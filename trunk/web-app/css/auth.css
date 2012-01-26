@@ -1,0 +1,70 @@
+#login {
+    margin: 35px 0px;
+    padding: 0px;
+    text-align: center;
+}
+
+#login .inner {
+
+    margin: 0px auto;
+    text-align: left;
+    padding: 0px;
+    border: #505050 ridge medium;
+    width: 350px;
+    background-color: white;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+#login .inner .fheader {
+    background-color: #2582A4;
+    color: white;
+    font-family: Tahoma,Arial,sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0 0 0 0;
+    padding: 10px;
+    text-align: right;
+}
+
+#login .inner .cssform p {
+    clear: left;
+    margin: 5px;
+    padding: 5px 0 8px 0;
+    padding-left: 135px;
+    margin-bottom: 10px;
+    height: 3%;
+}
+
+#login .inner .cssform input[type='text'] {
+    width: 120px;
+}
+
+#login .inner .cssform label {
+    font-weight: bold;
+    float: left;
+    margin-left: -105px;
+    width: 100px;
+    font-family: Tahoma, Arial, sans-serif;
+    font-size: 14px;
+}
+
+#login .inner .login_message {
+    color: red;
+    padding: 0px;
+    margin: 4px;
+    background-color: #ffc0cb;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: #db7093 solid thin;
+}
+
+#login .inner .text_ {
+    width: 120px;
+}
+
+#login .inner .chk {
+    height: 12px;
+}

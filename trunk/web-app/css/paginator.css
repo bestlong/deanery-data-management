@@ -1,0 +1,26 @@
+.pg-cur-page {
+    display: inline-block;
+    min-width: 22px;
+    height: 26px;
+    border: 1px solid #3D3D3D;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    color: #212121;
+    font-weight: bold;
+    background-color: #eeeee0;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.pg-page {
+    padding-left: 4px;
+    padding-right: 4px;
+    display: inline-block;
+    min-width: 22px;
+    height: 26px;
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
