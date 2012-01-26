@@ -6,6 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<span id="ajax_spinner" style="display:none; position:absolute; left: 60%; top: 30%">
+<span id="ajax_spinner" style="display:none">
        <img src="<g:createLinkTo dir="images/notifications" file="ajax-loader.gif"/>"/>
 </span>

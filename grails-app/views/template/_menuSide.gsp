@@ -9,7 +9,10 @@
 </style>
 
 <div class="menuBox">
-    <h3>Меню</h3>
+    <h3>
+        <g:render template="/template/notification/busyIndicator"/>
+        Меню
+    </h3>
     <ul class="menuBottom">
         <tooltip:tip code="tooltip.menu.gotoSpeciality">
             <li class="${selectedMenu == 1 ? 'selectedMenu' : ''}">

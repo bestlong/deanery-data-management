@@ -57,9 +57,7 @@
             <g:layoutBody/>
         </div>
 
-        <g:render template="/template/notification/busyIndicator"/>
         <div id="buffer"></div>
-
     </div>
 </div>
 </body>
