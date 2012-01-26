@@ -1,0 +1,33 @@
+.message_error {
+    color: red;
+    padding: 0px;
+    margin: 4px;
+    background-color: #fcd1d8;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: #db7093 solid thin;
+}
+
+.message_warn {
+    color: #daa520;
+    padding: 0px;
+    margin: 4px;
+    background-color: #f9f3c1;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: #daa520 solid thin;
+}
+
+.message_info {
+    color: #48802c;
+    padding: 0px;
+    margin: 4px;
+    background-color: #c4e3c4;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: #48802c solid thin;
+    width: 100%;
+}
