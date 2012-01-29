@@ -19,7 +19,6 @@ class ExcelService {
 
     private COLUMN_COUNT = 56
 
-    private Workbook workbook
     private CellStyle centerCellStyle
     private CellStyle rightCellStyle
     private CellStyle leftCellStyle
@@ -27,7 +26,7 @@ class ExcelService {
     static transactional = true
 
     def exportToExcel() {
-        workbook = new HSSFWorkbook();
+        Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("new sheet");
 
         centerCellStyle = workbook.createCellStyle()
@@ -66,16 +65,21 @@ class ExcelService {
         }
     }
 
+    private void printSubjectHeader(Sheet sheet){}
+
     private void printHeader(Sheet sheet){
 
-        Row row = sheet.createRow(0)
+        int currentRow = 0;
+
+        //ROW0
+        Row row = sheet.createRow(currentRow)
         Cell cell = row.createCell(0)
         cell.setCellValue("ЗАТВЕРДЖУЮ")
         cell.setCellStyle(centerCellStyle)
 
         sheet.addMergedRegion(new CellRangeAddress(
-                0, //first row (0-based)
-                0, //last row  (0-based)
+                currentRow, //first row (0-based)
+                currentRow, //last row  (0-based)
                 2, //first column (0-based)
                 26  //last column  (0-based)
         ));
@@ -85,8 +89,8 @@ class ExcelService {
         cell.setCellValue("Р О Б О Ч И Й   Н А В Ч А Л Ь Н Ы Й   П Л А Н")
 
         sheet.addMergedRegion(new CellRangeAddress(
-                0, //first row (0-based)
-                0, //last row  (0-based)
+                currentRow, //first row (0-based)
+                currentRow, //last row  (0-based)
                 27, //first column (0-based)
                 COLUMN_COUNT-1  //last column  (0-based)
         ));
@@ -94,10 +98,12 @@ class ExcelService {
         cell.setCellStyle(rightCellStyle)
         cell.setCellValue("ЧЕРНІГІВСЬКИЙ ДЕРЖАВНИЙ ТЕХНОЛОГІЧНИЙ УНІВЕРСИТЕТ")
 
-        row = sheet.createRow(1)
+        currentRow++;
+        //ROW1
+        row = sheet.createRow(currentRow)
         sheet.addMergedRegion(new CellRangeAddress(
-                1, //first row (0-based)
-                1, //last row  (0-based)
+                currentRow, //first row (0-based)
+                currentRow, //last row  (0-based)
                 2, //first column (0-based)
                 26  //last column  (0-based)
         ));
@@ -107,8 +113,8 @@ class ExcelService {
         cell.setCellValue("на 2010 - 2011 навчальній рік за напрямом підготовки компютерна інженерія")
 
         sheet.addMergedRegion(new CellRangeAddress(
-                1, //first row (0-based)
-                1, //last row  (0-based)
+                currentRow, //first row (0-based)
+                currentRow, //last row  (0-based)
                 27, //first column (0-based)
                 COLUMN_COUNT-1  //last column  (0-based)
         ));
@@ -116,13 +122,10 @@ class ExcelService {
         cell.setCellStyle(rightCellStyle)
         cell.setCellValue("ФАКУЛЬТЕТ ЕЛЕКТРОННИХ ТА ІНФОРМАЦІЙНИХ ТЕХНОЛОГІЙ")
 
+        currentRow++;
 
-
-
-        //ROW3
-
-        row = sheet.createRow(2)
-
+        //ROW2
+        row = sheet.createRow(currentRow)
         cell = row.createCell(0)
         cell.setCellStyle(leftCellStyle)
         cell.setCellValue("Перший проректор")
@@ -130,24 +133,28 @@ class ExcelService {
         cell.setCellStyle(leftCellStyle)
         cell.setCellValue("В. І. Скоробогатова")
 
+        currentRow++;
+
         //ROW3
-        row = sheet.createRow(3)
+        row = sheet.createRow(currentRow)
         sheet.addMergedRegion(new CellRangeAddress(
-                3, //first row (0-based)
-                3, //last row  (0-based)
+                currentRow, //first row (0-based)
+                currentRow, //last row  (0-based)
                 1, //first column (0-based)
                 COLUMN_COUNT-1  //last column  (0-based)
         ));
         cell = row.createCell(1)
         cell.setCellStyle(leftCellStyle)
-        cell.setCellValue("Спеціальність 6.050102 - Компютерна Інженерія, освітньо-кваліфікаційний рівень - бакалавр, кваліфікація бакалавр компютерної інженерії, термін навчання 3 роки 10 місяців")
+        cell.setCellValue("""Спеціальність 6.050102 - Компютерна Інженерія, освітньо-кваліфікаційний рівень - бакалавр,
+кваліфікація бакалавр компютерної інженерії, термін навчання 3 роки 10 місяців""")
 
+        currentRow++;
 
 //ROW4
-        row = sheet.createRow(4)
+        row = sheet.createRow(currentRow)
         sheet.addMergedRegion(new CellRangeAddress(
-                4, //first row (0-based)
-                4, //last row  (0-based)
+                currentRow, //first row (0-based)
+                currentRow, //last row  (0-based)
                 7, //first column (0-based)
                 13  //last column  (0-based)
         ));
