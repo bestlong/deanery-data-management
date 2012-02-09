@@ -15,9 +15,17 @@ class ExcelService {
 
     private FIRST_COLUMN_WIDTH = 7000
     private SECOND_COLUMN_WIDTH = 4000
-    private OTHER_COLUMNS_WIDTH = 370
 
-    private COLUMN_COUNT = 56
+    private THIRD_BLOCK_CELL_COUNT = 7
+    private THIRD_BLOCK_CELL_WIDTH = 10 * 330 / THIRD_BLOCK_CELL_COUNT
+
+    private FOURTH_BLOCK_CELL_COUNT = 6
+    private FOURTH_BLOCK_CELL_WIDTH = 15 * 330 / FOURTH_BLOCK_CELL_COUNT
+
+    private LAST_BLOCK_CELL_WIDTH = 330
+
+    private COLUMN_COUNT = 55
+    private FONT_SIZE = 4
 
     private CellStyle centerCellStyle
     private CellStyle rightCellStyle
@@ -40,11 +48,12 @@ class ExcelService {
 
         // Create a new font and alter it.
         Font font = workbook.createFont();
-        font.setFontHeightInPoints((Short)4);
+        font.setFontHeightInPoints((Short) FONT_SIZE);
         font.setFontName("Courier New");
 
         initColumnsWidth(sheet)
-        printHeader(sheet)
+        def row = printHeader(sheet)
+        printSubjectHeader(sheet, row)
 
         rightCellStyle.setFont(font)
         centerCellStyle.setFont(font)
@@ -56,21 +65,59 @@ class ExcelService {
         fileOut.close();
     }
 
-    private void initColumnsWidth(Sheet sheet){
+    private void initColumnsWidth(Sheet sheet) {
         sheet.setColumnWidth(0, FIRST_COLUMN_WIDTH)
         sheet.setColumnWidth(1, SECOND_COLUMN_WIDTH)
 
-        for (int i:2..COLUMN_COUNT-1){
-            sheet.setColumnWidth(i, OTHER_COLUMNS_WIDTH)
+        int pos = 2
+        int lastPos = pos + THIRD_BLOCK_CELL_COUNT-1
+        for (int i: pos..lastPos) {
+            sheet.setColumnWidth(i, THIRD_BLOCK_CELL_WIDTH.intValue())
+        }
+
+        pos += THIRD_BLOCK_CELL_COUNT
+        lastPos = pos + FOURTH_BLOCK_CELL_COUNT-1
+        for (int i: pos..lastPos) {
+            sheet.setColumnWidth(i, FOURTH_BLOCK_CELL_WIDTH.intValue())
+        }
+
+        pos += FOURTH_BLOCK_CELL_COUNT
+        lastPos = COLUMN_COUNT-1
+        for (int i: pos..lastPos) {
+            sheet.setColumnWidth(i, LAST_BLOCK_CELL_WIDTH)
         }
     }
 
-    private void printSubjectHeader(Sheet sheet){}
+    private void printSubjectHeader(Sheet sheet, int startRow) {
+        sheet.addMergedRegion(new CellRangeAddress(
+                startRow, //first row (0-based)
+                startRow, //last row  (0-based)
+                3, //first column (0-based)
+                8  //last column  (0-based)
+        ));
+        Row row = sheet.createRow(startRow)
+        Cell cell = row.createCell(3)
+        cell.setCellValue("Годин")
+        cell.setCellStyle(centerCellStyle)
 
-    private void printHeader(Sheet sheet){
+        sheet.addMergedRegion(new CellRangeAddress(
+                startRow, //first row (0-based)
+                startRow, //last row  (0-based)
+                9, //first column (0-based)
+                14  //last column  (0-based)
+        ));
+        cell = row.createCell(9)
+        cell.setCellValue("Розподіл між семестрами")
+        cell.setCellStyle(centerCellStyle)
+    }
 
+    /**
+     *
+     * @param sheet страница Excel в которую писать
+     * @return номер строки на котрой закончилась запись
+     */
+    private int printHeader(Sheet sheet) {
         int currentRow = 0;
-
         //ROW0
         Row row = sheet.createRow(currentRow)
         Cell cell = row.createCell(0)
@@ -92,7 +139,7 @@ class ExcelService {
                 currentRow, //first row (0-based)
                 currentRow, //last row  (0-based)
                 27, //first column (0-based)
-                COLUMN_COUNT-1  //last column  (0-based)
+                COLUMN_COUNT - 1  //last column  (0-based)
         ));
         cell = row.createCell(27)
         cell.setCellStyle(rightCellStyle)
@@ -116,7 +163,7 @@ class ExcelService {
                 currentRow, //first row (0-based)
                 currentRow, //last row  (0-based)
                 27, //first column (0-based)
-                COLUMN_COUNT-1  //last column  (0-based)
+                COLUMN_COUNT - 1  //last column  (0-based)
         ));
         cell = row.createCell(27)
         cell.setCellStyle(rightCellStyle)
@@ -141,7 +188,7 @@ class ExcelService {
                 currentRow, //first row (0-based)
                 currentRow, //last row  (0-based)
                 1, //first column (0-based)
-                COLUMN_COUNT-1  //last column  (0-based)
+                COLUMN_COUNT - 1  //last column  (0-based)
         ));
         cell = row.createCell(1)
         cell.setCellStyle(leftCellStyle)
@@ -165,5 +212,7 @@ class ExcelService {
         cell = row.createCell(0)
         cell.setCellStyle(leftCellStyle)
         cell.setCellValue("<___>____________________2010p")
+
+        return ++currentRow
     }
 }
