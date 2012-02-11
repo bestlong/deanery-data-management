@@ -2,6 +2,7 @@ package stu.cn.ua.excel
 
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.Font
+import org.apache.poi.hssf.usermodel.HSSFCellStyle
 
 /**
  * author: evgeniy
@@ -27,15 +28,23 @@ class ExcelComponent {
     public CellStyle rightCellStyle
     public CellStyle leftCellStyle
 
+    public CellStyle centerVerticalStyle
+
     def init(def workbook){
         centerCellStyle = workbook.createCellStyle()
         centerCellStyle.setAlignment(CellStyle.ALIGN_CENTER)
+        centerCellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
 
         rightCellStyle = workbook.createCellStyle()
         rightCellStyle.setAlignment(CellStyle.ALIGN_RIGHT)
 
         leftCellStyle = workbook.createCellStyle()
         leftCellStyle.setAlignment(CellStyle.ALIGN_LEFT)
+
+        centerVerticalStyle = workbook.createCellStyle()
+        centerVerticalStyle.setVerticalAlignment(CellStyle.VERTICAL_BOTTOM);
+        centerVerticalStyle.setAlignment(CellStyle.ALIGN_CENTER)
+        centerVerticalStyle.setWrapText(true)
 
         // Create a new font and alter it.
         Font font = workbook.createFont();
@@ -45,5 +54,6 @@ class ExcelComponent {
         rightCellStyle.setFont(font)
         centerCellStyle.setFont(font)
         leftCellStyle.setFont(font)
+        centerVerticalStyle.setFont(font)
     }
 }
