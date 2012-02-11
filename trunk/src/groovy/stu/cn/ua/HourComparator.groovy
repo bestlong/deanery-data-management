@@ -12,6 +12,6 @@ import decanat.grails.PlanHours
 class HourComparator implements Comparator<PlanHours>{
 
     int compare(PlanHours o1, PlanHours o2) {
-        return 0  //To change body of implemented methods use File | Settings | File Templates.
+        return 0
     }
 }

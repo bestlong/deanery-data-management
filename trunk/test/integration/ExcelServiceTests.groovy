@@ -1,11 +1,11 @@
-package decanat.grails
+
 
 import grails.test.*
 import org.junit.Test
 
 class ExcelServiceTests extends GrailsUnitTestCase {
 
-    def excelService  = new ExcelService()
+    def excelService
 
     protected void setUp() {
         super.setUp()
