@@ -4,6 +4,7 @@ import stu.cn.ua.excel.ExcelClient
 import stu.cn.ua.excel.ExcelComponent
 import decanat.grails.ExcelService
 import stu.cn.ua.excel.SubjectHeaderPrinter
+import stu.cn.ua.excel.SubjectPrinter
 
 // Place your Spring DSL code here
 beans = {
@@ -11,6 +12,10 @@ beans = {
     excelComponent(ExcelComponent){}
 
     subjectHeadPrinter(SubjectHeaderPrinter){
+        excelComponent = ref("excelComponent")
+    }
+
+    subjectPrinter(SubjectPrinter){
         excelComponent = ref("excelComponent")
     }
 
@@ -33,6 +38,7 @@ beans = {
         documentInitializer = ref("documentInitializer")
         headPrinter = ref("headPrinter")
         excelComponent = ref("excelComponent")
+        subjectPrinter = ref("subjectPrinter")
     }
 
 

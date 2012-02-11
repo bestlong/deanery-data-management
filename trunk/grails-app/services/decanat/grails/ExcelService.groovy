@@ -16,6 +16,7 @@ class ExcelService {
     def headPrinter
     def excelComponent
     def subjectHeadPrinter
+    def subjectPrinter
 
     def exportToExcel() {
 
@@ -30,6 +31,8 @@ class ExcelService {
         documentInitializer.initColumnsWidth(sheet)
         def row = headPrinter.printHeader(sheet)
         subjectHeadPrinter.printSubjectHeader(sheet, row)
+
+        subjectPrinter.printSubjects(sheet, row+5)
 
          // Write the output to a file
         FileOutputStream fileOut = new FileOutputStream("workbook.xls");
