@@ -78,7 +78,7 @@
                 var count = $("#count" + id).val()
                 oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr, id, count), 'detailsStyle');
 
-                $.post('/decanat-grails/addSubjects/hours',
+                $.post('/decanat-grails/addSubjects/work',
                         {id:id},
                         function(data) {
                             for (i = 0; i < count.length; i++) {
