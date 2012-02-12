@@ -48,9 +48,31 @@ class PlanSubject {
         result.toString()
     }
 
+    public int getControlTypeCount(ControlTypeEnum cType) {
+        def sum = 0
+        planControlTypes.each {
+            if (it.isControlTypeExists(cType)) {
+                sum++
+            }
+        }
+        sum
+    }
+
+    public int getControlTypeCount(ControlTypeEnum cType, int semestr) {
+        def sum = 0
+        def planControl = PlanControlType.findBySemestrAndPlanSubject(semestr, this)
+        if (null == planControl){
+            return 0
+        }
+        if (planControl.isControlTypeExists(cType)) {
+            sum++
+        }
+        sum
+    }
+
     public int getHourCount(int semestr, WorkTypeEnum workType) {
-        PlanHours hour = PlanHours.findBySemestr(semestr)
-        if (null == hour){
+        PlanHours hour = PlanHours.findBySemestrAndPlanSubject(semestr, this)
+        if (null == hour) {
             return 0;
         }
         switch (workType) {
@@ -67,11 +89,11 @@ class PlanSubject {
     }
 
     public int getHourCount(int semestr) {
-        PlanHours hour = PlanHours.findBySemestr(semestr)
-        if (null == hour){
+        PlanHours hour = PlanHours.findBySemestrAndPlanSubject(semestr, this)
+        if (null == hour) {
             return 0;
         }
-        return hour.lectures + hour.seminars  + hour.practices  + hour.labs
+        return hour.lectures + hour.seminars + hour.practices + hour.labs
     }
 
     static mapping = {

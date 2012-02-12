@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.hssf.util.CellRangeAddress
 import decanat.grails.Plan
 import stu.cn.ua.enums.WorkTypeEnum
+import stu.cn.ua.enums.ControlTypeEnum
 
 /**
  * author: evgeniy
@@ -85,6 +86,35 @@ class SubjectFooterPrinter {
 
             cCol+=5
         }
+
+        startRow +=2
+        
+        def col = 9
+        
+        ControlTypeEnum.values().each {
+            def row = sheet.createRow(startRow)
+            cell = row.createCell(1)
+            cell.setCellValue(it.caption)
+            cell.setCellStyle(excelComponent.leftCellStyle)
+
+            cell = row.createCell(col)
+            cell.setCellValue(plan.getTotal(it))
+            cell.setCellStyle(excelComponent.centerBottomCellStyle)
+
+            cCol = 15
+
+            for (int j:1..plan.semestrCount){
+                cell = row.createCell(cCol)
+                cell.setCellValue(plan.getControlTypeCount(it, j))
+                cell.setCellStyle(excelComponent.centerBottomCellStyle)
+                cCol+=5
+            }
+
+            col++
+            startRow++
+        }
+
+
     }
 
     void setExcelComponent(ExcelComponent excelComponent) {
