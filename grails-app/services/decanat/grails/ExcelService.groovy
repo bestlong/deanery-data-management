@@ -37,7 +37,7 @@ class ExcelService {
         def row = headPrinter.printHeader(sheet, date, plan)
         subjectHeadPrinter.printSubjectHeader(sheet, row)
 
-        subjectPrinter.printSubjects(sheet, row+5)
+        subjectPrinter.printSubjects(sheet, row+5, plan)
 
          // Write the output to a file
         FileOutputStream fileOut = new FileOutputStream("workbook.xls");
