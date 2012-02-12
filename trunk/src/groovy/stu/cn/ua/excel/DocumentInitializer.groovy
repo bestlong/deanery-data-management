@@ -29,7 +29,12 @@ class DocumentInitializer {
         pos += excelComponent.FOURTH_BLOCK_CELL_COUNT
         lastPos = excelComponent.COLUMN_COUNT-1
         for (int i: pos..lastPos) {
-            sheet.setColumnWidth(i, excelComponent.LAST_BLOCK_CELL_WIDTH)
+            if (i%5 == 0){
+                sheet.setColumnWidth(i, excelComponent.LAST_TOTAL_BLOCK_CELL_WIDTH)
+            } else {
+                sheet.setColumnWidth(i, excelComponent.LAST_BLOCK_CELL_WIDTH)
+            }
+
         }
     }
 }

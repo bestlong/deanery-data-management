@@ -1,5 +1,8 @@
 package decanat.grails
 
+import stu.cn.ua.enums.ControlTypeEnum
+import stu.cn.ua.enums.WorkTypeEnum
+
 class Plan {
 
     SortedSet semestr
@@ -38,7 +41,77 @@ class Plan {
         lastUpdated(nullable: true)
         termin(nullable: false)
         qualification(nullable: false)
+    }
+    
+    def getCreditCountTotal(){
+        Double sum = 0
+        subjects.each {
+            sum += it.creditCount
+        }
+        sum
+    }
 
+    def getTotal(){
+        Double sum = 0
+        subjects.each {
+            sum += it.getTotal()
+        }
+        sum
+    }
 
+    def getTotalLecturesCount(){
+        Double sum = 0
+        subjects.each {
+            sum += it.lectureCount
+        }
+        sum
+    }
+
+    def getTotalSeminarCount(){
+        Double sum = 0
+        subjects.each {
+            sum += it.seminarCount
+        }
+        sum
+    }
+
+    def getTotalPractiseCount(){
+        Double sum = 0
+        subjects.each {
+            sum += it.practiceCount
+        }
+        sum
+    }
+
+    def getTotalLabCount(){
+        Double sum = 0
+        subjects.each {
+            sum += it.labCount
+        }
+        sum
+    }
+
+    def getTotalSamCount(){
+        Double sum = 0
+        subjects.each {
+            sum += it.samCount
+        }
+        sum
+    }
+    
+    def getTotalSemestr(int semestr){
+        Double sum = 0
+        subjects.each {
+            sum += it.getHourCount(semestr)
+        }
+        sum
+    }
+
+    def getTotalSemestr(int semestr, WorkTypeEnum workTypeEnum){
+        Double sum = 0
+        subjects.each {
+            sum += it.getHourCount(semestr, workTypeEnum)
+        }
+        sum
     }
 }

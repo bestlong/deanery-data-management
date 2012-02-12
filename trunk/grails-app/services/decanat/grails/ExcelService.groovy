@@ -12,6 +12,7 @@ import stu.cn.ua.excel.HeadPrinter
 import stu.cn.ua.excel.ExcelComponent
 import stu.cn.ua.excel.SubjectHeaderPrinter
 import stu.cn.ua.excel.SubjectPrinter
+import stu.cn.ua.excel.SubjectFooterPrinter
 
 class ExcelService {
 
@@ -22,6 +23,9 @@ class ExcelService {
     private ExcelComponent excelComponent
     private SubjectHeaderPrinter subjectHeadPrinter
     private SubjectPrinter subjectPrinter
+    private SubjectFooterPrinter subjectFooterPrinter
+
+    private static final int SUBJECT_HEADER_SIZE = 5
 
     def exportToExcel(Plan plan, Date date) {
 
@@ -37,7 +41,11 @@ class ExcelService {
         def row = headPrinter.printHeader(sheet, date, plan)
         subjectHeadPrinter.printSubjectHeader(sheet, row)
 
-        subjectPrinter.printSubjects(sheet, row+5, plan)
+        row += SUBJECT_HEADER_SIZE
+
+        row += subjectPrinter.printSubjects(sheet, row, plan)
+        subjectFooterPrinter.printFooter(sheet, row, plan)
+
 
          // Write the output to a file
         FileOutputStream fileOut = new FileOutputStream("workbook.xls");
@@ -63,5 +71,9 @@ class ExcelService {
 
     void setSubjectPrinter(SubjectPrinter subjectPrinter) {
         this.subjectPrinter = subjectPrinter
+    }
+
+    void setSubjectFooterPrinter(SubjectFooterPrinter subjectFooterPrinter) {
+        this.subjectFooterPrinter = subjectFooterPrinter
     }
 }
