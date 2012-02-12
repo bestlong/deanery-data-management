@@ -19,7 +19,8 @@ class ExcelComponent {
     public FOURTH_BLOCK_CELL_COUNT = 6
     public FOURTH_BLOCK_CELL_WIDTH = 15 * 330 / FOURTH_BLOCK_CELL_COUNT
 
-    public LAST_BLOCK_CELL_WIDTH = 330
+    public LAST_BLOCK_CELL_WIDTH = 310
+    public LAST_TOTAL_BLOCK_CELL_WIDTH = 400
 
     public COLUMN_COUNT = 55
     public FONT_SIZE = 4

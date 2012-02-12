@@ -79,28 +79,10 @@ class SubjectPrinter {
                     cell.setCellStyle(excelComponent.centerBottomCellStyle)
                     cCol++
                 }
-//
-//
-//                cell = row.createCell(cCol+1)
-//                cell.setCellValue("6")
-//                cell.setCellStyle(excelComponent.leftCellStyle)
-//
-//                cell = row.createCell(cCol+2)
-//                cell.setCellValue("6")
-//                cell.setCellStyle(excelComponent.leftCellStyle)
-//
-//                cell = row.createCell(cCol+3)
-//                cell.setCellValue("6")
-//                cell.setCellStyle(excelComponent.leftCellStyle)
-//
-//                cell = row.createCell(cCol+4)
-//                cell.setCellValue("7")
-//                cell.setCellStyle(excelComponent.leftCellStyle)
-//
-//                cCol+=5
             }
             startRow++
         }
+        return subjects.size()
     }
 
     void setExcelComponent(ExcelComponent excelComponent) {
