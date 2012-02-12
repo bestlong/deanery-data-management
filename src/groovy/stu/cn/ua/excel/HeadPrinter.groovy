@@ -4,6 +4,7 @@ import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.hssf.util.CellRangeAddress
+import decanat.grails.Plan
 
 /**
  * author: evgeniy
@@ -18,7 +19,7 @@ class HeadPrinter {
      * @param sheet страница Excel в которую писать
      * @return номер строки на котрой закончилась запись
      */
-    def printHeader(Sheet sheet) {
+    def printHeader(Sheet sheet, Date date, Plan plan) {
         int currentRow = 0;
         //ROW0
         Row row = sheet.createRow(currentRow)
@@ -26,23 +27,13 @@ class HeadPrinter {
         cell.setCellValue("ЗАТВЕРДЖУЮ")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(
-                currentRow, //first row (0-based)
-                currentRow, //last row  (0-based)
-                2, //first column (0-based)
-                26  //last column  (0-based)
-        ));
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 2, 26));
 
         cell = row.createCell(2)
         cell.setCellStyle(excelComponent.centerCellStyle)
         cell.setCellValue("Р О Б О Ч И Й   Н А В Ч А Л Ь Н Ы Й   П Л А Н")
 
-        sheet.addMergedRegion(new CellRangeAddress(
-                currentRow, //first row (0-based)
-                currentRow, //last row  (0-based)
-                27, //first column (0-based)
-                excelComponent.COLUMN_COUNT - 1  //last column  (0-based)
-        ));
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 27, excelComponent.COLUMN_COUNT - 1));
         cell = row.createCell(27)
         cell.setCellStyle(excelComponent.rightCellStyle)
         cell.setCellValue("ЧЕРНІГІВСЬКИЙ ДЕРЖАВНИЙ ТЕХНОЛОГІЧНИЙ УНІВЕРСИТЕТ")
@@ -50,23 +41,13 @@ class HeadPrinter {
         currentRow++;
         //ROW1
         row = sheet.createRow(currentRow)
-        sheet.addMergedRegion(new CellRangeAddress(
-                currentRow, //first row (0-based)
-                currentRow, //last row  (0-based)
-                2, //first column (0-based)
-                26  //last column  (0-based)
-        ));
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 2, 26));
 
         cell = row.createCell(2)
         cell.setCellStyle(excelComponent.centerCellStyle)
-        cell.setCellValue("на 2010 - 2011 навчальній рік за напрямом підготовки компютерна інженерія")
+        cell.setCellValue("на ${date.year} - ${date.year+1} навчальній рік за напрямом підготовки ${plan.direction}")
 
-        sheet.addMergedRegion(new CellRangeAddress(
-                currentRow, //first row (0-based)
-                currentRow, //last row  (0-based)
-                27, //first column (0-based)
-                excelComponent.COLUMN_COUNT - 1  //last column  (0-based)
-        ));
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 27, excelComponent.COLUMN_COUNT - 1));
         cell = row.createCell(27)
         cell.setCellStyle(excelComponent.rightCellStyle)
         cell.setCellValue("ФАКУЛЬТЕТ ЕЛЕКТРОННИХ ТА ІНФОРМАЦІЙНИХ ТЕХНОЛОГІЙ")
@@ -86,16 +67,11 @@ class HeadPrinter {
 
         //ROW3
         row = sheet.createRow(currentRow)
-        sheet.addMergedRegion(new CellRangeAddress(
-                currentRow, //first row (0-based)
-                currentRow, //last row  (0-based)
-                1, //first column (0-based)
-                excelComponent.COLUMN_COUNT - 1  //last column  (0-based)
-        ));
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 1, excelComponent.COLUMN_COUNT - 1));
         cell = row.createCell(1)
         cell.setCellStyle(excelComponent.leftCellStyle)
-        cell.setCellValue("""Спеціальність 6.050102 - Компютерна Інженерія, освітньо-кваліфікаційний рівень - бакалавр,
-кваліфікація бакалавр компютерної інженерії, термін навчання 3 роки 10 місяців""")
+        cell.setCellValue("""Спеціальність ${plan.speciality.kod} - ${plan.speciality.name}, освітньо-кваліфікаційний рівень - ${plan.level},
+кваліфікація ${plan.qualification}, термін навчання ${plan.termin}""")
 
         currentRow++;
 
@@ -109,7 +85,7 @@ class HeadPrinter {
         ));
         cell = row.createCell(7)
         cell.setCellStyle(excelComponent.centerCellStyle)
-        cell.setCellValue("форма навчання - денна")
+        cell.setCellValue("форма навчання - ${plan.form}")
 
         cell = row.createCell(0)
         cell.setCellStyle(excelComponent.leftCellStyle)
