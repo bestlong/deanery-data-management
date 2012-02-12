@@ -25,6 +25,7 @@ class ExcelComponent {
     public FONT_SIZE = 4
 
     public CellStyle centerCellStyle
+    public CellStyle centerBottomCellStyle
     public CellStyle rightCellStyle
     public CellStyle leftCellStyle
 
@@ -34,6 +35,9 @@ class ExcelComponent {
         centerCellStyle = workbook.createCellStyle()
         centerCellStyle.setAlignment(CellStyle.ALIGN_CENTER)
         centerCellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+
+        centerBottomCellStyle = workbook.createCellStyle()
+        centerBottomCellStyle.setAlignment(CellStyle.ALIGN_CENTER)
 
         rightCellStyle = workbook.createCellStyle()
         rightCellStyle.setAlignment(CellStyle.ALIGN_RIGHT)
@@ -55,5 +59,6 @@ class ExcelComponent {
         centerCellStyle.setFont(font)
         leftCellStyle.setFont(font)
         centerVerticalStyle.setFont(font)
+        centerBottomCellStyle.setFont(font)
     }
 }

@@ -17,8 +17,10 @@ class ExcelServiceTests extends GrailsUnitTestCase {
 
     @Test
     void testExport() {
-        def speciality = new Speciality(kod: "sp_code", name: "sp_name")
-        def plan = new Plan(level: "test_level", qualification: "test_qualification", termin: "test_termin", direction: "test_direction", form: "test_form", speciality: speciality)
+//        def speciality = new Speciality(kod: "sp_code", name: "sp_name")
+//        def plan = new Plan(level: "test_level", qualification: "test_qualification", termin: "test_termin", direction: "test_direction", form: "test_form", speciality: speciality)
+
+        def plan = Plan.list().get(0)
         excelService.exportToExcel(plan, new Date())
 
     }

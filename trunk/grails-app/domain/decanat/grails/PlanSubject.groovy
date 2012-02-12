@@ -1,5 +1,8 @@
 package decanat.grails
 
+import stu.cn.ua.enums.ControlTypeEnum
+import stu.cn.ua.enums.WorkTypeEnum
+
 class PlanSubject {
 
     SortedSet planHours
@@ -23,9 +26,57 @@ class PlanSubject {
         plan.lastUpdated = new Date()
 
     }
-       def beforeDelete = {
+    def beforeDelete = {
         plan.lastUpdated = new Date()
 
+    }
+
+    def getTotal() {
+        return lectureCount + seminarCount + practiceCount + labCount + samCount
+    }
+
+    public String getControlType(ControlTypeEnum cType) {
+        def result = new StringBuilder()
+        planControlTypes.each {
+            if (it.isControlTypeExists(cType)) {
+                result.append(it.semestr)
+            }
+        }
+        if ("".equals(result.toString())) {
+            result.append("___")
+        }
+        result.toString()
+    }
+
+    public int getHourCount(int semestr, WorkTypeEnum workType) {
+        PlanHours hour = PlanHours.findBySemestr(semestr)
+        if (null == hour){
+            return 0;
+        }
+        switch (workType) {
+            case WorkTypeEnum.LECTURE:
+                return hour.lectures
+            case WorkTypeEnum.SEMINAR:
+                return hour.seminars
+            case WorkTypeEnum.PRACTISE:
+                return hour.practices
+            case WorkTypeEnum.LAB:
+                return hour.labs
+        }
+        throw IllegalArgumentException("unknown workType: ${workType}")
+    }
+
+    public int getHourCount(int semestr) {
+        PlanHours hour = PlanHours.findBySemestr(semestr)
+        if (null == hour){
+            return 0;
+        }
+        return hour.lectures + hour.seminars  + hour.practices  + hour.labs
+    }
+
+    static mapping = {
+        planControlTypes sort: 'semestr'
+        planHours sort: 'semestr'
     }
 
     static constraints = {
