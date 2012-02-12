@@ -1,7 +1,7 @@
-
-
 import grails.test.*
 import org.junit.Test
+import decanat.grails.Plan
+import decanat.grails.Speciality
 
 class ExcelServiceTests extends GrailsUnitTestCase {
 
@@ -17,6 +17,9 @@ class ExcelServiceTests extends GrailsUnitTestCase {
 
     @Test
     void testExport() {
-        excelService.exportToExcel()
+        def speciality = new Speciality(kod: "sp_code", name: "sp_name")
+        def plan = new Plan(level: "test_level", qualification: "test_qualification", termin: "test_termin", direction: "test_direction", form: "test_form", speciality: speciality)
+        excelService.exportToExcel(plan, new Date())
+
     }
 }

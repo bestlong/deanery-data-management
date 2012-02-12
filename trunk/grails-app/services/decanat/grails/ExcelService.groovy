@@ -7,18 +7,23 @@ import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.hssf.util.CellRangeAddress
 import static junit.framework.Assert.assertNotNull
+import stu.cn.ua.excel.DocumentInitializer
+import stu.cn.ua.excel.HeadPrinter
+import stu.cn.ua.excel.ExcelComponent
+import stu.cn.ua.excel.SubjectHeaderPrinter
+import stu.cn.ua.excel.SubjectPrinter
 
 class ExcelService {
 
     static transactional = false
 
-    def documentInitializer
-    def headPrinter
-    def excelComponent
-    def subjectHeadPrinter
-    def subjectPrinter
+    private DocumentInitializer documentInitializer
+    private HeadPrinter headPrinter
+    private ExcelComponent excelComponent
+    private SubjectHeaderPrinter subjectHeadPrinter
+    private SubjectPrinter subjectPrinter
 
-    def exportToExcel() {
+    def exportToExcel(Plan plan, Date date) {
 
         assertNotNull(documentInitializer)
         assertNotNull(headPrinter)
@@ -29,7 +34,7 @@ class ExcelService {
         excelComponent.init(workbook)
 
         documentInitializer.initColumnsWidth(sheet)
-        def row = headPrinter.printHeader(sheet)
+        def row = headPrinter.printHeader(sheet, date, plan)
         subjectHeadPrinter.printSubjectHeader(sheet, row)
 
         subjectPrinter.printSubjects(sheet, row+5)
@@ -40,5 +45,23 @@ class ExcelService {
         fileOut.close();
     }
 
+    void setDocumentInitializer(DocumentInitializer documentInitializer) {
+        this.documentInitializer = documentInitializer
+    }
 
+    void setHeadPrinter(HeadPrinter headPrinter) {
+        this.headPrinter = headPrinter
+    }
+
+    void setExcelComponent(ExcelComponent excelComponent) {
+        this.excelComponent = excelComponent
+    }
+
+    void setSubjectHeadPrinter(SubjectHeaderPrinter subjectHeadPrinter) {
+        this.subjectHeadPrinter = subjectHeadPrinter
+    }
+
+    void setSubjectPrinter(SubjectPrinter subjectPrinter) {
+        this.subjectPrinter = subjectPrinter
+    }
 }
