@@ -114,4 +114,20 @@ class Plan {
         }
         sum
     }
+    
+    def getTotal(ControlTypeEnum controlTypeEnum){
+        def sum = 0
+        subjects.each {
+            sum +=it.getControlTypeCount(controlTypeEnum)
+        }
+        sum
+    }
+
+    public int getControlTypeCount(ControlTypeEnum cType, int semestr) {
+        def sum = 0
+        subjects.each {
+            sum += it.getControlTypeCount(cType, semestr)
+        }
+        sum
+    }
 }
