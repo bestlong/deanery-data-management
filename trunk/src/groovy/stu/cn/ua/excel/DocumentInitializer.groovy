@@ -37,6 +37,7 @@ class DocumentInitializer {
                 sheet.setColumnWidth(i, excelComponent.LAST_BLOCK_CELL_WIDTH)
             }
         }
+
     }
 
     void setExcelComponent(ExcelComponent excelComponent) {

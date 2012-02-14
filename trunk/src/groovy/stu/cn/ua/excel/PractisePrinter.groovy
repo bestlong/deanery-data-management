@@ -13,10 +13,9 @@ class PractisePrinter {
     ExcelComponent excelComponent
 
 
-    public void print(Plan plan, int startRow, Sheet sheet){
+    public int print(Plan plan, int startRow, Sheet sheet){
         sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 3));
         def row = sheet.createRow(startRow)
-        def cCol = 1
         def cell = row.createCell(0)
         cell.setCellValue("2. Практики")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
@@ -121,7 +120,16 @@ class PractisePrinter {
         sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 35, excelComponent.COLUMN_COUNT-1));
         cell = row.createCell(35)
         cell.setCellValue(plan.stateExam.forma)
-        cell.setCellStyle(excelComponent.centerBottomCellStyle)        
+        cell.setCellStyle(excelComponent.centerBottomCellStyle)
+
+        def cnt = 0
+        if (plan.practise.size() == 0){
+            cnt = 1
+        } else {
+            cnt = plan.practise.size()
+        }
+
+        def retVal = 2 + cnt
     }
 
     void setExcelComponent(ExcelComponent excelComponent) {
