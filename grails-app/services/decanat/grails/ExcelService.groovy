@@ -33,10 +33,6 @@ class ExcelService {
 
     public OutputStream exportToExcel(Plan plan, Date date, OutputStream out) {
 
-        assertNotNull(documentInitializer)
-        assertNotNull(headPrinter)
-        assertNotNull(excelComponent)
-
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("new sheet");
         excelComponent.init(workbook)
