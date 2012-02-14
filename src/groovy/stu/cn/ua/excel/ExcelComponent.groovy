@@ -2,7 +2,6 @@ package stu.cn.ua.excel
 
 import org.apache.poi.ss.usermodel.CellStyle
 import org.apache.poi.ss.usermodel.Font
-import org.apache.poi.hssf.usermodel.HSSFCellStyle
 
 /**
  * author: evgeniy
@@ -10,20 +9,20 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle
  */
 class ExcelComponent {
 
-    public FIRST_COLUMN_WIDTH = 7000
-    public SECOND_COLUMN_WIDTH = 4000
+    public static final int FIRST_COLUMN_WIDTH = 7000
+    public static final int SECOND_COLUMN_WIDTH = 4000
 
-    public THIRD_BLOCK_CELL_COUNT = 7
-    public THIRD_BLOCK_CELL_WIDTH = 10 * 330 / THIRD_BLOCK_CELL_COUNT
+    public static final int THIRD_BLOCK_CELL_COUNT = 7
+    public static final int THIRD_BLOCK_CELL_WIDTH = 10 * 330 / THIRD_BLOCK_CELL_COUNT
 
-    public FOURTH_BLOCK_CELL_COUNT = 6
-    public FOURTH_BLOCK_CELL_WIDTH = 15 * 330 / FOURTH_BLOCK_CELL_COUNT
+    public static final int FOURTH_BLOCK_CELL_COUNT = 6
+    public static final int FOURTH_BLOCK_CELL_WIDTH = 15 * 330 / FOURTH_BLOCK_CELL_COUNT
 
-    public LAST_BLOCK_CELL_WIDTH = 310
-    public LAST_TOTAL_BLOCK_CELL_WIDTH = 400
+    public static final int LAST_BLOCK_CELL_WIDTH = 310
+    public static final int LAST_TOTAL_BLOCK_CELL_WIDTH = 400
 
-    public COLUMN_COUNT = 55
-    public FONT_SIZE = 4
+    public static final int COLUMN_COUNT = 58
+    public static final int FONT_SIZE = 4
 
     public CellStyle centerCellStyle
     public CellStyle centerBottomCellStyle

@@ -13,6 +13,7 @@ import stu.cn.ua.excel.ExcelComponent
 import stu.cn.ua.excel.SubjectHeaderPrinter
 import stu.cn.ua.excel.SubjectPrinter
 import stu.cn.ua.excel.SubjectFooterPrinter
+import stu.cn.ua.excel.PractisePrinter
 
 class ExcelService {
 
@@ -24,6 +25,7 @@ class ExcelService {
     private SubjectHeaderPrinter subjectHeadPrinter
     private SubjectPrinter subjectPrinter
     private SubjectFooterPrinter subjectFooterPrinter
+    private PractisePrinter practisePrinter
 
     private static final int SUBJECT_HEADER_SIZE = 5
 
@@ -45,6 +47,9 @@ class ExcelService {
 
         row += subjectPrinter.printSubjects(sheet, row, plan)
         subjectFooterPrinter.printFooter(sheet, row, plan)
+
+        row +=8
+        practisePrinter.print(plan, row, sheet)
 
 
          // Write the output to a file
@@ -75,5 +80,9 @@ class ExcelService {
 
     void setSubjectFooterPrinter(SubjectFooterPrinter subjectFooterPrinter) {
         this.subjectFooterPrinter = subjectFooterPrinter
+    }
+
+    void setPractisePrinter(PractisePrinter practisePrinter) {
+        this.practisePrinter = practisePrinter
     }
 }

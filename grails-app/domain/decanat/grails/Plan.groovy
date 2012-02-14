@@ -42,7 +42,11 @@ class Plan {
         termin(nullable: false)
         qualification(nullable: false)
     }
-    
+
+    /**
+     *
+     * @return количество всех кредитов по всем предметам
+     */
     def getCreditCountTotal(){
         Double sum = 0
         subjects.each {
@@ -51,6 +55,9 @@ class Plan {
         sum
     }
 
+    /**
+     * @return сумарное количество часов по всем предметам
+     */
     def getTotal(){
         Double sum = 0
         subjects.each {
@@ -59,6 +66,9 @@ class Plan {
         sum
     }
 
+    /**
+     * @return сумарное количество часов по всем предметам, по лекциям
+     */
     def getTotalLecturesCount(){
         Double sum = 0
         subjects.each {
@@ -67,6 +77,9 @@ class Plan {
         sum
     }
 
+/**
+ * @return сумарное количество часов по всем предметам, по семинарам
+ */
     def getTotalSeminarCount(){
         Double sum = 0
         subjects.each {
@@ -75,6 +88,9 @@ class Plan {
         sum
     }
 
+    /**
+     * @return сумарное количество часов по всем предметам, по практикам
+     */
     def getTotalPractiseCount(){
         Double sum = 0
         subjects.each {
@@ -83,6 +99,9 @@ class Plan {
         sum
     }
 
+    /**
+     * @return сумарное количество часов по всем предметам, по лабораторным работам
+     */
     def getTotalLabCount(){
         Double sum = 0
         subjects.each {
@@ -91,6 +110,9 @@ class Plan {
         sum
     }
 
+/**
+ * @return сумарное количество часов по всем предметам, по самостоятельной работе
+ */
     def getTotalSamCount(){
         Double sum = 0
         subjects.each {
@@ -98,7 +120,10 @@ class Plan {
         }
         sum
     }
-    
+
+/**
+ * @return сумарное количество часов по всем предметам, по определённому семестру
+ */
     def getTotalSemestr(int semestr){
         Double sum = 0
         subjects.each {
@@ -107,6 +132,9 @@ class Plan {
         sum
     }
 
+    /**
+     * @return сумарное количество часов по предмету ${WorkTypeEnum}, по  определённому семестру
+     */
     def getTotalSemestr(int semestr, WorkTypeEnum workTypeEnum){
         Double sum = 0
         subjects.each {
@@ -114,7 +142,10 @@ class Plan {
         }
         sum
     }
-    
+
+    /**
+     * @return количество типа контроля по всем предметам
+     */
     def getTotal(ControlTypeEnum controlTypeEnum){
         def sum = 0
         subjects.each {
@@ -123,6 +154,9 @@ class Plan {
         sum
     }
 
+    /**
+     * @return количество типа контроля по всем предметам
+     */
     public int getControlTypeCount(ControlTypeEnum cType, int semestr) {
         def sum = 0
         subjects.each {
