@@ -17,9 +17,14 @@ class PrinterController {
 
     def preview = {
         if (params.submit == "Экспорт в Excel") {
-            response.contentType = "application/vnd.ms-excel"
-            response.setHeader("Content-disposition", "attachment;filename=work-plan.xls")
-            excelService.exportToExcel(Plan.get(params.id), new Date().parse("MM/dd/yyyy", params.date_value), response.outputStream)
+            try {
+                response.contentType = "application/vnd.ms-excel"
+                response.setHeader("Content-disposition", "attachment;filename=work-plan.xls")
+                excelService.exportToExcel(Plan.get(params.id), new Date().parse("MM/dd/yyyy", params.date_value), response.outputStream)
+            } catch(Exception e) {
+                log.error("error while exporting into excel: ", e)
+            }
+
         } else {
             def date, plan, university
             double totalCCount = 0d
