@@ -21,9 +21,7 @@ class PlanControlType {
     private String getMaskAsBitString(){
         def res = new StringBuilder("")
         def strMask = Integer.toBinaryString(mask)
-        println "strMask ${strMask}"
         def sizeNeed = OPTIMAL_MASK_SIZE - strMask.size()
-        println "sizeNeeded ${sizeNeed}"
         for (int i=0; i<sizeNeed; i++){
             res.append("0")
         }
