@@ -31,7 +31,7 @@ class ExcelService {
 
     private static final int SUBJECT_HEADER_SIZE = 5
 
-    def exportToExcel(Plan plan, Date date) {
+    public OutputStream exportToExcel(Plan plan, Date date, OutputStream out) {
 
         assertNotNull(documentInitializer)
         assertNotNull(headPrinter)
@@ -58,9 +58,7 @@ class ExcelService {
 
 
          // Write the output to a file
-        FileOutputStream fileOut = new FileOutputStream("workbook.xls");
-        workbook.write(fileOut);
-        fileOut.close();
+        workbook.write(out);
     }
 
     void setDocumentInitializer(DocumentInitializer documentInitializer) {

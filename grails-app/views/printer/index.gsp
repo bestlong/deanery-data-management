@@ -15,8 +15,8 @@
         $(document).ready(function () {
             $("#dialog").dialog(
                     {
-                        height: 130,
-                        width:350,
+                        height: 150,
+                        width:400,
                         zIndex: 0,
                         resizable: false,
                         draggable: false,
@@ -52,6 +52,9 @@
                 <tr>
                     <td align="left">
                         <g:submitButton name="submit" value="Предв. просмотр"/>
+                    </td>
+                    <td align="left">
+                        <g:submitButton name="submit" value="Экспорт в Excel"/>
                     </td>
                     <td align="right">
                         <a href="<g:createLink action="index" controller="index"/>" style="margin: 10px">Отмена</a>
