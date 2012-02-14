@@ -23,25 +23,25 @@ class SubjectHeaderPrinter {
         sheet.addMergedRegion(new CellRangeAddress(
                 startRow, //first row (0-based)
                 startRow, //last row  (0-based)
-                3, //first column (0-based)
-                8  //last column  (0-based)
+                6, //first column (0-based)
+                11  //last column  (0-based)
         ));
         Row row1 = sheet.createRow(startRow)
-        Cell cell = row1.createCell(3)
+        Cell cell = row1.createCell(6)
         cell.setCellValue("Годин")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
         sheet.addMergedRegion(new CellRangeAddress(
                 startRow, //first row (0-based)
                 startRow, //last row  (0-based)
-                9, //first column (0-based)
-                14  //last column  (0-based)
+                12, //first column (0-based)
+                17  //last column  (0-based)
         ));
-        cell = row1.createCell(9)
+        cell = row1.createCell(12)
         cell.setCellValue("Розподіл між семестрами")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        def cCol = 15
+        def cCol = 18
         for (int i: 1..8) {
             sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, cCol, cCol+4));
             cell = row1.createCell(cCol)
@@ -56,15 +56,15 @@ class SubjectHeaderPrinter {
         sheet.addMergedRegion(new CellRangeAddress(
                 startRow, //first row (0-based)
                 startRow, //last row  (0-based)
-                4, //first column (0-based)
-                8  //last column  (0-based)
+                7, //first column (0-based)
+                11  //last column  (0-based)
         ));
         def row2 = sheet.createRow(startRow)
-        cell = row2.createCell(4)
+        cell = row2.createCell(7)
         cell.setCellValue("у тому числі")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        cCol = 15
+        cCol = 18
         for (int i: 1..8) {
             sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, cCol, cCol+4));
             cell = row2.createCell(cCol)
@@ -74,7 +74,7 @@ class SubjectHeaderPrinter {
             cCol += 5
         }
 
-        cCol=2
+        cCol=5
 
         //вертикальный текст
         startRow--;
@@ -119,13 +119,13 @@ class SubjectHeaderPrinter {
             }
         }
 
-        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 0, 0));
+        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 0, 3));
         cell = row1.createCell(0)
         cell.setCellValue("Назва дисципліни")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 1, 1));
-        cell = row1.createCell(1)
+        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 4, 4));
+        cell = row1.createCell(4)
         cell.setCellValue("Кафедра")
         cell.setCellStyle(excelComponent.centerCellStyle)
     }

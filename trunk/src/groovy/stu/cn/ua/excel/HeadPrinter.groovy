@@ -12,7 +12,7 @@ import decanat.grails.Plan
  */
 class HeadPrinter {
 
-    def excelComponent
+    private ExcelComponent excelComponent
 
     /**
      *
@@ -23,52 +23,56 @@ class HeadPrinter {
         int currentRow = 0;
         //ROW0
         Row row = sheet.createRow(currentRow)
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 3));
         Cell cell = row.createCell(0)
         cell.setCellValue("ЗАТВЕРДЖУЮ")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 2, 26));
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 5, 29));
 
-        cell = row.createCell(2)
+        cell = row.createCell(5)
         cell.setCellStyle(excelComponent.centerCellStyle)
         cell.setCellValue("Р О Б О Ч И Й   Н А В Ч А Л Ь Н Ы Й   П Л А Н")
 
-        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 27, excelComponent.COLUMN_COUNT - 1));
-        cell = row.createCell(27)
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 30, excelComponent.COLUMN_COUNT - 1));
+        cell = row.createCell(30)
         cell.setCellStyle(excelComponent.rightCellStyle)
         cell.setCellValue("ЧЕРНІГІВСЬКИЙ ДЕРЖАВНИЙ ТЕХНОЛОГІЧНИЙ УНІВЕРСИТЕТ")
 
         currentRow++;
         //ROW1
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 3));
         row = sheet.createRow(currentRow)
-        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 2, 26));
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 5, 29));
 
-        cell = row.createCell(2)
+        cell = row.createCell(5)
         cell.setCellStyle(excelComponent.centerCellStyle)
         cell.setCellValue("на ${date.year} - ${date.year+1} навчальній рік за напрямом підготовки ${plan.direction}")
 
-        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 27, excelComponent.COLUMN_COUNT - 1));
-        cell = row.createCell(27)
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 30, excelComponent.COLUMN_COUNT - 1));
+        cell = row.createCell(30)
         cell.setCellStyle(excelComponent.rightCellStyle)
         cell.setCellValue("ФАКУЛЬТЕТ ЕЛЕКТРОННИХ ТА ІНФОРМАЦІЙНИХ ТЕХНОЛОГІЙ")
 
         currentRow++;
 
         //ROW2
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 3));
         row = sheet.createRow(currentRow)
         cell = row.createCell(0)
         cell.setCellStyle(excelComponent.leftCellStyle)
         cell.setCellValue("Перший проректор")
-        cell = row.createCell(1)
+        cell = row.createCell(4)
         cell.setCellStyle(excelComponent.leftCellStyle)
         cell.setCellValue("В. І. Скоробогатова")
 
         currentRow++;
 
         //ROW3
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 3));
         row = sheet.createRow(currentRow)
-        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 1, excelComponent.COLUMN_COUNT - 1));
-        cell = row.createCell(1)
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 4, excelComponent.COLUMN_COUNT - 1));
+        cell = row.createCell(4)
         cell.setCellStyle(excelComponent.leftCellStyle)
         cell.setCellValue("""Спеціальність ${plan.speciality.kod} - ${plan.speciality.name}, освітньо-кваліфікаційний рівень - ${plan.level},
 кваліфікація ${plan.qualification}, термін навчання ${plan.termin}""")
@@ -76,14 +80,15 @@ class HeadPrinter {
         currentRow++;
 
 //ROW4
+        sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 0, 3));
         row = sheet.createRow(currentRow)
         sheet.addMergedRegion(new CellRangeAddress(
                 currentRow, //first row (0-based)
                 currentRow, //last row  (0-based)
-                7, //first column (0-based)
-                13  //last column  (0-based)
+                10, //first column (0-based)
+                16  //last column  (0-based)
         ));
-        cell = row.createCell(7)
+        cell = row.createCell(10)
         cell.setCellStyle(excelComponent.centerCellStyle)
         cell.setCellValue("форма навчання - ${plan.form}")
 
@@ -93,4 +98,10 @@ class HeadPrinter {
 
         return ++currentRow
     }
+
+    void setExcelComponent(ExcelComponent excelComponent) {
+        this.excelComponent = excelComponent
+    }
+
+
 }

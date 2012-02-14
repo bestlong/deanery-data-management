@@ -7,6 +7,7 @@ import decanat.grails.Plan
 import decanat.grails.PlanSubject
 import stu.cn.ua.enums.ControlTypeEnum
 import stu.cn.ua.enums.WorkTypeEnum
+import org.apache.poi.hssf.util.CellRangeAddress
 
 /**
  * author: evgeniy
@@ -22,43 +23,45 @@ class SubjectPrinter {
         for (PlanSubject planSubject: subjects){
             Row row = sheet.createRow(startRow);
 
+            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 3));
+
             Cell cell = row.createCell(0)
             cell.setCellValue(planSubject.subject.name)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(1)
+            cell = row.createCell(4)
             cell.setCellValue(planSubject.subject.chair.name)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(2)
+            cell = row.createCell(5)
             cell.setCellValue(planSubject.creditCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(3)
+            cell = row.createCell(6)
             cell.setCellValue(planSubject.getTotal())
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(4)
+            cell = row.createCell(7)
             cell.setCellValue(planSubject.lectureCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(5)
+            cell = row.createCell(8)
             cell.setCellValue(planSubject.seminarCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(6)
+            cell = row.createCell(9)
             cell.setCellValue(planSubject.practiceCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(7)
+            cell = row.createCell(10)
             cell.setCellValue(planSubject.labCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(8)
+            cell = row.createCell(11)
             cell.setCellValue(planSubject.samCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            def cCol =9
+            def cCol =12
 
             ControlTypeEnum.values().each {
                 cell = row.createCell(cCol)
