@@ -9,13 +9,13 @@ class IndexController {
             def useless = it.speciality.kod
         }
         log.info "aaaaaaaa"
-        chain(action: 'index', model: [res: plans, msg: "Список рабочих планов кафедры '${chair.name}'"])
+        chain(action: 'index', model: [res: plans, msg: "Список учебных планов кафедры '${chair.name}'"])
     }
 
 
     def index = {
         def planList
-        def msg = chainModel?.msg ?: "Список рабочих планов"
+        def msg = chainModel?.msg ?: "Список учебных планов"
         def totalPlans = Plan.count()
         if (chainModel?.res == null)
             if (params.offset == null) {

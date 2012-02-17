@@ -1,16 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  decanat.grails.User: Admin
-  Date: 27.06.11
-  Time: 20:21
-  To change this template use File | Settings | File Templates.
---%>
-<%--   <script type="text/javascript">
-$(function() {
-jQuery.ajax({type:'POST', url:'/decanat-grails/search/searchMenu',success:function(data,textStatus){jQuery('#menuSide').html(data);},error:function(XMLHttpRequest,textStatus,errorThrown){}});
-return false;
-});
-</script> --%>
 <script type="text/javascript ">
 
     $(function() {
@@ -90,9 +77,7 @@ return false;
                                                    src="<g:createLinkTo dir="/images" file="print_printer.png"/>">
                                         </tooltip:tip>
                                     </g:else>
-
                                 </small>
-
                             </p>
                         </div>
                     </td>
