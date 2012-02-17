@@ -33,7 +33,7 @@
         </tooltip:tip>
         <tooltip:tip code="tooltip.menu.gotoUniversity">
             <li  class="${selectedMenu == 4 ? 'selectedMenu' : ''}">
-                <g:link controller="university" action="index">Информация об деканате</g:link>
+                <g:link controller="university" action="index">Информация о деканате</g:link>
             </li>
         </tooltip:tip>
     </ul>

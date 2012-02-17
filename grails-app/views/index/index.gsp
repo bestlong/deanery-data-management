@@ -28,7 +28,7 @@
     <g:set var="align" value="center"/>
 </g:ifAllGranted>
 <div align="${align}">
-    <g:render template="/template/latestPost"/>
+    <g:render template="/template/plans"/>
 </div>
 
 <div class="paginateButtons">
