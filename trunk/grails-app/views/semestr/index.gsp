@@ -24,7 +24,7 @@
     </content>
     <h4 class="subtitle">Продолжительность семестров:</h4>
     <g:form controller="semestr" action="update" width="300">
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <g:hiddenField name="planId" value="${plan.id}"/>
             <tr>
                 <td class="caption">Номер семестра</td>
@@ -55,9 +55,7 @@
 
         <div align="center" class="action">
             <g:link controller="stateExam" action="index" id="${plan.id}">Отмена</g:link>
-
             <g:submitButton name="save" value="Завершить"/>
-
         </div>
     </g:form>
 </div>

@@ -25,7 +25,7 @@
     %{--<div >--}%
     <h4 class="subtitle">Редактировать предмет:</h4>
     <g:form controller="subject" action="update" width="300" >
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <tr>
                 <td>Кафедра*</td>
                 <td>

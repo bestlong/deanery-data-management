@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title> Информация об деканате</title>
+    <title> Информация о деканате</title>
     <meta name="layout" content="main"/>
     <jqvalui:renderValidationScript for="decanat.grails.University"/>
 </head>
@@ -19,7 +19,7 @@
 <div id="latest-post">
     <h4 class="subtitle">Изменить информацию:</h4>
     <g:form controller="university" action="update" width="300">
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <tr>
                 <td class="caption">Проректор*</td>
                 <td>
@@ -33,12 +33,6 @@
                     <g:textField name="dean" value="${university?.dean}"/>
                 </td>
             </tr>
-            %{--<tr>--}%
-                %{--<td class="caption">Заведующий кафедрой*</td>--}%
-                %{--<td>--}%
-                    %{--<g:textField name="chairHead" value="${university?.chairHead}"/>--}%
-                %{--</td>--}%
-            %{--</tr>--}%
         </table>
         <br/>
 

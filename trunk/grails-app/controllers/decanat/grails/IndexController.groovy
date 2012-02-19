@@ -8,7 +8,6 @@ class IndexController {
         plans.each {
             def useless = it.speciality.kod
         }
-        log.info "aaaaaaaa"
         chain(action: 'index', model: [res: plans, msg: "Список учебных планов кафедры '${chair.name}'"])
     }
 
@@ -49,5 +48,9 @@ class IndexController {
             log.error(e.getMessage(), e)
         }
         redirect(action: index)
+    }
+
+    def newPlan = {
+
     }
 }

@@ -21,7 +21,6 @@ class Plan {
     }
     def beforeUpdate = {
         lastUpdated = new Date()
-
     }
 
     static hasMany = [practise: PlanPractice, subjects: PlanSubject, semestr: Semestr]
@@ -41,6 +40,10 @@ class Plan {
         lastUpdated(nullable: true)
         termin(nullable: false)
         qualification(nullable: false)
+    }
+
+    static mapping = {
+        discriminator value: "study"
     }
 
     /**

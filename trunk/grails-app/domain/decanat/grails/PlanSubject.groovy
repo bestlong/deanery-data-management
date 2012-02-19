@@ -19,6 +19,25 @@ class PlanSubject {
     int labCount
     int samCount
 
+    static PlanSubject createNew(PlanSubject subj){
+        PlanSubject newSubject = new PlanSubject()
+        newSubject.subject = subj.subject
+        newSubject.creditCount = subj.creditCount
+        newSubject.lectureCount = subj.lectureCount
+        newSubject.seminarCount = subj.seminarCount
+        newSubject.practiceCount = subj.practiceCount
+        newSubject.labCount = subj.labCount
+        newSubject.samCount = subj.samCount
+        planHours.each {
+            newSubject.addToPlanHours(PlanHours.createNew(it))
+        }
+        planControlTypes.each {
+            newSubject.addToPlanControlTypes(PlanControlType.createPlanControlType(it))
+        }
+
+        newSubject
+    }
+
     def beforeInsert = {
         plan.lastUpdated = new Date()
     }

@@ -31,7 +31,7 @@
     </g:hasErrors>
     <g:form controller="chair" action="update" width="300">
         <g:hiddenField name="id" value="${curChair?.id}"/>
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <tr class="title">
                 <td>Имя</td>
                 <td>

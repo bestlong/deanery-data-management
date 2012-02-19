@@ -1,9 +1,5 @@
 <%--
-  Created by IntelliJ IDEA.
-  decanat.grails.User: Admin
-  Date: 27.06.11
-  Time: 20:46
-  To change this template use File | Settings | File Templates.
+    author: evgeniy
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -16,7 +12,7 @@
 <g:ifAllGranted role="ROLE_ADMIN">
     <div align="left">
         <tooltip:tip code="tooltip.plan.add">
-            <a href="<g:createLink action="index" controller="selectSpeciality"/>">
+            <a href="<g:createLink action="index" controller="planCreation"/>">
                 <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
             </a>
         </tooltip:tip>

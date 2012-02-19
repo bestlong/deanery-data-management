@@ -35,7 +35,7 @@
         <h4 class="subtitle">Инициализация плана:</h4>
 
         <g:form action="next" controller="selectSpeciality" name="selectSpecialityForm">
-            <table cellpadding="5" id="editTable">
+            <table cellpadding="5" class="editTable">
                 <tr>
                     <td class="caption">Специальность*</td>
                     <td>

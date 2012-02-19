@@ -1,4 +1,8 @@
-package decanat.grails
+package decanat.grails.domain
+
+import decanat.grails.PlanPractice
+import decanat.grails.Speciality
+import decanat.grails.Plan
 
 class PlanPractiseIntegrationTests extends GroovyTestCase {
     protected void setUp() {

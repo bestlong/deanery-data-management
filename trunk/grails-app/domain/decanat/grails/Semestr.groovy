@@ -4,6 +4,13 @@ class Semestr implements Comparable{
     Plan plan;
     int number;
     int weekCount;
+    
+    static Semestr createNew(Semestr semestr){
+        Semestr sem = new Semestr()
+        sem.number = semestr.number
+        sem.weekCount = semestr.weekCount
+        sem
+    }
 
     static belongsTo = [plan: Plan]
     def beforeInsert = {

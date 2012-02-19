@@ -18,6 +18,14 @@ class PlanControlType {
         planSubject(nullable: false)
     }
 
+    static PlanControlType createPlanControlType(PlanControlType planControlType){
+        PlanControlType newPlanControlType = new PlanControlType()
+        newPlanControlType.mask = planControlType.mask
+        newPlanControlType.semestr = planControlType.semestr
+
+        newPlanControlType
+    }
+
     private String getMaskAsBitString(){
         def res = new StringBuilder("")
         def strMask = Integer.toBinaryString(mask)

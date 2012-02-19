@@ -1,6 +1,8 @@
-package decanat.grails
+package decanat.grails.domain
 
 import grails.test.*
+import decanat.grails.Subject
+import decanat.grails.Chair
 
 class SubjectIntegrationTests extends GroovyTestCase {
     protected void setUp() {

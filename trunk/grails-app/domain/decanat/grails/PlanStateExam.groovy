@@ -9,6 +9,16 @@ class PlanStateExam {
     int semestr;
 
     static belongsTo = [plan: Plan]
+
+    static PlanStateExam createNew(PlanStateExam planStateExam){
+        PlanStateExam newPlanStateExam = new PlanStateExam()
+        newPlanStateExam.date = planStateExam.date
+        newPlanStateExam.forma = planStateExam.forma
+        newPlanStateExam.semestr = planStateExam.semestr
+
+        newPlanStateExam
+    }
+
     def beforeInsert = {
         plan.lastUpdated = new Date()
     }
