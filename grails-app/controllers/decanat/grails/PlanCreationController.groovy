@@ -11,11 +11,13 @@ class PlanCreationController {
 //        try {
             PlanType planType = params.planType
             if (PlanType.STUDY.equals(planType)){
-                
+                redirect(action: "index", controller: "selectSpeciality")
             } else {
                 PlanWayCreation planWayCreation = params.planWayCreation
                 if (PlanWayCreation.STANDARD_CONSTRUCTOR.equals(planWayCreation)){
-                    
+                    WorkPlan plan = new WorkPlan(name: params.planName)
+                    plan.save(flush:  true)
+                    redirect(action: "index", controller: "selectSpeciality", id: plan.id)
                 } else {
                     if (PlanWayCreation.FROM_WORK_PLAN.equals(planWayCreation)){
 

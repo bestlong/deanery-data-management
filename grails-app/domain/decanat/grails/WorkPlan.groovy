@@ -7,6 +7,10 @@ class WorkPlan extends Plan{
     WorkPlan() {
     }
 
+    WorkPlan(String name) {
+        this.name = name
+    }
+
     WorkPlan(String name, Plan plan) {
         this.name = name
         copyPlan(plan)
@@ -16,7 +20,7 @@ class WorkPlan extends Plan{
         discriminator value: "work"
     }
     static constraints = {
-        name(blank: false)
+        name(nullable: true)
     }
     
     private void copyPlan(Plan p){

@@ -27,19 +27,19 @@ class Plan {
     static hasOne = [stateExam: PlanStateExam]
 
     static constraints = {
-        speciality(nullable: false)
-        chair(nullable: false)
-        direction(blank: false)
-        form(blank: false)
-        level(blank: false)
+        speciality(nullable: true)
+        chair(nullable: true)
+        direction(nullable: true)
+        form(nullable: true)
+        level(nullable: true)
         practise(nullable: true)
         subjects(nullable: true)
         stateExam(nullable: true)
         semestr(nullable: true)
-        semestrCount(range: 1..20)
+        semestrCount(range: 1..20, nullable: true)
         lastUpdated(nullable: true)
-        termin(nullable: false)
-        qualification(nullable: false)
+        termin(nullable: true)
+        qualification(nullable: true)
     }
 
     static mapping = {
