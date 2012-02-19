@@ -24,7 +24,8 @@ class PlanCreationController {
                             Plan plan = Plan.findById(params.baseStudyPlan as long)
                             WorkPlan workPlan = new WorkPlan("new work plan", plan)
                             workPlan.save()
-                            redirect(action: index, controller: index, params: params)
+                            flash.message = message(code: "msg.plan.work.successfully.added")
+                            redirect(action: "index", controller: "index", params: params)
                         }
                         else {
                             flash.error = message(code: "error.plan.unknown.way.creation")
@@ -32,6 +33,7 @@ class PlanCreationController {
                     }
                 }
             }
+
 //        } catch (Exception e){
 //
 //        }

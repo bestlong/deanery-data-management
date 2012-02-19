@@ -14,7 +14,7 @@ class IndexController {
 
     def index = {
         def planList
-        def msg = chainModel?.msg ?: "Список учебных планов"
+        def msg = chainModel?.msg ?: ""
         def totalPlans = Plan.count()
         if (chainModel?.res == null)
             if (params.offset == null) {
