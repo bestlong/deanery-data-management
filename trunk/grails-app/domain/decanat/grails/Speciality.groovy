@@ -11,4 +11,9 @@ class Speciality {
         name(blank: false, unique: true)
         shortName(unique: true, nullable: true)
     }
+
+    @Override
+    String toString() {
+        return "Специальность, код: ${kod}, имя: ${name} "
+    }
 }

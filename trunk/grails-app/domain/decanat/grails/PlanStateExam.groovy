@@ -10,11 +10,12 @@ class PlanStateExam {
 
     static belongsTo = [plan: Plan]
 
-    static PlanStateExam createNew(PlanStateExam planStateExam){
+    static PlanStateExam createNew(PlanStateExam planStateExam, Plan p){
         PlanStateExam newPlanStateExam = new PlanStateExam()
         newPlanStateExam.date = planStateExam.date
         newPlanStateExam.forma = planStateExam.forma
         newPlanStateExam.semestr = planStateExam.semestr
+        newPlanStateExam.plan = p
 
         newPlanStateExam
     }
