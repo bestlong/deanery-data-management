@@ -75,6 +75,14 @@
         <table class="editTable" align="center">
             <tr>
                 <td class="caption">
+                    Название плана
+                </td>
+                <td>
+                    <g:textField name="planName" style="width:450px;"/>
+                </td>
+            </tr>
+            <tr>
+                <td class="caption">
                     Способ создания плана
                 </td>
                 <td>
@@ -110,7 +118,7 @@
     </div>
 
     <div align="center" class="action">
-        <g:link controller="subject" action="index">Отмена</g:link>
+        <g:link controller="index" action="index">Отмена</g:link>
         <g:submitButton name="next" value="Далее"/>
     </div>
 </g:form>

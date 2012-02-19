@@ -1,7 +1,5 @@
 package decanat.grails
 
-import stu.cn.ua.CommonUtils
-
 class SelectSpecialityController {
     def selectSpecialityService
     def specialityService
