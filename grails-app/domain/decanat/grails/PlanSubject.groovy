@@ -5,8 +5,6 @@ import stu.cn.ua.enums.WorkTypeEnum
 
 class PlanSubject {
 
-    SortedSet planHours
-
     static hasMany = [planControlTypes: PlanControlType, planHours: PlanHours]
     static belongsTo = [plan: Plan]
 

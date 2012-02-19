@@ -3,14 +3,13 @@ package decanat.grails
 class WorkPlan extends Plan{
     
     String name
-    Plan plan
 
     WorkPlan() {
     }
 
     WorkPlan(String name, Plan plan) {
         this.name = name
-        this.plan = copyPlan(plan)
+        copyPlan(plan)
     }
 
     static mapping = {
@@ -18,30 +17,28 @@ class WorkPlan extends Plan{
     }
     static constraints = {
         name(blank: false)
-        plan(nullable: false)
     }
     
-    private Plan copyPlan(Plan p){
-        WorkPlan newPlan = new WorkPlan()
-        newPlan.speciality = p.speciality
-        newPlan.chair = p.chair
-        newPlan.direction = p.direction
-        newPlan.level = p.level
-        newPlan.form = p.form
-        newPlan.termin = p.termin
-        newPlan.qualification = p.qualification
-        newPlan.semestrCount = p.semestrCount
-        semestr.each {
-            newPlan.addToSemestr(Semestr.createNew(it))
+    private void copyPlan(Plan p){
+        speciality = p.speciality
+        chair = p.chair
+        direction = p.direction
+        level = p.level
+        form = p.form
+        termin = p.termin
+        qualification = p.qualification
+        semestrCount = p.semestrCount
+        p.semestr.each {
+            addToSemestr(Semestr.createNew(it))
         }
-        subjects.each {
-            newPlan.addToSubjects(PlanSubject.createNew(it))
+        p.subjects.each {
+            addToSubjects(PlanSubject.createNew(it))
         }
-        practise.each {
-            newPlan.addToPractise(PlanPractice.createNew(it))
+        p.practise.each {
+            addToPractise(PlanPractice.createNew(it))
         }
-        newPlan.stateExam = PlanStateExam.createNew(newPlan.stateExam)
-
-        newPlan
+        if (null != p.stateExam){
+            stateExam = PlanStateExam.createNew(p.stateExam, this)
+        }
     }
 }
