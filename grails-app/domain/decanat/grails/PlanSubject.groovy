@@ -28,10 +28,10 @@ class PlanSubject {
         newSubject.practiceCount = subj.practiceCount
         newSubject.labCount = subj.labCount
         newSubject.samCount = subj.samCount
-        planHours.each {
+        subj.planHours.each {
             newSubject.addToPlanHours(PlanHours.createNew(it))
         }
-        planControlTypes.each {
+        subj.planControlTypes.each {
             newSubject.addToPlanControlTypes(PlanControlType.createPlanControlType(it))
         }
 
