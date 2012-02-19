@@ -25,7 +25,7 @@
     <h4 class="subtitle">Редактировать специальность:</h4>
 
     <g:form controller="speciality" action="update" width="300">
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <tr>
                 <td class="caption">Код*</td>
                 <td>

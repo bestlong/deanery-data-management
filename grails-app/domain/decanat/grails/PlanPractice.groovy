@@ -8,6 +8,15 @@ class PlanPractice {
 
     static belongsTo = [plan: Plan]
 
+    static PlanPractice createNew(PlanPractice planPractice){
+        PlanPractice newPlanPractice = new PlanPractice()
+        newPlanPractice.name = planPractice.name
+        newPlanPractice.semestr = planPractice.semestr
+        newPlanPractice.weeks = planPractice.weeks
+
+        newPlanPractice
+    }
+
     def beforeInsert = {
         plan.lastUpdated = new Date()
     }

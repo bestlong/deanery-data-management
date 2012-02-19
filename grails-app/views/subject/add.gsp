@@ -24,7 +24,7 @@
 <div id="latest-post">
     <h4 class="subtitle">Добавить новый предмет в систему:</h4>
     <g:form controller="subject" action="save" width="300" >
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <tr>
                 <td class="caption">Кафедра*</td>
                 <td>

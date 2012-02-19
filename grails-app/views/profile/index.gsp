@@ -10,10 +10,9 @@
 </head>
 
 <div id="latest-post">
-    %{--<div >--}%
     <h4 class="subtitle">Изменить информацию:</h4>
     <g:form controller="profile" action="update" width="300" name="profile">
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <tr>
                 <td class="caption">Логин*</td>
                 <td>
@@ -34,7 +33,6 @@
                 </td>
 
             </tr>
-
         </table>
         <br/>
 
@@ -42,7 +40,6 @@
             <g:link controller="index" action="index">Отмена</g:link>
             <g:submitButton name="save" value="Сохранить"/>
             <a href="#" onclick="deleteDialog(${user?.id})" class="editPass">Изменить пароль</a>
-
         </div>
     </g:form>
 </div>

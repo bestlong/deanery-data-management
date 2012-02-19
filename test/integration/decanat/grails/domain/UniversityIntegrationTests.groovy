@@ -1,6 +1,7 @@
-package decanat.grails
+package decanat.grails.domain
 
 import grails.test.*
+import decanat.grails.University
 
 class UniversityIntegrationTests extends GroovyTestCase {
     protected void setUp() {

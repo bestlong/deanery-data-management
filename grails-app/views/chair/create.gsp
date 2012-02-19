@@ -22,7 +22,7 @@
         </div>
     </g:hasErrors>
     <g:form controller="chair" action="save" width="300">
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
             <tr class="title">
                 <td class="caption">Имя*</td>
                 <td>

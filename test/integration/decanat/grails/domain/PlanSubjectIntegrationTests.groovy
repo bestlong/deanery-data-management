@@ -1,6 +1,11 @@
-package decanat.grails
+package decanat.grails.domain
 
 import grails.test.*
+import decanat.grails.PlanSubject
+import decanat.grails.Chair
+import decanat.grails.Subject
+import decanat.grails.Speciality
+import decanat.grails.Plan
 
 class PlanSubjectIntegrationTests extends GroovyTestCase {
     protected void setUp() {

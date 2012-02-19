@@ -21,7 +21,7 @@
 <h4 class="subtitle">Добавить нового пользователя в систему:</h4>
 
 <g:form controller="user" action="save" width="300" method="post">
-    <table id="editTable" align="center">
+    <table class="editTable" align="center">
         <tr>
             <td class="caption">Роль*</td>
             <td align="left">

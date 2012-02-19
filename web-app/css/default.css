@@ -305,17 +305,17 @@ td .error_field {
     height: 35px;
 }
 
-#editTable #title {
+.editTable #title {
     font-weight: bold;
     height: 35px;
 }
 
 
-#editTable tr {
+.editTable tr {
     height: 50px;
 }
 
-#editTable td {
+.editTable td {
     width: 300px;
 }
 
@@ -323,18 +323,18 @@ td .error_field {
     width: 200px;
 }
 
-#editTable td .checkBox {
+.editTable td .checkBox {
     width: 10px;
 }
 
-#editTable .caption {
+.editTable .caption {
     font-size: 16px;
     font-family: Tahoma, Arial, serif;
     font-style: normal;
     color: #000000;
 }
 
-#editTable input {
+.editTable input {
     margin: 0;
     padding: 3px;
     width: 200px;

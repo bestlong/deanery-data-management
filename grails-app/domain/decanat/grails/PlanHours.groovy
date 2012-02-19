@@ -11,6 +11,17 @@ class PlanHours implements Comparable{
     int labs;
     int seminars;
 
+    static PlanHours createNew(PlanHours hours){
+        PlanHours planHours = new PlanHours()
+        planHours.practices = hours.practices
+        planHours.semestr = hours.semestr
+        planHours.lectures = hours.lectures
+        planHours.labs = hours.labs
+        planHours.seminars = hours.seminars
+
+        planHours
+    }
+
     static constraints = {
         semestr(nullable: false)
         planSubject(nullable: false)

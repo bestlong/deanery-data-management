@@ -24,7 +24,7 @@
     </content>
     <h4 class="subtitle">Изменить информацию о гос. экзамене:</h4>
     <g:form controller="stateExam" action="save" width="300" >
-        <table id="editTable" align="center">
+        <table class="editTable" align="center">
                <tr>
                 <td class="caption">Номер семестра*</td>
                 <td>
@@ -40,25 +40,18 @@
                    <g:textField name="date" value="${stateExam.date}" />
                 </td>
             </tr>
-
             <tr>
                 <td class="caption">Форма аттестации*</td>
-              <td>
-
+                <td>
                     <g:textField name="forma" value="${stateExam.forma}" />
                 </td>
-
             </tr>
-
         </table>
         <br/>
 
         <div align="center" class="action">
             <g:link controller="practice" action="index" id="${plan.id}">Отмена</g:link>
-
             <g:submitButton name="save" value="Следующий шаг"/>
-
-
         </div>
     </g:form>
 </div>
