@@ -49,8 +49,48 @@
                 }
                 $("#forConstructorType").show();
             }
-        });
 
+
+            var myForm = $('#planCreationForm');
+            myForm.validate({
+                onkeyup:false,
+                errorClass:'error_field',
+                validClass:'valid',
+                onsubmit:true,
+                success:function (label) {
+                    $('[id=' + label.attr('for') + ']').qtip('destroy');
+                },
+                errorPlacement:function (error, element) {
+                    if ($(error).text()) {
+                        $(element).filter(':not(.valid)').qtip({
+                            overwrite:true,
+                            content:error,
+                            position:{ my:'left center', at:'right center' },
+                            show:{
+                                event:false,
+                                ready:true
+                            },
+                            hide:false,
+                            style:{
+                                widget:false,
+                                classes:'ui-tooltip-blue ui-tooltip-jtools ui-tooltip-rounded',
+                                tip:true
+                            }
+                        });
+                    }
+                },
+                rules:{
+                    planName:{
+                        required:true
+                    }
+                },
+                messages:{
+                    planName:{
+                        required:'Введите название для рабочего плана'
+                    }
+                }
+            });
+        });
 
     </script>
     <meta name="layout" content="main"/>
@@ -58,7 +98,7 @@
 </head>
 
 <body>
-<g:form controller="planCreation" action="next">
+<g:form controller="planCreation" action="next" name="planCreationForm">
     <div class="subtitle" align="center">Меню создания плана</div>
     <table class="editTable" align="center">
         <tr>
