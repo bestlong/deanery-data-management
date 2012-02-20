@@ -61,22 +61,28 @@
                     $('[id=' + label.attr('for') + ']').qtip('destroy');
                 },
                 errorPlacement:function (error, element) {
-                    if ($(error).text()) {
-                        $(element).filter(':not(.valid)').qtip({
-                            overwrite:true,
-                            content:error,
-                            position:{ my:'left center', at:'right center' },
-                            show:{
-                                event:false,
-                                ready:true
-                            },
-                            hide:false,
-                            style:{
-                                widget:false,
-                                classes:'ui-tooltip-blue ui-tooltip-jtools ui-tooltip-rounded',
-                                tip:true
-                            }
-                        });
+                    var str = $("#planType option:selected").val();
+                    if (str == '${PlanClass.STUDY}') {
+                        myForm.send()
+                    }
+                    else {
+                        if ($(error).text()) {
+                            $(element).filter(':not(.valid)').qtip({
+                                overwrite:true,
+                                content:error,
+                                position:{ my:'left center', at:'right center' },
+                                show:{
+                                    event:false,
+                                    ready:true
+                                },
+                                hide:false,
+                                style:{
+                                    widget:false,
+                                    classes:'ui-tooltip-blue ui-tooltip-jtools ui-tooltip-rounded',
+                                    tip:true
+                                }
+                            });
+                        }
                     }
                 },
                 rules:{
@@ -102,8 +108,8 @@
     <div class="subtitle" align="center">Меню создания плана</div>
     <table class="editTable" align="center">
         <tr>
-            <td class="caption">Тип плана*</td>
-            <td>
+            <td class="caption" width="100px">Тип плана*</td>
+            <td align="left">
                 <g:select from="${PlanClass.values()}" optionValue="caption" name="planType"
                           style="width:450px; padding: 3px; margin: 0" value="${PlanClass.STUDY}"/>
             </td>
@@ -114,11 +120,11 @@
         <div class="subtitle" align="center">Подменю для рабочих планов</div>
         <table class="editTable" align="center">
             <tr>
-                <td class="caption">
+                <td class="caption" width="100px">
                     Название плана
                 </td>
                 <td>
-                    <g:textField name="planName" style="width:450px;"/>
+                    <g:textField name="planName" style="width:440px;"/>
                 </td>
             </tr>
             <tr>
@@ -136,7 +142,7 @@
         <div id="forConstructorType" style="display: none">
             <table class="editTable" align="center">
                 <tr id="workPlanTr">
-                    <td class="caption">
+                    <td class="caption" width="100px">
                         Рабочие планы
                     </td>
                     <td>
@@ -145,10 +151,10 @@
                     </td>
                 </tr>
                 <tr id="studyPlanTr">
-                    <td class="caption">
+                    <td class="caption" width="100px">
                         Учебные планы
                     </td>
-                    <td>
+                    <td align="left">
                         <g:select from="${Plan.list()}" optionValue="speciality" optionKey="id" name="baseStudyPlan"
                                   style="width:450px; padding: 3px; margin: 0"/>
                     </td>

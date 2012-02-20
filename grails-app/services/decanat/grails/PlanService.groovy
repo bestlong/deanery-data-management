@@ -24,4 +24,13 @@ class PlanService {
         }
         list.size()
     }
+
+    def findWorkPlansByStudyPlan(Plan plan){
+        def c = Plan.createCriteria()
+        def list = c.list(){
+            eq("class", PlanClass.WORK.name())
+            eq("plan", plan)
+        }
+        list
+    }
 }
