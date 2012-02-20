@@ -1,7 +1,7 @@
 package decanat.grails
 
-import stu.cn.ua.enums.PlanType
 import stu.cn.ua.enums.PlanWayCreation
+import stu.cn.ua.enums.PlanClass
 
 class PlanCreationController {
 
@@ -9,8 +9,8 @@ class PlanCreationController {
 
     def next = {
 //        try {
-            PlanType planType = params.planType
-            if (PlanType.STUDY.equals(planType)){
+            PlanClass planType = params.planType
+            if (PlanClass.STUDY.equals(planType)){
                 redirect(action: "index", controller: "selectSpeciality")
             } else {
                 PlanWayCreation planWayCreation = params.planWayCreation

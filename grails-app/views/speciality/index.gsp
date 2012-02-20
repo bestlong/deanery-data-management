@@ -15,34 +15,33 @@
 
         function initTable() {
             $('#specialityList').dataTable({
-                "bJQueryUI": true,
-                "sPaginationType": "full_numbers",
-                "iDisplayLength": 15,
-                "bLengthChange": false,
-                "oLanguage": {
-                    "sInfo": "Всего: _TOTAL_. Показано с _START_ по _END_",
-                    "sInfoEmpty": "Нет данных для отображения",
-                    "sSearch": "Поиск",
-                    "sLengthMenu":"Отображать по _MENU_",
-                    "sInfoFiltered": "(найдено из _MAX_)",
-                    "sZeroRecords": "По Вашему запросу ничего не найдено.",
-                    "oPaginate":
-                    {
-                        "sFirst": "К началу",
-                        "sPrevious": "Назад",
-                        "sLast": "В конец",
-                        "sNext": "Далее"
+                        "bJQueryUI":true,
+                        "sPaginationType":"full_numbers",
+                        "iDisplayLength":15,
+                        "bLengthChange":false,
+                        "oLanguage":{
+                            "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+                            "sInfoEmpty":"Нет данных для отображения",
+                            "sSearch":"Поиск",
+                            "sLengthMenu":"Отображать по _MENU_",
+                            "sInfoFiltered":"(найдено из _MAX_)",
+                            "sZeroRecords":"По Вашему запросу ничего не найдено.",
+                            "oPaginate":{
+                                "sFirst":"К началу",
+                                "sPrevious":"Назад",
+                                "sLast":"В конец",
+                                "sNext":"Далее"
+                            }
+                        },
+                        bAutoWidth:false,
+                        aoColumns:[
+                            { sWidth:"30%" },
+                            { sWidth:"30%" },
+                            { sWidth:"25%" },
+                            { sWidth:"15%", bSortable:false }
+                        ]
                     }
-                },
-                bAutoWidth: false,
-                aoColumns   : [
-                    { sWidth: "30%" },
-                    { sWidth: "30%" },
-                    { sWidth: "25%" },
-                    { sWidth: "15%", bSortable: false }
-                ]
-            }
-                    );
+            );
         }
 
 
@@ -65,7 +64,7 @@
 
 <body>
 
-<div id="latest-post">
+<div>
     <div align="left">
         <tooltip:tip code="tooltip.add.speciality">
             <a href="<g:createLink action="add" controller="speciality"/>">
@@ -82,7 +81,7 @@
 
     <content tag="deleteConfirmation">
         <g:render template="/template/deleteConfirmation"
-                model="['askMessage':'Вы точно хотите удалить эту специальность?']"/>
+                  model="['askMessage': 'Вы точно хотите удалить эту специальность?']"/>
     </content>
 </div>
 </body>

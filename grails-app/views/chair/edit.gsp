@@ -22,7 +22,7 @@
 
 <body>
 
-<div id="latest-post">
+<div>
     <h4 class="subtitle">Редактировать кафедру ${curChair?.name}:</h4>
     <g:hasErrors>
         <div style="color: red;">

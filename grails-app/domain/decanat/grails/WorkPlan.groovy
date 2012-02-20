@@ -1,5 +1,7 @@
 package decanat.grails
 
+import stu.cn.ua.enums.PlanClass
+
 class WorkPlan extends Plan{
     
     String name
@@ -17,7 +19,7 @@ class WorkPlan extends Plan{
     }
 
     static mapping = {
-        discriminator value: "work"
+        discriminator value: PlanClass.WORK, column: "class"
     }
     static constraints = {
         name(nullable: true)

@@ -2,6 +2,7 @@ package decanat.grails
 
 import stu.cn.ua.enums.ControlTypeEnum
 import stu.cn.ua.enums.WorkTypeEnum
+import stu.cn.ua.enums.PlanClass
 
 class Plan {
 
@@ -43,7 +44,7 @@ class Plan {
     }
 
     static mapping = {
-        discriminator value: "study"
+        discriminator value: PlanClass.STUDY, column: "class"
     }
 
     /**

@@ -52,7 +52,7 @@
         <div id="menuBuffer"></div>
         <g:pageProperty name="page.deleteConfirmation"/>
         <g:pageProperty name="page.editPassword"/>
-        <div id="latest-post" >
+        <div>
             <g:render template="/template/notification/general"/>
             <g:layoutBody/>
         </div>

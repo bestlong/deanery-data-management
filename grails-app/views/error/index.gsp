@@ -14,7 +14,7 @@
 
 <body>
 
-<div id="latest-post">
+<div>
     <h1 style="color: red;">
         ${flash.message}
     </h1>

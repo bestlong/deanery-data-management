@@ -1,9 +1,7 @@
 <%--
-  Created by IntelliJ IDEA.
-  decanat.grails.User: Admin
+  author: evgeniy
   Date: 27.06.11
   Time: 23:44
-  To change this template use File | Settings | File Templates.
 --%>
 
 <%@ page import="decanat.grails.Role" contentType="text/html;charset=UTF-8" %>
@@ -23,10 +21,8 @@
     });
 </script>
 
-<div id="latest-post">
-    %{--<div >--}%
+<div>
     <h4 class="subtitle">Редактировать пользователя ${user?.userRealName}:</h4>
-%{--</div>--}%
 
     <g:if test="${params?.login}">
     <g:set var="userEdit" value="${User.findByUsername(params?.login)}"/>

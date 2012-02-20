@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<div id="latest-post">
+<div>
     <content tag="search">
         <g:render template="/template/subject/searchTemplate"  model="['controller':'addSubjects']"/>
         <g:render template="/template/plan/menu" model="[ 'active' : 1, 'plan': plan ]"/>

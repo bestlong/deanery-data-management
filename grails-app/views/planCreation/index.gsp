@@ -2,7 +2,7 @@
   author: evgeniy
 --%>
 
-<%@ page import="decanat.grails.Plan; decanat.grails.WorkPlan; stu.cn.ua.enums.PlanWayCreation; stu.cn.ua.enums.PlanType" contentType="text/html;charset=UTF-8" %>
+<%@ page import="stu.cn.ua.enums.PlanClass; decanat.grails.Plan; decanat.grails.WorkPlan; stu.cn.ua.enums.PlanWayCreation; stu.cn.ua.enums.PlanClass" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <script type="text/javascript ">
@@ -10,7 +10,7 @@
             $("input:submit, a, button", ".action").button();
             $('#planType').change(function () {
                 var str = $("#planType option:selected").val();
-                if (str == '${PlanType.WORK}') {
+                if (str == '${PlanClass.WORK}') {
                     $("#forWorkPlan").show();
                 } else {
                     $("#forWorkPlan").hide();
@@ -33,7 +33,7 @@
 
             });
             var str = $("#planType option:selected").val();
-            if (str == '${PlanType.WORK}') {
+            if (str == '${PlanClass.WORK}') {
                 $("#forWorkPlan").show();
             }
             str = $("#planWayCreation option:selected").val();
@@ -104,8 +104,8 @@
         <tr>
             <td class="caption">Тип плана*</td>
             <td>
-                <g:select from="${PlanType.values()}" optionValue="caption" name="planType"
-                          style="width:450px; padding: 3px; margin: 0" value="${PlanType.STUDY}"/>
+                <g:select from="${PlanClass.values()}" optionValue="caption" name="planType"
+                          style="width:450px; padding: 3px; margin: 0" value="${PlanClass.STUDY}"/>
             </td>
         </tr>
     </table>
