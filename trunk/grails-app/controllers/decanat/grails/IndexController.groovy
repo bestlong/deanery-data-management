@@ -1,6 +1,10 @@
 package decanat.grails
 
+import stu.cn.ua.enums.PlanClass
+
 class IndexController {
+
+    def planService
 
     def chairPlans = {
         def chair = Chair.get(params.id)
@@ -15,13 +19,13 @@ class IndexController {
     def index = {
         def planList
         def msg = chainModel?.msg ?: ""
-        def totalPlans = Plan.count()
+        def totalPlans = planService.findByDiscriminatorCount(PlanClass.STUDY)
         if (chainModel?.res == null)
             if (params.offset == null) {
-                planList = Plan.list([max: 4, offset: 0, sort: 'lastUpdated', order: 'desc'])
+                planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, 4, 0)
             }
             else {
-                planList = Plan.list([max: params.max, offset: params.offset, sort: 'lastUpdated', order: 'desc'])
+                planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, params.max, params.offset)
             }
         else{
             planList = chainModel.res
@@ -48,9 +52,5 @@ class IndexController {
             log.error(e.getMessage(), e)
         }
         redirect(action: index)
-    }
-
-    def newPlan = {
-
     }
 }

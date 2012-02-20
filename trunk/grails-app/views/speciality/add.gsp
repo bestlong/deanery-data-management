@@ -9,33 +9,33 @@
 <%@ page import="decanat.grails.Role" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title> Добавление специальности</title>
+    <title>Добавление специальности</title>
     <meta name="layout" content="main"/>
     <jqvalui:renderValidationScript for="decanat.grails.Speciality"/>
 </head>
+
 <body>
 
 <script type="text/javascript ">
-    $(function() {
+    $(function () {
         $("input:submit, a, button", ".action").button();
     });
 </script>
 
-<div id="latest-post">
+<div>
     <h4 class="subtitle">Добавить новую специальность в систему:</h4>
-
-    <g:form controller="speciality" action="save" width="300" >
+    <g:form controller="speciality" action="save" width="300">
         <table class="editTable" align="center">
             <tr>
                 <td class="caption">Код*</td>
                 <td>
-                    <g:textField name="kod" value="${speciality?.kod}" />
+                    <g:textField name="kod" value="${speciality?.kod}"/>
                 </td>
             </tr>
             <tr>
                 <td class="caption">Имя*</td>
                 <td>
-                    <g:textField name="name" value="${speciality?.name}" />
+                    <g:textField name="name" value="${speciality?.name}"/>
                 </td>
             </tr>
             <tr>
@@ -48,7 +48,7 @@
         <br/>
 
         <div align="center" class="action">
-            <g:link controller="speciality" action="index" >Отмена</g:link>
+            <g:link controller="speciality" action="index">Отмена</g:link>
             <g:submitButton name="save" value="Сохранить"/>
         </div>
     </g:form>

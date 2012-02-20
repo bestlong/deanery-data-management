@@ -3,13 +3,14 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-<g:javascript src="/init/profile/init.js"/>
-<title>
-    Мой профиль
-</title>
+    <g:javascript src="/init/profile/init.js"/>
+    <title>
+        Мой профиль
+    </title>
 </head>
 
-<div id="latest-post">
+<body>
+<div>
     <h4 class="subtitle">Изменить информацию:</h4>
     <g:form controller="profile" action="update" width="300" name="profile">
         <table class="editTable" align="center">

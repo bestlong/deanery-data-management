@@ -18,7 +18,7 @@
 
 </script>
 
-<div id="latest-post">
+<div>
      <content tag="search">
       <g:render template="/template/plan/menu" model="[ 'active' : 4 ]"/>
     </content>

@@ -9,33 +9,34 @@
 <%@ page import="decanat.grails.Chair; decanat.grails.Role" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title> Добавление предметов</title>
+    <title>Добавление предметов</title>
     <meta name="layout" content="main"/>
     <jqvalui:renderValidationScript for="decanat.grails.Subject"/>
 </head>
+
 <body>
 
 <script type="text/javascript ">
-    $(function() {
+    $(function () {
         $("input:submit, a, button", ".action").button();
     });
 </script>
 
-<div id="latest-post">
+<div>
     <h4 class="subtitle">Добавить новый предмет в систему:</h4>
-    <g:form controller="subject" action="save" width="300" >
+    <g:form controller="subject" action="save" width="300">
         <table class="editTable" align="center">
             <tr>
                 <td class="caption">Кафедра*</td>
                 <td>
                     <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair"
-                               style="width:150px; padding: 3px; margin: 0"/>
+                              style="width:150px; padding: 3px; margin: 0"/>
                 </td>
             </tr>
             <tr>
                 <td class="caption">Имя*</td>
                 <td>
-                    <g:textField name="name" value="${subject?.name}" />
+                    <g:textField name="name" value="${subject?.name}"/>
                 </td>
             </tr>
             <tr>
@@ -48,7 +49,7 @@
         <br/>
 
         <div align="center" class="action">
-            <g:link controller="subject" action="index" >Отмена</g:link>
+            <g:link controller="subject" action="index">Отмена</g:link>
             <g:submitButton name="save" value="Сохранить"/>
         </div>
     </g:form>

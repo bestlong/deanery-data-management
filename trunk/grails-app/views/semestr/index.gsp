@@ -18,7 +18,7 @@
 
 </script>
 
-<div id="latest-post">
+<div>
     <content tag="search">
         <g:render template="/template/plan/menu" model="[ 'active' : 5 ]"/>
     </content>
@@ -32,18 +32,16 @@
             </tr>
             <g:set var="idx" value="${1}"/>
             <g:while test="${idx <= plan.semestrCount}">
-
                 <tr>
                     <td class="caption">${idx} семестр*</td>
                     <td>
-
                         <g:if test="${idx<=semestr.size()}">
                             <g:hiddenField name="id${idx}" value="${semestr.get(idx-1).id}"/>
-                            <g:select name="sem${idx}" from="${1..20}" value="${semestr?.get(idx-1).weekCount}" style="width: 100px">недель</g:select>
+                            <g:select name="sem${idx}" from="${1..20}" value="${semestr?.get(idx-1)?.weekCount}" style="width: 100px">недель</g:select>
                         </g:if>
                         <g:else>
                             <g:hiddenField name="id${idx}"/>
-                            <g:select name="sem${idx}" from="${1..20}" value="${1}" style="width: 100px"></g:select>
+                            <g:select name="sem${idx}" from="${1..20}" value="${1}" style="width: 100px"/>
                         </g:else>
                     </td>
                 </tr>

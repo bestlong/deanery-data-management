@@ -7,12 +7,12 @@
 </head>
 
 <body>
-<div id="latest-post">
+<div>
     <content tag="search">
-        <g:render template="/template/plan/menu" model="[ 'active' : 1, 'plan': plan ]"/>
-        <g:render template="/template/speciality/searchTemplate" model="['controller': 'selectSpeciality', searchConfig: searchSpecialityConfig]"/>
+        <g:render template="/template/plan/menu" model="['active': 1, 'plan': plan]"/>
+        <g:render template="/template/speciality/searchTemplate"
+                  model="['controller': 'selectSpeciality', searchConfig: searchSpecialityConfig]"/>
         <g:render template="/template/chair/searchTemplate" model="[searchConfig: searchConfig]"/>
-
     </content>
 
     <div id="searchPart" style="display: none;">
@@ -33,19 +33,18 @@
 
     <div id="selectPart">
         <h4 class="subtitle">Инициализация плана:</h4>
-
         <g:form action="next" controller="selectSpeciality" name="selectSpecialityForm">
             <table cellpadding="5" class="editTable">
                 <tr>
                     <td class="caption">Специальность*</td>
                     <td>
                         <span style="font-size: 14px;" id="specialityName">${plan?.speciality?.name}</span>
-                        <a id="selectSpec" href="#" onclick="showSpecialitySelect(true)" class="action">Выбрать специальность</a>
+                        <a id="selectSpec" href="#" onclick="showSpecialitySelect(true)"
+                           class="action">Выбрать специальность</a>
                         <g:hiddenField name="specId" value="${plan?.speciality?.id}"/>
                         <g:hiddenField name="id" value="${plan?.id}"/>
                     </td>
                 </tr>
-
                 <tr>
                     <td class="caption">Кафедра*</td>
                     <td>
@@ -55,7 +54,6 @@
 
                     </td>
                 </tr>
-
                 <tr>
                     <td class="caption">Форма обучения*</td>
                     <td>
@@ -107,9 +105,7 @@
                 <g:submitButton name="save" value="Следующий шаг"/>
             </div>
         </g:form>
-
     </div>
-
 </div>
 
 </body>

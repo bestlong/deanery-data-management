@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title> Информация о деканате</title>
+    <title>Информация о деканате</title>
     <meta name="layout" content="main"/>
     <jqvalui:renderValidationScript for="decanat.grails.University"/>
 </head>
 
 <body>
 <script type="text/javascript ">
-    $(function() {
+    $(function () {
         $("#messages").delay(6000).fadeOut(5 * 400);
         $("#errors").delay(6000).fadeOut(5 * 400);
         $("input:submit, a, button", ".action").button();
@@ -16,7 +16,7 @@
     });
 </script>
 
-<div id="latest-post">
+<div>
     <h4 class="subtitle">Изменить информацию:</h4>
     <g:form controller="university" action="update" width="300">
         <table class="editTable" align="center">

@@ -21,7 +21,7 @@
     });
 </script>
 
-<div id="latest-post">
+<div>
     <h4 class="subtitle">Редактировать специальность:</h4>
 
     <g:form controller="speciality" action="update" width="300">
