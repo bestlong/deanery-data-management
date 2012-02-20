@@ -5,6 +5,7 @@ import stu.cn.ua.enums.PlanClass
 class WorkPlan extends Plan{
     
     String name
+    Plan plan
 
     WorkPlan() {
     }
@@ -16,6 +17,7 @@ class WorkPlan extends Plan{
     WorkPlan(String name, Plan plan) {
         this.name = name
         copyPlan(plan)
+        this.plan = plan
     }
 
     static mapping = {
@@ -23,6 +25,7 @@ class WorkPlan extends Plan{
     }
     static constraints = {
         name(nullable: true)
+        plan(nullable: false)
     }
     
     private void copyPlan(Plan p){
