@@ -44,7 +44,7 @@ class Plan {
     }
 
     static mapping = {
-        discriminator value: PlanClass.STUDY, column: "class"
+        discriminator value: PlanClass.STUDY
     }
 
     /**

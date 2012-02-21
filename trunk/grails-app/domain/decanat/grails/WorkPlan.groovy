@@ -21,7 +21,7 @@ class WorkPlan extends Plan{
     }
 
     static mapping = {
-        discriminator value: PlanClass.WORK, column: "class"
+        discriminator value: PlanClass.WORK
     }
     static constraints = {
         name(nullable: true)
