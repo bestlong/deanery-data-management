@@ -37,7 +37,7 @@
             <div class="post">
                 <table style="font-size: 16px; width: 100%">
                     <tr>
-                        <td>
+                        <td colspan="6">
                             <h4 class="title">
                                 <g:ifAllGranted role="ROLE_ADMIN">
                                     <g:link id="${plan.id}" action="index"
@@ -48,7 +48,15 @@
                                 </g:ifAllGranted>
                             </h4>
                         </td>
-                        <td width="50%"></td>
+                    </tr>
+                    <tr>
+                        <td width="20%">
+                            <span style="font-size: small;">Форма обучения:</span>
+                        </td>
+                        <td width="20%">
+                            <span style="font-size: small; text-decoration: underline;">${plan.form}</span>
+                        </td>
+                        <td width="40%"></td>
                         <td rowspan="5" valign="bottom" width="5%" align="right">
                             <g:ifAllGranted role="ROLE_ADMIN">
                                 <tooltip:tip code="tooltip.plan.remove">
@@ -83,14 +91,6 @@
                                     <input id="details" type="image" src="<g:createLinkTo dir="/images" file="expand.png"/>">
                                 </g:remoteLink>
                             </tooltip:tip>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="20%">
-                            <span style="font-size: small;">Форма обучения:</span>
-                        </td>
-                        <td width="20%">
-                            <span style="font-size: small; text-decoration: underline;">${plan.form}</span>
                         </td>
                     </tr>
                     <tr>

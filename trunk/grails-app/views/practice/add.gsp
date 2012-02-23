@@ -13,9 +13,9 @@
 <body>
 <div>
     <h4 class="subtitle">Добавление практик:</h4>
-    <g:form controller="practice" action="save" width="300" name="formSave">
+    <g:form controller="practice" action="save" name="formSave">
         <g:hiddenField name="planId" value="${params.id}"/>
-        <table id="controlType" align="center">
+        <table align="center" class="editTable">
             <tr>
                 <td class="caption">Название*</td>
                 <td>
@@ -26,13 +26,13 @@
             <tr>
                 <td class="caption">№ Семестра*</td>
                 <td>
-                    <g:select name="semestr" from="${1..plan.semestrCount}" style="width: 100px"></g:select>
+                    <g:select name="semestr" from="${1..plan.semestrCount}" style="width: 100px"/>
                 </td>
             </tr>
             <tr>
                 <td class="caption">Количество недель*</td>
                 <td>
-                    <g:select name="weeks" from="${1..20}" style="width: 100px"></g:select>
+                    <g:select name="weeks" from="${1..20}" style="width: 100px"/>
                 </td>
             </tr>
         </table>

@@ -27,21 +27,20 @@
     <g:form controller="subject" action="update" width="300">
         <table class="editTable" align="center">
             <tr>
-                <td>Кафедра*</td>
+                <td class="caption">Кафедра*</td>
                 <td>
                     <g:hiddenField name="id" value="${subject.id}"/>
-                    <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair"
-                              style="width:150px; padding: 3px; margin: 0"/>
+                    <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair"/>
                 </td>
             </tr>
             <tr>
-                <td>Имя*</td>
+                <td class="caption">Имя*</td>
                 <td>
                     <g:textField name="name" value="${subject?.name}"/>
                 </td>
             </tr>
             <tr>
-                <td>Короткое имя*</td>
+                <td class="caption">Короткое имя*</td>
                 <td>
                     <g:textField name="shortName" value="${subject?.shortName}"/>
                 </td>

@@ -64,7 +64,7 @@
 
 <body>
 
-<div>
+<div  style="width: 100%">
     <div align="left">
         <tooltip:tip code="tooltip.add.speciality">
             <a href="<g:createLink action="add" controller="speciality"/>">
