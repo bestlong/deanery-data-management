@@ -8,7 +8,7 @@ class IndexController {
 
     def chairPlans = {
         def chair = Chair.get(params.id)
-        def plans = Plan.findAllByChair(chair, [sort: 'lastUpdated', order: 'desc'])
+        def plans = planService.findStudyPlansByChair(chair)
         plans.each {
             def useless = it.speciality.kod
         }
