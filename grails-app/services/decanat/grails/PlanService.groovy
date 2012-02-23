@@ -30,6 +30,17 @@ class PlanService {
         def list = c.list(){
             eq("class", PlanClass.WORK.name())
             eq("plan", plan)
+            order("lastUpdated", "desc")
+        }
+        list
+    }
+
+    def findStudyPlansByChair(Chair chair){
+        def c = Plan.createCriteria()
+        def list = c.list(){
+            eq("class", PlanClass.STUDY.name())
+            eq("chair", chair)
+            order("lastUpdated", "desc")
         }
         list
     }

@@ -56,8 +56,8 @@
                         <td width="20%">
                             <span style="font-size: small; text-decoration: underline;">${plan.form}</span>
                         </td>
-                        <td width="40%"></td>
-                        <td rowspan="5" valign="bottom" width="5%" align="right">
+                        <td width="60%"></td>
+                        <td rowspan="5" valign="bottom" width="10px" align="right">
                             <g:ifAllGranted role="ROLE_ADMIN">
                                 <tooltip:tip code="tooltip.plan.remove">
                                     <a href="#" class="delPlan" onclick="deleteDialog(${plan?.id})">
@@ -67,7 +67,7 @@
                                 </tooltip:tip>
                             </g:ifAllGranted>
                         </td>
-                        <td rowspan="5" valign="bottom" width="5%" align="right">
+                        <td rowspan="5" valign="bottom" width="10px" align="right">
                             <g:if test="${univer && plan.stateExam}">
                                 <tooltip:tip code="tooltip.plan.print">
                                     <a style="align: right"
@@ -85,7 +85,7 @@
                                 </tooltip:tip>
                             </g:else>
                         </td>
-                        <td rowspan="5" valign="bottom" width="5%" align="right">
+                        <td rowspan="5" valign="bottom" width="10px" align="right">
                             <tooltip:tip code="tooltip.plan.expand.work.plans">
                                 <g:remoteLink action="showWorkPlans" id="${plan.id}" update="wPlans" onSuccess="switchIcon()">
                                     <input id="details" type="image" src="<g:createLinkTo dir="/images" file="expand.png"/>">
