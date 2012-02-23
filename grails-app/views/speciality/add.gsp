@@ -24,7 +24,7 @@
 
 <div>
     <h4 class="subtitle">Добавить новую специальность в систему:</h4>
-    <g:form controller="speciality" action="save" width="300">
+    <g:form controller="speciality" action="save">
         <table class="editTable" align="center">
             <tr>
                 <td class="caption">Код*</td>

@@ -27,11 +27,11 @@ class SubjectPrinter {
 
             Cell cell = row.createCell(0)
             cell.setCellValue(planSubject.subject.name)
-            cell.setCellStyle(excelComponent.centerBottomCellStyle)
+            cell.setCellStyle(excelComponent.leftCellStyle)
 
             cell = row.createCell(4)
             cell.setCellValue(planSubject.subject.chair.name)
-            cell.setCellStyle(excelComponent.centerBottomCellStyle)
+            cell.setCellStyle(excelComponent.leftCellStyle)
 
             cell = row.createCell(5)
             cell.setCellValue(planSubject.creditCount)

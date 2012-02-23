@@ -38,8 +38,7 @@
                 <td class="caption">Роль*</td>
                 <td align="left">
                     <g:hiddenField name="id" value="${user.id}"/>
-                    <g:select from="${Role.list()}" optionValue="description" optionKey="id" name="user.role"
-                               style="width:150px; padding: 3px; margin: 0"/>
+                    <g:select from="${Role.list()}" optionValue="description" optionKey="id" name="user.role"/>
                 </td>
             </tr>
             <tr>

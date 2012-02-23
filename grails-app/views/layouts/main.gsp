@@ -48,7 +48,7 @@
         <g:set var="style" value="width: 100%"/>
     </g:ifAllGranted>
 
-    <div id="colTwo" style="${style}">
+    <div id="colTwo" style="${style}; width: 840px">
         <div id="menuBuffer"></div>
         <g:pageProperty name="page.deleteConfirmation"/>
         <g:pageProperty name="page.editPassword"/>
@@ -62,3 +62,4 @@
 </div>
 </body>
 </html>
+

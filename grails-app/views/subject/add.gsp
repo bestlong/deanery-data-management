@@ -29,8 +29,7 @@
             <tr>
                 <td class="caption">Кафедра*</td>
                 <td>
-                    <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair"
-                              style="width:150px; padding: 3px; margin: 0"/>
+                    <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair"/>
                 </td>
             </tr>
             <tr>

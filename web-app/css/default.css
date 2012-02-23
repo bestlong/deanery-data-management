@@ -216,6 +216,14 @@ body .hello {
     color: #2582A4;
 }
 
+.editTable tr td input {
+     width:440px;
+ }
+
+.editTable tr td select {
+    width:450px;
+}
+
 .post .meta {
     margin: 0;
     padding-bottom: 10px;
@@ -241,7 +249,7 @@ body .hello {
 #colTwo {
     float: left;
     width: 700px;
-    padding: 30px 40px 0 30px;
+    padding: 30px 10px 0 0;
 
 }
 
