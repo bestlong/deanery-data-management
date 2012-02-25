@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title> Добавление предметов</title>
+<title>Добавление предметов</title>
 <meta name="layout" content="main"/>
 <script type="text/javascript">
 
@@ -9,42 +9,41 @@
 
     function initTable() {
         oTable = $('#subjects').dataTable({
-                    "bJQueryUI": true,
-                    "sPaginationType": "full_numbers",
-                    "iDisplayLength": 15,
-                    "bLengthChange": false,
-                    "oLanguage": {
-                        "sInfo": "Всего: _TOTAL_. Показано с _START_ по _END_",
-                        "sInfoEmpty": "Нет данных для отображения",
-                        "sSearch": "Поиск",
-                        "sLengthMenu":"Отображать по _MENU_",
-                        "sInfoFiltered": "(найдено из _MAX_)",
-                        "sZeroRecords": "По Вашему запросу ничего не найдено.",
-                        "oPaginate":
-                        {
-                            "sFirst": "К началу",
-                            "sPrevious": "Назад",
-                            "sLast": "В конец",
-                            "sNext": "Далее"
-                        }
-                    },
-                    bAutoWidth: false,
-                    "aoColumnDefs": [
-                        { "bSortable": false, "aTargets": [ 0 ] }
-                    ],
-                    aoColumns   : [
-                        { sWidth: "5%", bSortable: false },
-                        { sWidth: "15%" },
-                        { sWidth: "10%" },
-                        { sWidth: "10%" },
-                        { sWidth: "10%" },
-                        { sWidth: "10%" },
-                        { sWidth: "10%" },
-                        { sWidth: "10%" },
-                        { sWidth: "10%" },
-                        { sWidth: "10%", bSortable: false }
-                    ]
-                });
+            "bJQueryUI":true,
+            "sPaginationType":"full_numbers",
+            "iDisplayLength":15,
+            "bLengthChange":false,
+            "oLanguage":{
+                "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+                "sInfoEmpty":"Нет данных для отображения",
+                "sSearch":"Поиск",
+                "sLengthMenu":"Отображать по _MENU_",
+                "sInfoFiltered":"(найдено из _MAX_)",
+                "sZeroRecords":"По Вашему запросу ничего не найдено.",
+                "oPaginate":{
+                    "sFirst":"К началу",
+                    "sPrevious":"Назад",
+                    "sLast":"В конец",
+                    "sNext":"Далее"
+                }
+            },
+            bAutoWidth:false,
+            "aoColumnDefs":[
+                { "bSortable":false, "aTargets":[ 0 ] }
+            ],
+            aoColumns:[
+                { sWidth:"5%", bSortable:false },
+                { sWidth:"15%" },
+                { sWidth:"10%" },
+                { sWidth:"10%" },
+                { sWidth:"10%" },
+                { sWidth:"10%" },
+                { sWidth:"10%" },
+                { sWidth:"10%" },
+                { sWidth:"10%" },
+                { sWidth:"10%", bSortable:false }
+            ]
+        });
     }
 
 
@@ -86,7 +85,7 @@
 
                 $.post('/decanat-grails/addSubjects/hours',
                         {id:id},
-                        function(data) {
+                        function (data) {
                             for (i = 0; i < count.length; i++) {
                                 $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "lecture").html(data[i].lectures)
                                 $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "practise").html(data[i].practices)
@@ -97,7 +96,7 @@
 
                 $.post('/decanat-grails/addSubjects/control',
                         {id:id},
-                        function(data) {
+                        function (data) {
 //                            alert(data);
                             for (i = 0; i < count.length; i++) {
                                 if (data[i].exam == 1)
@@ -235,27 +234,28 @@ td.detailsStyle {
 <body>
 <h4 class="subtitle">Добавление предметов:</h4>
 <content tag="search">
-    <g:render template="/template/plan/menu" model="[ 'active' : 2, 'plan': plan ]"/>
+    <g:render template="/template/plan/menu" model="['active': 2, 'plan': plan]"/>
+    <g:render template="/template/planSubject/filter" model="['plan': plan]"/>
 </content>
 
 <div align="left">
     <tooltip:tip code="tooltip.subject.add">
-    <a href="<g:createLink action="add" controller="addSubjects" id="${plan.id}"/>">
-        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
-    </a>
-        </tooltip:tip>
+        <a href="<g:createLink action="add" controller="addSubjects" id="${plan.id}"/>">
+            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
+        </a>
+    </tooltip:tip>
 </div>
 
 <g:render template="/template/planSubject/planSubjectList" model="${[res: res]}"/>
- <div align="center" class="action">
-            <g:link controller="selectSpeciality" action="index" id="${plan.id}">Отмена</g:link>
+<div align="center" class="action">
+    <g:link controller="selectSpeciality" action="index" id="${plan.id}">Отмена</g:link>
 
-            <g:link controller="practice" action="index" id="${plan.id}">Следующий шаг</g:link>
+    <g:link controller="practice" action="index" id="${plan.id}">Следующий шаг</g:link>
 
-        </div>
+</div>
 <content tag="deleteConfirmation">
     <g:render template="/template/deleteConfirmation"
-              model="['askMessage':'Вы точно хотите удалить этот предмет из плана?']"/>
+              model="['askMessage': 'Вы точно хотите удалить этот предмет из плана?']"/>
 </content>
 
 </body>
