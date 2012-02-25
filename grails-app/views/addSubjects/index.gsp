@@ -27,6 +27,78 @@
                     "sNext":"Далее"
                 }
             },
+            "fnFooterCallback": function ( nRow, aaData, iStart, iEnd, aiDisplay ) {
+                /*
+                 * Calculate the total market share for all browsers in this table (ie inc. outside
+                 * the pagination)
+                 */
+                var iTotalMarket = 0;
+                var iCreditTotal = 0;
+                var iLectureTotal = 0;
+                var iSeminarTotal = 0;
+                var iPractiseTotal = 0;
+                var iLabTotal = 0;
+                var iSamostTotal = 0;
+                var iTotalTotal = 0;
+                for ( var i=0 ; i<aaData.length ; i++ )
+                {
+                    iCreditTotal += aaData[i][2]*1;
+                    iLectureTotal += aaData[i][3]*1;
+                    iSeminarTotal += aaData[i][4]*1;
+                    iPractiseTotal += aaData[i][5]*1;
+                    iLabTotal += aaData[i][6]*1;
+                    iSamostTotal += aaData[i][7]*1;
+                    iTotalTotal += aaData[i][8]*1;
+                    iTotalMarket += aaData[i][4]*1;
+                }
+
+                /* Calculate the market share for browsers on this page */
+                var iPageMarket = 0;
+                var iCreditPage = 0;
+                var iLecturePage = 0;
+                var iSeminarPage = 0;
+                var iPractisePage = 0;
+                var iLabPage = 0;
+                var iSamostPage = 0;
+                var iTotalPage = 0;
+                for ( var i=iStart ; i<iEnd ; i++ )
+                {
+                    iCreditPage += aaData[ aiDisplay[i] ][2]*1;
+                    iLecturePage += aaData[ aiDisplay[i] ][3]*1;
+                    iSeminarPage += aaData[ aiDisplay[i] ][4]*1;
+                    iPractisePage += aaData[ aiDisplay[i] ][5]*1;
+                    iLabPage += aaData[ aiDisplay[i] ][6]*1;
+                    iSamostPage += aaData[ aiDisplay[i] ][7]*1;
+                    iTotalPage += aaData[ aiDisplay[i] ][8]*1;
+                    iPageMarket += aaData[ aiDisplay[i] ][4]*1;
+                }
+
+                /* Modify the footer row to match what we want */
+                var nCells = nRow.getElementsByTagName('th');
+
+                nCells[1].innerHTML = 'Всего';
+                nCells[2].innerHTML = parseInt(iCreditPage * 100)/100 +
+                        ' ('+ parseInt(iCreditTotal * 100)/100 +' всего)';
+                nCells[3].innerHTML = parseInt(iLecturePage * 100)/100 +
+                        ' ('+ parseInt(iLectureTotal * 100)/100 +' всего)';
+                nCells[4].innerHTML = parseInt(iSeminarPage * 100)/100 +
+                        ' ('+ parseInt(iSeminarTotal * 100)/100 +' всего)';
+
+                nCells[5].innerHTML = parseInt(iPractisePage * 100)/100 +
+                        ' ('+ parseInt(iPractiseTotal * 100)/100 +' всего)';
+
+                nCells[6].innerHTML = parseInt(iLabPage * 100)/100 +
+                        ' ('+ parseInt(iLabTotal * 100)/100 +' всего)';
+
+                nCells[7].innerHTML = parseInt(iSamostPage * 100)/100 +
+                        ' ('+ parseInt(iSamostTotal * 100)/100 +' всего)';
+
+                nCells[8].innerHTML = parseInt(iTotalPage * 100)/100 +
+                        ' ('+ parseInt(iTotalTotal * 100)/100 +' всего)';
+//
+//                nCells[1].innerHTML = parseInt(iPageMarket * 100)/100 +
+//                        '% ('+ parseInt(iTotalMarket * 100)/100 +'% total)';
+            },
             bAutoWidth:false,
             "aoColumnDefs":[
                 { "bSortable":false, "aTargets":[ 0 ] }
