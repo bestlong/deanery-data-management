@@ -53,10 +53,9 @@
                         <td width="20%">
                             <span style="font-size: small;">Форма обучения:</span>
                         </td>
-                        <td width="20%">
+                        <td width="80%">
                             <span style="font-size: small; text-decoration: underline;">${plan.form}</span>
                         </td>
-                        <td width="60%"></td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
                             <g:ifAllGranted role="ROLE_ADMIN">
                                 <tooltip:tip code="tooltip.plan.remove">

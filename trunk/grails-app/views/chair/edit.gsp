@@ -33,13 +33,13 @@
         <g:hiddenField name="id" value="${curChair?.id}"/>
         <table class="editTable" align="center">
             <tr class="title">
-                <td>Имя</td>
+                <td class="caption">Имя*</td>
                 <td>
                     <g:textField name="name" value="${curChair?.name}"/>
                 </td>
             </tr>
             <tr class="title">
-                <td>Короткое имя</td>
+                <td class="caption">Короткое имя</td>
                 <td>
                     <g:textField name="shortName" value="${curChair?.shortName}"/>
                 </td>
