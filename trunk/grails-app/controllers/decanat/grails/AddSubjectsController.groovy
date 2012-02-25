@@ -37,6 +37,41 @@ class AddSubjectsController {
         [res: newSubjects, plan: plan]
     }
 
+    def filter = {
+        def plan = Plan.get(params.id)
+        def semestrs = []
+        (1..plan.semestrCount).each {int i ->
+            if (params."filterSemestr${i}" as Boolean){
+                semestrs.add(i)
+            }
+        }
+        def result = planSubjectService.findPlanSubjectsBySemestrList(semestrs)
+        def newSubjects = []
+        result.each {
+            def res = ""
+            def list = PlanHours.findAllByPlanSubject(it)
+            list.each {
+                res += it.semestr
+            }
+            def newSubject = [
+                    id: it.id,
+                    planId: it.plan.id,
+                    name: it.subject.name,
+                    chair: it.subject.chair.name,
+                    count: res,
+                    creditCount: it.creditCount,
+                    lectureCount: it.lectureCount,
+                    seminarCount: it.seminarCount,
+                    practiceCount: it.practiceCount,
+                    labCount: it.labCount,
+                    samCount: it.samCount,
+                    total: it.lectureCount + it.seminarCount + it.practiceCount + it.labCount + it.samCount
+            ]
+            newSubjects.add newSubject
+        }
+        render(template: "/template/planSubject/planSubjectList", model: ['plan': plan, 'res': newSubjects]);
+    }
+
     def add = {
         def plan = Plan.get(params.id)
         [res: Subject.list(), plan: plan]
