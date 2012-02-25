@@ -13,7 +13,6 @@ class PlanService {
             firstResult(offset)
             order("lastUpdated", "desc")
             eq("class", planClass.name())
-
         }
     }
 

@@ -46,8 +46,7 @@
         });
     }
 
-
-    $(document).ready(function () {
+    function initDocument(){
         $("#messages").delay(6000).fadeOut(5 * 400);
         $("#errors").delay(6000).fadeOut(5 * 400);
         $("input:submit, a, button", ".action").button();
@@ -68,7 +67,11 @@
         $('#subjects tbody tr').each(function () {
             this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
         });
+    }
 
+
+    $(document).ready(function () {
+        initDocument();
         $('#subjects tbody td img').live('click', function () {
             var nTr = this.parentNode.parentNode;
             if (this.src.match('details_close')) {
@@ -97,7 +100,6 @@
                 $.post('/decanat-grails/addSubjects/control',
                         {id:id},
                         function (data) {
-//                            alert(data);
                             for (i = 0; i < count.length; i++) {
                                 if (data[i].exam == 1)
                                     $("#subject" + data[i].subjId + "semestr" + count[i] + "exam").attr("checked", "checked");
@@ -115,7 +117,6 @@
                         });
             }
         });
-
         initTable();
     });
 
@@ -246,7 +247,10 @@ td.detailsStyle {
     </tooltip:tip>
 </div>
 
-<g:render template="/template/planSubject/planSubjectList" model="${[res: res]}"/>
+<div id="planSubjectList">
+    <g:render template="/template/planSubject/planSubjectList" model="${[res: res]}"/>
+</div>
+
 <div align="center" class="action">
     <g:link controller="selectSpeciality" action="index" id="${plan.id}">Отмена</g:link>
 

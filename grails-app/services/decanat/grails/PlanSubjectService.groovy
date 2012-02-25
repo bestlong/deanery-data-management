@@ -4,6 +4,16 @@ class PlanSubjectService {
 
     static transactional = true
 
+    def findPlanSubjectsBySemestrList(def semestr){
+        def c = PlanSubject.createCriteria()
+        c.list{
+            order("lastUpdated", "desc")
+            planHours {
+                'in'("semestr", semestr);
+            }
+        }
+    }
+
     def getControlType(id) {
         def subj = PlanSubject.get(id)
         def list = PlanControlType.findAllByPlanSubject(subj)

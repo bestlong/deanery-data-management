@@ -1,6 +1,7 @@
 <div>
-    <g:formRemote name="fromSearch" update="updateChairDiv"
-                  url="[controller: 'addSubjects', action: 'index']">
+    <g:formRemote name="fromSearch" update="planSubjectList"
+                  url="[controller: 'addSubjects', action: 'filter']" onComplete="initDocument(); initTable();">
+        <g:hiddenField name="id" value="${plan.id}"/>
         <table width="90%" border="1"
                style="margin-left: 20px; margin-right: 20px; margin-top: 20px; border: 1px dotted #5E99BD; ">
             <tr>

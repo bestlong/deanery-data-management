@@ -16,6 +16,7 @@ class PlanSubject {
     int practiceCount
     int labCount
     int samCount
+    Date lastUpdated
 
     static PlanSubject createNew(PlanSubject subj){
         PlanSubject newSubject = new PlanSubject()
@@ -37,15 +38,17 @@ class PlanSubject {
     }
 
     def beforeInsert = {
+        lastUpdated = new Date()
         plan.lastUpdated = new Date()
     }
     def beforeUpdate = {
+        lastUpdated = new Date()
         plan.lastUpdated = new Date()
 
     }
     def beforeDelete = {
+        lastUpdated = new Date()
         plan.lastUpdated = new Date()
-
     }
 
     def getTotal() {
@@ -127,5 +130,6 @@ class PlanSubject {
         practiceCount(min: 0)
         labCount(min: 0)
         samCount(min: 0)
+        lastUpdated(nullable: true)
     }
 }
