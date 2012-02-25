@@ -3,7 +3,6 @@
   User: evgeniy
   Date: 06.07.11
   Time: 0:32
-  To change this template use File | Settings | File Templates.
 --%>
 
 <div class="search" id="searchChair">
@@ -22,5 +21,4 @@
             </div>
         </div>
     </g:formRemote>
-
 </div>
