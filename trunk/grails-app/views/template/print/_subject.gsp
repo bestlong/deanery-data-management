@@ -61,6 +61,7 @@
         </td>
         <g:set var="iterator" value="${subject.hours.iterator()}"/>
         <g:each in="${1..plan.semestrCount}" var="num">
+            %{--<g:set var="aa" value="${g.hourBySubjAndSem("11", "ff")}"/>--}%
             <g:if test="${g.hourBySubjAndSem(subject.id, num) as int == 0}">
                 <g:render template="/template/print/emptyHour"/>
             </g:if>
