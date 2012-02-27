@@ -1,9 +1,13 @@
 package decanat.grails
 
+import decanat.grails.domain.User
+import decanat.grails.domain.Role
+import decanat.grails.domain.UserRole
+
 class UserController {
 
     def userService;
-    def authenticateService;
+    def springSecurityService;
 
     def index = {
         [res: User.list(), active: 2]
@@ -21,11 +25,11 @@ class UserController {
                     flash.error = message(code: "msg.user.add.role.not.found")
                 }
                 else {
-                    user.addToAuthorities(role)
-                    user.passwd = authenticateService.encodePassword(user.passwd)
+//                    user.password = springSecurityService.encodePassword(user.password)
                     user.enabled = true
                     user.save();
-                    flash.message = message(code: "msg.user.add", args: [user.userRealName])
+                    UserRole.create(user, role, true)
+                    flash.message = message(code: "msg.user.add", args: [user.username])
                 }
             }
             else {
@@ -44,8 +48,9 @@ class UserController {
         if (params.id) {
             User user = User.findById(params.id)
             user.properties = params
+//            user.password = springSecurityService.encodePassword(user.password)
             if (user?.save()) {
-                flash.message = message(code: "msg.user.edit", args: [user.userRealName])
+                flash.message = message(code: "msg.user.edit", args: [user.username])
             } else {
                 flash.error = message(code: "msg.edit.error")
             }

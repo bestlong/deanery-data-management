@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page import="decanat.grails.User" contentType="text/html;charset=UTF-8" %>
+<%@ page import="decanat.grails.domain.User" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>
@@ -38,10 +38,8 @@
                 },
                 bAutoWidth: false,
                 aoColumns   : [
-                    { sWidth: "20%" },
-                    { sWidth: "15%" },
-                    { sWidth: "25%" },
-                    { sWidth: "25%" },
+                    { sWidth: "55%" },
+                    { sWidth: "30%" },
                     { sWidth: "15%", bSortable: false }
                 ]
             });

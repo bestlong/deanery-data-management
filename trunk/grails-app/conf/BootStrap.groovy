@@ -1,36 +1,21 @@
-import decanat.grails.Role
-import decanat.grails.User
-//import VersionControl.VersionControl
+import decanat.grails.domain.User
+import decanat.grails.domain.Role
+import decanat.grails.domain.UserRole
 
 class BootStrap {
 
-    def authenticateService
+    def springSecurityService
     User user
-    //VersionControl contr
 
     def init = { servletContext ->
-//        def userRole = Role.findByAuthority("ROLE_USER") ?: new Role(authority: "ROLE_USER", description: "").save()
         def adminRole = Role.findByAuthority("ROLE_ADMIN") ?: new Role(authority: "ROLE_ADMIN", description: "Администратор").save()
         def userRole = Role.findByAuthority("ROLE_USER") ?: new Role(authority: "ROLE_USER", description: "Секретарь").save()
 
         def users = User.list()
         if (!users) {
-            user = new User(
-                    authorities: [adminRole],
-                    email: "tester@mail.com",
-                    enabled: true,
-                    userRealName: "Real User",
-                    username: "admin",
-                    passwd: authenticateService.encodePassword("pass"),
-                    description: ""
-            ).save()
-            adminRole.addToPeople(user).save()
-//            userRole.addToPeople(user).save()
+            user = new User(enabled: true, username: "admin", password: "pass").save();
+            UserRole.create(user, adminRole, true)
         }
-
-        //contr.index()
-        //VersionControl.index()
-
     }
 
     def destroy = {

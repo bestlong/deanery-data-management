@@ -31,7 +31,7 @@ $(function() {
                                 });
                 },
                 rules: {
-                    passwd: {
+                    password: {
                         required: true,
                         minlength: 4
                     },
@@ -41,28 +41,18 @@ $(function() {
                             url: '/decanat-grails/JQueryRemoteValidator/validate',
                             type: 'post',
                             data: {
-                                validatableClass: 'decanat.grails.User',
+                                validatableClass: 'decanat.grails.domain.User',
                                 property: 'username',
                                 id: $('input:hidden#id').length ? $('input:hidden#id').val() : '0'
                             }
                         }
                     },
-                    email: {
-                        email: true,
-                        required: true
-                    },
-                    description: {
-                        required: true
-                    },
                     passwdRetype: {
-                        equalTo: "#passwd"
-                    },
-                    userRealName: {
-                        required: true
+                        equalTo: "#password"
                     }
                 },
                 messages: {
-                    passwd: {
+                    password: {
                         required: 'Пароль не может быть пустым',
                         minlength: function() {
                             return 'Слишком короткий пароль';
@@ -74,17 +64,8 @@ $(function() {
                             return 'Пользователь с таким логином уже существует';
                         }
                     },
-                    email: {
-                        email: function() {
-                            return 'Поле E-mail заполнено неправильно';
-                        },
-                        required: 'Email не может быть пустым'
-                    },
                     passwdRetype: {
                         equalTo: "Пароль и подтверждение должны совпадать"
-                    },
-                    userRealName: {
-                        required: 'ФИО не может быть пустым'
                     }
                 }
             });

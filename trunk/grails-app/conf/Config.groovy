@@ -120,12 +120,6 @@ jqueryValidationUi {
         classes = 'ui-tooltip-blue ui-tooltip-jtools ui-tooltip-rounded'
     }
 
-//    rules {
-//        confirmPasswd: {
-//            equalTo: "#password"
-//        }
-//    }
-
     /*
        Grails constraints to JQuery Validation rules mapping for client side validation.
        Constraint not found in the ConstraintsMap will trigger remote AJAX validation.
@@ -191,6 +185,27 @@ jqueryValidationUi {
     ]
 
 grails.gorm.failOnError= true
-//    grails.views.javascript.library="dojo"
 }
 
+
+// Added by the Spring Security Core plugin:
+grails.plugins.springsecurity.userLookup.userDomainClassName = 'decanat.grails.domain.User'
+grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'decanat.grails.domain.UserRole'
+grails.plugins.springsecurity.authority.className = 'decanat.grails.domain.Role'
+
+grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
+
+grails.plugins.springsecurity.interceptUrlMap = [
+        '/':                            ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/login/**':                    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/logout/**':                   ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/js/**':                       ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/css/**':                      ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/images/**':                   ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/plugins/**':                  ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/JQueryRemoteValidator/**':    ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/index/**':                    ['IS_AUTHENTICATED_FULLY'],
+        '/profile/**':                  ['IS_AUTHENTICATED_FULLY'],
+        '/printer/**':                  ['IS_AUTHENTICATED_FULLY'],
+        '/**':                          ['ROLE_ADMIN']
+]

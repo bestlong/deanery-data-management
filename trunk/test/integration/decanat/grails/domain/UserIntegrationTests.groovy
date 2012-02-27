@@ -1,8 +1,5 @@
 package decanat.grails.domain
 
-import grails.test.*
-import decanat.grails.User
-
 class UserIntegrationTests extends GroovyTestCase {
     protected void setUp() {
         super.setUp()

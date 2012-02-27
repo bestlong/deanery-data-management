@@ -7,23 +7,23 @@
     <g:each in="${plans}" var="plan">
         <tr>
             <td width="400px" style="font-size: 12px">
-                <g:ifAllGranted role="ROLE_ADMIN">
+                <sec:ifAllGranted roles="ROLE_ADMIN">
                     <g:link id="${plan.id}" action="index"
                             controller="selectSpeciality">${plan.name}</g:link>
-                </g:ifAllGranted>
-                <g:ifAllGranted role="ROLE_USER">
+                </sec:ifAllGranted>
+                <sec:ifAllGranted roles="ROLE_USER">
                     ${plan.name}
-                </g:ifAllGranted>
+                </sec:ifAllGranted>
             </td>
             <td >
-                <g:ifAllGranted role="ROLE_ADMIN">
+                <sec:ifAllGranted roles="ROLE_ADMIN">
                     <tooltip:tip code="tooltip.plan.remove">
                         <a href="#" class="delPlan" onclick="deleteDialog(${plan?.id})">
                             <input type="image"
                                    src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
                         </a>
                     </tooltip:tip>
-                </g:ifAllGranted>
+                </sec:ifAllGranted>
             </td>
             <td >
                 <g:if test="${univer && plan.stateExam}">

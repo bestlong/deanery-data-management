@@ -10,7 +10,7 @@
 <html>
   <head>
       <meta name="layout" content="main"/>
-      <jqvalui:renderValidationScript for="decanat.grails.User"/>
+      <jqvalui:renderValidationScript for="decanat.grails.domain.User"/>
   </head>
   <body>
    <div align="left" style="width: 17%">

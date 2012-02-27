@@ -21,22 +21,8 @@
                     <g:textField name="username" value="${user.username}"/>
                 </td>
             </tr>
-            <tr>
-                <td class="caption">Полное имя*</td>
-                <td>
-                    <g:textField name="userRealName" value="${user.userRealName}"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="caption">E-mail*</td>
-                <td>
-                    <g:textField name="email" value="${user.email}"/>
-                </td>
-
-            </tr>
         </table>
         <br/>
-
         <div align="center" class="action">
             <g:link controller="index" action="index">Отмена</g:link>
             <g:submitButton name="save" value="Сохранить"/>
