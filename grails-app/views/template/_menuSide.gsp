@@ -1,9 +1,7 @@
-<%@ page import="decanat.grails.Role" %>
 
 <style type="text/css">
 .selectedMenu {
     background-color: #e6e6fa;
-
 }
 
 </style>
