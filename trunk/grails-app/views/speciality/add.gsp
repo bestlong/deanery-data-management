@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page import="decanat.grails.Role" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Добавление специальности</title>
