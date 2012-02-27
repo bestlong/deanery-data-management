@@ -48,22 +48,15 @@ $(function () {
                     url:'/decanat-grails/JQueryRemoteValidator/validate',
                     type:'post',
                     data:{
-                        validatableClass:'decanat.grails.User',
+                        validatableClass:'decanat.grails.domain.User',
                         property:'username',
                         id:$('input:hidden#id').length ? $('input:hidden#id').val() : '0'
                     }
                 }
-            },
-            email:{
-                email:true,
-                required:true
-            },
-            userRealName:{
-                required:true
             }
         },
         messages:{
-            passwd:{
+            password:{
                 required:'Пароль не может быть пустым',
                 minlength:function () {
                     return 'Слишком короткий пароль';
@@ -74,15 +67,6 @@ $(function () {
                 unique:function () {
                     return 'Пользователь с таким логином уже существует';
                 }
-            },
-            email:{
-                email:function () {
-                    return 'Поле E-mail заполнено неправильно';
-                },
-                required:'Email не может быть пустым'
-            },
-            userRealName:{
-                required:'ФИО не может быть пустым'
             }
         }
     });

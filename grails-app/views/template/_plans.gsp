@@ -39,13 +39,13 @@
                     <tr>
                         <td colspan="6">
                             <h4 class="title">
-                                <g:ifAllGranted role="ROLE_ADMIN">
+                                <sec:ifAllGranted roles="ROLE_ADMIN">
                                     <g:link id="${plan.id}" action="index"
                                             controller="selectSpeciality">${plan.speciality.kod} ${plan.speciality.name}</g:link>
-                                </g:ifAllGranted>
-                                <g:ifAllGranted role="ROLE_USER">
+                                </sec:ifAllGranted>
+                                <sec:ifAllGranted roles="ROLE_USER">
                                     ${plan.speciality.kod} ${plan.speciality.name}
-                                </g:ifAllGranted>
+                                </sec:ifAllGranted>
                             </h4>
                         </td>
                     </tr>
@@ -57,14 +57,14 @@
                             <span style="font-size: small; text-decoration: underline;">${plan.form}</span>
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
-                            <g:ifAllGranted role="ROLE_ADMIN">
+                            <sec:ifAllGranted roles="ROLE_ADMIN">
                                 <tooltip:tip code="tooltip.plan.remove">
                                     <a href="#" class="delPlan" onclick="deleteDialog(${plan?.id})">
                                         <input type="image"
                                                src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
                                     </a>
                                 </tooltip:tip>
-                            </g:ifAllGranted>
+                            </sec:ifAllGranted>
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
                             <g:if test="${univer && plan.stateExam}">

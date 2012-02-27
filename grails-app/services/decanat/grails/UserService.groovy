@@ -1,7 +1,7 @@
 package decanat.grails
 
 import ua.cn.decanat.plan.exception.RoleNotFoundException
-import org.springframework.security.event.authorization.AuthorizedEvent
+import decanat.grails.domain.User
 
 class UserService {
 

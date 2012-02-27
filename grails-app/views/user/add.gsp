@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page import="decanat.grails.Role" contentType="text/html;charset=UTF-8" %>
+<%@ page import="decanat.grails.domain.Role" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="main"/>
@@ -30,23 +30,6 @@
             </td>
         </tr>
         <tr>
-            <td class="caption">ФИО*</td>
-            <td>
-                <g:textField name="userRealName"/>
-            </td>
-        </tr>
-        <tr>
-            <td class="caption">Email*</td>
-            <td>
-                <g:textField name="email"/>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <div class="subtitle">Информация для авторизации:</div>
-            </td>
-        </tr>
-        <tr>
             <td class="caption">Логин*</td>
             <td>
                 <g:textField name="username"/>
@@ -55,7 +38,7 @@
         <tr>
             <td class="caption">Пароль*</td>
             <td>
-                <g:passwordField name="passwd"/>
+                <g:passwordField name="password"/>
             </td>
         </tr>
         <tr>

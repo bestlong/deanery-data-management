@@ -18,14 +18,6 @@
             </p>
 
             <p>
-                <label for='remember_me'>Запомнить меня</label>
-                <tooltip:tip code="tooltip.auth.remember">
-                    <input type='checkbox' class='chk' name='_spring_security_remember_me' id='remember_me'
-                           <g:if test='${hasCookie}'>checked='checked'</g:if>/>
-                </tooltip:tip>
-            </p>
-
-            <p>
                 <tooltip:tip code="tooltip.auth.submit">
                     <input type='submit' value='Войти'/>
                 </tooltip:tip>
@@ -37,10 +29,8 @@
     </div>
 </div>
 <script type='text/javascript'>
-    <!--
     (function() {
         document.forms['loginForm'].elements['j_username'].focus();
     })();
-    // -->
 </script>
 </body>

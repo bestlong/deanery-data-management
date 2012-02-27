@@ -1,4 +1,4 @@
-<%@ page import="decanat.grails.User" %>
+<%@ page import="decanat.grails.domain.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: evgeniy
@@ -15,8 +15,6 @@
         <tr>
             <th>Логин</th>
             <th>Роль</th>
-            <th>ФИО</th>
-            <th>e-mail</th>
             <th>Ред.</th>
         </tr>
         </thead>
@@ -30,12 +28,6 @@
                 </td>
                 <td>
                     ${user?.authorities?.description}
-                </td>
-                <td>
-                    ${user?.userRealName}
-                </td>
-                <td>
-                    ${user?.email}
                 </td>
                 <td>
                     <tooltip:tip code="tooltip.edit">

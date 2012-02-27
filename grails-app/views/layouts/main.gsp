@@ -37,18 +37,21 @@
 <g:render template="/template/header"/>
 <div id="content">
     <div id="menuSide" xmlns="">
-        <g:ifAllGranted role="ROLE_ADMIN">
+        <sec:ifAllGranted roles="ROLE_ADMIN">
             <div id="colOne">
                 <g:render template="/template/menuSide"/>
                 <g:pageProperty name="page.search"/>
             </div>
-        </g:ifAllGranted>
+        </sec:ifAllGranted>
     </div>
-    <g:ifAllGranted role="ROLE_USER">
+    <sec:ifAllGranted roles="ROLE_USER">
         <g:set var="style" value="width: 100%"/>
-    </g:ifAllGranted>
+    </sec:ifAllGranted>
+    <sec:ifNotGranted roles="ROLE_USER">
+        <g:set var="style" value="width: 840px"/>
+    </sec:ifNotGranted>
 
-    <div id="colTwo" style="${style}; width: 840px">
+    <div id="colTwo" style="${style}">
         <div id="menuBuffer"></div>
         <g:pageProperty name="page.deleteConfirmation"/>
         <g:pageProperty name="page.editPassword"/>

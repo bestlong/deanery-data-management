@@ -1,4 +1,4 @@
-<%@ page import="decanat.grails.Role" %>
+<%@ page import="decanat.grails.domain.Role" %>
 <%@ page import="decanat.grails.UserController" %>
 <%--
   Created by IntelliJ IDEA.
@@ -21,7 +21,7 @@
             <b class="searchTitles">Email</b><br/>
             <g:textField name="email"/><br/>
             <b class="searchTitles">Роль</b><br/>
-            <g:select from="${Role.list()}" optionValue="description"
+            <g:select from="${decanat.grails.domain.Role.list()}" optionValue="description"
                       noSelection="['0':'-Все роли-']" name="role"
                       optionKey="id" style="width: 150px"/><br/>
 

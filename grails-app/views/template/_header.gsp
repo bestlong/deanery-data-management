@@ -1,17 +1,16 @@
 <div id="header">
-    <g:isLoggedIn>
-
+    <sec:ifLoggedIn>
         <ul id="menu">
             <li>
                 <a style="text-decoration: ${active == 1 ? 'underline' : 'none'}"
                    href="<g:createLink action="index" controller="index"/> ">главная</a>
             </li>
-            <g:ifAllGranted role="ROLE_ADMIN">
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
                 <li>
                     <a style="text-decoration: ${active == 2 ? 'underline' : 'none'}"
                        href="<g:createLink action="index" controller="user"/>">пользователи</a>
                 </li>
-            </g:ifAllGranted>
+            </sec:ifAnyGranted>
             <li>
                 <a style="text-decoration: ${active == 3 ? 'underline' : 'none'}"
                    href="<g:createLink action="index" controller="profile"/> ">мой профиль</a></li>
@@ -21,5 +20,5 @@
         </ul>
 
         <div align="right" class="hello">Здравствуйте, ${g.userName()}</div>
-    </g:isLoggedIn>
+    </sec:ifLoggedIn>
 </div>

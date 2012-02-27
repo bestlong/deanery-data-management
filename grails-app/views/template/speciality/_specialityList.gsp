@@ -6,7 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-%{--<%@ page import="decanat.grails.User" contentType="text/html;charset=UTF-8" %>--}%
 <div id="updateSpecialityDiv">
     <div class="subtitle" align="center">Список специальностей</div>
     <table id="specialityList" class="display">

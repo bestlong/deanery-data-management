@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<g:ifAllGranted role="ROLE_ADMIN">
+<sec:ifAllGranted roles="ROLE_ADMIN">
     <div align="left">
         <tooltip:tip code="tooltip.plan.add">
             <a href="<g:createLink action="index" controller="planCreation"/>">
@@ -17,12 +17,12 @@
             </a>
         </tooltip:tip>
     </div>
-</g:ifAllGranted>
+</sec:ifAllGranted>
 
 
-<g:ifAllGranted role="ROLE_USER">
+<sec:ifAllGranted roles="ROLE_USER">
     <g:set var="align" value="center"/>
-</g:ifAllGranted>
+</sec:ifAllGranted>
 <div align="${align}">
     <g:render template="/template/plans"/>
 </div>

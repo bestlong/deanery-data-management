@@ -1,15 +1,14 @@
+<%@ page import="decanat.grails.domain.Role; decanat.grails.domain.User" %>
 <%--
   author: evgeniy
   Date: 27.06.11
   Time: 23:44
 --%>
 
-<%@ page import="decanat.grails.Role" contentType="text/html;charset=UTF-8" %>
-<%@ page import="decanat.grails.User" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <jqvalui:renderValidationScript for="decanat.grails.User"/>
+    <jqvalui:renderValidationScript for="decanat.grails.domain.User"/>
      <title>
         Редикторовать пользователя
     </title>
@@ -22,7 +21,7 @@
 </script>
 
 <div>
-    <h4 class="subtitle">Редактировать пользователя ${user?.userRealName}:</h4>
+    <h4 class="subtitle">Редактировать пользователя ${user?.username}:</h4>
 
     <g:if test="${params?.login}">
     <g:set var="userEdit" value="${User.findByUsername(params?.login)}"/>
@@ -39,23 +38,6 @@
                 <td align="left">
                     <g:hiddenField name="id" value="${user.id}"/>
                     <g:select from="${Role.list()}" optionValue="description" optionKey="id" name="user.role"/>
-                </td>
-            </tr>
-            <tr>
-                <td class="caption">ФИО*</td>
-                <td>
-                    <g:textField name="userRealName" value="${user?.userRealName}" />
-                </td>
-            </tr>
-            <tr>
-                <td class="caption">Email*</td>
-                <td>
-                    <g:textField name="email" value="${user?.email}" />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="subtitle">Информация для авторизации:</div>
                 </td>
             </tr>
             <tr>

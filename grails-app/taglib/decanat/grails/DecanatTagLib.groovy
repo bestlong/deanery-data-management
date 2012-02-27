@@ -1,9 +1,14 @@
 package decanat.grails
 
 class DecanatTagLib {
-    def authenticateService
+    def springSecurityService
 
     def userName = {
-        out << (authenticateService.userDomain() ? authenticateService.userDomain().username : 'Guest')
+        out << (springSecurityService.getPrincipal() ? springSecurityService.getPrincipal().username : 'Guest')
+    }
+
+    def hourBySubjAndSem (def subjId, def semester) {
+        def subj = PlanSubject.get(subjId as int)
+        return PlanHours.findByPlanSubjectAndSemestr(subj, semester as int) ? 1 : 0
     }
 }

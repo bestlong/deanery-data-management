@@ -4,7 +4,7 @@
   Time: 23:44
 --%>
 
-<%@ page import="decanat.grails.User" contentType="text/html;charset=UTF-8" %>
+<%@ page import="decanat.grails.domain.User" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Предметы</title>
