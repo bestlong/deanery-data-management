@@ -54,7 +54,7 @@ grails.exceptionresolver.params.exclude = ['password']
 // set per-environment serverURL stem for creating absolute links
 environments {
     production {
-        grails.serverURL = "http://app.stu.cn.ua/decanat-grails"
+        grails.serverURL = "http://app.stu.cn.ua/${appName}"
     }
     development {
         grails.serverURL = "http://localhost:8080/${appName}"
@@ -196,7 +196,7 @@ grails.plugins.springsecurity.authority.className = 'decanat.grails.domain.Role'
 grails.plugins.springsecurity.securityConfigType = "InterceptUrlMap"
 
 grails.plugins.springsecurity.interceptUrlMap = [
-        '/':                            ['IS_AUTHENTICATED_ANONYMOUSLY'],
+        '/':                            ['IS_AUTHENTICATED_FULLY'],
         '/login/**':                    ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/logout/**':                   ['IS_AUTHENTICATED_ANONYMOUSLY'],
         '/js/**':                       ['IS_AUTHENTICATED_ANONYMOUSLY'],
