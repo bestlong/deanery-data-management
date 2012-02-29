@@ -14,10 +14,21 @@ class WorkPlan extends Plan{
         this.name = name
     }
 
-    WorkPlan(String name, Plan plan) {
-        this.name = name
-        copyPlan(plan)
-        this.plan = plan
+
+    static WorkPlan createFromWorkPlan(String name, WorkPlan workPlan){
+        WorkPlan wPlan = new WorkPlan()
+        wPlan.name = name
+        wPlan.copyPlan(workPlan)
+        wPlan.plan = workPlan.plan
+        wPlan
+    }
+
+    static WorkPlan createFromStudyPlan(String name, Plan plan){
+        WorkPlan wPlan = new WorkPlan()
+        wPlan.name = name
+        wPlan.copyPlan(plan)
+        wPlan.plan = plan
+        wPlan
     }
 
     static mapping = {

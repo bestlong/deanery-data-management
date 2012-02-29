@@ -20,11 +20,15 @@ class PlanCreationController {
                     redirect(action: "index", controller: "selectSpeciality", id: plan.id)
                 } else {
                     if (PlanWayCreation.FROM_WORK_PLAN.equals(planWayCreation)) {
-
+                        WorkPlan plan = WorkPlan.findById(params.baseWorkPlan as long)
+                        WorkPlan workPlan = WorkPlan.createFromWorkPlan(params.planName, plan)
+                        workPlan.save()
+                        flash.message = message(code: "msg.plan.work.successfully.added")
+                        redirect(action: "index", controller: "index", params: params)
                     } else {
                         if (PlanWayCreation.FROM_STUDY_PLAN.equals(planWayCreation)) {
                             Plan plan = Plan.findById(params.baseStudyPlan as long)
-                            WorkPlan workPlan = new WorkPlan(params.planName, plan)
+                            WorkPlan workPlan = WorkPlan.createFromStudyPlan(params.planName, plan)
                             workPlan.save()
                             flash.message = message(code: "msg.plan.work.successfully.added")
                             redirect(action: "index", controller: "index", params: params)

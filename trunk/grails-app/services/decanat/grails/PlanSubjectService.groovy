@@ -4,10 +4,11 @@ class PlanSubjectService {
 
     static transactional = true
 
-    def findPlanSubjectsBySemestrList(def semestr){
+    def findPlanSubjectsBySemestrList(def semestr, def plan){
         def c = PlanSubject.createCriteria()
-        c.list{
+        c.listDistinct{
             order("lastUpdated", "desc")
+            eq("plan", plan)
             planHours {
                 'in'("semestr", semestr);
             }
