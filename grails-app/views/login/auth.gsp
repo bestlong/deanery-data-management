@@ -1,6 +1,6 @@
 <head>
    <meta name='layout' content=''/>
-    <title>Login</title>
+    <title>Доброе пожаловать</title>
     <link rel="stylesheet" href="${resource(dir: 'css', file: 'auth.css')}"/>
 </head>
 <body>
@@ -16,12 +16,13 @@
                 <label for='j_password'>Пароль</label>
                 <input type='password' class='text_' name='j_password' id='j_password'/>
             </p>
-
+             <div  style="height: 36px;">
             <p>
                 <tooltip:tip code="tooltip.auth.submit">
-                    <input type='submit' value='Войти'/>
+                    <input class="vhod" type='submit' value=' '/>
                 </tooltip:tip>
-            </p>
+                </p>
+                 </div>
         </form>
         <g:if test='${flash.message}'>
             <g:render template="/template/notification/error" model="${[msg:flash.message]}"/>
