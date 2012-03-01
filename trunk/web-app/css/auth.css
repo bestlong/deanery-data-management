@@ -68,3 +68,24 @@
 #login .inner .chk {
     height: 12px;
 }
+
+
+.vhod {
+
+
+    background: url(../images/button.png);
+    width: 86px;
+    height: 36px;
+
+
+}
+
+.vhod:hover {
+
+
+    background: url(../images/button_act.png);
+    width: 86px;
+    height: 36px;
+
+
+}
