@@ -18,7 +18,7 @@
 }
 
 #login .inner .fheader {
-    background-color: #2582A4;
+    background-color: #BECF74;
     color: white;
     font-family: Tahoma,Arial,sans-serif;
     font-size: 14px;
@@ -26,7 +26,10 @@
     margin: 0 0 0 0;
     padding: 10px;
     text-align: right;
-}
+    border-top-left-radius:  8px;
+    border-top-right-radius:  8px;
+
+    }
 
 #login .inner .cssform p {
     clear: left;
@@ -73,19 +76,21 @@
 .vhod {
 
 
-    background: url(../images/button.png);
-    width: 86px;
-    height: 36px;
-
+    background-color:   #BECF74;
+    width: 62px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 17px;
 
 }
 
 .vhod:hover {
 
 
-    background: url(../images/button_act.png);
-    width: 86px;
-    height: 36px;
-
+    background: url(../images/img01.gif);
+    width: 62px;
+    height: 28px;
+    border-radius: 8px;
+    font-size: 17px;
 
 }

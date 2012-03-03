@@ -16,10 +16,10 @@
                 <label for='j_password'>Пароль</label>
                 <input type='password' class='text_' name='j_password' id='j_password'/>
             </p>
-             <div  style="height: 36px;">
+             <div  style="height: 30px;">
             <p>
                 <tooltip:tip code="tooltip.auth.submit">
-                    <input class="vhod" type='submit' value=' '/>
+                    <input class="vhod" type='submit' value='Войти'/>
                 </tooltip:tip>
                 </p>
                  </div>
