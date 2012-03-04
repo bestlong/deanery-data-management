@@ -73,8 +73,10 @@
 }
 
 .error_style{
-   text-align: justify;
+   text-align: center;
     padding: 10px;
+    color: red;
+    font-size: 14px;
 }
 
 .vhod {
