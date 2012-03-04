@@ -70,10 +70,10 @@
                             <g:if test="${univer && plan.stateExam}">
                                 <tooltip:tip code="tooltip.plan.print">
                                     <a style="align: right"
-                                       href="<g:createLink action="index" controller="printer"
+                                       href="<g:createLink action="print" controller="index"
                                                            id="${plan?.id}"/>">
                                         <input type="image"
-                                               src="<g:createLinkTo dir="/images" file="print_printer.png"/>">
+                                               src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                                     </a>
                                 </tooltip:tip>
                             </g:if>

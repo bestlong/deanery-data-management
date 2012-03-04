@@ -5,6 +5,7 @@ import stu.cn.ua.enums.PlanClass
 class IndexController {
 
     def planService
+    def excelService
 
     def chairPlans = {
         def chair = Chair.get(params.id)
@@ -57,5 +58,15 @@ class IndexController {
     def showWorkPlans = {
         def plans = planService.findWorkPlansByStudyPlan(Plan.get(params.id))
         render(template: "/template/workPlans", model: ["plans": plans, univer: University.list()])
+    }
+
+    def print = {
+        try {
+            response.contentType = "application/vnd.ms-excel"
+            response.setHeader("Content-disposition", "attachment;filename=work-plan.xls")
+            excelService.exportToExcel(Plan.get(params.id), new Date(), response.outputStream)
+        } catch(Exception e) {
+            log.error("error while exporting into excel: ", e)
+        }
     }
 }
