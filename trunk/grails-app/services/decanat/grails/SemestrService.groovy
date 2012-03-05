@@ -4,7 +4,7 @@ class SemestrService {
 
     static transactional = true
 
-    def cleanSemestrs(int semestr) {
-        Semestr.executeUpdate("delete Semestr s where s.number > :number", [number: semestr])
+    def cleanSemesters(int semestr, def plan) {
+        Semestr.executeUpdate("delete Semestr s where s.number > :number and s.plan = :plan", [number: semestr, plan: plan])
     }
 }

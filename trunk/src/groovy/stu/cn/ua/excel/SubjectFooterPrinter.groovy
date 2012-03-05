@@ -12,54 +12,54 @@ import stu.cn.ua.enums.ControlTypeEnum
  */
 class SubjectFooterPrinter {
 
-    private ExcelComponent excelComponent
-
-    def printFooter(Sheet sheet, int startRow, Plan plan){
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 3));
-        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 0, 3));
+    def printFooter(Sheet sheet, int startRow, Plan plan, ExcelComponent excelComponent){
+        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 9));
+        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 0, 9));
+        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 10, 19));
+        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 10, 19));
         def row1 = sheet.createRow(startRow)
         def row2 = sheet.createRow(startRow+1)
-        def cCol = 4
+        int cCol = 10
         def cell = row1.createCell(cCol)
         cell.setCellValue("Усього")
         cell.setCellStyle(excelComponent.rightCellStyle)
         
-        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 5, 6));
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 5, 6));
-        cell = row1.createCell(5)
+        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 20, 21));
+        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 20, 21));
+        cell = row1.createCell(20)
         cell.setCellValue(plan.getCreditCountTotal())
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        cell = row2.createCell(5)
+        cell = row2.createCell(21)
         cell.setCellValue(plan.getTotal())
         cell.setCellStyle(excelComponent.rightCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 7, 8));
-        cell = row1.createCell(7)
+        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 22, 23));
+        cell = row1.createCell(22)
         cell.setCellValue(plan.getTotalLecturesCount())
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 7, 8));
-        cell = row2.createCell(7)
+        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 22, 23));
+        cell = row2.createCell(22)
         cell.setCellValue(plan.getTotalSeminarCount())
         cell.setCellStyle(excelComponent.rightCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 9, 10));
-        cell = row1.createCell(9)
+        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 24, 25));
+        cell = row1.createCell(24)
         cell.setCellValue(plan.getTotalPractiseCount())
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 9, 10));
-        cell = row2.createCell(9)
+        sheet.addMergedRegion(new CellRangeAddress(startRow+1, startRow+1, 24, 25));
+        cell = row2.createCell(24)
         cell.setCellValue(plan.getTotalLabCount())
         cell.setCellStyle(excelComponent.rightCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 11, 12));
-        cell = row1.createCell(11)
+        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 26, 27));
+        cell = row1.createCell(26)
         cell.setCellValue(plan.getTotalSamCount())
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        cCol = 18
+        cCol = 33
 
         for (int i:1..plan.semestrCount){
             cell = row1.createCell(cCol)
@@ -91,12 +91,13 @@ class SubjectFooterPrinter {
 
         startRow +=2
         
-        def col = 12
+        int col = 27
         
         ControlTypeEnum.values().each {
-            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 3));
+            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 9));
+            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 10, 19));
             def row = sheet.createRow(startRow)
-            cell = row.createCell(4)
+            cell = row.createCell(10)
             cell.setCellValue(it.caption)
             cell.setCellStyle(excelComponent.leftCellStyle)
 
@@ -104,7 +105,7 @@ class SubjectFooterPrinter {
             cell.setCellValue(plan.getTotal(it))
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cCol = 18
+            cCol = 33
 
             for (int j:1..plan.semestrCount){
                 cell = row.createCell(cCol)
@@ -116,11 +117,5 @@ class SubjectFooterPrinter {
             col++
             startRow++
         }
-
-
-    }
-
-    void setExcelComponent(ExcelComponent excelComponent) {
-        this.excelComponent = excelComponent
     }
 }

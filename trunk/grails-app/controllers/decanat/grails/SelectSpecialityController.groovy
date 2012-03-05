@@ -29,7 +29,7 @@ class SelectSpecialityController {
             else {
                 flash.error = "plan.init.error"
             }
-            semestrService.cleanSemestrs(plan.semestrCount)
+            semestrService.cleanSemesters(plan.semestrCount, plan)
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)

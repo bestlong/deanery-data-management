@@ -80,7 +80,7 @@
                 <tr>
                     <td class="caption">Количество семестров*</td>
                     <td>
-                        <g:select from="${1..11}" name="semestrCount" value="${plan?.semestrCount}"
+                        <g:select from="${[2,3,4,8]}" name="semestrCount" value="${plan?.semestrCount}"
                                   style="width: 50px"/>
                     </td>
                 </tr>

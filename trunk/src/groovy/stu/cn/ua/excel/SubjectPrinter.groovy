@@ -15,53 +15,52 @@ import org.apache.poi.hssf.util.CellRangeAddress
  */
 class SubjectPrinter {
 
-    private ExcelComponent excelComponent
-
-    def printSubjects(Sheet sheet, int sRow, Plan plan){
+    def printSubjects(Sheet sheet, int sRow, Plan plan, ExcelComponent excelComponent){
         def startRow = sRow
         def subjects = plan.subjects
         for (PlanSubject planSubject: subjects){
             Row row = sheet.createRow(startRow);
 
-            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 3));
+            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 9));
+            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 10, 19));
 
             Cell cell = row.createCell(0)
             cell.setCellValue(planSubject.subject.name)
             cell.setCellStyle(excelComponent.leftCellStyle)
 
-            cell = row.createCell(4)
+            cell = row.createCell(10)
             cell.setCellValue(planSubject.subject.chair.name)
             cell.setCellStyle(excelComponent.leftCellStyle)
 
-            cell = row.createCell(5)
+            cell = row.createCell(20)
             cell.setCellValue(planSubject.creditCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(6)
+            cell = row.createCell(21)
             cell.setCellValue(planSubject.getTotal())
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(7)
+            cell = row.createCell(22)
             cell.setCellValue(planSubject.lectureCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(8)
+            cell = row.createCell(23)
             cell.setCellValue(planSubject.seminarCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(9)
+            cell = row.createCell(24)
             cell.setCellValue(planSubject.practiceCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(10)
+            cell = row.createCell(25)
             cell.setCellValue(planSubject.labCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            cell = row.createCell(11)
+            cell = row.createCell(26)
             cell.setCellValue(planSubject.samCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            def cCol =12
+            def cCol =27
 
             ControlTypeEnum.values().each {
                 cell = row.createCell(cCol)
@@ -87,10 +86,4 @@ class SubjectPrinter {
         }
         return subjects.size()
     }
-
-    void setExcelComponent(ExcelComponent excelComponent) {
-        this.excelComponent = excelComponent
-    }
-
-
 }
