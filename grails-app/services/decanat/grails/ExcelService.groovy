@@ -3,10 +3,6 @@ package decanat.grails
 import org.apache.poi.ss.usermodel.Workbook
 import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.hssf.usermodel.HSSFWorkbook
-import org.apache.poi.ss.usermodel.Row
-import org.apache.poi.ss.usermodel.Cell
-import org.apache.poi.hssf.util.CellRangeAddress
-import static junit.framework.Assert.assertNotNull
 import stu.cn.ua.excel.DocumentInitializer
 import stu.cn.ua.excel.HeadPrinter
 import stu.cn.ua.excel.ExcelComponent
@@ -31,27 +27,25 @@ class ExcelService {
 
     private static final int SUBJECT_HEADER_SIZE = 5
 
-    public OutputStream exportToExcel(Plan plan, Date date, OutputStream out) {
+    public void exportToExcel(Plan plan, Date date, OutputStream out) {
 
         Workbook workbook = new HSSFWorkbook();
         Sheet sheet = workbook.createSheet("new sheet");
-        excelComponent.init(workbook)
+        excelComponent = new ExcelComponent(plan, workbook)
 
-        documentInitializer.initColumnsWidth(sheet)
-        def row = headPrinter.printHeader(sheet, date, plan)
-        subjectHeadPrinter.printSubjectHeader(sheet, row)
+        documentInitializer.initColumnsWidth(sheet, plan, excelComponent)
+        int row = headPrinter.printHeader(sheet, date, plan, excelComponent)
+        subjectHeadPrinter.printSubjectHeader(sheet, row, excelComponent, plan)
 
         row += SUBJECT_HEADER_SIZE
 
-        row += subjectPrinter.printSubjects(sheet, row, plan)
-        subjectFooterPrinter.printFooter(sheet, row, plan)
+        row += subjectPrinter.printSubjects(sheet, row, plan, excelComponent)
+        subjectFooterPrinter.printFooter(sheet, row, plan, excelComponent)
 
         row +=8
-        def cnt = practisePrinter.print(plan, row, sheet)
+        def cnt = practisePrinter.print(plan, row, sheet, excelComponent)
         row += cnt
-        footerPrinter.print(plan, row, sheet, date)
-
-
+        footerPrinter.print(plan, row, sheet, date, excelComponent)
 
          // Write the output to a file
         workbook.write(out);

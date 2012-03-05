@@ -10,60 +10,58 @@ import org.apache.poi.ss.usermodel.Sheet
  */
 class PractisePrinter {
 
-    ExcelComponent excelComponent
-
-
-    public int print(Plan plan, int startRow, Sheet sheet){
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 3));
+    public int print(Plan plan, int startRow, Sheet sheet, ExcelComponent excelComponent){
+        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 0, 9));
         def row = sheet.createRow(startRow)
         def cell = row.createCell(0)
         cell.setCellValue("2. Практики")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 15, excelComponent.COLUMN_COUNT-1));
-        cell = row.createCell(15)
+        int cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 17000, excelComponent.PAGE_POINTS_WIDTH)
+        cell = row.createCell(cCell)
         cell.setCellValue("2. Державна атестація")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
         startRow++
 
 
         row = sheet.createRow(startRow)
-        cell = row.createCell(0)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 0, 2000)
+        cell = row.createCell(cCell)
         cell.setCellValue("№")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 1, 4));
-        cell = row.createCell(1)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 2000, 10000)
+        cell = row.createCell(cCell)
         cell.setCellValue("Назва практики")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 5, 7));
-        cell = row.createCell(5)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 10000, 12000)
+        cell = row.createCell(cCell)
         cell.setCellValue("семестр")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 8, 11));
-        cell = row.createCell(8)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 12000, 14000)
+        cell = row.createCell(cCell)
         cell.setCellValue("тижнів")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 20, 22));
-        cell = row.createCell(20)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 16500, 18000)
+        cell = row.createCell(cCell)
         cell.setCellValue("№")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 23, 26));
-        cell = row.createCell(23)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 18000, 20000)
+        cell = row.createCell(cCell)
         cell.setCellValue("семестр")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 27, 34));
-        cell = row.createCell(27)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 20000, 23000)
+        cell = row.createCell(cCell)
         cell.setCellValue("строки проведення")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 35, excelComponent.COLUMN_COUNT-1));
-        cell = row.createCell(35)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 23000, excelComponent.PAGE_POINTS_WIDTH)
+        cell = row.createCell(cCell)
         cell.setCellValue("форма державної атестації")
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
@@ -76,22 +74,23 @@ class PractisePrinter {
             if (null == curRow){
                 curRow =row
             }
-            cell = row.createCell(0)
+            cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 0, 2000)
+            cell = row.createCell(cCell)
             cell.setCellValue(idx+1)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 1, 4));
-            cell = row.createCell(1)
+            cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 2000, 10000)
+            cell = row.createCell(cCell)
             cell.setCellValue(it.name)
             cell.setCellStyle(excelComponent.leftCellStyle)
 
-            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 5, 7));
-            cell = row.createCell(5)
+            cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 10000, 12000)
+            cell = row.createCell(cCell)
             cell.setCellValue(it.semestr)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-            sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 8, 11));
-            cell = row.createCell(8)
+            cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 12000, 14000)
+            cell = row.createCell(cCell)
             cell.setCellValue(it.weeks)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)            
         }
@@ -102,37 +101,33 @@ class PractisePrinter {
             row = sheet.createRow(startRow)
         }
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 20, 22));
-        cell = row.createCell(20)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 16500, 18000)
+        cell = row.createCell(cCell)
         cell.setCellValue(1)
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 23, 26));
-        cell = row.createCell(23)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 18000, 20000)
+        cell = row.createCell(cCell)
         cell.setCellValue(plan.stateExam.semestr)
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 27, 34));
-        cell = row.createCell(27)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 20000, 23000)
+        cell = row.createCell(cCell)
         cell.setCellValue(plan.stateExam.date)
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 35, excelComponent.COLUMN_COUNT-1));
-        cell = row.createCell(35)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 23000, excelComponent.PAGE_POINTS_WIDTH)
+        cell = row.createCell(cCell)
         cell.setCellValue(plan.stateExam.forma)
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
-        def cnt = 0
+        int cnt
         if (plan.practise.size() == 0){
             cnt = 1
         } else {
             cnt = plan.practise.size()
         }
 
-        def retVal = 2 + cnt
-    }
-
-    void setExcelComponent(ExcelComponent excelComponent) {
-        this.excelComponent = excelComponent
+        2 + cnt
     }
 }

@@ -4,6 +4,8 @@ import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.hssf.util.CellRangeAddress
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Cell
+import decanat.grails.Plan
+import decanat.grails.Semestr
 
 /**
  * author: evgeniy
@@ -11,38 +13,36 @@ import org.apache.poi.ss.usermodel.Cell
  */
 class SubjectHeaderPrinter {
 
-    def excelComponent
-
     def work =["л\nе\nк\nц\nі\nі", "с\nе\nм\nн\nа\nр", "п\nр\nа\nк\nт\nч", "л\nа\nб\nо\nр\nт", "с\nа\nм\nо\nс\nт"]
     def check =["і\nс\nп\nи\nт\nи", "з\nа\nл\nі\nк\nи", "к\n.\nп\nр\nо\nе\nк\nт", "к\n.\nр\nо\nб\nо\nт\nи", "р\nг\nр", "к\nо\nн\nт\n.\nр\nо\nб"]
     def distribution =["у\nс\nь\nо\nг\nо", "л\nе\nк\nц\nі\nі", "с\nе\nм\nн\nа\nр", "п\nр\nа\nк\nт\nч", "л\nа\nб\nо\nр\nт"]
 
-    def printSubjectHeader(Sheet sheet, int sRow) {
+    def printSubjectHeader(Sheet sheet, int sRow, ExcelComponent excelComponent, Plan plan) {
 
-        def startRow = sRow
+        int startRow = sRow
         sheet.addMergedRegion(new CellRangeAddress(
                 startRow, //first row (0-based)
                 startRow, //last row  (0-based)
-                6, //first column (0-based)
-                11  //last column  (0-based)
+                21, //first column (0-based)
+                26  //last column  (0-based)
         ));
         Row row1 = sheet.createRow(startRow)
-        Cell cell = row1.createCell(6)
+        Cell cell = row1.createCell(21)
         cell.setCellValue("Годин")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
         sheet.addMergedRegion(new CellRangeAddress(
                 startRow, //first row (0-based)
                 startRow, //last row  (0-based)
-                12, //first column (0-based)
-                17  //last column  (0-based)
+                27, //first column (0-based)
+                32  //last column  (0-based)
         ));
-        cell = row1.createCell(12)
+        cell = row1.createCell(27)
         cell.setCellValue("Розподіл між семестрами")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        def cCol = 18
-        for (int i: 1..8) {
+        int cCol = 33
+        for (int i: 1..plan.semestrCount) {
             sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, cCol, cCol+4));
             cell = row1.createCell(cCol)
             cell.setCellValue("${i} семестр")
@@ -56,25 +56,25 @@ class SubjectHeaderPrinter {
         sheet.addMergedRegion(new CellRangeAddress(
                 startRow, //first row (0-based)
                 startRow, //last row  (0-based)
-                7, //first column (0-based)
-                11  //last column  (0-based)
+                22, //first column (0-based)
+                26  //last column  (0-based)
         ));
         def row2 = sheet.createRow(startRow)
-        cell = row2.createCell(7)
+        cell = row2.createCell(22)
         cell.setCellValue("у тому числі")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        cCol = 18
-        for (int i: 1..8) {
+        cCol = 33
+        for (Semestr semestr: plan.semestr) {
             sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, cCol, cCol+4));
             cell = row2.createCell(cCol)
-            cell.setCellValue("18 тижнів")
+            cell.setCellValue("${semestr.weekCount} тижнів")
             cell.setCellStyle(excelComponent.centerCellStyle)
 
             cCol += 5
         }
 
-        cCol=5
+        cCol=20
 
         //вертикальный текст
         startRow--;
@@ -109,7 +109,7 @@ class SubjectHeaderPrinter {
             cell.setCellStyle(excelComponent.centerVerticalStyle)
         }
 
-        for (int i:1..8){
+        for (int i:1..plan.semestrCount){
             for (String str: distribution){
                 cCol++
                 sheet.addMergedRegion(new CellRangeAddress(startRow+2, startRow+4, cCol, cCol));
@@ -119,13 +119,13 @@ class SubjectHeaderPrinter {
             }
         }
 
-        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 0, 3));
+        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 0, 9));
         cell = row1.createCell(0)
         cell.setCellValue("Назва дисципліни")
         cell.setCellStyle(excelComponent.centerCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 4, 4));
-        cell = row1.createCell(4)
+        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow+4, 10, 19));
+        cell = row1.createCell(10)
         cell.setCellValue("Кафедра")
         cell.setCellStyle(excelComponent.centerCellStyle)
     }

@@ -13,38 +13,34 @@ import decanat.grails.University
  */
 class FooterPrinter {
 
-    private ExcelComponent excelComponent
-
-    public void print(Plan plan, int sRow, Sheet sheet, Date date){
+    public void print(Plan plan, int sRow, Sheet sheet, Date date, ExcelComponent excelComponent){
         def university = University.findAll().get(0)
 
-        DateFormat dateFormat = new SimpleDateFormat("MM. dd. yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("dd. MM. yyyy");
         def row = sheet.createRow(sRow)
-        def cell = row.createCell(1)
+        int cCell = excelComponent.mergeCellsByCoordinates(sheet, sRow, 1000, 3000)
+        def cell = row.createCell(cCell)
         cell.setCellValue(dateFormat.format(date))
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        cell = row.createCell(4)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, sRow, 5000, 7000)
+        cell = row.createCell(cCell)
         cell.setCellValue("Декан")
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow, 5, 9));
-        cell = row.createCell(5)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, sRow, 9000, 12000)
+        cell = row.createCell(cCell)
         cell.setCellValue(university.dean)
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow, 30, 38));
-        cell = row.createCell(30)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, sRow, 20000, 24000)
+        cell = row.createCell(cCell)
         cell.setCellValue("зав. кафедрою")
         cell.setCellStyle(excelComponent.leftCellStyle)
 
-        sheet.addMergedRegion(new CellRangeAddress(sRow, sRow, 43, 52));
-        cell = row.createCell(43)
+        cCell = excelComponent.mergeCellsByCoordinates(sheet, sRow, 27000, 30000)
+        cell = row.createCell(cCell)
         cell.setCellValue(plan.chair.head)
         cell.setCellStyle(excelComponent.leftCellStyle)
-    }
-
-    void setExcelComponent(ExcelComponent excelComponent) {
-        this.excelComponent = excelComponent
     }
 }

@@ -12,40 +12,30 @@ import stu.cn.ua.excel.FooterPrinter
 // Place your Spring DSL code here
 beans = {
 
-    excelComponent(ExcelComponent){}
-
     subjectFooterPrinter(SubjectFooterPrinter){
-        excelComponent = ref("excelComponent")
     }
 
     footerPrinter(FooterPrinter){
-        excelComponent = ref("excelComponent")
     }
 
     practisePrinter(PractisePrinter){
-        excelComponent = ref("excelComponent")
     }
 
     subjectHeadPrinter(SubjectHeaderPrinter){
-        excelComponent = ref("excelComponent")
     }
 
     subjectPrinter(SubjectPrinter){
-        excelComponent = ref("excelComponent")
     }
 
     headPrinter(HeadPrinter) {
-        excelComponent = ref("excelComponent")
     }
 
     documentInitializer(DocumentInitializer) {
-        excelComponent = ref("excelComponent")
     }
 
     excelClient(ExcelClient){
         documentInitializer = ref("documentInitializer")
         headPrinter = ref("headPrinter")
-        excelComponent = ref("excelComponent")
     }
 
     excelService(ExcelService){
@@ -53,7 +43,6 @@ beans = {
         subjectHeadPrinter = ref("subjectHeadPrinter")
         documentInitializer = ref("documentInitializer")
         headPrinter = ref("headPrinter")
-        excelComponent = ref("excelComponent")
         subjectPrinter = ref("subjectPrinter")
         subjectFooterPrinter = ref("subjectFooterPrinter")
         practisePrinter = ref("practisePrinter")
