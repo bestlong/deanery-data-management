@@ -25,12 +25,13 @@ class SubjectPrinter {
             sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, 10, 19));
 
             Cell cell = row.createCell(0)
+
             cell.setCellValue(planSubject.subject.name)
-            cell.setCellStyle(excelComponent.leftCellStyle)
+            cell.setCellStyle(excelComponent.leftWrapTextCellStyle)
 
             cell = row.createCell(10)
             cell.setCellValue(planSubject.subject.chair.name)
-            cell.setCellStyle(excelComponent.leftCellStyle)
+            cell.setCellStyle(excelComponent.leftWrapTextCellStyle)
 
             cell = row.createCell(20)
             cell.setCellValue(planSubject.creditCount)
