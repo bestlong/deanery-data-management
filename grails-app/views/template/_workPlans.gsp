@@ -32,14 +32,14 @@
                            href="<g:createLink action="print" controller="index"
                                                id="${plan?.id}"/>">
                             <input type="image"
-                                   src="<g:createLinkTo dir="/images" file="print_printer.png"/>">
+                                   src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                         </a>
                     </tooltip:tip>
                 </g:if>
                 <g:else>
                     <tooltip:tip code="tooltip.plan.notPrint">
                         <input type="image"
-                               src="<g:createLinkTo dir="/images" file="print_printer.png"/>">
+                               src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                     </tooltip:tip>
                 </g:else>
             </td>

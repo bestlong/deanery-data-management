@@ -35,6 +35,7 @@ class ExcelComponent {
     public CellStyle centerBottomCellStyle
     public CellStyle rightCellStyle
     public CellStyle leftCellStyle
+    public CellStyle leftWrapTextCellStyle
 
     public CellStyle centerVerticalStyle
 
@@ -98,6 +99,11 @@ class ExcelComponent {
         leftCellStyle = workbook.createCellStyle()
         leftCellStyle.setAlignment(CellStyle.ALIGN_LEFT)
 
+
+        leftWrapTextCellStyle = workbook.createCellStyle()
+        leftWrapTextCellStyle.setAlignment(CellStyle.ALIGN_LEFT)
+        leftWrapTextCellStyle.setWrapText(true)
+
         centerVerticalStyle = workbook.createCellStyle()
         centerVerticalStyle.setVerticalAlignment(CellStyle.VERTICAL_BOTTOM);
         centerVerticalStyle.setAlignment(CellStyle.ALIGN_CENTER)
@@ -111,6 +117,7 @@ class ExcelComponent {
         rightCellStyle.setFont(font)
         centerCellStyle.setFont(font)
         leftCellStyle.setFont(font)
+        leftWrapTextCellStyle.setFont(font)
         centerVerticalStyle.setFont(font)
         centerBottomCellStyle.setFont(font)
     }
