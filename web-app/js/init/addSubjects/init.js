@@ -68,17 +68,17 @@
             var nTr = this.parentNode.parentNode;
             if (this.src.match('details_close')) {
                 /* This row is already open - close it */
-                this.src = "/decanat-grails/images/details_open.png";
+                this.src = "${request.contextPath}/images/details_open.png";
                 oTable.fnClose(nTr);
             }
             else {
                 /* Open this row */
-                this.src = "/decanat-grails/images/details_close.png";
+                this.src = "${request.contextPath}/images/details_close.png";
                 var id = nTr.id;
                 var count = $("#count" + id).val()
                 oTable.fnOpen(nTr, fnFormatDetails(oTable, nTr, id, count), 'detailsStyle');
 
-                $.post('/decanat-grails/addSubjects/work',
+                $.post('${request.contextPath}/addSubjects/work',
                         {id:id},
                         function(data) {
                             for (i = 0; i < count.length; i++) {
@@ -89,7 +89,7 @@
                             }
                         });
 
-                $.post('/decanat-grails/addSubjects/control',
+                $.post('${request.contextPath}/addSubjects/control',
                         {id:id},
                         function(data) {
 //                            alert(data);

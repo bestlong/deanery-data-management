@@ -45,7 +45,14 @@ class AddSubjectsController {
                 semestrs.add(i)
             }
         }
-        def result = planSubjectService.findPlanSubjectsBySemestrList(semestrs, plan)
+        def result
+        if (semestrs?.size() != 0){
+            result = planSubjectService.findPlanSubjectsBySemestrList(semestrs, plan)
+        }
+        else {
+            result = []
+        }
+
         def newSubjects = []
         result.each {
             def res = ""

@@ -44,7 +44,7 @@ class HeadPrinter {
 
         cell = row.createCell(cCell)
         cell.setCellStyle(excelComponent.centerCellStyle)
-        cell.setCellValue("на ${date.year} - ${date.year+1} навчальній рік за напрямом підготовки ${plan.direction}")
+        cell.setCellValue("на ${plan.startYear} - ${plan.endYear} навчальній рік за напрямом підготовки ${plan.direction}")
 
         cCell = excelComponent.mergeCellsByCoordinates(sheet, currentRow, 20000, excelComponent.PAGE_POINTS_WIDTH)
         cell = row.createCell(cCell)
@@ -87,7 +87,7 @@ class HeadPrinter {
 
         cell = row.createCell(0)
         cell.setCellStyle(excelComponent.leftCellStyle)
-        cell.setCellValue("<___>____________________2010p")
+        cell.setCellValue("<___>____________________${date.year+1900}")
 
         return ++currentRow
     }

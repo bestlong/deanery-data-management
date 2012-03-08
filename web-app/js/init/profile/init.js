@@ -6,7 +6,7 @@ $(function () {
 });
 
 function deleteDialog(iid) {
-    $("#editPass").attr("href", '/decanat-grails/user/edit/' + iid);
+    $("#editPass").attr("href", '${request.contextPath}/user/edit/' + iid);
     $("#dialog").dialog();
 }
 
@@ -45,7 +45,7 @@ $(function () {
             username:{
                 required:true,
                 unique:{
-                    url:'/decanat-grails/JQueryRemoteValidator/validate',
+                    url:'${request.contextPath}/JQueryRemoteValidator/validate',
                     type:'post',
                     data:{
                         validatableClass:'decanat.grails.domain.User',
@@ -80,7 +80,7 @@ $(function () {
             oldPasswd:{
                 required:true,
                 remote:{
-                    url:'/decanat-grails/profile/validate',
+                    url:'${request.contextPath}/profile/validate',
                     type:'post',
                     data:{
                         oldPasswd:function () {

@@ -4,6 +4,22 @@
     <meta name="layout" content="main"/>
     <g:javascript src="/init/selectSpeciality/init.js"/>
     <title>Выбор специальности</title>
+    <g:javascript>
+        function calculateEndYear(){
+            var startYear = $('#startYear').val();
+            if ($.isNumeric(startYear)){
+                var endYear = parseInt(startYear, 10) + parseInt(1, 10);
+                $('#endYear').val(endYear);
+            }
+        }
+        function calculateStartYear(){
+            var endYear = $('#endYear').val();
+            if ($.isNumeric(endYear)){
+                var startYear = parseInt(endYear, 10) - parseInt(1, 10);
+                $('#startYear').val(startYear);
+            }
+        }
+    </g:javascript>
 </head>
 
 <body>
@@ -34,24 +50,39 @@
     <div id="selectPart">
         <h4 class="subtitle">Инициализация плана:</h4>
         <g:form action="next" controller="selectSpeciality" name="selectSpecialityForm">
-            <table cellpadding="5" class="editTable">
+            <table cellpadding="5" class="editTable" style="border-width: 1">
+                <tr>
+                    <td class="caption">Года*</td>
+                    <td>
+                        <g:textField name="startYear" style="width: 40px" class="integer" onkeyup="calculateEndYear();"/>
+                        ${" -  "}
+                        <g:textField name="endYear" style="width: 40px" class="integer" onkeyup="calculateStartYear();"/>
+                    </td>
+                </tr>
                 <tr>
                     <td class="caption">Специальность*</td>
                     <td>
-                        <span style="font-size: 14px;" id="specialityName">${plan?.speciality?.name}</span>
-                        <a id="selectSpec" href="#" onclick="showSpecialitySelect(true)"
-                           class="action">Выбрать специальность</a>
-                        <g:hiddenField name="specId" value="${plan?.speciality?.id}"/>
-                        <g:hiddenField name="id" value="${plan?.id}"/>
+                        <div>
+                            <a id="selectSpec" href="#" onclick="showSpecialitySelect(true)"
+                               class="action">Выбрать специальность</a>
+                            <g:hiddenField name="specId" value="${plan?.speciality?.id}"/>
+                            <g:hiddenField name="id" value="${plan?.id}"/>
+                        </div>
+                        <div style="margin-top: 5px">
+                            <span style="font-size: 14px; color: #0000ff; text-decoration: underline" id="specialityName">${plan?.speciality?.name}</span>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td class="caption">Кафедра*</td>
                     <td>
-                        <span style="font-size: 14px;" id="chairName">${plan?.chair?.name}</span>
-                        <a id="selectChair" href="#" onclick="showChairSelect(true)" class="action">Выбрать кафедру</a>
-                        <g:hiddenField name="chairId" value="${plan?.chair?.id}"/>
-
+                        <div>
+                            <a id="selectChair" href="#" onclick="showChairSelect(true)" class="action">Выбрать кафедру</a>
+                            <g:hiddenField name="chairId" value="${plan?.chair?.id}"/>
+                        </div>
+                        <div>
+                            <span style="font-size: 14px; color: #0000ff; text-decoration: underline" id="chairName">${plan?.chair?.name}</span>
+                        </div>
                     </td>
                 </tr>
                 <tr>

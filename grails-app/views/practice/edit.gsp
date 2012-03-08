@@ -17,7 +17,7 @@
         <g:form controller="practice" action="save" width="300" name="formSave">
             <g:hiddenField name="id" value="${practice.id}"/>
             <g:hiddenField name="planId" value="${plan.id}"/>
-            <table id="controlType" align="center">
+            <table align="center" class="editTable">
                 <tr>
                     <td class="caption">Название*</td>
                     <td>

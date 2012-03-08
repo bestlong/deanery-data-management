@@ -16,6 +16,8 @@ class Plan {
     String qualification;
     Integer semestrCount;
     Date lastUpdated;
+    Integer startYear
+    Integer endYear
 
     def beforeInsert = {
         lastUpdated = new Date()
@@ -41,6 +43,8 @@ class Plan {
         lastUpdated(nullable: true)
         termin(nullable: true)
         qualification(nullable: true)
+        startYear(nullable: true)
+        endYear(nullable: true)
     }
 
     static mapping = {

@@ -28,7 +28,7 @@
            <table>
                 <tr>
                     <td>
-                        <img src="/decanat-grails/images/notifications/error.png" align="left" width="80%">
+                        <img src="${request.contextPath}/images/notifications/error.png" align="left" width="80%">
                     </td>
                     <td>
                         <div class="error_style">

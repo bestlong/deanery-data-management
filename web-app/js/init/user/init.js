@@ -38,7 +38,7 @@ $(function() {
                     username: {
                         required: true,
                         unique: {
-                            url: '/decanat-grails/JQueryRemoteValidator/validate',
+                            url: '${request.contextPath}/JQueryRemoteValidator/validate',
                             type: 'post',
                             data: {
                                 validatableClass: 'decanat.grails.domain.User',
