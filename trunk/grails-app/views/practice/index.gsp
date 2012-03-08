@@ -28,10 +28,10 @@
                 },
                 bAutoWidth: false,
                 aoColumns   : [
-                    { sWidth: "25%" },
-                    { sWidth: "25%"},
-                    { sWidth: "25%"},
-                    { setWidth: "25%", bSortable: false}
+                    { sWidth: "60%" },
+                    { sWidth: "15%"},
+                    { sWidth: "15%"},
+                    { setWidth: "10%", bSortable: false}
 
                 ]
             });

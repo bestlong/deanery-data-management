@@ -31,16 +31,24 @@
                     ${subject.shortName}
                 </td>
                 <td>
-                    <tooltip:tip code="tooltip.edit">
-                        <a href="<g:createLink action="edit" controller="subject" id="${subject.id}"/>">
-                            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
-                        </a>
-                    </tooltip:tip>
-                    <tooltip:tip code="tooltip.del">
-                        <a href="#" onclick="deleteDialog(${subject?.id})" class="delBtn">
-                            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
-                        </a>
-                    </tooltip:tip>
+                    <table>
+                        <tr>
+                            <td align="left" style="margin: 5px">
+                                <tooltip:tip code="tooltip.edit">
+                                    <a href="<g:createLink action="edit" controller="subject" id="${subject.id}"/>">
+                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
+                                    </a>
+                                </tooltip:tip>
+                            </td>
+                            <td align="right" style="margin: 5px">
+                                <tooltip:tip code="tooltip.del">
+                                    <a href="#" onclick="deleteDialog(${subject?.id})" class="delBtn">
+                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                                    </a>
+                                </tooltip:tip>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </g:each>

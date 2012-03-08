@@ -4,9 +4,9 @@
         <thead>
         <tr>
             <th>Название</th>
-            <th>№Семестра</th>
+            <th>№ Семестра</th>
             <th>Количество недель</th>
-            <th> Редактирование </th>
+            <th>Ред.</th>
 
         </tr>
         </thead>
@@ -15,7 +15,7 @@
         <g:each in="${res}" var="practice">
             <tr id="${practice.id}">
                 <td>
-                    <g:hiddenField name="count${practice.id}" />
+                    <g:hiddenField name="count${practice.id}"/>
                     ${practice.name}
                 </td>
                 <td>
@@ -25,16 +25,25 @@
                     ${practice.weeks}
                 </td>
                 <td>
-                    <tooltip:tip code="tooltip.edit">
-                    <a href="<g:createLink action="edit" controller="practice" id="${practice.id}" params="[planId: practice.planId]"/>">
-                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
-                    </a>
-                        </tooltip:tip>
-                    <tooltip:tip code="tooltip.del">
-                    <a href="#" onclick="deleteDialog(${practice?.id}, ${practice?.planId})" class="delBtn">
-                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
-                    </a>
-                        </tooltip:tip>
+                    <table width="100%">
+                        <tr align="center">
+                            <td align="left" style="margin: 5px">
+                                <tooltip:tip code="tooltip.edit">
+                                    <a href="<g:createLink action="edit" controller="practice" id="${practice.id}"
+                                                           params="[planId: practice.planId]"/>">
+                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
+                                    </a>
+                                </tooltip:tip>
+                            </td>
+                            <td align="right" style="margin: 5px">
+                                <tooltip:tip code="tooltip.del">
+                                    <a href="#" onclick="deleteDialog(${practice?.id}, ${practice?.planId})" class="delBtn">
+                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                                    </a>
+                                </tooltip:tip>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </g:each>

@@ -70,6 +70,7 @@ $(document).ready(function () {
     $("#dialog").hide();
     $('#searchSpeciality').hide();
     $('#searchChair').hide();
+    $(".integer").numeric({ decimal: false, negative: false }, null);
 });
 
 function showChairSelect() {
@@ -114,14 +115,6 @@ function showMain() {
     $('#searchChair').hide();
     $("#searchPartChair").hide();
 }
-
-//function showOrHideChair(show) {
-//    $('#selectChair').qtip('destroy');
-//    $("#searchPartChair").toggle(show);
-//    $("#selectPart").toggle(!show);
-//
-//    $("#menuBox").toggle(!show);
-//}
 
 function chooseChair(id, name) {
     $("#chairName").html(name);
@@ -193,6 +186,18 @@ $(function() {
                     },
                     chairId : {
                         required: true
+                    },
+                    startYear : {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 4,
+                        range: [1990, 2100]
+                    },
+                    endYear : {
+                        required: true,
+                        minlength: 4,
+                        maxlength: 4,
+                        range: [1990, 2100]
                     }
                 },
                 messages: {
@@ -219,6 +224,18 @@ $(function() {
                     },
                     qualification: {
                         required: " Введите квалификацию"
+                    },
+                    startYear: {
+                        required: "Введите год",
+                        minlength: "Должно быть 4 цифры",
+                        maxlength: "Должно быть 4 цифры",
+                        range: "Значение должно быть в пределать от 1990 до 2100"
+                    },
+                    endYear: {
+                        required: "Введите год",
+                        minlength: "Должно быть 4 цифры",
+                        maxlength: "Должно быть 4 цифры",
+                        range: "Значение должно быть в пределать от 1990 до 2100"
                     }
                 }
             });

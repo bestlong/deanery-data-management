@@ -15,6 +15,7 @@
           rel="stylesheet"/>
 
     <script type="text/javascript" src="<g:createLinkTo dir="/js/jQuery" file="jquery.dataTables.js"/>"></script>
+    <script type="text/javascript" src="<g:createLinkTo dir="/js/jQuery" file="jquery.numeric.js"/>"></script>
     <link href="${resource(dir: 'css', file: 'dataTables/demo_table.css')}" rel="stylesheet" type="text/css"/>
     <link href="${resource(dir: 'css', file: 'dataTables/demo_table_jui.css')}" rel="stylesheet" type="text/css"/>
 
