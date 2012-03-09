@@ -83,7 +83,7 @@
                         function(data) {
                             for (i = 0; i < count.length; i++) {
                                 $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "lecture").html(data[i].lectures)
-                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "practise").html(data[i].practices)
+                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "practiseList").html(data[i].practices)
                                 $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "seminar").html(data[i].seminars)
                                 $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "lab").html(data[i].labs)
                             }
@@ -143,7 +143,7 @@
         sOut += '<tr><td>Практик</td>';
         for (i = 0; i < count.length; i++) {
             id = ''
-            id = 'subject' + subjId + 'semestr' + count[i] + 'practise';
+            id = 'subject' + subjId + 'semestr' + count[i] + 'practiseList';
             sOut += '<td id =' + id + '>0</td>';
         }
         sOut += '</tr>';

@@ -1,7 +1,7 @@
 package decanat.grails
 
-class SelectSpecialityController {
-    def selectSpecialityService
+class PlanInitController {
+    def planInitService
     def specialityService
     def semestrService
     def chairService
@@ -21,7 +21,7 @@ class SelectSpecialityController {
     }
 
     def next = {
-        def plan = selectSpecialityService.savePlan(params)
+        def plan = planInitService.savePlan(params)
         try {
             if (plan) {
                 flash.message = "plan.init.done"

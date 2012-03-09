@@ -2,7 +2,7 @@ package decanat.grails
 
 import stu.cn.ua.enums.PlanForm
 
-class SelectSpecialityService {
+class PlanInitService {
 
     static transactional = true
 

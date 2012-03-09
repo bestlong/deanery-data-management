@@ -67,7 +67,7 @@ class PractisePrinter {
 
         def curRow = null
 
-        plan.practise.eachWithIndex {it, idx ->
+        plan.practiseList.eachWithIndex {it, idx ->
             startRow++;
             
             row = sheet.createRow(startRow)
@@ -91,7 +91,7 @@ class PractisePrinter {
 
             cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 12000, 14000)
             cell = row.createCell(cCell)
-            cell.setCellValue(it.weeks)
+            cell.setCellValue(it.weekCount)
             cell.setCellStyle(excelComponent.centerBottomCellStyle)            
         }
         if (curRow != null){
@@ -118,14 +118,14 @@ class PractisePrinter {
 
         cCell = excelComponent.mergeCellsByCoordinates(sheet, startRow, 23000, excelComponent.PAGE_POINTS_WIDTH)
         cell = row.createCell(cCell)
-        cell.setCellValue(plan.stateExam.forma)
+        cell.setCellValue(plan.stateExam.form)
         cell.setCellStyle(excelComponent.centerBottomCellStyle)
 
         int cnt
-        if (plan.practise.size() == 0){
+        if (plan.practiseList.size() == 0){
             cnt = 1
         } else {
-            cnt = plan.practise.size()
+            cnt = plan.practiseList.size()
         }
 
         2 + cnt

@@ -4,7 +4,7 @@ class PlanPractice {
     String name;
     Plan plan;
     int semestr;
-    int weeks;
+    int weekCount;
 
     static belongsTo = [plan: Plan]
 
@@ -12,7 +12,7 @@ class PlanPractice {
         PlanPractice newPlanPractice = new PlanPractice()
         newPlanPractice.name = planPractice.name
         newPlanPractice.semestr = planPractice.semestr
-        newPlanPractice.weeks = planPractice.weeks
+        newPlanPractice.weekCount = planPractice.weekCount
 
         newPlanPractice
     }
@@ -34,6 +34,6 @@ class PlanPractice {
         plan(nullable: false)
 
         semestr(min: 0)
-        weeks(min: 0)
+        weekCount(min: 0)
     }
 }

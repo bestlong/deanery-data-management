@@ -65,10 +65,10 @@ class PlanSubjectService {
             planHour = hour
         else
             planHour = new PlanHours()
-        planHour.lectures = params."lectureCount${semestr}" == null || params."lectureCount${semestr}".equals("") ? 0 : params."lectureCount${semestr}" as int
-        planHour.seminars = params."seminarCount${semestr}" == null || params."seminarCount${semestr}".equals("") ? 0 : params."seminarCount${semestr}" as int
-        planHour.practices = params."practiceCount${semestr}" == null || params."practiceCount${semestr}".equals("") ? 0 : params."practiceCount${semestr}" as int
-        planHour.labs = params."labCount${semestr}" == null || params."labCount${semestr}".equals("") ? 0 : params."labCount${semestr}" as int
+        planHour.lectureCount = params."lectureCount${semestr}" == null || params."lectureCount${semestr}".equals("") ? 0 : params."lectureCount${semestr}" as int
+        planHour.seminarCount = params."seminarCount${semestr}" == null || params."seminarCount${semestr}".equals("") ? 0 : params."seminarCount${semestr}" as int
+        planHour.practiceCount = params."practiceCount${semestr}" == null || params."practiceCount${semestr}".equals("") ? 0 : params."practiceCount${semestr}" as int
+        planHour.labCount = params."labCount${semestr}" == null || params."labCount${semestr}".equals("") ? 0 : params."labCount${semestr}" as int
         planHour.semestr = semestr
         planHour.planSubject = planSubject
         return planHour

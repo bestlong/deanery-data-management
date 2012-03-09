@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <g:javascript src="/init/selectSpeciality/init.js"/>
+    <g:javascript src="/init/planInit/init.js"/>
     <title>Выбор специальности</title>
     <g:javascript>
         function calculateEndYear(){
@@ -49,14 +49,14 @@
 
     <div id="selectPart">
         <h4 class="subtitle">Инициализация плана:</h4>
-        <g:form action="next" controller="selectSpeciality" name="selectSpecialityForm">
+        <g:form action="next" controller="planInit" name="selectSpecialityForm">
             <table cellpadding="5" class="editTable" style="border-width: 1">
                 <tr>
                     <td class="caption">Года*</td>
                     <td>
-                        <g:textField name="startYear" style="width: 40px" class="integer" onkeyup="calculateEndYear();"/>
+                        <g:textField name="startYear" style="width: 40px" class="integer" onkeyup="calculateEndYear();" value="${plan?.startYear}"/>
                         ${" -  "}
-                        <g:textField name="endYear" style="width: 40px" class="integer" onkeyup="calculateStartYear();"/>
+                        <g:textField name="endYear" style="width: 40px" class="integer" onkeyup="calculateStartYear();" value="${plan?.endYear}"/>
                     </td>
                 </tr>
                 <tr>

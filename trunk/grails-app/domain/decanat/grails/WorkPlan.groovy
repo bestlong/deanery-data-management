@@ -31,6 +31,8 @@ class WorkPlan extends Plan{
         wPlan
     }
 
+    static belongsTo = [plan: Plan]
+
     static mapping = {
         discriminator value: PlanClass.WORK
     }
@@ -48,14 +50,16 @@ class WorkPlan extends Plan{
         termin = p.termin
         qualification = p.qualification
         semestrCount = p.semestrCount
-        p.semestr.each {
-            addToSemestr(Semestr.createNew(it))
+        startYear = p.startYear
+        endYear = p.endYear
+        p.semesterList.each {
+            addToSemesterList(Semestr.createNew(it))
         }
         p.subjects.each {
             addToSubjects(PlanSubject.createNew(it))
         }
-        p.practise.each {
-            addToPractise(PlanPractice.createNew(it))
+        p.practiseList.each {
+            addToPractiseList(PlanPractice.createNew(it))
         }
         if (null != p.stateExam){
             stateExam = PlanStateExam.createNew(p.stateExam, this)

@@ -18,28 +18,6 @@
             });
             $('#planWayCreation').change(function () {
                 var str = $("#planWayCreation option:selected").val();
-                if (str == '${PlanWayCreation.STANDARD_CONSTRUCTOR}') {
-                    $("#forConstructorType").hide();
-                } else {
-                    if (str == '${PlanWayCreation.FROM_WORK_PLAN}') {
-                        $("#workPlanTr").show();
-                        $("#studyPlanTr").hide();
-                    } else {
-                        $("#workPlanTr").hide();
-                        $("#studyPlanTr").show();
-                    }
-                    $("#forConstructorType").show();
-                }
-
-            });
-            var str = $("#planType option:selected").val();
-            if (str == '${PlanClass.WORK}') {
-                $("#forWorkPlan").show();
-            }
-            str = $("#planWayCreation option:selected").val();
-            if (str == '${PlanWayCreation.STANDARD_CONSTRUCTOR}') {
-                $("#forConstructorType").hide();
-            } else {
                 if (str == '${PlanWayCreation.FROM_WORK_PLAN}') {
                     $("#workPlanTr").show();
                     $("#studyPlanTr").hide();
@@ -48,7 +26,21 @@
                     $("#studyPlanTr").show();
                 }
                 $("#forConstructorType").show();
+
+            });
+            var str = $("#planType option:selected").val();
+            if (str == '${PlanClass.WORK}') {
+                $("#forWorkPlan").show();
             }
+            str = $("#planWayCreation option:selected").val();
+            if (str == '${PlanWayCreation.FROM_WORK_PLAN}') {
+                $("#workPlanTr").show();
+                $("#studyPlanTr").hide();
+            } else {
+                $("#workPlanTr").hide();
+                $("#studyPlanTr").show();
+            }
+            $("#forConstructorType").show();
 
 
             var myForm = $('#planCreationForm');

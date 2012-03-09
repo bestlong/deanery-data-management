@@ -32,7 +32,7 @@
             <tr>
                 <td class="caption">Количество недель*</td>
                 <td>
-                    <g:select name="weeks" from="${1..20}" style="width: 100px"/>
+                    <g:select name="weekCount" from="${1..20}" style="width: 100px"/>
                 </td>
             </tr>
         </table>

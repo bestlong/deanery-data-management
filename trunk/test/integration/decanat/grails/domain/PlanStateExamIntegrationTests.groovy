@@ -1,6 +1,5 @@
 package decanat.grails.domain
 
-import grails.test.*
 import decanat.grails.PlanStateExam
 import decanat.grails.Speciality
 import decanat.grails.Plan
@@ -19,7 +18,7 @@ class PlanStateExamIntegrationTests extends GroovyTestCase {
 
         assertFalse pExam.validate()
 
-        pExam.forma = "f"
+        pExam.form = "f"
 
         pExam.date= "dt"
         pExam.semestr = 1
