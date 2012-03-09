@@ -6,7 +6,6 @@ import stu.cn.ua.enums.PlanClass
 
 class Plan {
 
-    SortedSet semestr
     Speciality speciality;
     Chair chair;
     String direction;
@@ -26,7 +25,7 @@ class Plan {
         lastUpdated = new Date()
     }
 
-    static hasMany = [practise: PlanPractice, subjects: PlanSubject, semestr: Semestr]
+    static hasMany = [practiseList: PlanPractice, subjects: PlanSubject, semesterList: Semestr, workPlans: WorkPlan]
     static hasOne = [stateExam: PlanStateExam]
 
     static constraints = {
@@ -35,10 +34,10 @@ class Plan {
         direction(nullable: true)
         form(nullable: true)
         level(nullable: true)
-        practise(nullable: true)
+        practiseList(nullable: true)
         subjects(nullable: true)
         stateExam(nullable: true)
-        semestr(nullable: true)
+        semesterList(nullable: true)
         semestrCount(range: 1..20, nullable: true)
         lastUpdated(nullable: true)
         termin(nullable: true)

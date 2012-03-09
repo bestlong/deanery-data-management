@@ -97,7 +97,7 @@
                 <td class="caption" align="center">Лекций</td>
                 <td align="center">
                     <g:if test="${hours?.containsKey(idx)}">
-                        <g:textField name="lectureCount${idx}" value="${hours?.get(idx)?.lectures}"/>
+                        <g:textField name="lectureCount${idx}" value="${hours?.get(idx)?.lectureCount}"/>
                     </g:if>
                     <g:else>
                         <g:textField name="lectureCount${idx}"/>
@@ -108,7 +108,7 @@
                 <td class="caption" align="center">Семинаров</td>
                 <td align="center">
                     <g:if test="${hours?.containsKey(idx)}">
-                        <g:textField name="seminarCount${idx}" value="${hours?.get(idx)?.seminars}"/>
+                        <g:textField name="seminarCount${idx}" value="${hours?.get(idx)?.seminarCount}"/>
                     </g:if>
                     <g:else>
                         <g:textField name="seminarCount${idx}"/>
@@ -119,7 +119,7 @@
                 <td class="caption" align="center">Практик</td>
                 <td align="center">
                     <g:if test="${hours?.containsKey(idx)}">
-                        <g:textField name="practiceCount${idx}" value="${hours?.get(idx)?.practices}"/>
+                        <g:textField name="practiceCount${idx}" value="${hours?.get(idx)?.practiceCount}"/>
                     </g:if>
                     <g:else>
                         <g:textField name="practiceCount${idx}"/>
@@ -130,7 +130,7 @@
                 <td class="caption" align="center">Лабораторных</td>
                 <td align="center">
                     <g:if test="${hours?.containsKey(idx)}">
-                        <g:textField name="labCount${idx}" value="${hours?.get(idx)?.labs}"/>
+                        <g:textField name="labCount${idx}" value="${hours?.get(idx)?.labCount}"/>
                     </g:if>
                     <g:else>
                         <g:textField name="labCount${idx}"/>

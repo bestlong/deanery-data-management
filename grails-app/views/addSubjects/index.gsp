@@ -162,10 +162,10 @@
                         {id:id},
                         function (data) {
                             for (i = 0; i < count.length; i++) {
-                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "lecture").html(data[i].lectures)
-                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "practise").html(data[i].practices)
-                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "seminar").html(data[i].seminars)
-                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "lab").html(data[i].labs)
+                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "lecture").html(data[i].lectureCount)
+                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "practise").html(data[i].practiceCount)
+                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "seminar").html(data[i].seminarCount)
+                                $("#subject" + data[i].planSubject.id + "semestr" + count[i] + "lab").html(data[i].labCount)
                             }
                         });
 
@@ -324,7 +324,7 @@ td.detailsStyle {
 </div>
 
 <div align="center" class="action">
-    <g:link controller="selectSpeciality" action="index" id="${plan.id}">Отмена</g:link>
+    <g:link controller="planInit" action="index" id="${plan.id}">Отмена</g:link>
 
     <g:link controller="practice" action="index" id="${plan.id}">Следующий шаг</g:link>
 

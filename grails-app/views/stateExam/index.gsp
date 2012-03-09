@@ -43,7 +43,7 @@
             <tr>
                 <td class="caption">Форма аттестации*</td>
                 <td>
-                    <g:textField name="forma" value="${stateExam.forma}" />
+                    <g:textField name="form" value="${stateExam.form}" />
                 </td>
             </tr>
         </table>

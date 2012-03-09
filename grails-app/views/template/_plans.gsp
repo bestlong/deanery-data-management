@@ -30,7 +30,7 @@
         <div class="subtitle" align="center">${msg}</div>
         <g:if test="${totalPlans == 0}">
             <div class="post">
-                <h1 class="title">Нет ни одного плана</h1>
+                <h3 class="title">Пока что нету ни одного учебного плана...</h3>
             </div>
         </g:if>
         <g:each in="${res}" var="plan">
@@ -41,7 +41,7 @@
                             <h4 class="title">
                                 <sec:ifAllGranted roles="ROLE_ADMIN">
                                     <g:link id="${plan.id}" action="index"
-                                            controller="selectSpeciality">${plan.speciality.kod} ${plan.speciality.name}</g:link>
+                                            controller="planInit">${plan.speciality.kod} ${plan.speciality.name}</g:link>
                                 </sec:ifAllGranted>
                                 <sec:ifAllGranted roles="ROLE_USER">
                                     ${plan.speciality.kod} ${plan.speciality.name}
@@ -80,7 +80,7 @@
                             <g:else>
                                 <tooltip:tip code="tooltip.plan.notPrint">
                                     <input type="image"
-                                           src="<g:createLinkTo dir="/images" file="print_printer.png"/>">
+                                           src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                                 </tooltip:tip>
                             </g:else>
                         </td>

@@ -1,6 +1,5 @@
 package decanat.grails.domain
 
-import grails.test.*
 import decanat.grails.PlanHours
 import decanat.grails.Semestr
 import decanat.grails.Chair
@@ -74,9 +73,9 @@ class PlanHoursIntegrationTests extends GroovyTestCase {
 
         pHours.semestr = sem
         pHours.planSubject = pSubj
-        pHours.labs = 10
-        pHours.lectures = 30
-        pHours.practices = 0
+        pHours.labCount = 10
+        pHours.lectureCount = 30
+        pHours.practiceCount = 0
 
         assert pHours.validate()
 

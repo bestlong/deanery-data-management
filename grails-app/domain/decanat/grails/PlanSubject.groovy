@@ -97,13 +97,13 @@ class PlanSubject {
         }
         switch (workType) {
             case WorkTypeEnum.LECTURE:
-                return hour.lectures
+                return hour.lectureCount
             case WorkTypeEnum.SEMINAR:
-                return hour.seminars
+                return hour.seminarCount
             case WorkTypeEnum.PRACTISE:
-                return hour.practices
+                return hour.practiceCount
             case WorkTypeEnum.LAB:
-                return hour.labs
+                return hour.labCount
         }
         throw IllegalArgumentException("unknown workType: ${workType}")
     }
@@ -113,7 +113,7 @@ class PlanSubject {
         if (null == hour) {
             return 0;
         }
-        return hour.lectures + hour.seminars + hour.practices + hour.labs
+        return hour.lectureCount + hour.seminarCount + hour.practiceCount + hour.labCount
     }
 
     static mapping = {

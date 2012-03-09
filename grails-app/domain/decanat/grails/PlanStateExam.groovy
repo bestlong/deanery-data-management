@@ -5,7 +5,7 @@ class PlanStateExam {
 
     Plan plan;
     String date;
-    String forma;
+    String form;
     int semestr;
 
     static belongsTo = [plan: Plan]
@@ -13,7 +13,7 @@ class PlanStateExam {
     static PlanStateExam createNew(PlanStateExam planStateExam, Plan p){
         PlanStateExam newPlanStateExam = new PlanStateExam()
         newPlanStateExam.date = planStateExam.date
-        newPlanStateExam.forma = planStateExam.forma
+        newPlanStateExam.form = planStateExam.form
         newPlanStateExam.semestr = planStateExam.semestr
         newPlanStateExam.plan = p
 
@@ -35,7 +35,7 @@ class PlanStateExam {
 
         plan(nullable: false)
         date(blank: false)
-        forma(blank: false)
+        form(blank: false)
         semestr(blank: false)
     }
 }

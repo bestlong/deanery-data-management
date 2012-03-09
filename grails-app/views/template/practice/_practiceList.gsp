@@ -22,7 +22,7 @@
                     ${practice.semestr}
                 </td>
                 <td>
-                    ${practice.weeks}
+                    ${practice.weekCount}
                 </td>
                 <td>
                     <table width="100%">

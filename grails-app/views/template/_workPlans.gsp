@@ -4,12 +4,19 @@
             Список рабочих планов:
         </td>
     </tr>
+    <g:if test="${!plans}">
+        <tr>
+            <td>
+                <h3 class="title">Пока что нету ни одного рабочего плана...</h3>
+            </td>
+        </tr>
+    </g:if>
     <g:each in="${plans}" var="plan">
         <tr>
             <td width="400px" style="font-size: 12px">
                 <sec:ifAllGranted roles="ROLE_ADMIN">
                     <g:link id="${plan.id}" action="index"
-                            controller="selectSpeciality">${plan.name}</g:link>
+                            controller="planInit">${plan.name}</g:link>
                 </sec:ifAllGranted>
                 <sec:ifAllGranted roles="ROLE_USER">
                     ${plan.name}

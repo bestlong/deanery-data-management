@@ -18,7 +18,7 @@ class PlanPractiseIntegrationTests extends GroovyTestCase {
 
         assertFalse pPractise.validate()
 
-        pPractise.name = "practise"
+        pPractise.name = "practiseList"
         pPractise.kafedraName = "kaf"
         pPractise.term = 1
         pPractise.weaks = 2

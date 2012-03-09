@@ -65,7 +65,7 @@ class SubjectHeaderPrinter {
         cell.setCellStyle(excelComponent.centerCellStyle)
 
         cCol = 33
-        for (Semestr semestr: plan.semestr) {
+        for (Semestr semestr: plan.semesterList) {
             sheet.addMergedRegion(new CellRangeAddress(startRow, startRow, cCol, cCol+4));
             cell = row2.createCell(cCol)
             cell.setCellValue("${semestr.weekCount} тижнів")
