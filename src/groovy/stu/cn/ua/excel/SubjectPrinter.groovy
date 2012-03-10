@@ -30,7 +30,7 @@ class SubjectPrinter {
             cell.setCellStyle(excelComponent.leftWrapTextCellStyle)
 
             cell = row.createCell(10)
-            cell.setCellValue(planSubject.subject.chair.name)
+            cell.setCellValue(planSubject.subject.chair?.name)
             cell.setCellStyle(excelComponent.leftWrapTextCellStyle)
 
             cell = row.createCell(20)

@@ -22,7 +22,7 @@
         <g:each in="${res}" var="subject">
             <tr>
                 <td>
-                    ${subject.chair.name}
+                    ${subject.chair?.name}
                 </td>
                 <td>
                     ${subject.name}

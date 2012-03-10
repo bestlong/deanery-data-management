@@ -2,7 +2,6 @@ package stu.cn.ua.dbf.reader
 
 import stu.cn.ua.dbf.dto.ChairDTO
 import decanat.grails.Chair
-import java.text.MessageFormat
 
 /**
  * author: evgeniy
@@ -37,7 +36,7 @@ class ChairDTOReader extends DBFAbstractReader<ChairDTO> {
     @Override
     int save() {
         resultList.each {
-            new Chair(it).save()
+            Chair.saveChair(it)
         }
         resultList.size()
     }

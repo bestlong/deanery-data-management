@@ -2,18 +2,14 @@ package decanat.grails
 
 import stu.cn.ua.dbf.reader.ChairDTOReader
 import stu.cn.ua.dbf.enums.AllowedFiles
+import stu.cn.ua.dbf.reader.SubjectDTOReader
 
 class DBFImportController {
 
     def index() {
         def errors = chainModel?.validationErrors
-        def count = chainModel?.count
-
         if (errors){
             [validationErrors: errors]
-        }
-        else {
-            [count: count]
         }
     }
 
@@ -24,6 +20,9 @@ class DBFImportController {
         switch (filename){
             case AllowedFiles.KAFEDRA.filename:
                 reader =  new ChairDTOReader()
+                break
+            case AllowedFiles.DIS.filename:
+                reader = new SubjectDTOReader()
                 break
             default:
                 flash.error = "Файл ${filename} не найден в списке допустимых файлов"
@@ -36,7 +35,8 @@ class DBFImportController {
         def errors = reader.validate()
         if (!errors){
             Integer count = reader.save()
-            chain(action: 'index', model: [count: count])
+            flash.message = "В результате импорта удачно сохранено ${count} записей"
+            redirect(action: 'index')
         } else {
             chain(action: 'index', model: [validationErrors: errors])
         }

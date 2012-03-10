@@ -33,11 +33,6 @@
         <input type="submit" class="buttons" value="Загрузить"/>
     </g:form>
 </fieldset>
-<g:if test="${count}">
-    <div style="background-color: #adff2f;">
-        В результате импорта успешно сохранено ${count} записей
-    </div>
-</g:if>
 <g:if test="${validationErrors}">
     <table border="1" width="840px">
         <tr>

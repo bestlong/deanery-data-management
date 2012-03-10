@@ -6,7 +6,7 @@ class SubjectController {
 
     def subjectService
     def index = {
-        [res: Subject.list(), selectedMenu: 2]
+        [res: Subject.list(sort: 'name', order: "asc"), selectedMenu: 2]
     }
 
     def add = {}

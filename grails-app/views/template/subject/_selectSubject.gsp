@@ -25,7 +25,7 @@
                     </a>
                 </td>
                 <td>
-                    ${subject.chair.name}
+                    ${subject.chair?.name}
                 </td>
                 <td>
                     ${subject.shortName}
