@@ -24,6 +24,12 @@
     <g:form controller="chair" action="save" width="300">
         <table class="editTable" align="center">
             <tr class="title">
+                <td class="caption">Код*</td>
+                <td>
+                    <g:textField name="codeChair" value="${chairInstance?.codeChair}" class="normal_input"/>
+                </td>
+            </tr>
+            <tr class="title">
                 <td class="caption">Имя*</td>
                 <td>
                     <g:textField name="name" value="${chairInstance?.name}" class="normal_input"/>

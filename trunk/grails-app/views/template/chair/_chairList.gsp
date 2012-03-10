@@ -12,18 +12,22 @@
     <table id="tableCont" class="display">
         <thead>
         <tr>
+            <th>Код</th>
             <th>Название</th>
             <th>Аббревиатура</th>
             <th>Заведующий</th>
             <th>Предметы</th>
             <th>Планы</th>
-            <th>Редактирование</th>
+            <th>Ред.</th>
         </tr>
         </thead>
 
         <tbody>
         <g:each in="${chairCollection}" var="chair">
             <tr>
+                <td>
+                    ${chair?.codeChair}
+                </td>
                 <td>
                     ${chair?.name}
                 </td>

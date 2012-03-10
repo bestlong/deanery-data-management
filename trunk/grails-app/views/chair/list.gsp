@@ -35,12 +35,13 @@
                         },
                         bAutoWidth: false,
                         aoColumns   : [
-                            { sWidth: "25%" },
-                            { sWidth: "20%" },
-                            { sWidth: "20%" },
-                            { sWidth: "10%" },
-                            { sWidth: "10%" },
-                            { sWidth: "15%", bSortable: false }
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {},
+                            {bSortable: false }
                         ]
                     });
         }

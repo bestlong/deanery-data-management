@@ -11,16 +11,20 @@
     <table id="subjects" class="display">
         <thead>
         <tr>
+            <th>Код</th>
             <th>Кафедра</th>
             <th>Имя</th>
             <th>Короткое имя</th>
-            <th>Редактирование</th>
+            <th>Ред.</th>
         </tr>
         </thead>
 
         <tbody>
         <g:each in="${res}" var="subject">
             <tr>
+                <td>
+                    ${subject.code}
+                </td>
                 <td>
                     ${subject.chair?.name}
                 </td>

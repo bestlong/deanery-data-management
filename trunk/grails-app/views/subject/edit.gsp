@@ -73,6 +73,12 @@
     <g:form controller="subject" action="update" width="300">
         <table class="editTable" align="center">
             <tr>
+                <td class="caption">Код*</td>
+                <td>
+                    <g:textField name="code" value="${subject?.code}"/>
+                </td>
+            </tr>
+            <tr>
                 <td class="caption">Кафедра*</td>
                 <td>
                     <g:hiddenField name="id" value="${subject.id}"/>
