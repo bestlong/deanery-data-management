@@ -5,7 +5,7 @@
     </g:if>
 </div>
 
-<div style="width: 800px;" id="errors" onclick='$(this).fadeOut(400);' onmouseover='$(this).fadeIn(400);'>
+<div style="width: 840px;" id="errors" onclick='$(this).fadeOut(400);' onmouseover='$(this).fadeIn(400);'>
     <g:if test="${flash.error}">
         <g:render template="/template/notification/error" model="${[code: flash.error, args: flash.args]}"/>
     </g:if>

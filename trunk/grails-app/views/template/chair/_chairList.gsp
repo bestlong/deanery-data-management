@@ -46,14 +46,14 @@
                 <td class="edit" width="10px">
                     <table>
                         <tr>
-                            <td align="left" style="margin: 5px">
+                            <td align="left" style="margin-left: 5px; margin-right: 5px">
                                 <tooltip:tip code="tooltip.chair.edit">
                                     <g:link class="edBtn" controller="chair" action="edit" params="${[id: chair?.id]}">
                                         <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
                                     </g:link>
                                 </tooltip:tip>
                             </td>
-                            <td align="right" style="margin: 5px">
+                            <td align="right" style="margin-left: 5px; margin-right: 5px">
                                 <tooltip:tip code="tooltip.chair.remove">
                                     <a href="#" class="delBtn" onclick="deleteDialog(${chair?.id})">
                                         <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>

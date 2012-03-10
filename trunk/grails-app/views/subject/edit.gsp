@@ -11,14 +11,60 @@
 <head>
     <title>Редактирование предметов</title>
     <meta name="layout" content="main"/>
-    <jqvalui:renderValidationScript for="decanat.grails.Subject"/>
-
 </head>
 
 <body>
 <script type="text/javascript ">
     $(function () {
         $("input:submit, a, button", ".action").button();
+        var myForm = $('form:first');
+        myForm.validate({
+            onkeyup:false,
+            errorClass:'error_field',
+            validClass:'valid',
+            onsubmit:true,
+            success:function (label) {
+                $('[id=' + label.attr('for') + ']').qtip('destroy');
+            },
+            errorPlacement:function (error, element) {
+                if ($(error).text())
+                    $(element).filter(':not(.valid)').qtip({
+                        overwrite:true,
+                        content:error,
+                        position:{ my:'left center', at:'right center' },
+                        show:{
+                            event:false,
+                            ready:true
+                        },
+                        hide:false,
+                        style:{
+                            widget:false,
+                            classes:'ui-tooltip-blue ui-tooltip-jtools ui-tooltip-rounded',
+                            tip:true
+                        }
+                    });
+            },
+            rules:{
+                name:{
+                    required:true
+                },
+                chair:{
+                    required:true
+                },
+                shortName:{
+                }
+            },
+            messages:{
+                name:{
+                    required:'Имя предмета не может быть пустым'
+                },
+                chair:{
+                    required:'Поле [chair] класса [class decanat.grails.Subject] не может иметь значение null'
+                },
+                shortName:{
+                }
+            }
+        });
     });
 </script>
 

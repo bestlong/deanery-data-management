@@ -16,12 +16,33 @@ class Chair {
     static constraints = {
         name (blank: false, unique: true)
         shortName(unique: true, nullable: true)
-        head(blank: false)
+        head(nullable: true)
         codeChair(nullable: true)
     }
 
+    public static Chair saveChair(ChairDTO chairDTO){
+        Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
+        if (!chair || "".equals(chairDTO.codkaf)){
+            chair = new Chair(name:  chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf)
+        }
+        else {
+            chair.name =chairDTO.namekaf
+            chair.shortName = chairDTO.shortkaf
+            chair.head = chairDTO.famzav
+        }
+        chair.save()
+    }
+
     public static ValidationResult validate(ChairDTO chairDTO){
-        def chair = new Chair(name:  chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf)
+        Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
+        if (!chair || "".equals(chairDTO.codkaf)){
+            chair = new Chair(name:  chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf)
+        }
+        else {
+            chair.name =chairDTO.namekaf
+            chair.shortName = chairDTO.shortkaf
+            chair.head = chairDTO.famzav
+        }
         if (!chair.validate()){
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
             chair.errors.allErrors.each {
