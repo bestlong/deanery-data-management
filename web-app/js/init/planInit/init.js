@@ -21,9 +21,10 @@ function initTableSpeciality() {
                 },
                 bAutoWidth: false,
                 aoColumns   : [
-                    { sWidth: "30%" },
-                    { sWidth: "30%" },
-                    { sWidth: "25%" }
+                    {},
+                    {},
+                    {},
+                    {}
                 ]
             }
     );
@@ -52,8 +53,9 @@ function initTableChair() {
                 },
                 bAutoWidth: false,
                 aoColumns   : [
-                    { sWidth: "50%" },
-                    { sWidth: "50%" }
+                    {},
+                    {},
+                    {}
                 ]
             }
     );

@@ -54,7 +54,7 @@ class SpecialityController {
     }
 
     def search = {
-        def res = specialityService.findSpecialities(params.code, params.name, params.shortName);
+        def res = specialityService.findSpecialities(params.code, params.specialityCode, params.name, params.shortName);
         render(template: "/template/speciality/specialityList", model: [res: res]);
     }
 

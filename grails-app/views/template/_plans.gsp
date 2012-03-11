@@ -41,7 +41,7 @@
                             <h4 class="title">
                                 <sec:ifAllGranted roles="ROLE_ADMIN">
                                     <g:link id="${plan.id}" action="index"
-                                            controller="planInit">${plan.speciality.kod} ${plan.speciality.name}</g:link>
+                                            controller="planInit">${plan.speciality.specialityCode} ${plan.speciality.name}</g:link>
                                 </sec:ifAllGranted>
                                 <sec:ifAllGranted roles="ROLE_USER">
                                     ${plan.speciality.kod} ${plan.speciality.name}

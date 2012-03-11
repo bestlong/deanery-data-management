@@ -4,12 +4,9 @@ class ChairService {
 
     static transactional = true
 
-    List<Chair> findChairs(String name, String shortName) {
+    List<Chair> findChairs(String code, String name, String shortName) {
         def chairs
-        if (!shortName.equals(""))
-            chairs = Chair.findAll("from Chair c where c.name like :name and c.shortName like :shortName", [name: "%${name}%", shortName: "%${shortName}%"])
-        else
-            chairs = Chair.findAll("from Chair c where c.name like :name and c.shortName is null", [name: "%${name}%"])
+        chairs = Chair.findAll("from Chair c where c.codeChair like :code and c.name like :name and c.shortName like :shortName", [code: "%${code}%", name: "%${name}%", shortName: "%${shortName}%"])
         return chairs
     }
 

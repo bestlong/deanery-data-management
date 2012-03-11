@@ -10,15 +10,19 @@
     <table id="specialityList" class="display">
         <thead>
         <tr>
+            <th>Код</th>
             <th>Имя</th>
             <th>Короткое имя</th>
-            <th>Код</th>
+            <th>Код специальности</th>
         </tr>
         </thead>
 
         <tbody>
         <g:each in="${res}" var="speciality">
             <tr>
+                <td>
+                    ${speciality.code}
+                </td>
                 <td>
                     <a href="#" onclick="chooseSpeciality('${speciality?.id}', '${speciality?.name}')" class="delBtn">
                         ${speciality.name}
@@ -28,7 +32,7 @@
                     ${speciality.shortName}
                 </td>
                 <td>
-                    ${speciality.kod}
+                    ${speciality.specialityCode}
                 </td>
             </tr>
         </g:each>

@@ -27,7 +27,7 @@
     <content tag="search">
         <g:render template="/template/plan/menu" model="['active': 1, 'plan': plan]"/>
         <g:render template="/template/speciality/searchTemplate"
-                  model="['controller': 'selectSpeciality', searchConfig: searchSpecialityConfig]"/>
+                  model="['controller': 'planInit', searchConfig: searchSpecialityConfig]"/>
         <g:render template="/template/chair/searchTemplate" model="[searchConfig: searchConfig]"/>
     </content>
 

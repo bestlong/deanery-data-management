@@ -93,7 +93,7 @@ class ChairController {
     }
 
     def search = {
-        def res = chairService.findChairs(params.name, params.shortName)
+        def res = chairService.findChairs(params.code, params.name, params.shortName)
         render template: "/template/chair/chairList", model: [chairCollection: res]
     }
 

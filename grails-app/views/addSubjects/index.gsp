@@ -104,16 +104,16 @@
                 { "bSortable":false, "aTargets":[ 0 ] }
             ],
             aoColumns:[
-                { sWidth:"5%", bSortable:false },
-                { sWidth:"39%" },
-                { sWidth:"7%" },
-                { sWidth:"7%" },
-                { sWidth:"7%" },
-                { sWidth:"7%" },
-                { sWidth:"7%" },
-                { sWidth:"7%" },
-                { sWidth:"7%" },
-                { sWidth:"7%", bSortable:false }
+                {bSortable:false},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                {},
+                { bSortable:false }
             ]
         });
     }

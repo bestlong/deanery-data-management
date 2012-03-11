@@ -39,21 +39,21 @@ class PlanInitController {
     }
 
     def search = {
-        def res = specialityService.findSpecialities(params.code, params.name, params.shortName);
+        def res = specialityService.findSpecialities(params.code, params.specialityCode, params.name, params.shortName);
         render(template: "/template/speciality/selectSpeciality", model: [res: res]);
     }
 
     def searchChair = {
-        def res = chairService.findChairs(params.name, params.shortName);
+        def res = chairService.findChairs(params.code, params.name, params.shortName);
         render(template: "/template/chair/selectChair", model: [res: res]);
     }
 
 
     def getSearchChairConfig(){
-        return [action: 'searchChair', controller: 'selectSpeciality', successFunction: 'initTableChair()']
+        return [action: 'searchChair', controller: 'planInit', successFunction: 'initTableChair()']
     }
 
     def getSearchSpecialityConfig(){
-        return [action: 'search', controller: 'selectSpeciality', successFunction: 'initTableSpeciality()']
+        return [action: 'search', controller: 'planInit', successFunction: 'initTableSpeciality()']
     }
 }

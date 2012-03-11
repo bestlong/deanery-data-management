@@ -34,10 +34,11 @@
                         },
                         bAutoWidth:false,
                         aoColumns:[
-                            { sWidth:"30%" },
-                            { sWidth:"30%" },
-                            { sWidth:"25%" },
-                            { sWidth:"15%", bSortable:false }
+                            {},
+                            {},
+                            {},
+                            {},
+                            { bSortable:false }
                         ]
                     }
             );

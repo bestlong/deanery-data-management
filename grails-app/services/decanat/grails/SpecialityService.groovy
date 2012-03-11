@@ -8,13 +8,14 @@ class SpecialityService {
 
     }
 
-    List<Speciality> findSpecialities(String code, String name, String shortName) {
+    List<Speciality> findSpecialities(String code, String specialityCode, String name, String shortName) {
 
         def c = Speciality.createCriteria()
 
         def specialities = c.listDistinct {
-            ilike("name", "%" + name + "%");
-            ilike("kod", "%" + code + "%");
+            ilike("code", "%" + code + "%")
+            ilike("name", "%" + name + "%")
+            ilike("specialityCode", "%" + specialityCode + "%");
             if (!shortName.equals(""))
                 ilike("shortName", "%" + shortName + "%");
         }
