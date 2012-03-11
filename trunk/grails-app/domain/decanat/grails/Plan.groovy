@@ -3,6 +3,9 @@ package decanat.grails
 import stu.cn.ua.enums.ControlTypeEnum
 import stu.cn.ua.enums.WorkTypeEnum
 import stu.cn.ua.enums.PlanClass
+import stu.cn.ua.dbf.dto.ValidationResult
+import stu.cn.ua.dbf.dto.SpecilaityPlanDTO
+import stu.cn.ua.dbf.dto.ErrorInfo
 
 class Plan {
 
@@ -23,6 +26,26 @@ class Plan {
     }
     def beforeUpdate = {
         lastUpdated = new Date()
+    }
+
+    public static ValidationResult validate(SpecilaityPlanDTO specialityPlanDTO, Speciality speciality){
+        if (!speciality || "".equals(specialityPlanDTO.codsp)){
+            speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
+        }
+        else {
+            speciality.name =specialityPlanDTO.name
+            speciality.shortName = specialityPlanDTO.codname
+            speciality.specialityCode= specialityPlanDTO.codspec
+        }
+        if (!speciality.validate()){
+            List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
+            speciality.errors.allErrors.each {
+                validationErrors.add(new ErrorInfo(specialityPlanDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
+            }
+            return new ValidationResult(false, validationErrors)
+        } else {
+            return new ValidationResult(true)
+        }
     }
 
     static hasMany = [practiseList: PlanPractice, subjects: PlanSubject, semesterList: Semestr, workPlans: WorkPlan]
@@ -48,6 +71,27 @@ class Plan {
 
     static mapping = {
         discriminator value: PlanClass.STUDY
+    }
+
+    public static ValidationResult validate(SpecilaityPlanDTO specialityPlanDTO){
+        Speciality speciality = Speciality.findByCode(specialityPlanDTO.codsp)
+        if (!speciality || "".equals(specialityPlanDTO.codsp)){
+            speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
+        }
+        else {
+            speciality.name =specialityPlanDTO.name
+            speciality.shortName = specialityPlanDTO.codname
+            speciality.specialityCode= specialityPlanDTO.codspec
+        }
+        if (!speciality.validate()){
+            List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
+            speciality.errors.allErrors.each {
+                validationErrors.add(new ErrorInfo(specialityPlanDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
+            }
+            return new ValidationResult(false, validationErrors)
+        } else {
+            return new ValidationResult(true)
+        }
     }
 
     /**

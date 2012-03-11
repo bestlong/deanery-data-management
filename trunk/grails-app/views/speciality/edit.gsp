@@ -26,11 +26,17 @@
     <g:form controller="speciality" action="update" width="300">
         <table class="editTable" align="center">
             <tr>
-                <td class="caption">Код*</td>
+                <td class="caption">Код специальности*</td>
                 <td>
                     <g:hiddenField name="id" value="${speciality.id}"/>
-                    <g:textField name="kod" value="${speciality?.kod}" />
+                    <g:textField name="specialityCode" value="${speciality?.specialityCode}" />
                 </td >
+            </tr>
+            <tr>
+                <td class="caption">Код*</td>
+                <td>
+                    <g:textField name="code" value="${speciality?.code}" />
+                </td>
             </tr>
             <tr>
                 <td class="caption">Имя*</td>

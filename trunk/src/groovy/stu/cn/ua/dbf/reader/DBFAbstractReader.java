@@ -15,8 +15,8 @@ import java.text.MessageFormat;
 import java.util.List;
 
 /**
- * @author evgeniy
- */
+* @author evgeniy
+*/
 public abstract class DBFAbstractReader<DOMEN> {
 
     protected abstract void add(DOMEN d);

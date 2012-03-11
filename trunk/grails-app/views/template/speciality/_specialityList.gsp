@@ -12,9 +12,10 @@
         <thead>
         <tr>
             <th>Код</th>
+            <th>Код специальности</th>
             <th>Имя</th>
             <th>Короткое имя</th>
-            <th>Редактирование</th>
+            <th>Ред.</th>
         </tr>
         </thead>
 
@@ -22,7 +23,10 @@
         <g:each in="${res}" var="speciality">
             <tr>
                 <td>
-                    ${speciality.kod}
+                    ${speciality.code}
+                </td>
+                <td>
+                    ${speciality.specialityCode}
                 </td>
                 <td>
                     ${speciality.name}

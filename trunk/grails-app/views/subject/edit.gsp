@@ -59,7 +59,7 @@
                     required:'Имя предмета не может быть пустым'
                 },
                 chair:{
-                    required:'Поле [chair] класса [class decanat.grails.Subject] не может иметь значение null'
+                    required:'Поле кафедра не может быть пустым'
                 },
                 shortName:{
                 }

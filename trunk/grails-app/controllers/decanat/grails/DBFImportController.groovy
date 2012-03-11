@@ -3,6 +3,7 @@ package decanat.grails
 import stu.cn.ua.dbf.reader.ChairDTOReader
 import stu.cn.ua.dbf.enums.AllowedFiles
 import stu.cn.ua.dbf.reader.SubjectDTOReader
+import stu.cn.ua.dbf.reader.SpecialityPlanDTOReader
 
 class DBFImportController {
 
@@ -23,6 +24,9 @@ class DBFImportController {
                 break
             case AllowedFiles.DIS.filename:
                 reader = new SubjectDTOReader()
+                break
+            case AllowedFiles.SPEC.filename:
+                reader = new SpecialityPlanDTOReader()
                 break
             default:
                 flash.error = "Файл ${filename} не найден в списке допустимых файлов"
