@@ -3,7 +3,7 @@ $(function() {
 });
 
 $(function() {
-    var myForm = $('form:first');
+    var myForm = $('#addUserForm');
     myForm.validate({
                 onkeyup: false,
                 errorClass: 'error_field',
@@ -38,7 +38,7 @@ $(function() {
                     username: {
                         required: true,
                         unique: {
-                            url: '${request.contextPath}/JQueryRemoteValidator/validate',
+                            url: '/plan/JQueryRemoteValidator/validate',
                             type: 'post',
                             data: {
                                 validatableClass: 'decanat.grails.domain.User',

@@ -10,8 +10,9 @@ class DBFImportController {
     def index() {
         def errors = chainModel?.validationErrors
         if (errors){
-            [validationErrors: errors]
+            [validationErrors: errors, active: 4]
         }
+        [active: 4]
     }
 
     def upload = {

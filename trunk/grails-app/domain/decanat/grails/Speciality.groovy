@@ -2,7 +2,7 @@ package decanat.grails
 
 import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.ErrorInfo
-import stu.cn.ua.dbf.dto.SpecilaityPlanDTO
+import stu.cn.ua.dbf.dto.SpecialityPlanDTO
 
 class Speciality {
 
@@ -20,7 +20,7 @@ class Speciality {
         code(nullable: true)
     }
 
-    public static ValidationResult validate(SpecilaityPlanDTO specialityPlanDTO){
+    public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO){
         Speciality speciality = Speciality.findByCode(specialityPlanDTO.codsp)
         if (!speciality || "".equals(specialityPlanDTO.codsp)){
             speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
@@ -41,7 +41,7 @@ class Speciality {
         }
     }
 
-    public static Speciality saveSpeciality(SpecilaityPlanDTO specialityPlanDTO){
+    public static Speciality saveSpeciality(SpecialityPlanDTO specialityPlanDTO){
         def speciality = Speciality.findByCode(specialityPlanDTO.codsp)
         if (!speciality || "".equals(specialityPlanDTO.codsp)){
             speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
@@ -56,6 +56,6 @@ class Speciality {
 
     @Override
     String toString() {
-        return "Специальность, код: ${kod}, имя: ${name} "
+        return "Специальность, код: ${code}, имя: ${name} "
     }
 }

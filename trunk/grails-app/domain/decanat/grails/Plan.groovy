@@ -4,7 +4,7 @@ import stu.cn.ua.enums.ControlTypeEnum
 import stu.cn.ua.enums.WorkTypeEnum
 import stu.cn.ua.enums.PlanClass
 import stu.cn.ua.dbf.dto.ValidationResult
-import stu.cn.ua.dbf.dto.SpecilaityPlanDTO
+import stu.cn.ua.dbf.dto.SpecialityPlanDTO
 import stu.cn.ua.dbf.dto.ErrorInfo
 
 class Plan {
@@ -26,26 +26,6 @@ class Plan {
     }
     def beforeUpdate = {
         lastUpdated = new Date()
-    }
-
-    public static ValidationResult validate(SpecilaityPlanDTO specialityPlanDTO, Speciality speciality){
-        if (!speciality || "".equals(specialityPlanDTO.codsp)){
-            speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
-        }
-        else {
-            speciality.name =specialityPlanDTO.name
-            speciality.shortName = specialityPlanDTO.codname
-            speciality.specialityCode= specialityPlanDTO.codspec
-        }
-        if (!speciality.validate()){
-            List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
-            speciality.errors.allErrors.each {
-                validationErrors.add(new ErrorInfo(specialityPlanDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
-            }
-            return new ValidationResult(false, validationErrors)
-        } else {
-            return new ValidationResult(true)
-        }
     }
 
     static hasMany = [practiseList: PlanPractice, subjects: PlanSubject, semesterList: Semestr, workPlans: WorkPlan]
@@ -73,25 +53,23 @@ class Plan {
         discriminator value: PlanClass.STUDY
     }
 
-    public static ValidationResult validate(SpecilaityPlanDTO specialityPlanDTO){
-        Speciality speciality = Speciality.findByCode(specialityPlanDTO.codsp)
-        if (!speciality || "".equals(specialityPlanDTO.codsp)){
-            speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
+    public static Plan savePlan(SpecialityPlanDTO specialityPlanDTO, Speciality spec){
+        Chair chair = Chair.findByCodeChair(specialityPlanDTO.specKaf)
+        Plan plan = new Plan(direction: specialityPlanDTO.napram, form: specialityPlanDTO.forma, speciality: spec, chair: chair,
+                level: specialityPlanDTO.qualRiv, termin: specialityPlanDTO.srok, qualification: specialityPlanDTO.qualif, semestrCount: 8)
+        plan.save()
+    }
+
+    public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO){
+        List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
+        Chair chair = Chair.findByCodeChair(specialityPlanDTO.specKaf)
+        if (null == chair){
+            validationErrors.add(new ErrorInfo(specialityPlanDTO.toString(), "SPEC_KAF", specialityPlanDTO.specKaf))
         }
-        else {
-            speciality.name =specialityPlanDTO.name
-            speciality.shortName = specialityPlanDTO.codname
-            speciality.specialityCode= specialityPlanDTO.codspec
-        }
-        if (!speciality.validate()){
-            List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
-            speciality.errors.allErrors.each {
-                validationErrors.add(new ErrorInfo(specialityPlanDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
-            }
+        if (validationErrors.size() != 0){
             return new ValidationResult(false, validationErrors)
-        } else {
-            return new ValidationResult(true)
         }
+        return new ValidationResult(true)
     }
 
     /**

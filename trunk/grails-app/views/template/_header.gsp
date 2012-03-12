@@ -14,11 +14,16 @@
             <li>
                 <a style="text-decoration: ${active == 3 ? 'underline' : 'none'}"
                    href="<g:createLink action="index" controller="profile"/> ">мой профиль</a></li>
-            <li>
-                <a href="<g:createLink action="index" controller="logout"/>">выход</a>
-            </li>
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <li>
+                    <a style="text-decoration: ${active == 4 ? 'underline' : 'none'}"
+                       href="<g:createLink action="index" controller="DBFImport"/>">DBF импорт</a>
+                </li>
+            </sec:ifAnyGranted>
         </ul>
 
-        <div align="right" class="hello">Здравствуйте, ${g.userName()}</div>
+        <div align="right" class="hello">${g.userName()} &nbsp;
+            <a  style="color: white;" href="<g:createLink action="index" controller="logout"/>">выход</a>
+        </div>
     </sec:ifLoggedIn>
 </div>
