@@ -1,27 +1,28 @@
 package stu.cn.ua.dbf.reader
 
-import stu.cn.ua.dbf.dto.SpecilaityPlanDTO
 import decanat.grails.Speciality
+import stu.cn.ua.dbf.dto.SpecialityPlanDTO
+import decanat.grails.Plan
 
 /**
  * @author evgeniy
  * date: 11.03.12
  */
-class SpecialityPlanDTOReader extends DBFAbstractReader<SpecilaityPlanDTO> {
-    private List<SpecilaityPlanDTO> resultList = new ArrayList<SpecilaityPlanDTO>();
+class SpecialityPlanDTOReader extends DBFAbstractReader<SpecialityPlanDTO> {
+    private List<SpecialityPlanDTO> resultList = new ArrayList<SpecialityPlanDTO>();
 
     @Override
-    protected void add(SpecilaityPlanDTO d) {
+    protected void add(SpecialityPlanDTO d) {
         resultList.add(d)
     }
 
     @Override
-    protected SpecilaityPlanDTO createDomain() {
-        return new SpecilaityPlanDTO()
+    protected SpecialityPlanDTO createDomain() {
+        return new SpecialityPlanDTO()
     }
 
     @Override
-    List<SpecilaityPlanDTO> validate() {
+    List<SpecialityPlanDTO> validate() {
         def errors = []
         resultList.each {
             def result = Speciality.validate(it)
@@ -29,7 +30,10 @@ class SpecialityPlanDTOReader extends DBFAbstractReader<SpecilaityPlanDTO> {
                 errors.add(result.messages)
             }
             else {
-
+                result = Plan.validate(it)
+                if (!result.success) {
+                    errors.add(result.messages)
+                }
             }
         }
         errors
@@ -38,7 +42,8 @@ class SpecialityPlanDTOReader extends DBFAbstractReader<SpecilaityPlanDTO> {
     @Override
     int save() {
         resultList.each {
-            Speciality.saveSpeciality(it)
+            def spec = Speciality.saveSpeciality(it)
+            Plan.savePlan(it, spec)
         }
         resultList.size()
     }

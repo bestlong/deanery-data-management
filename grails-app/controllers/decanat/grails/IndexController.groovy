@@ -11,9 +11,9 @@ class IndexController {
         def chair = Chair.get(params.id)
         def plans = planService.findStudyPlansByChair(chair)
         plans.each {
-            def useless = it.speciality.kod
+            def useless = it.speciality.code
         }
-        chain(action: 'index', model: [res: plans, msg: "Список учебных планов кафедры '${chair.name}'"])
+        chain(action: 'index', model: [res: plans, msg: "Список учебных планов кафедры '${chair.name}", sizePerPage: plans.size()])
     }
 
 
@@ -26,13 +26,13 @@ class IndexController {
                 planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, 4, 0)
             }
             else {
-                planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, params.max, params.offset)
+                planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, params.max as int, params.offset as int)
             }
         else{
             planList = chainModel.res
             totalPlans = planList.size()
         }
-        [res: planList, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg]
+        [res: planList, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
     }
 
     def delete = {

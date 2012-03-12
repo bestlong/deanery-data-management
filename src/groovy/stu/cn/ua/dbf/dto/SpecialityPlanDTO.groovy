@@ -6,7 +6,7 @@ import java.text.MessageFormat
  * @author evgeniy
  * date: 10.03.12
  */
-class SpecilaityPlanDTO {
+class SpecialityPlanDTO {
 
     private String codsp
     private String codspec
@@ -19,6 +19,7 @@ class SpecilaityPlanDTO {
     private String srok
     private String namedip
     private String codname
+    private String specKaf
 
     String getCodsp() {
         return codsp
@@ -106,6 +107,14 @@ class SpecilaityPlanDTO {
 
     void setCodname(String codname) {
         this.codname = codname
+    }
+
+    String getSpecKaf() {
+        return specKaf
+    }
+
+    void setSpecKaf(String specKaf) {
+        this.specKaf = specKaf
     }
 
     @Override

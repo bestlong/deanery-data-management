@@ -12,16 +12,16 @@
         $("#dialog").dialog();
     }
 
-    function switchIcon(){
-        var res = $("#details").attr("src").match("expand");
+    function switchIcon(id){
+        var res = $("#details"+id).attr("src").match("expand");
         var src;
         if (null != res){
-            src = $("#details").attr("src").replace("expand", "collapse");
+            src = $("#details"+id).attr("src").replace("expand", "collapse");
         } else {
-            src = $("#details").attr("src").replace("collapse", "expand");
-            $("#wPlans").empty();
+            src = $("#details"+id).attr("src").replace("collapse", "expand");
+            $("#wPlans"+id).empty();
         }
-        $("#details").attr("src", src);
+        $("#details"+id).attr("src", src);
     }
 </script>
 
@@ -86,8 +86,8 @@
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
                             <tooltip:tip code="tooltip.plan.expand.work.plans">
-                                <g:remoteLink action="showWorkPlans" id="${plan.id}" update="wPlans" onSuccess="switchIcon()">
-                                    <input id="details" type="image" src="<g:createLinkTo dir="/images" file="expand.png"/>">
+                                <g:remoteLink action="showWorkPlans" id="${plan.id}" update="wPlans${plan.id}" onSuccess="switchIcon(${plan.id})">
+                                    <input id="details${plan.id}" type="image" src="<g:createLinkTo dir="/images" file="expand.png"/>">
                                 </g:remoteLink>
                             </tooltip:tip>
                         </td>
@@ -117,7 +117,7 @@
                         </td>
                     </tr>
                 </table>
-                <div id="wPlans">
+                <div id="wPlans${plan.id}">
 
                 </div>
             </div>

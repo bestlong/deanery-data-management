@@ -28,7 +28,7 @@
 </div>
 
 <div class="paginateButtons">
-    <g:paginate total="${totalPlans}" max="4" maxsteps="3" prev="Предыдущая" next="Следующая"/>   <br/>
+    <g:paginate total="${totalPlans}" max="${sizePerPage ?: 4}" maxsteps="3" action="index" controller="index" prev="Предыдущая" next="Следующая"/>   <br/>
 </div>
 
 </body>
