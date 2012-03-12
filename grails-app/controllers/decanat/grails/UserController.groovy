@@ -65,9 +65,10 @@ class UserController {
         if (params.id) {
             User user = User.findById(params.id);
             if (user) {
-                user.authorities.toList().get(0).removeFromPeople(user);
-                flash.message = message(code: "msg.user.remove", args: [user.userRealName])
-                user.delete();
+                Collection<UserRole> userRoles = UserRole.findAllByUser(user)
+                userRoles*.delete()
+                user.delete()
+                flash.message = message(code: "msg.user.remove", args: [user.username])
             }
         }
         else {
