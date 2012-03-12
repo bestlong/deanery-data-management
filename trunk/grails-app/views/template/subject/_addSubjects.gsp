@@ -21,11 +21,11 @@
         <table id="controlType" align="center">
             <tr>
                 <td colspan="2" align="left">
-                    <div class="caption">Вид контроля:</div>
+                <div class="h7" >Вид контроля:</div>
                 </td>
             </tr>
             <tr class="planSubjectRowHeight">
-                <td class="planSubjectCaption">Экзамен</td>
+                <td class="planSubjectCaption" align="left">Экзамен</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
 
@@ -40,26 +40,15 @@
             </tr>
 
             <tr class="planSubjectRowHeight">
-                <td class="planSubjectCaption">Зачёт</td>
+                <td class="planSubjectCaption" align="left">Зачёт</td>
                 <td align="left">
                     <g:if test="${semestr<=hours?.size()?:0-1}">
                         <g:checkBox name="zach${idx}"
                                     checked="${newControls?.get(idx)?.zach == 1 ? 'true' : 'false'}"/>
            </g:if>
-            <tr>
-                <td class="caption" align="center">Семинаров</td>
-                <td align="center">
-                    <g:if test="${hours?.containsKey(idx)}">
-                        <g:textField name="seminarCount${idx}" value="${hours?.get(idx)?.seminarCount}"/>
 
-                    </g:if>
-                    <g:else>
-                        <g:checkBox name="zach${idx}"/>
-                    </g:else>
-                </td>
-            </tr>
             <tr class="planSubjectRowHeight">
-                <td class="planSubjectCaption">Курсовая работа</td>
+                <td class="planSubjectCaption" align="left">Курсовая работа</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:checkBox name="cWork${idx}"
@@ -72,7 +61,7 @@
                 </td>
             </tr>
             <tr class="planSubjectRowHeight">
-                <td class="planSubjectCaption">Курсовой проект</td>
+                <td class="planSubjectCaption" align="left">Курсовой проект</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:checkBox name="cProj${idx}"
@@ -84,7 +73,7 @@
                 </td>
             </tr>
             <tr class="planSubjectRowHeight">
-                <td class="planSubjectCaption">РГР</td>
+                <td class="planSubjectCaption" align="left">РГР</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:checkBox name="rgr${idx}" checked="${newControls?.get(idx)?.rgr == 1 ? 'true' : 'false'}"/>
@@ -96,7 +85,7 @@
                 </td>
             </tr>
             <tr class="planSubjectRowHeight">
-                <td class="planSubjectCaption" >Контрольная работа</td>
+                <td class="planSubjectCaption" align="left">Контрольная работа</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:checkBox name="contrWork${idx}"
@@ -109,9 +98,13 @@
                 </td>
             </tr>
 
-
             <tr>
-                <td class="planSubjectCaption">Лекций</td>
+                <td align="left">
+                    <div class="h7">Количество за 2 недели:</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="planSubjectCaption" align="left">Лекций</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:textField name="lectureCount${idx}" value="${hours?.get(idx)?.lectures}"/>
@@ -122,7 +115,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="planSubjectCaption">Семинаров</td>
+                <td class="planSubjectCaption" align="left">Семинаров</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:textField name="seminarCount${idx}" value="${hours?.get(idx)?.seminars}"/>
@@ -133,7 +126,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="planSubjectCaption">Практик</td>
+                <td class="planSubjectCaption" align="left">Практик</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:textField name="practiceCount${idx}" value="${hours?.get(idx)?.practices}"/>
@@ -144,7 +137,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="planSubjectCaption">Лабораторных</td>
+                <td class="planSubjectCaption" align="left">Лабораторных</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
                         <g:textField name="labCount${idx}" value="${hours?.get(idx)?.labs}"/>

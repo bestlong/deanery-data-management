@@ -9,7 +9,7 @@
 
 <g:form controller="addSubjects" action="save" width="300" name="formSave">
     <g:hiddenField name="planId" value="${plan.id}"/>
-    <table id="controlType" align="center">
+    <table id="controlType" align="left">
         <tr>
             <td class="caption">Предмет*</td>
             <td>
@@ -63,8 +63,9 @@
 
     </table>
 
-    <br/><br/><br/>
-
+    <br/><br/><br/>   <br/><br/><br/>    <br/><br/><br/>   <br/><br/><br/>
+    <br/><br/><br/>   <br/><br/><br/>    <br/><br/><br/>   <br/><br/><br/>
+    <br/><br/><br/>   <br/><br/><br/>    <br/><br/><br/>
 
     <div align="center" class="action">
         <a href="<g:createLink controller="addSubjects" action="index" id="${plan.id}"/>">Отмена</a>

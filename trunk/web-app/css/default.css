@@ -9,9 +9,15 @@ h1 {
    font-size: 24px;
 }
 
+.h7 {
+    font-size: 24px;
+}
+
 h2, h3, h4, h5 {
     color: #2582A4;
 }
+
+
 
 h6 {
     font-family: Tahoma, Arial, Helvetica, sans-serif;
@@ -249,7 +255,8 @@ body .hello {
 #colTwo {
     float: left;
     width: 700px;
-    padding: 30px 10px 0 0;
+    padding: 30px 10px 20px 0;
+    padding: 30px 10px 10px 0;
 
 }
 
@@ -380,7 +387,7 @@ td .error_field {
     font-style: normal;
     color: #000000;
     align: left;
-    width:35%;
+    width:50%;
 }
 
 #controlType .planSubjectRowHeight {
@@ -393,7 +400,7 @@ height: 3%;
 #controlType input {
     margin: 0;
     padding: 3px;
-    width: 200px;
+    width: 30px;
 }
 
 /* ContentTable */
