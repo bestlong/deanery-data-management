@@ -5,19 +5,10 @@
   Time: 10:47
   To change this template use File | Settings | File Templates.
 --%>
-<script type="text/javascript">
-
-
-    $(document).ready(function () {
-        for (i = 1; i <=${semestr}; i++) {
-            switchBox('l' + i.toString(), document.getElementById('c' + i.toString()).checked);
-        }
-    });
-</script>
 
 <g:set var="idx" value="${1}"/>
 <g:while test="${idx <= semestr}">
-    <div class="nonDisplay" id="d${idx}" align="center">
+    <div  id="semestrNumber-${idx}" align="center">
         <table id="controlType" align="center">
             <tr>
                 <td colspan="2" align="left">

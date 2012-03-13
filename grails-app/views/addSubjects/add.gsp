@@ -4,28 +4,12 @@
     <title> Добавление новых предметов</title>
     <meta name="layout" content="main"/>
 
-    <script type="text/javascript">
-        function switchBox(id, val) {
-            document.getElementById(id).setAttribute('class', val ? 'visible' : 'invisible');
-        }
-
-        function showSubjectInGeneral() {
-            for(var i = 1; i<=${plan?.semestrCount}; i++){
-                document.getElementById('d' + i.toString()).setAttribute('class','nonDisplay');
-            }
-            document.getElementById('subjectGeneral').setAttribute('class','visible');
-        }
-
-        function switchDiv(id) {
-            for (i = 1; i <=${plan?.semestrCount}; i++) {
-                document.getElementById('d' + i.toString()).setAttribute('class', 'nonDisplay');
-            }
-            document.getElementById('subjectGeneral').setAttribute('class','nonDisplay');
-            document.getElementById(id).setAttribute('class', 'display');
-        }
+     %{--<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>--}%
+     %{--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>--}%
+     %{--<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>--}%
 
 
-    </script>
+
     <style>
     .visible {
         visibility: visible;
@@ -62,59 +46,38 @@
         </div>
     </div>
 
-
-    <div id="selectPart">
-        <h4 class="subtitle">Добавление предметов:</h4>
-        <div id="tabs">
-            <ul>
-                <li>
-                     <a href="#" onclick="javascript: showSubjectInGeneral()">
-                         <span>Предмет</span>
-                     </a>
-                </li>
-                <g:each in="${1..plan?.semestrCount}" var ="cp">
-                    <li id="l${cp}">
-                        <a href="#" onclick="javascript: switchDiv('d${cp}')">
-                            <span>${cp} семестр</span>
-                        </a>
-                    </li>
-                </g:each>
-            </ul>
-            <br/>
-        </div>
-
-    </div>
+    <h4 class="subtitle">Добавление предметов:</h4>
+      <div id="tabs">
+          <ul>
+              <li>
+                  <a href="#subjectGeneral">
+                      <span>Предмет</span>
+                  </a>
+              </li>
+              <g:each in="${1..plan?.semestrCount}" var ="cp">
+                  <li>
+                      <a href="#semestrNumber-${cp}">
+                          <span>${cp} семестр</span>
+                      </a>
+                  </li>
+              </g:each>
+          </ul>
 
         <div id="subjectGeneral">
-            <br/>
-            <table id="addSubjTable">
-                <tr>
-                    <g:set var="idx" value="${1}"/>
-                    <g:while test="${idx <= plan?.semestrCount}">
-                        <td>
-                            <g:if test="${hours?.containsKey(idx) && hours?.get(idx)}">
-                                <h3>${idx} <g:checkBox name="c${idx}" value="true" onclick="javascript: switchBox('l${idx}', this.checked );"/></h3>
-                            </g:if>
-                            <g:else>
-                                <h3>${idx} <g:checkBox name="c${idx}" onclick="javascript: switchBox('l${idx}', this.checked );"/></h3>
-                            </g:else>
-                        </td>
-                        <g:set var="idx" value="${idx + 1}"/>
-                    </g:while>
-                </tr>
-            </table>
 
             <g:render template="/template/planSubject/addSubjectInGeneral"/>
         </div>
-        <div id="addSubjectInSemestr">
             <g:render template="/template/subject/addSubjects" model="[ 'semestr' : plan?.semestrCount]"/>
-        </div>
-
-
-
-
-
+    </div>
 </div>
+
+
+
+<script>
+    $(document).ready(function() {
+        $("#tabs").tabs();
+    });
+</script>
 
 </body>
 </html>
