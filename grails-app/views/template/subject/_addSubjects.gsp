@@ -98,7 +98,7 @@
             <td align="center">
                 <div name="controlType${index}">
                     <g:checkBox name="exam${index}"
-                                value="${newControls?.get(index)?.exam == 1 ? true : false}"/>
+                                value="${newControls?.get(index)?.exam == 1}"/>
                 </div>
             </td>
         </g:each>
@@ -109,7 +109,7 @@
             <td align="center">
                 <div name="controlType${index}">
                     <g:checkBox name="zach${index}"
-                                value="${newControls?.get(index)?.zach == 1 ? true : false}"/>
+                                value="${newControls?.get(index)?.zach == 1}"/>
                 </div>
             </td>
         </g:each>
@@ -120,7 +120,7 @@
             <td align="center">
                 <div name="controlType${index}">
                     <g:checkBox name="cWork${index}"
-                                checked="${newControls?.get(index)?.cWork == 1 ? true : false}"/>
+                                checked="${newControls?.get(index)?.cWork == 1}"/>
                 </div>
             </td>
         </g:each>
@@ -131,7 +131,7 @@
             <td align="center">
                 <div name="controlType${index}">
                     <g:checkBox name="cProj${index}"
-                                checked="${newControls?.get(index)?.cProj == 1 ? true : false}"/>
+                                checked="${newControls?.get(index)?.cProj == 1}"/>
                 </div>
             </td>
         </g:each>
@@ -141,7 +141,7 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:checkBox name="rgr${index}" checked="${newControls?.get(index)?.rgr == 1 ? true : false}"/>
+                    <g:checkBox name="rgr${index}" checked="${newControls?.get(index)?.rgr == 1}"/>
                 </div>
             </td>
         </g:each>
@@ -152,7 +152,7 @@
             <td align="center">
                 <div name="controlType${index}">
                     <g:checkBox name="contrWork${index}"
-                                checked="${newControls?.get(index)?.contrWork == 1 ? true : false}"/>
+                                checked="${newControls?.get(index)?.contrWork == 1}"/>
                 </div>
             </td>
         </g:each>
