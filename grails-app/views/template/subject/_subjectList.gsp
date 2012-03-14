@@ -45,11 +45,20 @@
                                 </tooltip:tip>
                             </td>
                             <td align="right" style="margin: 5px">
-                                <tooltip:tip code="tooltip.del">
-                                    <a href="#" onclick="deleteDialog(${subject?.id})" class="delBtn">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
-                                    </a>
-                                </tooltip:tip>
+
+                                <g:if test="${subject.referenceCount == 0}">
+                                    <tooltip:tip code="tooltip.del">
+                                        <a href="#" onclick="deleteDialog(${subject?.id})" class="delBtn">
+                                            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                                        </a>
+                                    </tooltip:tip>
+                                </g:if>
+                                <g:else>
+                                    <tooltip:tip code="tooltip.unable.remove">
+                                        <input type="image"
+                                               src="<g:createLinkTo dir="/images/ctrl" file="delete_disabled.gif"/>"/>
+                                    </tooltip:tip>
+                                </g:else>
                             </td>
                         </tr>
                     </table>

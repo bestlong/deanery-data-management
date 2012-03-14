@@ -10,6 +10,7 @@ class Chair {
     String shortName;
     String head
     String codeChair
+    Integer referenceCount = 0
 
     private static final fieldMap = [name: 'NAMEKAF', shortName: 'SHORTKAF', head: 'FAMZAV', codeChair: 'CODKAF']
 
@@ -18,6 +19,7 @@ class Chair {
         shortName(unique: true, nullable: true)
         head(nullable: true)
         codeChair(nullable: true)
+        referenceCount(nullable: false)
     }
 
     public static Chair saveChair(ChairDTO chairDTO){

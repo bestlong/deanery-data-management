@@ -58,11 +58,19 @@
                                 </tooltip:tip>
                             </td>
                             <td align="right" style="margin-left: 5px; margin-right: 5px">
-                                <tooltip:tip code="tooltip.chair.remove">
-                                    <a href="#" class="delBtn" onclick="deleteDialog(${chair?.id})">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
-                                    </a>
-                                </tooltip:tip>
+
+                                <g:if test="${0 == chair.referenceCount}">
+                                    <tooltip:tip code="tooltip.chair.remove">
+                                        <a href="#" class="delBtn" onclick="deleteDialog(${chair?.id})">
+                                            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                                        </a>
+                                    </tooltip:tip>
+                                </g:if>
+                                <g:else>
+                                    <tooltip:tip code="tooltip.unable.remove">
+                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="delete_disabled.gif"/>"/>
+                                    </tooltip:tip>
+                                </g:else>
                             </td>
                         </tr>
                     </table>

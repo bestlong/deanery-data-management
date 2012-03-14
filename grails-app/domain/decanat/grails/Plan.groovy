@@ -72,6 +72,24 @@ class Plan {
         return new ValidationResult(true)
     }
 
+    def afterInsert(){
+        if (null != chair){
+            chair?.referenceCount++
+        }
+        if (null != speciality){
+            speciality?.referenceCount++
+        }
+    }
+
+    def afterDelete(){
+        if (null != chair){
+            chair?.referenceCount--
+        }
+        if (null != speciality){
+            speciality?.referenceCount--
+        }
+    }
+
     /**
      *
      * @return количество всех кредитов по всем предметам

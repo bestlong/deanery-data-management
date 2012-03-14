@@ -13,6 +13,8 @@ class PlanInitService {
         }
         else {
             plan = Plan.findById(params.id)
+            plan.chair?.referenceCount--
+            plan.speciality?.referenceCount--
         }
 
         plan.properties = params
@@ -29,6 +31,8 @@ class PlanInitService {
         }
         plan.speciality = Speciality.findById(params.specId)
         plan.chair = Chair.findById(params.chairId)
+        plan.chair?.referenceCount++
+        plan.speciality?.referenceCount++
         plan.save(flush: true)
 
         return plan;

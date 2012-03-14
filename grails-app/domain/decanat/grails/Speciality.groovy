@@ -10,6 +10,7 @@ class Speciality {
     String specialityCode;
     String name;
     String shortName;
+    Integer referenceCount = 0
 
     private static final fieldMap = [code: 'CODSP', specialityCode: 'CODSPEC', name: 'NAME', shortName: 'CODNAME']
 
@@ -18,6 +19,7 @@ class Speciality {
         name(blank: false)
         shortName(nullable: true)
         code(nullable: true)
+        referenceCount(nullable: false)
     }
 
     public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO){

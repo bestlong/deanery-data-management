@@ -39,17 +39,27 @@
                         <tr>
                             <td align="left" style="margin: 5px">
                                 <tooltip:tip code="tooltip.edit">
-                                    <a href="<g:createLink action="edit" controller="speciality" id="${speciality?.id}"/>">
+                                    <a href="<g:createLink action="edit" controller="speciality"
+                                                           id="${speciality?.id}"/>">
                                         <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
                                     </a>
                                 </tooltip:tip>
                             </td>
                             <td align="right" style="margin: 5px">
-                                <tooltip:tip code="tooltip.del">
-                                    <a href="#" onclick="deleteDialog(${speciality?.id})" class="delBtn">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
-                                    </a>
-                                </tooltip:tip>
+                                <g:if test="${speciality.referenceCount == 0}">
+                                    <tooltip:tip code="tooltip.del">
+                                        <a href="#" onclick="deleteDialog(${speciality?.id})" class="delBtn">
+                                            <input type="image"
+                                                   src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                                        </a>
+                                    </tooltip:tip>
+                                </g:if>
+                                <g:else>
+                                    <tooltip:tip code="tooltip.unable.remove">
+                                        <input type="image"
+                                               src="<g:createLinkTo dir="/images/ctrl" file="delete_disabled.gif"/>"/>
+                                    </tooltip:tip>
+                                </g:else>
                             </td>
                         </tr>
                     </table>

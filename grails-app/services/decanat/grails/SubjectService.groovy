@@ -1,11 +1,18 @@
 package decanat.grails
 
+import stu.cn.ua.CommonUtils
+
 class SubjectService {
 
     static transactional = true
 
-    def serviceMethod() {
-
+    def updateSubject(Subject subject, def params) {
+        subject.properties = params
+        subject.chair?.referenceCount--
+        subject.chair = Chair.findById(params.subject.chair);
+        subject.chair?.referenceCount++
+        subject.name = CommonUtils.prepareString(subject.name)
+        return subject.save()
     }
 
     List<Subject> findSubjects(Integer chairId, String name, String shortName) {

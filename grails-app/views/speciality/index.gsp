@@ -44,7 +44,6 @@
             );
         }
 
-
         $(document).ready(function () {
             initTable();
             $("#messages").delay(6000).fadeOut(5 * 400);
