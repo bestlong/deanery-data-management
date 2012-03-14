@@ -146,7 +146,7 @@ class AddSubjectsController {
                 List semestrs = new ArrayList<Integer>(plan.semestrCount);
 
                 for (int i: 1..plan.semestrCount) {
-                    if (params."c${i}")
+                    if (params."semester${i}")
                         semestrs.add(i)
                 }
 

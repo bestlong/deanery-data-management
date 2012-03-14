@@ -10,7 +10,7 @@ h1 {
 }
 
 .h7 {
-    font-size: 24px;
+    font-size: 16px;
 }
 
 h2, h3, h4, h5 {
@@ -438,92 +438,92 @@ height: 3%;
     width: 85px;
 }
 
-#tabs {
-    float: left;
-    width: 100%;
-    background: #E3ECF3;
-    font-size: 93%;
-    line-height: normal;
-}
+/*#tabs {*/
+    /*float: left;*/
+    /*width: 100%;*/
+    /*background: #E3ECF3;*/
+    /*font-size: 93%;*/
+    /*line-height: normal;*/
+/*}*/
 
-#tabs ul {
-    margin: 0;
-    padding: 10px 10px 0 0px;
-    list-style: none;
-}
+/*#tabs ul {*/
+    /*margin: 0;*/
+    /*padding: 10px 10px 0 0px;*/
+    /*list-style: none;*/
+/*}*/
 
-#tabs li {
-    display: inline;
-    margin: 0;
-    padding: 0;
+/*#tabs li {*/
+    /*display: inline;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
 
-}
+/*}*/
 
-#tabs a {
-    float: left;
-    background: url("../images/tableft.gif") no-repeat left top;
-    margin: 0;
-    padding: 0 0 0 4px;
-    text-decoration: none;
+/*#tabs a {*/
+    /*float: left;*/
+    /*background: url("../images/tableft.gif") no-repeat left top;*/
+    /*margin: 0;*/
+    /*padding: 0 0 0 4px;*/
+    /*text-decoration: none;*/
 
-}
+/*}*/
 
-#tabs a span {
-    float: left;
-    display: block;
-    background: url("../images/tabright.gif") no-repeat right top;
-    padding: 5px 15px 4px 6px;
-    color: #FFF;
-    font-size: 13px;
-    width: 60px;
-}
+/*#tabs a span {*/
+    /*float: left;*/
+    /*display: block;*/
+    /*background: url("../images/tabright.gif") no-repeat right top;*/
+    /*padding: 5px 15px 4px 6px;*/
+    /*color: #FFF;*/
+    /*font-size: 13px;*/
+    /*width: 60px;*/
+/*}*/
 
 /* Commented Backslash Hack hides rule from IE5-Mac \*/
-#tabs a span {
-    float: left;
-}
+/*#tabs a span {*/
+    /*float: left;*/
+/*}*/
 
 /* End IE5-Mac hack */
-#tabs a:hover span {
-    color: #FFF;
-}
+/*#tabs a:hover span {*/
+    /*color: #FFF;*/
+/*}*/
 
-#tabs a:hover {
-    background-position: 0% -42px;
-}
+/*#tabs a:hover {*/
+    /*background-position: 0% -42px;*/
+/*}*/
 
-#tabs a:hover span {
-    background-position: 100% -42px;
-}
+/*#tabs a:hover span {*/
+    /*background-position: 100% -42px;*/
+/*}*/
 
-#editPassTable .validation_error{
-    color: red;
-    font-style: italic;
-}
+/*#editPassTable .validation_error{*/
+    /*color: red;*/
+    /*font-style: italic;*/
+/*}*/
 
-body .paginateButtons{
-        text-align: center;
-        font-size: 15px;
-     font-family: Tahoma, Arial, Helvetica, sans-serif;
-}
+/*body .paginateButtons{*/
+        /*text-align: center;*/
+        /*font-size: 15px;*/
+     /*font-family: Tahoma, Arial, Helvetica, sans-serif;*/
+/*}*/
 
-body .paginateButtons .prevLink{
+/*body .paginateButtons .prevLink{*/
 
-        margin-right: 50px;
-}
+        /*margin-right: 50px;*/
+/*}*/
 
-body .paginateButtons .nextLink{
+/*body .paginateButtons .nextLink{*/
 
-        margin-left: 50px;
-}
+        /*margin-left: 50px;*/
+/*}*/
 
-body .paginateButtons .step {
+/*body .paginateButtons .step {*/
 
-        margin: 0px 5px 0 0;
-}
+        /*margin: 0px 5px 0 0;*/
+/*}*/
 
-body .paginateButtons span {
+/*body .paginateButtons span {*/
 
-        margin: 0px 5px 0 0;
-}
+        /*margin: 0px 5px 0 0;*/
+/*}*/
 

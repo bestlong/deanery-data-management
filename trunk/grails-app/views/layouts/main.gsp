@@ -11,8 +11,7 @@
     <jqval:resources/>
     <jqvalui:resources/>
     <jqui:resources/>
-    <link href="<g:createLinkTo dir='/css/jquery-ui/themes/green' file='jquery-ui-1.8.14.custom.css'/>"
-          rel="stylesheet"/>
+    <link href="<g:createLinkTo dir='/css/jquery-ui/themes/green' file='jquery-ui-1.8.14.custom.css'/>" rel="stylesheet"/>
 
     <script type="text/javascript" src="<g:createLinkTo dir="/js/jQuery" file="jquery.dataTables.js"/>"></script>
     <script type="text/javascript" src="<g:createLinkTo dir="/js/jQuery" file="jquery.numeric.js"/>"></script>
