@@ -51,6 +51,18 @@ class PlanSubject {
         plan.lastUpdated = new Date()
     }
 
+    def afterInsert(){
+        if (null != subject){
+            subject.referenceCount++
+        }
+    }
+
+    def afterDelete(){
+        if (null != subject){
+            subject.referenceCount--
+        }
+    }
+
     def getTotal() {
         return lectureCount + seminarCount + practiceCount + labCount + samCount
     }

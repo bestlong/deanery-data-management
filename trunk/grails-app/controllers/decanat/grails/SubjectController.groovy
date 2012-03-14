@@ -15,10 +15,7 @@ class SubjectController {
         try {
             if (params.id) {
                 Subject subject = Subject.findById(params.id)
-                subject.properties = params
-                subject.chair = Chair.findById(params.subject.chair);
-                subject.name = CommonUtils.prepareString(subject.name)
-                if (subject?.save()) {
+                if (subjectService.updateSubject(subject, params)) {
                     flash.message = message(code:"msg.subject.edit", args:[subject.name])
                 } else {
                     flash.error = message(code:"msg.edit.error")

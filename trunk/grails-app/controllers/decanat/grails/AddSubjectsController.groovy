@@ -193,8 +193,10 @@ class AddSubjectsController {
             if (subject && plan) {
                 def planSubject = PlanSubject.get(params.subjectId)
                 planSubjectService.clearSubject(planSubject)
+                planSubject.subject?.referenceCount--
                 planSubject.plan = plan
                 planSubject.subject = subject
+                planSubject.subject?.referenceCount++
                 planSubject.creditCount = params.creditCount == "" || params.creditCount == null ? 0 : params.creditCount as double
                 planSubject.lectureCount = params.lectureCount == "" || params.lectureCount == null ? 0 : params.lectureCount as int
                 planSubject.seminarCount = params.seminarCount == "" || params.seminarCount == null ? 0 : params.seminarCount as int

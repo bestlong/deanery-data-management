@@ -37,7 +37,7 @@
                     {},
                     {},
                     {},
-                    { bSortable:false }
+                    { bSortable:false, sWidth: "5%"}
                 ]
             });
         }

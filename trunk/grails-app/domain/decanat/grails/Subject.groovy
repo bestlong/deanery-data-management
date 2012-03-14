@@ -10,6 +10,7 @@ class Subject {
     Chair chair
     String shortName
     String code
+    Integer referenceCount = 0
 
     private static final fieldMap = [name: 'NAMEDIS', shortName: 'SHORTDIS', code: 'CODDIS']
 
@@ -18,6 +19,7 @@ class Subject {
         chair(nullable: true)
         shortName(nullable: true)
         code(nullable: true)
+        referenceCount(nullable: false)
     }
 
     public static Subject saveSubject(SubjectDTO subjectDTO){
@@ -48,5 +50,17 @@ class Subject {
         } else {
             return new ValidationResult(true)
         }
-    }    
+    }
+
+    def afterInsert(){
+        if (null != chair){
+            chair?.referenceCount++
+        }
+    }
+
+    def afterDelete(){
+        if (null != chair){
+            chair?.referenceCount--
+        }
+    }
 }

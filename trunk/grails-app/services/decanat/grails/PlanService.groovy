@@ -11,7 +11,7 @@ class PlanService {
         c.list{
             maxResults (max)
             firstResult(offset)
-            order("lastUpdated", "desc")
+            order("lastUpdated", "asc")
             eq("class", planClass.name())
         }
     }
