@@ -51,33 +51,36 @@
                     ${subject.total}
                 </td>
                 <td>
-                                <tooltip:tip code="tooltip.edit">
-                                    <a href="<g:createLink action="edit" controller="addSubjects" id="${subject.id}" params="[planId: subject.planId]"/>" style="margin: 5px; text-decoration: none">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
-                                    </a>
-                                </tooltip:tip>
-                                <tooltip:tip code="tooltip.del">
-                                    <a href="#" onclick="deleteDialog(${subject?.id}, ${subject?.planId})" class="delBtn" style="margin: 5px; text-decoration: none">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
-                                    </a>
-                                </tooltip:tip>
+                    <tooltip:tip code="tooltip.edit">
+                        <a href="<g:createLink action="edit" controller="addSubjects" id="${subject.id}"
+                                               params="[planId: subject.planId]"/>"
+                           style="margin: 5px; text-decoration: none">
+                            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
+                        </a>
+                    </tooltip:tip>
+                    <tooltip:tip code="tooltip.del">
+                        <a href="#" onclick="deleteDialog(${subject?.id}, ${subject?.planId})" class="delBtn"
+                           style="margin: 5px; text-decoration: none">
+                            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                        </a>
+                    </tooltip:tip>
                 </td>
             </tr>
         </g:each>
         </tbody>
         <tfoot>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
         </tfoot>
     </table>
 </div>

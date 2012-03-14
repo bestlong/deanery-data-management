@@ -3,63 +3,7 @@
 <head>
     <title>Добавление новых предметов</title>
     <meta name="layout" content="main"/>
-    <g:javascript>
-        $(function () {
-            $("#tabs").tabs();
-            $("input[type=text]").numeric({ decimal:false, negative:false }, null);
-            $('#searchSubject').hide();
-            initTable();
-            $("#messages").delay(6000).fadeOut(5 * 400);
-            $("#errors").delay(6000).fadeOut(5 * 400);
-            $("input:submit, a, button", ".action").button();
-            $("#dialog").hide();
-            $("#selectSubj").button();
-        });
-
-        function initTable() {
-            $('#subjects').dataTable({
-                "bJQueryUI":true,
-                "sPaginationType":"full_numbers",
-                "iDisplayLength":20,
-                "bLengthChange":false,
-                "oLanguage":{
-                    "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
-                    "sInfoEmpty":"Нет данных для отображения",
-                    "sSearch":"Поиск",
-                    "sLengthMenu":"Отображать по _MENU_",
-                    "sInfoFiltered":"(найдено из _MAX_)",
-                    "sZeroRecords":"По Вашему запросу ничего не найдено.",
-                    "oPaginate":{
-                        "sFirst":"К началу",
-                        "sPrevious":"Назад",
-                        "sLast":"В конец",
-                        "sNext":"Далее"
-                    }
-                },
-                bAutoWidth:false,
-                aoColumns:[
-                    { sWidth:"30%" },
-                    { sWidth:"30%" },
-                    { sWidth:"25%" }
-                ]
-            });
-        }
-
-        function showOrHide(show) {
-            $('#selectSubj').qtip('destroy');
-            $("#searchPart").toggle(show);
-            $("#selectPart").toggle(!show);
-            $("#searchSubject").toggle(show);
-            $("#menuBox").toggle(!show);
-        }
-
-        function chooseSubj(id, name) {
-            $("#subjName").html(name);
-            $("#subjId").val(id);
-            showOrHide(false);
-        }
-    </g:javascript>
-    %{--<g:render template="/template/planSubject/validation"/>--}%
+    <g:render template="/template/planSubject/validation"/>
 </head>
 
 <body>

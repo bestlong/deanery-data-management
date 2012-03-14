@@ -8,7 +8,7 @@ class AddSubjectsController {
     def subjectService
 
     def index = {
-        def plan = Plan.get(params.id)
+        def plan = Plan.get(params.id as int)
         def subjects = PlanSubject.findAllByPlan(plan)
         def newSubjects = new ArrayList()
 
@@ -38,7 +38,7 @@ class AddSubjectsController {
     }
 
     def filter = {
-        def plan = Plan.get(params.id)
+        def plan = Plan.get(params.id as int)
         def semestrs = []
         (1..plan.semestrCount).each {int i ->
             if (params."filterSemestr${i}" as Boolean){
@@ -80,16 +80,16 @@ class AddSubjectsController {
     }
 
     def add = {
-        def plan = Plan.get(params.id)
+        def plan = Plan.get(params.id as int)
         [res: Subject.list(), plan: plan]
     }
 
     def edit = {
-        def plan = Plan.get(params.planId)
-        def subject = PlanSubject.get(params.id)
+        def plan = Plan.get(params.planId as int)
+        def subject = PlanSubject.get(params.id as int)
         def controls = [:]
         def mapHours = [:]
-        def newControls = planSubjectService.getControlType(params.id);
+        def newControls = planSubjectService.getControlType(params.id as int);
 
         newControls.each {
             controls.put(it.semestr, it)
@@ -104,13 +104,13 @@ class AddSubjectsController {
     }
 
     def hours = {
-        def subj = PlanSubject.get(params.id)
+        def subj = PlanSubject.get(params.id as int)
         def list = PlanHours.findAllByPlanSubject(subj)
         render list as JSON
     }
 
     def control = {
-        def newControls = planSubjectService.getControlType(params.id);
+        def newControls = planSubjectService.getControlType(params.id as int);
         render newControls as JSON
     }
 
@@ -121,8 +121,8 @@ class AddSubjectsController {
 
     def save = {
         try {
-            def subject = Subject.get(params.subjId)
-            def plan = Plan.get(params.planId)
+            def subject = Subject.get(params.subjId as int)
+            def plan = Plan.get(params.planId as int)
             params.id = params.planId
             if (subject && plan) {
                 def planSubject = new PlanSubject()
@@ -186,12 +186,13 @@ class AddSubjectsController {
     }
 
     def update = {
+        def plan = null
         try {
-            def subject = Subject.get(params.subjId)
-            def plan = Plan.get(params.planId)
+            def subject = Subject.get(params.subjId as long)
+            plan = Plan.get(params.planId as long)
             params.id = params.planId
             if (subject && plan) {
-                def planSubject = PlanSubject.get(params.subjectId)
+                def planSubject = PlanSubject.get(params.subjectId as long)
                 planSubjectService.clearSubject(planSubject)
                 planSubject.subject?.referenceCount--
                 planSubject.plan = plan
@@ -215,7 +216,7 @@ class AddSubjectsController {
                 List semestrs = new ArrayList<Integer>(plan.semestrCount);
 
                 for (int i: 1..plan.semestrCount) {
-                    if (params."c${i}")
+                    if (params."semester${i}")
                         semestrs.add(i)
                 }
 
@@ -251,13 +252,13 @@ class AddSubjectsController {
             log.error(e.getMessage(), e)
             flash.error = message(code:"msg.planSubject.edit.error")
         }
-        redirect(action: index, params: params)
+        redirect(action: index, params: params, id:  plan?.id)
     }
 
     def delete = {
         try {
             if (params.id) {
-                PlanSubject subj = PlanSubject.get(params.id);
+                PlanSubject subj = PlanSubject.get(params.id as int);
                 if (subj) {
                     subj.delete(flush: true);
                     flash.message = message(code:"msg.planSubject.remove.success")
