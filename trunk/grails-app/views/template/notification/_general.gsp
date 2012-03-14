@@ -1,7 +1,6 @@
-<div style="width: 800px;" id="messages" onclick='$(this).fadeOut(400);' onmouseover='$(this).fadeIn(400);'>
+<div style="width: 840px;" id="messages" onclick='$(this).fadeOut(400);' onmouseover='$(this).fadeIn(400);'>
     <g:if test="${flash.message}">
         <g:render template="/template/notification/info" model="${[code: flash.message, args: flash.args]}"/>
-
     </g:if>
 </div>
 

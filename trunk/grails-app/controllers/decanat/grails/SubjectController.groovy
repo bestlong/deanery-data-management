@@ -43,7 +43,7 @@ class SubjectController {
             def subject = new Subject(params);
             subject.chair = Chair.findById(params.subject.chair);
             subject.name = CommonUtils.prepareString(subject.name)
-            if (subject.save()) {
+            if (subject.save(flush: true)) {
                 flash.message = message(code:"msg.subject.add", args:[subject.name])
             }
         }
@@ -70,8 +70,11 @@ class SubjectController {
             if (params.id) {
                 Subject subj = Subject.findById(params.id);
                 if (subj) {
-                    subj.delete();
+                    subj.delete(flush: true);
                     flash.message = message(code:"msg.subject.remove", args:[subj.name])
+                }
+                else {
+                    flash.error = message(code: "msg.remove.error")
                 }
             }
         }
@@ -79,6 +82,6 @@ class SubjectController {
             flash.error = message(code:"msg.remove.error")
             log.error(e.getMessage(), e)
         }
-        redirect(action: index, params: params)
+        redirect(action: 'index', controller: 'subject', params: params)
     }
 }

@@ -52,7 +52,7 @@ class IndexController {
             flash.error = message(code: "msg.plan.remove.error")
             log.error(e.getMessage(), e)
         }
-        redirect(action: index)
+        redirect(controller: 'index', action: 'index')
     }
 
     def showWorkPlans = {

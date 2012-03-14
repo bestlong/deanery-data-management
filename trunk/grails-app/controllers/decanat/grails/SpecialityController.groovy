@@ -72,6 +72,9 @@ class SpecialityController {
                     flash.message = message(code: "msg.speciality.remove", args: [spec.name])
                     spec.delete();
                 }
+                else {
+                    flash.error = message(code: "msg.remove.error")
+                }
             }
         }
         catch (Exception e) {
