@@ -61,9 +61,15 @@
         </g:each>
     </tr>
     <tr>
+
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
-                <g:checkBox name="semester${index}" onclick="showNeededSemesters()"/>
+                <g:if test="${hours?.containsKey(index) && hours?.get(index)}">
+                    <g:checkBox name="semester${index}" value="${true}" onclick="showNeededSemesters()"/>
+                </g:if>
+                <g:else>
+                    <g:checkBox name="semester${index}" onclick="showNeededSemesters()"/>
+                </g:else>
             </td>
         </g:each>
     </tr>
@@ -91,7 +97,8 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:checkBox name="exam${index}"/>
+                    <g:checkBox name="exam${index}"
+                                value="${newControls?.get(index)?.exam == 1 ? true : false}"/>
                 </div>
             </td>
         </g:each>
@@ -101,7 +108,8 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:checkBox name="zach${index}"/>
+                    <g:checkBox name="zach${index}"
+                                value="${newControls?.get(index)?.zach == 1 ? true : false}"/>
                 </div>
             </td>
         </g:each>
@@ -111,7 +119,8 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:checkBox name="cWork${index}"/>
+                    <g:checkBox name="cWork${index}"
+                                checked="${newControls?.get(index)?.cWork == 1 ? true : false}"/>
                 </div>
             </td>
         </g:each>
@@ -121,7 +130,8 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:checkBox name="cProj${index}"/>
+                    <g:checkBox name="cProj${index}"
+                                checked="${newControls?.get(index)?.cProj == 1 ? true : false}"/>
                 </div>
             </td>
         </g:each>
@@ -131,7 +141,7 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:checkBox name="rgr${index}"/>
+                    <g:checkBox name="rgr${index}" checked="${newControls?.get(index)?.rgr == 1 ? true : false}"/>
                 </div>
             </td>
         </g:each>
@@ -141,7 +151,8 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:checkBox name="contrWork${index}"/>
+                    <g:checkBox name="contrWork${index}"
+                                checked="${newControls?.get(index)?.contrWork == 1 ? true : false}"/>
                 </div>
             </td>
         </g:each>
@@ -168,7 +179,13 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:textField name="lectureCount${index}" style="width: 20px"/>
+                    <g:if test="${hours?.containsKey(index)}">
+                        <g:textField name="lectureCount${index}" value="${hours?.get(index)?.lectureCount}" style="width: 20px"/>
+                    </g:if>
+                    <g:else>
+                        <g:textField name="lectureCount${index}" style="width: 20px"/>
+                    </g:else>
+
                 </div>
             </td>
         </g:each>
@@ -178,7 +195,12 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:textField name="seminarCount${index}" style="width: 20px"/>
+                    <g:if test="${hours?.containsKey(index)}">
+                        <g:textField name="seminarCount${index}" style="width: 20px" value="${hours?.get(index)?.seminarCount}"/>
+                    </g:if>
+                    <g:else>
+                        <g:textField name="seminarCount${index}" style="width: 20px"/>
+                    </g:else>
                 </div>
             </td>
         </g:each>
@@ -188,7 +210,12 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:textField name="practiceCount${index}" style="width: 20px"/>
+                    <g:if test="${hours?.containsKey(index)}">
+                        <g:textField name="practiceCount${index}" style="width: 20px" value="${hours?.get(index)?.practiceCount}"/>
+                    </g:if>
+                    <g:else>
+                        <g:textField name="practiceCount${index}" style="width: 20px"/>
+                    </g:else>
                 </div>
             </td>
         </g:each>
@@ -198,7 +225,12 @@
         <g:each in="${1..semesterCount}" var="index">
             <td align="center">
                 <div name="controlType${index}">
-                    <g:textField name="labCount${index}" style="width: 20px"/>
+                    <g:if test="${hours?.containsKey(index)}">
+                        <g:textField name="labCount${index}" style="width: 20px" value="${hours?.get(index)?.labCount}"/>
+                    </g:if>
+                    <g:else>
+                        <g:textField name="labCount${index}" style="width: 20px"/>
+                    </g:else>
                 </div>
             </td>
         </g:each>
@@ -207,7 +239,7 @@
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
 <br/><br/><br/><br/><br/><br/><br/><br/><br/>
-<br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
 
 <g:set var="idx" value="${1}"/>
 <g:while test="${idx <= semestr}">

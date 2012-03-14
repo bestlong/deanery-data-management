@@ -12,45 +12,45 @@
     <tr>
         <td class="caption">Предмет*</td>
         <td>
-            <span style="font-size: 14px;" id="subjName"></span>
+            <span style="font-size: 14px;" id="subjName">${subject?.subject?.name}</span>
             <a id="selectSubj" href="#" onclick="showOrHide(true)" class="action">Выбрать предмет</a>
-            <g:hiddenField name="subjId"/>
+            <g:hiddenField name="subjId" value="${subject?.subject?.id ?: ''}"/>
         </td>
     </tr>
     <tr>
         <td class="caption">Количество кредитов*</td>
         <td>
-            <g:textField name="creditCount"/>
+            <g:textField name="creditCount" value="${subject?.creditCount}"/>
         </td>
     </tr>
     <tr>
         <td class="caption">Количество лекций*</td>
         <td>
-            <g:textField name="lectureCount"/>
+            <g:textField name="lectureCount" value="${subject?.lectureCount}"/>
         </td>
     </tr>
     <tr>
         <td class="caption">Количество семинаров*</td>
         <td>
-            <g:textField name="seminarCount"/>
+            <g:textField name="seminarCount" value="${subject?.seminarCount}"/>
         </td>
     </tr>
     <tr>
         <td class="caption">Количество практических занятий*</td>
         <td>
-            <g:textField name="practiceCount"/>
+            <g:textField name="practiceCount" value="${subject?.practiceCount}"/>
         </td>
     </tr>
     <tr>
         <td class="caption">Количество лабораторных*</td>
         <td>
-            <g:textField name="labCount"/>
+            <g:textField name="labCount" value="${subject?.labCount}"/>
         </td>
     </tr>
     <tr>
         <td class="caption">Количество самостоятельных работ*</td>
         <td>
-            <g:textField name="samCount"/>
+            <g:textField name="samCount" value="${subject?.samCount}"/>
         </td>
     </tr>
 </table>
