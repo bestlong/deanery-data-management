@@ -63,4 +63,10 @@ class Subject {
             chair?.referenceCount--
         }
     }
+
+    def beforeDelete(){
+        if (0 != referenceCount){
+            throw new IllegalStateException("Reference count = ${referenceCount}")
+        }
+    }
 }

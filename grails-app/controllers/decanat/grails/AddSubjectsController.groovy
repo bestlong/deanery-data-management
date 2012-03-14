@@ -64,7 +64,7 @@ class AddSubjectsController {
                     id: it.id,
                     planId: it.plan.id,
                     name: it.subject.name,
-                    chair: it.subject.chair.name,
+                    chair: it.subject.chair?.name,
                     count: res,
                     creditCount: it.creditCount,
                     lectureCount: it.lectureCount,

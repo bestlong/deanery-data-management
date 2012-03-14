@@ -14,11 +14,5 @@
 
 <body>
 
-<div>
-    <h1 style="color: red;">
-        ${flash.message}
-    </h1>
-</div>
-
 </body>
 </html>

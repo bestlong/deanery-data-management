@@ -25,11 +25,10 @@ class ChairController {
     def save = {
         try {
             def chairInstance = new Chair(params)
-            if (chairInstance.validate() && chairInstance.save()) {
+            if (chairInstance.save(flush: true)) {
                 flash.message = message(code: "msg.chair.add", args: [chairInstance.name, chairInstance.shortName ?: "<не указано>"])
                 redirect(action: "list", params: params)
             } else {
-                chairInstance.discard()
                 chain(action: 'create', model: [chairInstance: chairInstance], params: params)
             }
         }
@@ -45,8 +44,11 @@ class ChairController {
                 int id = params.id as int
                 Chair chair = Chair.findById(id)
                 if (chair) {
-                    chair.delete()
+                    chair.delete(flush: true)
                     flash.message = message(code: "msg.chair.remove", args: [chair.name])
+                }
+                else {
+                    flash.error = message(code: "msg.remove.error")
                 }
             }
         }
@@ -62,7 +64,7 @@ class ChairController {
             if (params.id) {
                 Chair chair = Chair.findById(params.id)
                 chair.properties = params
-                if (chair?.save()) {
+                if (chair?.save(flush: true)) {
                     flash.message = message(code: "msg.chair.edit", args: [chair.name, chair.shortName ?: "<не указано>"])
                 } else {
                     flash.error = message(code: "msg.edit.error")
