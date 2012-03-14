@@ -6,23 +6,224 @@
   To change this template use File | Settings | File Templates.
 --%>
 
+<g:javascript>
+    var semesterArray = new Array(${semesterCount});
+
+        $(function () {
+            showNeededSemesters();
+        });
+
+    function showNeededSemesters(){
+        refreshSemesterArray();
+        if (isAllUnchecked()){
+            $('#semesterInfo').hide();
+        }
+        else {
+            $('#semesterInfo').show();
+            for (var i=1; i<=${semesterCount}; i++){
+                if (semesterArray[i]){
+                    $('div[name=controlType'+i+']').show();
+                }
+                else {
+                    $('div[name=controlType'+i+']').hide();
+                }
+            }
+        }
+    }
+
+    function isAllUnchecked(){
+        for (var i=1; i<=${semesterCount}; i++){
+            if (semesterArray[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function refreshSemesterArray(){
+        for (var i=1; i<=${semesterCount}; i++){
+            semesterArray[i] = $('#semester'+i).attr('checked')=='checked'
+        }
+    }
+</g:javascript>
+
+<table width="40%" align="center">
+    <tr>
+        <td colspan="${semesterCount}" align="center">
+            Номер семестра
+        </td>
+    </tr>
+    <tr>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                ${index}
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <g:checkBox name="semester${index}" onclick="showNeededSemesters()"/>
+            </td>
+        </g:each>
+    </tr>
+</table>
+
+<table id="semesterInfo" align="left" width="90%">
+    <tr>
+        <td colspan="${semesterCount}" align="left">
+            <div class="h7" style="color: #5890D1">Вид контроля:</div>
+            <hr/>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    ${index}
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Экзамен</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:checkBox name="exam${index}"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Зачёт</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:checkBox name="zach${index}"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Курсовая работа</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:checkBox name="cWork${index}"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Курсовой проект</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:checkBox name="cProj${index}"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">РГР</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:checkBox name="rgr${index}"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Контрольная работа</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:checkBox name="contrWork${index}"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr><td><div><br/></div></td></tr>
+    <tr>
+        <td colspan="${semesterCount}" align="left">
+            <div style="color: #5890D1" class="h7">Количество за 2 недели:</div>
+            <hr/>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    ${index}
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Лекций</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:textField name="lectureCount${index}" style="width: 20px"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Семинаров</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:textField name="seminarCount${index}" style="width: 20px"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Практик</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:textField name="practiceCount${index}" style="width: 20px"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+    <tr>
+        <td class="planSubjectCaption" align="left" style="font-size: 16px">Лабораторных работ</td>
+        <g:each in="${1..semesterCount}" var="index">
+            <td align="center">
+                <div name="controlType${index}">
+                    <g:textField name="labCount${index}" style="width: 20px"/>
+                </div>
+            </td>
+        </g:each>
+    </tr>
+</table>
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/>
+<br/><br/><br/><br/><br/><br/>
+
 <g:set var="idx" value="${1}"/>
 <g:while test="${idx <= semestr}">
-    <div  id="semestrNumber-${idx}" align="center">
+    <div id="semestrNumber-${idx}" align="center">
         <table id="controlType" align="center">
             <tr>
                 <td colspan="2" align="left">
-                <div class="h7" >Вид контроля:</div>
+                    <div class="h7">Вид контроля:</div>
                 </td>
             </tr>
             <tr class="planSubjectRowHeight">
                 <td class="planSubjectCaption" align="left">Экзамен</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
-
                         <g:checkBox name="exam${idx}"
                                     checked="${newControls?.get(idx)?.exam == 1 ? 'true' : 'false'}"/>
-
                     </g:if>
                     <g:else>
                         <g:checkBox name="exam${idx}" align="left"/>
@@ -33,10 +234,10 @@
             <tr class="planSubjectRowHeight">
                 <td class="planSubjectCaption" align="left">Зачёт</td>
                 <td align="left">
-                    <g:if test="${semestr<=hours?.size()?:0-1}">
+                    <g:if test="${semestr <= hours?.size() ?: 0 - 1}">
                         <g:checkBox name="zach${idx}"
                                     checked="${newControls?.get(idx)?.zach == 1 ? 'true' : 'false'}"/>
-           </g:if>
+                    </g:if>
 
             <tr class="planSubjectRowHeight">
                 <td class="planSubjectCaption" align="left">Курсовая работа</td>
@@ -85,7 +286,6 @@
                     <g:else>
                         <g:checkBox name="contrWork${idx}"/>
                     </g:else>
-
                 </td>
             </tr>
 
@@ -106,17 +306,6 @@
                 </td>
             </tr>
             <tr>
-                <td class="planSubjectCaption" align="left">Семинаров</td>
-                <td align="left">
-                    <g:if test="${hours?.containsKey(idx)}">
-                        <g:textField name="seminarCount${idx}" value="${hours?.get(idx)?.seminars}"/>
-                    </g:if>
-                    <g:else>
-                        <g:textField name="seminarCount${idx}"/>
-                    </g:else>
-                </td>
-            </tr>
-            <tr>
                 <td class="planSubjectCaption" align="left">Практик</td>
                 <td align="left">
                     <g:if test="${hours?.containsKey(idx)}">
@@ -124,6 +313,17 @@
                     </g:if>
                     <g:else>
                         <g:textField name="practiceCount${idx}"/>
+                    </g:else>
+                </td>
+            </tr>
+            <tr>
+                <td class="planSubjectCaption" align="left">Семинаров</td>
+                <td align="left">
+                    <g:if test="${hours?.containsKey(idx)}">
+                        <g:textField name="seminarCount${idx}" value="${hours?.get(idx)?.seminars}"/>
+                    </g:if>
+                    <g:else>
+                        <g:textField name="seminarCount${idx}"/>
                     </g:else>
                 </td>
             </tr>
@@ -138,9 +338,7 @@
                     </g:else>
                 </td>
             </tr>
-
         </table>
-
     </div>
     <g:set var="idx" value="${idx + 1}"/>
 </g:while>
