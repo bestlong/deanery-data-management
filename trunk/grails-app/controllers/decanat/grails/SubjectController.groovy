@@ -16,17 +16,17 @@ class SubjectController {
             if (params.id) {
                 Subject subject = Subject.findById(params.id)
                 if (subjectService.updateSubject(subject, params)) {
-                    flash.message = message(code:"msg.subject.edit", args:[subject.name])
+                    flash.message = message(code: "msg.subject.edit", args: [subject.name])
                 } else {
-                    flash.error = message(code:"msg.edit.error")
+                    flash.error = message(code: "msg.edit.error")
                 }
             } else {
-                flash.error = message(code:"msg.edit.error")
+                flash.error = message(code: "msg.edit.error")
             }
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
-            flash.error = message(code:"msg.edit.error")
+            flash.error = message(code: "msg.edit.error")
         }
         redirect(action: index, params: params)
     }
@@ -44,15 +44,34 @@ class SubjectController {
             subject.chair = Chair.findById(params.subject.chair);
             subject.name = CommonUtils.prepareString(subject.name)
             if (subject.save(flush: true)) {
-                flash.message = message(code:"msg.subject.add", args:[subject.name])
+                flash.message = message(code: "msg.subject.add", args: [subject.name])
             }
         }
         catch (Exception e) {
-            flash.error = message(code:"msg.subject.add.error")
+            flash.error = message(code: "msg.subject.add.error")
             log.error(e.getMessage(), e)
 
         }
         redirect(action: index, params: params)
+    }
+
+    def multipleDelete = {
+        int deletedCount = 0
+        try {
+            def subjects = params.id
+            subjects.each {
+                def deleteItem = params."multipleDelete${it}"
+                if (deleteItem) {
+                    def item = Subject.get(it)
+                    item.delete(flush:true)
+                    deletedCount++
+                }
+            }
+            flash.message= message(code: "message.multiple.delete.success", args: [deletedCount])
+        } catch (Exception e) {
+            flash.error= message(code: "error.multiple.delete.records")
+        }
+        redirect(action: 'index')
     }
 
     def search = {
@@ -71,7 +90,7 @@ class SubjectController {
                 Subject subj = Subject.findById(params.id);
                 if (subj) {
                     subj.delete(flush: true);
-                    flash.message = message(code:"msg.subject.remove", args:[subj.name])
+                    flash.message = message(code: "msg.subject.remove", args: [subj.name])
                 }
                 else {
                     flash.error = message(code: "msg.remove.error")
@@ -79,7 +98,7 @@ class SubjectController {
             }
         }
         catch (Exception e) {
-            flash.error = message(code:"msg.remove.error")
+            flash.error = message(code: "msg.remove.error")
             log.error(e.getMessage(), e)
         }
         redirect(action: 'index', controller: 'subject', params: params)
