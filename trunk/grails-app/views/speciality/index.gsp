@@ -38,6 +38,7 @@
                             {},
                             {},
                             {},
+                            {},
                             { bSortable:false }
                         ]
                     }
@@ -57,31 +58,37 @@
             $("#dialog").dialog();
         }
 
+        function multipleDeleteDialog() {
+            $("#dialogMultipleDelete").dialog();
+            $('#recordsCount').html($("input[type=checkbox]:checked").length)
+        }
     </script>
 
 </head>
 
 <body>
 
-<div  style="width: 100%">
-    <div align="left">
-        <tooltip:tip code="tooltip.add.speciality">
-            <a href="<g:createLink action="add" controller="speciality"/>">
-                <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>"/>
-            </a>
-        </tooltip:tip>
-    </div>
+<div style="width: 100%">
+    <g:form action="multipleDelete" controller="subject">
+        <div align="left" class="action">
+            <g:link controller="speciality" action="add">
+                Новый
+            </g:link>
+            <a id="multipleDelete" onclick="multipleDeleteDialog()">Удалить выделенные</a>
+            <g:submitButton name="multipleDeleteSubmit" value="" style="display: none"/>
+        </div>
 
-    <g:render template="/template/speciality/specialityList" model="${[res: res]}"/>
+        <g:render template="/template/speciality/specialityList" model="${[res: res]}"/>
 
-    <content tag="search">
-        <g:render template="/template/speciality/searchTemplate" model="['controller': 'speciality']"/>
-    </content>
+        <content tag="search">
+            <g:render template="/template/speciality/searchTemplate" model="['controller': 'speciality']"/>
+        </content>
 
-    <content tag="deleteConfirmation">
-        <g:render template="/template/deleteConfirmation"
-                  model="['askMessage': 'Вы точно хотите удалить эту специальность?']"/>
-    </content>
+        <content tag="deleteConfirmation">
+            <g:render template="/template/deleteConfirmation"
+                      model="['askMessage': 'Вы точно хотите удалить эту специальность?']"/>
+        </content>
+    </g:form>
 </div>
 </body>
 </html>

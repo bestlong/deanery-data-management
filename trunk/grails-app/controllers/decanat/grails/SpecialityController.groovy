@@ -84,4 +84,22 @@ class SpecialityController {
         redirect(action: index, params: params)
     }
 
+    def multipleDelete = {
+        int deletedCount = 0
+        try {
+            def specialities = params.id
+            specialities.each {
+                def deleteItem = params."multipleDelete${it}"
+                if (deleteItem) {
+                    def item = Speciality.get(it)
+                    item.delete(flush: true)
+                    deletedCount++
+                }
+            }
+            flash.message = message(code: "message.multiple.delete.success", args: [deletedCount])
+        } catch (Exception e) {
+            flash.error = message(code: "error.multiple.delete.records")
+        }
+        redirect(action: 'index')
+    }
 }
