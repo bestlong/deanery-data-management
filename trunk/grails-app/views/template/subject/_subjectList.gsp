@@ -17,6 +17,7 @@
                 $('input[name*=multipleDelete]').attr('checked', false);
                 $('[name=subjectTr]').removeAttr('style');
             }
+            hideDeleteMultiple();
         }
         function changeBackground(id) {
             if ($('#multipleDelete' + id).attr('checked')) {
@@ -24,10 +25,20 @@
             } else {
                 $('#tr' + id).removeAttr('style');
             }
+            hideDeleteMultiple();
+        }
+        function hideDeleteMultiple(){
+            var size = $("input[type=checkbox]:checked").length;
+            if (size == 0){
+                $('#multipleDelete').hide();
+            }
+            else {
+                $('#multipleDelete').show();
+            }
         }
     </g:javascript>
     <div class="subtitle" align="center">Список предметов</div>
-
+    <g:render template="/template/multipleDeleteConfirmation"/>
     <g:hiddenField name="id" value="-1"/>
     <table id="subjects" class="display">
         <thead>
