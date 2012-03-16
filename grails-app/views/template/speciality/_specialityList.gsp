@@ -7,10 +7,12 @@
 --%>
 
 <div id="updateSpecialityDiv">
+    <g:render template="/template/multipleDeleteItem"/>
     <div class="subtitle" align="center">Список специальностей</div>
     <table id="specialityList" class="display">
         <thead>
         <tr>
+            <th><a onclick="selectUnselectAll()">Выделить все</a></th>
             <th>Код</th>
             <th>Код специальности</th>
             <th>Имя</th>
@@ -22,6 +24,14 @@
         <tbody>
         <g:each in="${res}" var="speciality">
             <tr>
+                <td align="center">
+                    <g:if test="${speciality.referenceCount == 0}">
+                        <tooltip:tip code="tooltip.del">
+                            <g:hiddenField name="id" value="${speciality.id}"/>
+                            <g:checkBox name="multipleDelete${speciality.id}" onclick="changeBackground(${speciality.id})"/>
+                        </tooltip:tip>
+                    </g:if>
+                </td>
                 <td>
                     ${speciality.code}
                 </td>
