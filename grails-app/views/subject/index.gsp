@@ -49,12 +49,17 @@
             $("#errors").delay(6000).fadeOut(5 * 400);
             $("input:submit, a, button", ".action").button();
             $("#dialog").hide();
-//            $("input:submit, a, button", ".action").button();
+            hideDeleteMultiple();
         });
 
         function deleteDialog(iid) {
             $("#delBtn").attr("href", '${request.contextPath + '/subject/delete/'}' + iid);
             $("#dialog").dialog();
+        }
+
+        function multipleDeleteDialog() {
+            $("#dialogMultipleDelete").dialog();
+            $('#recordsCount').html($("input[type=checkbox]:checked").length)
         }
     </script>
 </head>
@@ -66,7 +71,8 @@
             <g:link controller="subject" action="add">
                 Новый
             </g:link>
-            <g:submitButton name="multipleDelete" value="Удалить выделенные"/>
+            <a id="multipleDelete" onclick="multipleDeleteDialog()">Удалить выделенные</a>
+            <g:submitButton name="multipleDeleteSubmit" value="" style="display: none"/>
         </div>
 
         <g:render template="/template/subject/subjectList" model="${[res: res]}"/>
