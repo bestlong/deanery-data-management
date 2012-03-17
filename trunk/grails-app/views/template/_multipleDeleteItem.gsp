@@ -5,17 +5,17 @@
 
         if (size != totalSize) {
             $('input[name*=multipleDelete]').attr('checked', true);
-            $('[name=subjectTr]').css('background-color', '#e3a345');
+            $('[name=itemTr]').css('background-color', '#edf511');
         }
         else {
             $('input[name*=multipleDelete]').attr('checked', false);
-            $('[name=subjectTr]').removeAttr('style');
+            $('[name=itemTr]').removeAttr('style');
         }
         hideDeleteMultiple();
     }
     function changeBackground(id) {
         if ($('#multipleDelete' + id).attr('checked')) {
-            $('#tr' + id).css('background-color', '#e3a345');
+            $('#tr' + id).css('background-color', '#edf511');
         } else {
             $('#tr' + id).removeAttr('style');
         }

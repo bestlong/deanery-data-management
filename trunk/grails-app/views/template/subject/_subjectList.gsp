@@ -21,7 +21,7 @@
 
         <tbody>
         <g:each in="${res}" var="subject">
-            <tr id="tr${subject.id}" name="subjectTr">
+            <tr id="${subject.referenceCount == 0 ? 'tr'+subject.id : ''}" name="${subject.referenceCount == 0 ? 'itemTr' : ''}">
                 <td align="center">
                     <g:if test="${subject.referenceCount == 0}">
                         <tooltip:tip code="tooltip.del">
@@ -77,5 +77,4 @@
         </g:each>
         </tbody>
     </table>
-
 </div>

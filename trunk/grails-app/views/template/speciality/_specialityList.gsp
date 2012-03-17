@@ -23,7 +23,7 @@
 
         <tbody>
         <g:each in="${res}" var="speciality">
-            <tr>
+            <tr id="${speciality.referenceCount == 0 ? 'tr'+speciality.id : ''}" name="${speciality.referenceCount == 0 ? 'itemTr' : ''}">
                 <td align="center">
                     <g:if test="${speciality.referenceCount == 0}">
                         <tooltip:tip code="tooltip.del">
