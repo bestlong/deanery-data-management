@@ -8,10 +8,12 @@
 
 
 <div id="updateChairDiv">
+    <g:render template="/template/multipleDeleteItem"/>
     <div class="subtitle" align="center">Список кафедр</div>
     <table id="tableCont" class="display">
         <thead>
         <tr>
+            <th><a onclick="selectUnselectAll()">Выделить все</a></th>
             <th>Код</th>
             <th>Название</th>
             <th>Аббревиатура</th>
@@ -24,7 +26,15 @@
 
         <tbody>
         <g:each in="${chairCollection}" var="chair">
-            <tr>
+            <tr id="${chair.referenceCount == 0 ? 'tr'+chair.id : ''}" name="${chair.referenceCount == 0 ? 'itemTr' : ''}">
+                <td align="center">
+                    <g:if test="${chair.referenceCount == 0}">
+                        <tooltip:tip code="tooltip.del">
+                            <g:hiddenField name="id" value="${chair.id}"/>
+                            <g:checkBox name="multipleDelete${chair.id}" onclick="changeBackground(${chair.id})"/>
+                        </tooltip:tip>
+                    </g:if>
+                </td>
                 <td>
                     ${chair?.codeChair}
                 </td>
