@@ -35,7 +35,25 @@ class ChairController {
         catch (Exception e) {
             log.error(e.getMessage(), e)
         }
+    }
 
+    def multipleDelete = {
+        int deletedCount = 0
+        try {
+            def chairs = params.id
+            chairs.each {
+                def deleteItem = params."multipleDelete${it}"
+                if (deleteItem) {
+                    def item = Chair.get(it)
+                    item.delete(flush:true)
+                    deletedCount++
+                }
+            }
+            flash.message= message(code: "message.multiple.delete.success", args: [deletedCount])
+        } catch (Exception e) {
+            flash.error= message(code: "error.multiple.delete.records")
+        }
+        redirect(action: 'list')
     }
 
     def remove = {
