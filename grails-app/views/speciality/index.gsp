@@ -34,12 +34,12 @@
                         },
                         bAutoWidth:false,
                         aoColumns:[
+                            { bSortable:false, sWidth: "5%"},
                             {},
                             {},
                             {},
                             {},
-                            {},
-                            { bSortable:false }
+                            { bSortable:false, sWidth: "5%"}
                         ]
                     }
             );
@@ -51,6 +51,7 @@
             $("#errors").delay(6000).fadeOut(5 * 400);
             $("input:submit, a, button", ".action").button();
             $("#dialog").hide();
+            hideDeleteMultiple();
         });
 
         function deleteDialog(iid) {
@@ -69,7 +70,7 @@
 <body>
 
 <div style="width: 100%">
-    <g:form action="multipleDelete" controller="subject">
+    <g:form action="multipleDelete" controller="speciality">
         <div align="left" class="action">
             <g:link controller="speciality" action="add">
                 Новый
