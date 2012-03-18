@@ -7,10 +7,16 @@
 
 <html>
 <head>
+    <g:javascript>
+        function editPassDialog(iid) {
+            $("#editPass").attr("href", '/decanat-grails/user/edit/' + iid);
+            $("#dialog").dialog();
+        }
+    </g:javascript>
     <meta name="layout" content="main"/>
-    <jqvalui:renderValidationScript for="decanat.grails.domain.User"/>
+    <g:javascript src="/init/user/init.js"/>
      <title>
-        Редикторовать пользователя
+        Редактировать пользователя
     </title>
 </head>
 <body>
@@ -31,7 +37,7 @@
             <g:renderErrors bean="${user}" as="list"/>
         </div>
     </g:hasErrors>
-    <g:form controller="user" action="update" width="300">
+    <g:form controller="user" action="update" width="300" name="editUserForm">
         <table class="editTable" align="center">
             <tr>
                 <td class="caption">Роль*</td>
@@ -46,21 +52,20 @@
                     <g:textField name="username" value="${user?.username}"/>
                 </td>
             </tr>
-            <tr>
-                <td class="caption">Пароль*</td>
-                <td>
-                    <g:passwordField name="passwd"/>
-                </td>
-            </tr>
         </table>
         <br/>
 
         <div align="center" class="action">
             <g:link controller="user" action="index" >Отмена</g:link>
             <g:submitButton name="save" value="Сохранить"/>
+            <a href="#" onclick="editPassDialog(${user?.id})" class="editPass">Изменить пароль</a>
         </div>
     </g:form>
 </div>
+
+<content tag="editPassword">
+    <g:render template="/template/user/editPasword"/>
+</content>
 
 </body>
 </html>
