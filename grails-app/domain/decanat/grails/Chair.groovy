@@ -3,6 +3,7 @@ package decanat.grails
 import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.ChairDTO
 import stu.cn.ua.dbf.dto.ErrorInfo
+import stu.cn.ua.CommonUtils
 
 class Chair {
 
@@ -15,40 +16,43 @@ class Chair {
     private static final fieldMap = [name: 'NAMEKAF', shortName: 'SHORTKAF', head: 'FAMZAV', codeChair: 'CODKAF']
 
     static constraints = {
-        name (blank: false, unique: true)
+        name(blank: false, unique: true)
         shortName(unique: true, nullable: true)
         head(nullable: true)
         codeChair(nullable: true)
         referenceCount(nullable: false)
     }
 
-    public static Chair saveChair(ChairDTO chairDTO){
+    public static Chair saveChair(ChairDTO chairDTO) {
         Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
-        if (!chair || "".equals(chairDTO.codkaf)){
-            chair = new Chair(name:  chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf)
+        if (!chair || "".equals(chairDTO.codkaf)) {
+            chair = new Chair(name: CommonUtils.prepareString(chairDTO.namekaf),
+                    shortName: CommonUtils.prepareString(chairDTO.shortkaf),
+                    head: CommonUtils.prepareString(chairDTO.famzav),
+                    codeChair: CommonUtils.prepareString(chairDTO.codkaf))
         }
         else {
-            chair.name =chairDTO.namekaf
-            chair.shortName = chairDTO.shortkaf
-            chair.head = chairDTO.famzav
+            chair.name = CommonUtils.prepareString(chairDTO.namekaf)
+            chair.shortName = CommonUtils.prepareString(chairDTO.shortkaf)
+            chair.head = CommonUtils.prepareString(chairDTO.famzav)
         }
         chair.save()
     }
 
-    public static ValidationResult validate(ChairDTO chairDTO){
+    public static ValidationResult validate(ChairDTO chairDTO) {
         Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
-        if (!chair || "".equals(chairDTO.codkaf)){
-            chair = new Chair(name:  chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf)
+        if (!chair || "".equals(chairDTO.codkaf)) {
+            chair = new Chair(name: chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf)
         }
         else {
-            chair.name =chairDTO.namekaf
+            chair.name = chairDTO.namekaf
             chair.shortName = chairDTO.shortkaf
             chair.head = chairDTO.famzav
         }
-        if (!chair.validate()){
+        if (!chair.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
             chair.errors.allErrors.each {
-               validationErrors.add(new ErrorInfo(chairDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
+                validationErrors.add(new ErrorInfo(chairDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
             }
             return new ValidationResult(false, validationErrors)
         } else {

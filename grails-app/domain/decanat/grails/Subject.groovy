@@ -3,6 +3,7 @@ package decanat.grails
 import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.ErrorInfo
 import stu.cn.ua.dbf.dto.SubjectDTO
+import stu.cn.ua.CommonUtils
 
 class Subject {
 
@@ -22,26 +23,28 @@ class Subject {
         referenceCount(nullable: false)
     }
 
-    public static Subject saveSubject(SubjectDTO subjectDTO){
+    public static Subject saveSubject(SubjectDTO subjectDTO) {
         def subject = Subject.findByCode(subjectDTO.coddis)
-        if (!subject || "".equals(subjectDTO.coddis)){
-            subject = new Subject(name:  subjectDTO.namedis, shortName: subjectDTO.shortdis, code: subjectDTO.coddis)
-        } else{
-            subject.name = subjectDTO.namedis
-            subject.shortName = subjectDTO.shortdis
+        if (!subject || "".equals(subjectDTO.coddis)) {
+            subject = new Subject(name: CommonUtils.prepareString(subjectDTO.namedis),
+                    shortName: CommonUtils.prepareString(subjectDTO.shortdis),
+                    code: CommonUtils.prepareString(subjectDTO.coddis))
+        } else {
+            subject.name = CommonUtils.prepareString(subjectDTO.namedis)
+            subject.shortName = CommonUtils.prepareString(subjectDTO.shortdis)
         }
         subject.save()
     }
 
-    public static ValidationResult validate(SubjectDTO subjectDTO){
+    public static ValidationResult validate(SubjectDTO subjectDTO) {
         def subject = Subject.findByCode(subjectDTO.coddis)
-        if (!subject || "".equals(subjectDTO.coddis)){
-            subject = new Subject(name:  subjectDTO.namedis, shortName: subjectDTO.shortdis, code: subjectDTO.coddis)
-        } else{
+        if (!subject || "".equals(subjectDTO.coddis)) {
+            subject = new Subject(name: subjectDTO.namedis, shortName: subjectDTO.shortdis, code: subjectDTO.coddis)
+        } else {
             subject.name = subjectDTO.namedis
             subject.shortName = subjectDTO.shortdis
         }
-        if (!subject.validate()){
+        if (!subject.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
             subject.errors.allErrors.each {
                 validationErrors.add(new ErrorInfo(subjectDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
@@ -52,20 +55,20 @@ class Subject {
         }
     }
 
-    def afterInsert(){
-        if (null != chair){
+    def afterInsert() {
+        if (null != chair) {
             chair?.referenceCount++
         }
     }
 
-    def afterDelete(){
-        if (null != chair){
+    def afterDelete() {
+        if (null != chair) {
             chair?.referenceCount--
         }
     }
 
-    def beforeDelete(){
-        if (0 != referenceCount){
+    def beforeDelete() {
+        if (0 != referenceCount) {
             throw new IllegalStateException("Reference count = ${referenceCount}")
         }
     }

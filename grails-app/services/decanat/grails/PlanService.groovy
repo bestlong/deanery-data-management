@@ -11,7 +11,7 @@ class PlanService {
         c.list{
             maxResults (max)
             firstResult(offset)
-            order("lastUpdated", "asc")
+            order("lastUpdated", "desc")
             eq("class", planClass.name())
         }
     }
@@ -20,6 +20,7 @@ class PlanService {
         def c = Plan.createCriteria()
         def list = c.list(){
             eq("class", planClass.name())
+            order("lastUpdated", "desc")
         }
         list.size()
     }

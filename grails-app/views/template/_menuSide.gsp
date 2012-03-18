@@ -1,7 +1,12 @@
 
 <style type="text/css">
 .selectedMenu {
-    background-color: #e6e6fa;
+    background: 0 100% no-repeat #e6e6fa;
+    margin-bottom: 10px;
+    clear: both;
+    -moz-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
 }
 
 </style>
