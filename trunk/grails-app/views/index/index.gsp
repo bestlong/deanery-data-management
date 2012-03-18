@@ -6,6 +6,18 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
+    <style type="text/css">
+        .paginateButtons {
+            font-size: 16px;
+            text-align: center;
+            margin: 2px;
+            padding: 2px;
+        }
+        .step {
+            margin: 2px;
+            padding: 2px;
+        }
+    </style>
 </head>
 
 <body>

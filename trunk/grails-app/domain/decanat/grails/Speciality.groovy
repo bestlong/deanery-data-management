@@ -3,6 +3,7 @@ package decanat.grails
 import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.ErrorInfo
 import stu.cn.ua.dbf.dto.SpecialityPlanDTO
+import stu.cn.ua.CommonUtils
 
 class Speciality {
 
@@ -22,17 +23,17 @@ class Speciality {
         referenceCount(nullable: false)
     }
 
-    public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO){
+    public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO) {
         Speciality speciality = Speciality.findByCode(specialityPlanDTO.codsp)
-        if (!speciality || "".equals(specialityPlanDTO.codsp)){
-            speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
+        if (!speciality || "".equals(specialityPlanDTO.codsp)) {
+            speciality = new Speciality(name: specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
         }
         else {
-            speciality.name =specialityPlanDTO.name
+            speciality.name = specialityPlanDTO.name
             speciality.shortName = specialityPlanDTO.codname
-            speciality.specialityCode= specialityPlanDTO.codspec
+            speciality.specialityCode = specialityPlanDTO.codspec
         }
-        if (!speciality.validate()){
+        if (!speciality.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
             speciality.errors.allErrors.each {
                 validationErrors.add(new ErrorInfo(specialityPlanDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
@@ -43,15 +44,18 @@ class Speciality {
         }
     }
 
-    public static Speciality saveSpeciality(SpecialityPlanDTO specialityPlanDTO){
+    public static Speciality saveSpeciality(SpecialityPlanDTO specialityPlanDTO) {
         def speciality = Speciality.findByCode(specialityPlanDTO.codsp)
-        if (!speciality || "".equals(specialityPlanDTO.codsp)){
-            speciality = new Speciality(name:  specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
+        if (!speciality || "".equals(specialityPlanDTO.codsp)) {
+            speciality = new Speciality(name: CommonUtils.prepareString(specialityPlanDTO.name),
+                    shortName: CommonUtils.prepareString(specialityPlanDTO.codname),
+                    specialityCode: CommonUtils.prepareString(specialityPlanDTO.codspec),
+                    code: CommonUtils.prepareString(specialityPlanDTO.codsp))
         }
         else {
-            speciality.name =specialityPlanDTO.name
-            speciality.shortName = specialityPlanDTO.codname
-            speciality.specialityCode= specialityPlanDTO.codspec
+            speciality.name = CommonUtils.prepareString(specialityPlanDTO.name)
+            speciality.shortName = CommonUtils.prepareString(specialityPlanDTO.codname)
+            speciality.specialityCode = CommonUtils.prepareString(specialityPlanDTO.codspec)
         }
         speciality.save()
     }
