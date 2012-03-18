@@ -8,9 +8,13 @@ class SubjectService {
 
     def updateSubject(Subject subject, def params) {
         subject.properties = params
-        subject.chair?.referenceCount--
+        if (null != subject.chair) {
+            subject.chair?.referenceCount--
+        }
         subject.chair = Chair.findById(params.subject.chair);
-        subject.chair?.referenceCount++
+        if (null != subject.chair) {
+            subject.chair?.referenceCount++
+        }
         subject.name = CommonUtils.prepareString(subject.name)
         return subject.save()
     }
