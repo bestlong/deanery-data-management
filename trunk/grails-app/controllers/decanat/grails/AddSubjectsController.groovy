@@ -41,12 +41,12 @@ class AddSubjectsController {
         def plan = Plan.get(params.id as int)
         def semestrs = []
         (1..plan.semestrCount).each {int i ->
-            if (params."filterSemestr${i}" as Boolean){
+            if (params."filterSemestr${i}" as Boolean) {
                 semestrs.add(i)
             }
         }
         def result
-        if (semestrs?.size() != 0){
+        if (semestrs?.size() != 0) {
             result = planSubjectService.findPlanSubjectsBySemestrList(semestrs, plan)
         }
         else {
@@ -171,7 +171,7 @@ class AddSubjectsController {
                         throw new Exception("planHour is not valid")
                     }
                 }
-                flash.message = message(code:"msg.planSubject.add.success")
+                flash.message = message(code: "msg.planSubject.add.success")
             }
             else {
                 log.error "validation doesn't work, subject: ${subject}, plan: ${plan}"
@@ -180,7 +180,7 @@ class AddSubjectsController {
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
-            flash.error = message(code:"msg.planSubject.add.error")
+            flash.error = message(code: "msg.planSubject.add.error")
         }
         redirect(action: index, params: params)
     }
@@ -194,10 +194,14 @@ class AddSubjectsController {
             if (subject && plan) {
                 def planSubject = PlanSubject.get(params.subjectId as long)
                 planSubjectService.clearSubject(planSubject)
-                planSubject.subject?.referenceCount--
+                if (null != planSubject.subject) {
+                    planSubject.subject?.referenceCount--
+                }
                 planSubject.plan = plan
                 planSubject.subject = subject
-                planSubject.subject?.referenceCount++
+                if (null != planSubject.subject) {
+                    planSubject.subject?.referenceCount++
+                }
                 planSubject.creditCount = params.creditCount == "" || params.creditCount == null ? 0 : params.creditCount as double
                 planSubject.lectureCount = params.lectureCount == "" || params.lectureCount == null ? 0 : params.lectureCount as int
                 planSubject.seminarCount = params.seminarCount == "" || params.seminarCount == null ? 0 : params.seminarCount as int
@@ -241,7 +245,7 @@ class AddSubjectsController {
                         throw new Exception("planHour is not valid")
                     }
                 }
-                flash.message = message(code:"msg.planSubject.edit.success")
+                flash.message = message(code: "msg.planSubject.edit.success")
             }
             else {
                 log.error "validation doesn't work, subject: ${subject}, plan: ${plan}"
@@ -250,9 +254,9 @@ class AddSubjectsController {
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
-            flash.error = message(code:"msg.planSubject.edit.error")
+            flash.error = message(code: "msg.planSubject.edit.error")
         }
-        redirect(action: index, params: params, id:  plan?.id)
+        redirect(action: index, params: params, id: plan?.id)
     }
 
     def delete = {
@@ -261,13 +265,13 @@ class AddSubjectsController {
                 PlanSubject subj = PlanSubject.get(params.id as int);
                 if (subj) {
                     subj.delete(flush: true);
-                    flash.message = message(code:"msg.planSubject.remove.success")
+                    flash.message = message(code: "msg.planSubject.remove.success")
                 }
             }
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
-            flash.error = message(code:"msg.planSubject.remove.error")
+            flash.error = message(code: "msg.planSubject.remove.error")
         }
 
         redirect(action: index, id: params.planId)

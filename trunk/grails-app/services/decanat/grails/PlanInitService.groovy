@@ -13,8 +13,12 @@ class PlanInitService {
         }
         else {
             plan = Plan.findById(params.id)
-            plan.chair?.referenceCount--
-            plan.speciality?.referenceCount--
+            if (null != plan.chair){
+                plan.chair?.referenceCount--
+            }
+            if (null != plan.speciality){
+                plan.speciality?.referenceCount--
+            }
         }
 
         plan.properties = params
