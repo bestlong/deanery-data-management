@@ -18,7 +18,7 @@
                 <td class="caption">Логин*</td>
                 <td>
                     <g:hiddenField name="id" value="${user.id}"/>
-                    <g:textField name="username" value="${user.username}"/>
+                    <g:textField name="username" value="${user?.username}"/>
                 </td>
             </tr>
         </table>

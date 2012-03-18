@@ -35,6 +35,7 @@ class ProfileController {
     }
 
     def edit = {
+        flash.message = message(code: "tooltip.plan.expand.work.plans")
         try {
             User user = User.get(springSecurityService.principal.id)
             def encodedPass = springSecurityService.encodePassword(params.newPasswd)  //TODO fix fucking bug
