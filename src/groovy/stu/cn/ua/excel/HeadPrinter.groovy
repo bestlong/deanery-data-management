@@ -72,7 +72,7 @@ class HeadPrinter {
         sheet.addMergedRegion(new CellRangeAddress(currentRow, currentRow, 10, excelComponent.columnCount - 1));
         cell = row.createCell(10)
         cell.setCellStyle(excelComponent.leftCellStyle)
-        cell.setCellValue("""Спеціальність ${plan.speciality.kod} - ${plan.speciality.name}, освітньо-кваліфікаційний рівень - ${plan.level},
+        cell.setCellValue("""Спеціальність ${plan.speciality.specialityCode} - ${plan.speciality.name}, освітньо-кваліфікаційний рівень - ${plan.level},
 кваліфікація ${plan.qualification}, термін навчання ${plan.termin}""")
 
         currentRow++;

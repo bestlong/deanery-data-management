@@ -22,7 +22,7 @@
     </tr>
     <tr>
         <td colspan="3" align="center">
-            Спеціальність ${plan.speciality.kod} - ${plan.speciality.name}, освітньо-кваліфікаційний рівень - ${plan.level}, кваліфікація ${plan.qualification},
+            Спеціальність ${plan.speciality.specialityCode} - ${plan.speciality.name}, освітньо-кваліфікаційний рівень - ${plan.level}, кваліфікація ${plan.qualification},
             термін навчання ${plan.termin}
         </td>
     </tr>
