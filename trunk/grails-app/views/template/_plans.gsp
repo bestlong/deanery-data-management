@@ -44,7 +44,7 @@
                                             controller="planInit">${plan.speciality.specialityCode} ${plan.speciality.name}</g:link>
                                 </sec:ifAllGranted>
                                 <sec:ifAllGranted roles="ROLE_USER">
-                                    ${plan.speciality.kod} ${plan.speciality.name}
+                                    ${plan.speciality.specialityCode} ${plan.speciality.name}
                                 </sec:ifAllGranted>
                             </h4>
                         </td>
