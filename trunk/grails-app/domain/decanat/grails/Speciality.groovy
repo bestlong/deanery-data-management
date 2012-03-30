@@ -64,4 +64,18 @@ class Speciality {
     String toString() {
         return "Специальность, код: ${code}, имя: ${name} "
     }
+
+    public String toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" , "code", "name" , "referenceCount", "shortName", "specialityCode" ];
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
+    }
 }

@@ -54,6 +54,7 @@
     <div id="colTwo" style="${style}">
         <div id="menuBuffer"></div>
         <g:pageProperty name="page.deleteConfirmation"/>
+        <g:pageProperty name="page.chengplan"/>
         <g:pageProperty name="page.editPassword"/>
         <div>
             <g:render template="/template/notification/general"/>

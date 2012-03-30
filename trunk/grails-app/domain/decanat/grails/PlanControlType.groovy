@@ -1,6 +1,7 @@
 package decanat.grails
 
 import stu.cn.ua.enums.ControlTypeEnum
+import stu.cn.ua.CommonUtils
 
 class PlanControlType {
 
@@ -43,4 +44,19 @@ class PlanControlType {
         return bits.charAt(controlType.bitNum).equals("1".charAt(0))
 
     }
+
+    public String toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" , "semestr", "planSubjectId" , "mask"];
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
+    }
+
 }
