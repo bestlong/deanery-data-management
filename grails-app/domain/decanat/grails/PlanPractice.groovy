@@ -1,5 +1,7 @@
 package decanat.grails
 
+import stu.cn.ua.CommonUtils
+
 class PlanPractice {
     String name;
     Plan plan;
@@ -35,5 +37,21 @@ class PlanPractice {
 
         semestr(min: 0)
         weekCount(min: 0)
+    }
+
+    public String toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" , "name", "planId" , "semestr" ,  "weekCount"];
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
+
+
     }
 }

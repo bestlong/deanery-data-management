@@ -2,6 +2,7 @@ package decanat.grails
 
 import stu.cn.ua.enums.ControlTypeEnum
 import stu.cn.ua.enums.WorkTypeEnum
+import stu.cn.ua.CommonUtils
 
 class PlanSubject {
 
@@ -65,6 +66,20 @@ class PlanSubject {
 
     def getTotal() {
         return lectureCount + seminarCount + practiceCount + labCount + samCount
+    }
+
+    public String toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" , "creditCount", "labCount" , "lectureCount" ,  "planId" ,  "practiceCount" ,  "samCount" ,  "seminarCount" ,  "subjectId"];
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
     }
 
     public String getControlType(ControlTypeEnum cType) {

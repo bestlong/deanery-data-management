@@ -1,6 +1,7 @@
 package decanat.grails
 
 import stu.cn.ua.enums.PlanClass
+import stu.cn.ua.CommonUtils
 
 class WorkPlan extends Plan{
     
@@ -64,5 +65,20 @@ class WorkPlan extends Plan{
         if (null != p.stateExam){
             stateExam = PlanStateExam.createNew(p.stateExam, this)
         }
+    }
+    public String toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" , "chairId", "direction" , "startYear" ,  "endYear" ,  "form" ,  "level" ,  "qualification" ,  "semestrCount", "specialityId",  "termin","name","planId"];
+
+
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
     }
 }

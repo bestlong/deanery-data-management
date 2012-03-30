@@ -72,4 +72,18 @@ class Subject {
             throw new IllegalStateException("Reference count = ${referenceCount}")
         }
     }
+
+    public String toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" , "chairId", "code" , "name", "referenceCount", "shortName" ];
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
+    }
 }

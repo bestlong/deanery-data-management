@@ -6,6 +6,7 @@ import stu.cn.ua.enums.PlanClass
 import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.SpecialityPlanDTO
 import stu.cn.ua.dbf.dto.ErrorInfo
+import stu.cn.ua.CommonUtils
 
 class Plan {
 
@@ -211,4 +212,20 @@ class Plan {
         }
         sum
     }
+    public def toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" , "chairId", "direction" , "startYear" ,  "endYear" ,  "form" ,  "level" ,  "qualification" ,  "semestrCount", "specialityId",  "termin"];
+
+
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
+    }
 }
+

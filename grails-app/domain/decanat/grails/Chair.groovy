@@ -59,4 +59,21 @@ class Chair {
             return new ValidationResult(true)
         }
     }
+
+    public def toCSV(){
+
+        String srt = new String();
+
+        def  nodes=["id" ,"codeChair", "head", "name", "referenceCount", "shortName"];
+
+
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
+    }
+
 }

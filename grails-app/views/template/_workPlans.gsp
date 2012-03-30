@@ -1,3 +1,5 @@
+
+
 <table style="margin-left: 100px;" cellspacing="3">
     <tr>
         <td align="center" style="text-decoration: underline; font-size: 14px" class="subtitle">
@@ -33,6 +35,11 @@
                 </sec:ifAllGranted>
             </td>
             <td >
+                 <a href="#" onclick="chengworkplan(${plan?.id})" class="chengpl" >
+                    <img src="<g:createLinkTo dir="/images" file="cvs.png"/>" alt="CSV" class="chengpl">
+                </a>
+             </td>
+            <td >
                 <g:if test="${univer && plan.stateExam}">
                     <tooltip:tip code="tooltip.plan.print">
                         <a style="align: right"
@@ -53,3 +60,4 @@
         </tr>
     </g:each>
 </table>
+

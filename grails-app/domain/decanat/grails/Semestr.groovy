@@ -1,5 +1,7 @@
 package decanat.grails
 
+import stu.cn.ua.CommonUtils
+
 class Semestr implements Comparable{
     Plan plan;
     int number;
@@ -33,4 +35,19 @@ class Semestr implements Comparable{
    int compareTo(obj) {
        number.compareTo(obj.number)
    }
+
+    public String toCSV(){
+
+        String srt = new String();
+
+
+        def  nodes=["id" , "number", "planId" , "weekCount" ];
+
+        for(String obj: nodes){
+            def nod=this."${obj}";
+            srt = srt + CommonUtils.wordToCSV(nod);
+        }
+        srt=srt+"\n"
+        return srt;
+    }
 }

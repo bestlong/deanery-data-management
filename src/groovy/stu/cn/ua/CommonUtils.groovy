@@ -12,4 +12,19 @@ class CommonUtils {
     public static String prepareString(String inp){
         return inp.replaceAll("'", "’").replaceAll("\"", "’");
     }
+
+    public static def wordToCSV(def buf) {
+        String buf1;
+        if (buf == null) {buf1 = new String("\"\";");}
+        else {
+
+            buf1 = buf.toString().trim();
+            buf1 = buf1.replace("\"", "\"\"");
+            buf1 = "\"${buf1}\";";
+        }
+        return buf1;
+
+    }
+
+
 }
