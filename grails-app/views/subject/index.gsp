@@ -12,35 +12,90 @@
     <script type="text/javascript">
 
         function initTable() {
+            var currId = '';
+
             $('#subjects').dataTable({
-                        "bJQueryUI":true,
-                        "sPaginationType":"full_numbers",
-                        "iDisplayLength":20,
-                        "bLengthChange":false,
-                        "oLanguage":{
-                            "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
-                            "sInfoEmpty":"Нет данных для отображения",
-                            "sSearch":"Поиск",
-                            "sLengthMenu":"Отображать по _MENU_",
-                            "sInfoFiltered":"(найдено из _MAX_)",
-                            "sZeroRecords":"По Вашему запросу ничего не найдено.",
-                            "oPaginate":{
-                                "sFirst":"К началу",
-                                "sPrevious":"Назад",
-                                "sLast":"В конец",
-                                "sNext":"Далее"
+                "bJQueryUI":true,
+                "bFilter":false,
+                sPaginationType:"full_numbers",
+                iDisplayLength:25,
+                "oLanguage":{
+                    "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+                    "sInfoEmpty":"Нет данных для отображения",
+                    "sSearch":"Поиск",
+                    "sLengthMenu":"Отображать по _MENU_",
+                    "sInfoFiltered":"(найдено из _MAX_)",
+                    "sZeroRecords":"По Вашему запросу ничего не найдено.",
+                    "oPaginate":{
+                        "sFirst":"К началу",
+                        "sPrevious":"Назад",
+                        "sLast":"В конец",
+                        "sNext":"Далее"
+                    }
+                },
+                bProcessing:true,
+                bServerSide:true,
+                sAjaxSource:"${request.contextPath}/subject/table",
+                bAutoWidth:false,
+                aLengthMenu:[
+                    [10, 25, 50],
+                    [10, 25, 50]
+                ],
+                aoColumns:[
+                    { bSortable:false, sWidth:"5%",
+                        "fnRender":function (o, val) {
+                            currId = o.aData[0];
+                            return '<input type="hidden" name="id" value=' + o.aData[0] + '>' +
+                                    '<input type="hidden" name="referenceCount" value=' + o.aData[5] + '>' +
+                                    '<input type="checkbox" name ="multipleDelete' + o.aData[0] + '" id="multipleDelete' + o.aData[0] + '" onclick="changeBackground(' + o.aData[0] + ')">';
+
+                        }},
+                    {},
+                    {},
+                    {},
+                    {},
+                    { bSortable:false, sWidth:"5%",
+                        "fnRender":function (o, val) {
+                            var res = '';
+                            res = res + '<table>' +
+                                    '<tr>' +
+                                    '<td align="left" style="margin-left: 5px; margin-right: 5px">' +
+                                    '<span onmouseover="tooltip.show(\'Редактировать выбранный предмет\');" onmouseout="tooltip.hide();">' +
+                                    '<a href="/plan/subject/edit/' + currId + '" class="editBtn">' +
+                                    '<input type="image" src="/plan/images/ctrl/edit.jpg">' +
+                                    '</a>' +
+                                    '</span>' +
+                                    '</td>';
+                            if (o.aData[5] == 0) {
+                                res = res +
+                                        '<td align="right" style="margin-left: 5px; margin-right: 5px">' +
+                                        '<span onmouseover="tooltip.show(\'Удалить выбранный предмет\');" onmouseout="tooltip.hide();">' +
+                                        '<a class="delBtn" onclick="deleteDialog(' + currId + ')">' +
+                                        '<input type="image" src="/plan/images/ctrl/del.jpg">' +
+                                        '</a>' +
+                                        '</span>' +
+                                        '</td>';
+                            } else {
+                                res = res +
+                                        '<td align="right" style="margin-left: 5px; margin-right: 5px">' +
+                                        '<span onmouseover="tooltip.show(\'Удалить выбранный предмет\');" onmouseout="tooltip.hide();">' +
+                                        '<input type="image" src="/plan/images/ctrl/delete_disabled.gif">' +
+                                        '</span>' +
+                                        '</td>';
                             }
-                        },
-                        bAutoWidth:false,
-                        aoColumns:[
-                            { bSortable:false, sWidth: "5%"},
-                            {},
-                            {},
-                            {},
-                            {},
-                            { bSortable:false, sWidth: "5%"}
-                        ]
-                    });
+                            res = res + '</tr>'+
+                                    '</table>';
+                            return res;
+                        }}
+                ],
+                fnRowCallback:function (nRow, aData, iDisplayIndex) {
+                    $(nRow).attr("id", 'tr' + $(nRow).find("input:hidden[name=id]").val());
+                    if ($(nRow).find("input:hidden[name=referenceCount]").val() == 0) {
+                        $(nRow).attr("name", 'itemTr');
+                    }
+                    return nRow;
+                }
+            });
         }
 
         $(document).ready(function () {

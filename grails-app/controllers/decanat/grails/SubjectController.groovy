@@ -1,6 +1,9 @@
 package decanat.grails
 
 import stu.cn.ua.CommonUtils
+import com.google.gson.JsonArray
+import com.google.gson.Gson
+import grails.converters.JSON
 
 class SubjectController {
 
@@ -55,6 +58,33 @@ class SubjectController {
         redirect(action: index, params: params)
     }
 
+    def table = {
+        def propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'id']
+
+
+        def dataToRender = [:]
+        dataToRender.sEcho = params.sEcho
+        dataToRender.aaData=[]
+        dataToRender.iTotalRecords = Subject.count()
+        dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
+
+        def sortProperty = propertiesToRender[params.iSortCol_0 as int]
+        def sortDir = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
+
+        Subject.list(max: params.iDisplayLength as int, offset: params.iDisplayStart as int, sort: sortProperty, order: sortDir).each { subject ->
+            def record = []
+            record << subject.id
+            record << subject.code
+            record << subject.chair?.name
+            record << subject.name
+            record << subject.shortName
+            record << subject.referenceCount
+            dataToRender.aaData << record
+        }
+
+        render dataToRender as JSON
+    }
+
     def multipleDelete = {
         int deletedCount = 0
         try {
@@ -104,3 +134,4 @@ class SubjectController {
         redirect(action: 'index', controller: 'subject', params: params)
     }
 }
+
