@@ -1,8 +1,7 @@
 package decanat.grails
 
 import stu.cn.ua.CommonUtils
-import com.google.gson.JsonArray
-import com.google.gson.Gson
+
 import grails.converters.JSON
 
 class SubjectController {
