@@ -66,8 +66,6 @@ class Chair {
 
         def  nodes=["id" ,"codeChair", "head", "name", "referenceCount", "shortName"];
 
-
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);

@@ -20,6 +20,12 @@
                        href="<g:createLink action="index" controller="DBFImport"/>">DBF импорт</a>
                 </li>
             </sec:ifAnyGranted>
+            <sec:ifAnyGranted roles="ROLE_ADMIN">
+                <li>
+                    <a style="text-decoration: ${active == 5 ? 'underline' : 'none'}"
+                       href="<g:createLink action="index" controller="CSVExport"/>">Экспорт в CSV</a>
+                </li>
+            </sec:ifAnyGranted>
         </ul>
 
         <div align="right" class="hello">${g.userName()} &nbsp;

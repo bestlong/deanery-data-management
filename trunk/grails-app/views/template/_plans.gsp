@@ -5,17 +5,17 @@
         $("#errors").delay(6000).fadeOut(5 * 400);
         $("input:submit, a, button", ".action").button();
         $("#dialog").hide()
-        $("#dialogcvs").hide()
+        $("#dialogcsv").hide()
     });
 
     function chengplan(iid) {
         $("#chengpl").attr("href", '${request.contextPath + '/CSVExport/exportPlanToCSV/'}' + iid);
-        $("#dialogcvs").dialog();
+        $("#dialogcsv").dialog();
     }
 
     function chengworkplan(iid) {
         $("#chengpl").attr("href", '${request.contextPath + '/CSVExport/exportWorkPlanToCSV/'}' + iid);
-        $("#dialogcvs").dialog();
+        $("#dialogcsv").dialog();
     }
 
     function deleteDialog(iid) {
@@ -106,10 +106,10 @@
                             </tooltip:tip>
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
-                            <tooltip:tip code="tooltip.plan.incvs">
+                            <tooltip:tip code="tooltip.plan.incsv">
 
                                 <a href="#" onclick="chengplan(${plan?.id})" class="chengpl" >
-                                    <img src="<g:createLinkTo dir="/images" file="cvs.png"/>" alt="CVS" class="chengpl">
+                                    <img src="<g:createLinkTo dir="/images" file="cvs.png"/>" alt="CSV" class="chengpl">
                                 </a>
                             </tooltip:tip>
                         </td>
@@ -152,6 +152,6 @@
         <g:render template="/template/deleteConfirmation" model="['askMessage': 'Вы точно хотите удалить этот план?']"/>
     </content>
     <content tag="chengplan">
-        <g:render template="/CSVExport/chengplan" model="['askMessagecvs': 'Вы желаете импортировать план?']"/>
+        <g:render template="/CSVExport/chengplan" model="['askMessagecsv': 'Вы желаете экспортировать план?']"/>
     </content>
 </div>
