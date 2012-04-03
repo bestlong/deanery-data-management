@@ -39,6 +39,11 @@
                 <g:link controller="university" action="index">Информация о деканате</g:link>
             </li>
         </tooltip:tip>
+        <tooltip:tip code="tooltip.menu.gotoDeanery">
+            <li  class="${selectedMenu == 5 ? 'selectedMenu' : ''}">
+                <g:link controller="deanery" action="index">Деканаты</g:link>
+            </li>
+        </tooltip:tip>
     </ul>
 </div>
 

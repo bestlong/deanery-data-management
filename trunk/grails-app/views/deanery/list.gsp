@@ -1,7 +1,7 @@
-<%@ page import="decanat.grails.Chair" %>
-<html>
+<%@ page import="decanat.grails.Deanery" %>
+<!doctype html>
 <head>
-    <title>Кафедры</title>
+    <title>Деканаты</title>
     <meta name="layout" content="main"/>
     <script type="text/javascript">
 
@@ -34,33 +34,17 @@
                 },
                 bAutoWidth:false,
                 aoColumns:[
-                    {bSortable:false },
                     {},
                     {},
-                    {},
-                    {},
-                    {bSortable:false},
-                    {bSortable:false},
-                    {bSortable:false}
+                    {bSortable:false }
                 ]
+            });
+            $(function () {
+                $("input:submit, a, button", ".action").button();
             });
         }
 
-        $(function () {
-            $("#dialog").hide();
-            $("input:submit, a, button", ".action").button();
-            hideDeleteMultiple();
-        });
 
-        function deleteDialog(iid) {
-            $("#delBtn").attr("href", '${request.contextPath + '/chair/remove/'}' + iid);
-            $("#dialog").dialog();
-        }
-
-        function multipleDeleteDialog() {
-            $("#dialogMultipleDelete").dialog();
-            $('#recordsCount').html($("input[type=checkbox]:checked").length)
-        }
     </script>
 
     <style type="text/css">
@@ -72,32 +56,21 @@
 </head>
 
 <body>
-<g:form action="multipleDelete" controller="deanery">
-
     <div align="left">
         <div align="left" class="action">
-            <g:link controller="chair" action="create">
+            <g:link controller="deanery" action="create">
                 Новый
             </g:link>
-            <a id="multipleDelete" onclick="multipleDeleteDialog()">Удалить выделенные</a>
-            <g:submitButton name="multipleDeleteSubmit" value="" style="display: none"/>
         </div>
     </div>
 
     <div id="container" align="center">
-        <g:render template="/template/chair/chairList"
-                  model="${[chairCollection: chairList, searchConfig: searchConfig]}"/>
+        <g:render template="/template/deanery/deaneryList" model="${[deaneryCollection: deaneryList, searchConfig: searchConfig]}"/>
     </div>
 
     <content tag="search">
-        <g:render template="/template/chair/searchTemplate"/>
+        <g:render template="/template/deanery/searchTemplate"/>
     </content>
 
-    <content tag="deleteConfirmation">
-        <g:render template="/template/deleteConfirmation"
-                  model="['askMessage': 'Вы точно хотите удалить эту кафедру?']"/>
-    </content>
-
-</g:form>
 </body>
 </html>
