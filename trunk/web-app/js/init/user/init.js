@@ -1,5 +1,8 @@
 $(function() {
+    $("#messages").delay(6000).fadeOut(5 * 400);
+    $("#errors").delay(6000).fadeOut(5 * 400);
     $("input:submit, a, button", ".action").button();
+    $("#dialog").hide()
 });
 
 $(function() {
@@ -52,21 +55,45 @@ $(function() {
                     }
                 },
                 messages: {
-                    password: {
+                   password: {
                         required: 'Пароль не может быть пустым',
                         minlength: function() {
                             return 'Слишком короткий пароль';
                         }
-                    },
-                    username: {
+                   },
+                   username: {
                         required: 'Логин не может быть пустым',
                         unique: function() {
                             return 'Пользователь с таким логином уже существует';
                         }
                     },
-                    passwdRetype: {
+                   passwdRetype: {
                         equalTo: "Пароль и подтверждение должны совпадать"
-                    }
+                   }
                 }
             });
+    $('#editPasswd').validate({
+        onkeyup:false,
+        errorClass:'validation_error',
+        validClass:'valid',
+        onsubmit:true,
+        rules:{
+            newPasswd:{
+                required:true,
+                minlength:4
+            },
+            confirmPasswd:{
+                equalTo:"#newPasswd"
+            }
+        },
+        messages:{
+            confirmPasswd:{
+                equalTo:'Пароль и подтвержение должны совпадать'
+            },
+            newPasswd:{
+                required:"Введите новый пароль",
+                minlength:"Слишком короткий пароль"
+            }
+        }
+    });
 });
