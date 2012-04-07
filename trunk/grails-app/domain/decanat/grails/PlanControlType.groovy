@@ -46,11 +46,8 @@ class PlanControlType {
     }
 
     public String toCSV(){
-
         String srt = new String();
-
         def  nodes=["id" , "semestr", "planSubjectId" , "mask"];
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);
@@ -58,5 +55,4 @@ class PlanControlType {
         srt=srt+"\n"
         return srt;
     }
-
 }

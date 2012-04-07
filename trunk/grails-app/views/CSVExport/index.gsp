@@ -19,20 +19,23 @@
 </head>
 
 <body>
-  <div>
-<g:form controller="CSVExport" action="exportAllToCSV" method="get" name="ExportToCSV">
+<fieldset>
+    <fieldset>
+        <g:form controller="CSVExport" action="exportDirectoriToCSV" method="get" name="ExportToCSV">
+            <input type="submit" value="Экспортировать справочники в CSV">
+            <p></p>
+            &nbsp
+           Экспортировать справочники в CSV . В справочники входят кафедры, специальности и предметы.
+            <p></p>
+        </g:form>
+    </fieldset>
+    <p></p>
+    <g:form controller="CSVExport" action="exportAllToCSV" method="get" name="ExportToCSV">
+        <input type="submit" value="        Экспортировать всё в CSV           ">
+    </g:form>
 
-    <input type="submit" value="Экспортировать всё в CSV">
 
-</g:form>
-  </div>
- <div>
-<g:form controller="CSVExport" action="exportDirectoriToCSV" method="get" name="ExportToCSV">
 
-    <input type="submit" value="Экспортировать справочники в CSV">
-
-</g:form>
- </div>
-
+</fieldset>
 </body>
 </html>

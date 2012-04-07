@@ -152,6 +152,6 @@
         <g:render template="/template/deleteConfirmation" model="['askMessage': 'Вы точно хотите удалить этот план?']"/>
     </content>
     <content tag="chengplan">
-        <g:render template="/CSVExport/chengplan" model="['askMessagecsv': 'Вы желаете экспортировать план?']"/>
+        <g:render template="/CSVExport/exportCSVDialog" model="['askMessagecsv': 'Вы желаете экспортировать план?']"/>
     </content>
 </div>
