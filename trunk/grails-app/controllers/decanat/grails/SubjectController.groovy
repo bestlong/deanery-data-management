@@ -7,7 +7,12 @@ import grails.converters.JSON
 class SubjectController {
 
     def subjectService
+    def sessionParamsService
+
+    def propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'id']
+
     def index = {
+        sessionParamsService.saveParams(params)
         [res: Subject.list(sort: 'name', order: "asc"), selectedMenu: 2]
     }
 
@@ -33,7 +38,6 @@ class SubjectController {
         redirect(action: index, params: params)
     }
 
-
     def specialitiesSubjects = {
         def chair = Chair.findById(params.id as int)
         def res = Subject.findAllByChair(chair)
@@ -58,19 +62,14 @@ class SubjectController {
     }
 
     def table = {
-        def propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'id']
-
-
         def dataToRender = [:]
         dataToRender.sEcho = params.sEcho
         dataToRender.aaData=[]
-        dataToRender.iTotalRecords = Subject.count()
+
+        def list = subjectService.findSubjects(params, propertiesToRender)
+        dataToRender.iTotalRecords = list.totalCount
         dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
-
-        def sortProperty = propertiesToRender[params.iSortCol_0 as int]
-        def sortDir = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
-
-        Subject.list(max: params.iDisplayLength as int, offset: params.iDisplayStart as int, sort: sortProperty, order: sortDir).each { subject ->
+        list.each { subject ->
             def record = []
             record << subject.id
             record << subject.code
@@ -80,7 +79,6 @@ class SubjectController {
             record << subject.referenceCount
             dataToRender.aaData << record
         }
-
         render dataToRender as JSON
     }
 
@@ -104,7 +102,8 @@ class SubjectController {
     }
 
     def search = {
-        def res = subjectService.findSubjects(params.chair as int, params.name, params.shortName);
+        sessionParamsService.saveParams(params)
+        def res = subjectService.findSubjects(params, propertiesToRender);
         render(template: "/template/subject/subjectList", model: [res: res]);
     }
 

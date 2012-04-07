@@ -13,7 +13,6 @@
 
         function initTable() {
             var currId = '';
-
             $('#subjects').dataTable({
                 "bJQueryUI":true,
                 "bFilter":false,
@@ -45,10 +44,13 @@
                     { bSortable:false, sWidth:"5%",
                         "fnRender":function (o, val) {
                             currId = o.aData[0];
-                            return '<input type="hidden" name="id" value=' + o.aData[0] + '>' +
-                                    '<input type="hidden" name="referenceCount" value=' + o.aData[5] + '>' +
-                                    '<input type="checkbox" name ="multipleDelete' + o.aData[0] + '" id="multipleDelete' + o.aData[0] + '" onclick="changeBackground(' + o.aData[0] + ')">';
-
+                            var res = '';
+                            res = res + '<input type="hidden" name="id" value=' + o.aData[0] + '>' +
+                                    '<input type="hidden" name="referenceCount" value=' + o.aData[5] + '>';
+                            if (o.aData[5] == 0) {
+                                res = res + '<input type="checkbox" name ="multipleDelete' + o.aData[0] + '" id="multipleDelete' + o.aData[0] + '" onclick="changeBackground(' + o.aData[0] + ')">';
+                            }
+                            return res;
                         }},
                     {},
                     {},
@@ -62,7 +64,7 @@
                                     '<td align="left" style="margin-left: 5px; margin-right: 5px">' +
                                     '<span onmouseover="tooltip.show(\'Редактировать выбранный предмет\');" onmouseout="tooltip.hide();">' +
                                     '<a href="/plan/subject/edit/' + currId + '" class="editBtn">' +
-                                    '<input type="image" src="/plan/images/ctrl/edit.jpg">' +
+                                    '<img src="/plan/images/ctrl/edit.jpg">' +
                                     '</a>' +
                                     '</span>' +
                                     '</td>';
@@ -71,7 +73,7 @@
                                         '<td align="right" style="margin-left: 5px; margin-right: 5px">' +
                                         '<span onmouseover="tooltip.show(\'Удалить выбранный предмет\');" onmouseout="tooltip.hide();">' +
                                         '<a class="delBtn" onclick="deleteDialog(' + currId + ')">' +
-                                        '<input type="image" src="/plan/images/ctrl/del.jpg">' +
+                                        '<img alt="delete" src="/plan/images/ctrl/del.jpg">' +
                                         '</a>' +
                                         '</span>' +
                                         '</td>';
@@ -79,7 +81,7 @@
                                 res = res +
                                         '<td align="right" style="margin-left: 5px; margin-right: 5px">' +
                                         '<span onmouseover="tooltip.show(\'Удалить выбранный предмет\');" onmouseout="tooltip.hide();">' +
-                                        '<input type="image" src="/plan/images/ctrl/delete_disabled.gif">' +
+                                        '<img alt="delete_disabled" src="/plan/images/ctrl/delete_disabled.gif">' +
                                         '</span>' +
                                         '</td>';
                             }
@@ -129,7 +131,6 @@
             <a id="multipleDelete" onclick="multipleDeleteDialog()">Удалить выделенные</a>
             <g:submitButton name="multipleDeleteSubmit" value="" style="display: none"/>
         </div>
-
         <g:render template="/template/subject/subjectList" model="${[res: res]}"/>
 
         <content tag="search">
