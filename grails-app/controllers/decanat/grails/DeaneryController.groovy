@@ -62,6 +62,7 @@ class DeaneryController {
         if (params.id) {
             Deanery deanery = Deanery.findById(params.id)
             if (!deanery) {
+                //TODO ты используешь несуществующие месседжы, добавь нужные строки в messages.properties, ну и наверно месседжы не должны быть связаны с chair
                 flash.error = message(code: "msg.chair.edit.gotoError")
                 redirect(action: 'list', params: params)
             }

@@ -51,16 +51,15 @@
                                 <tooltip:tip code="tooltip.edit">
                                     <a href="<g:createLink action="edit" controller="speciality"
                                                            id="${speciality?.id}"/>">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
+                                        <img src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>" alt="edit"/>
                                     </a>
                                 </tooltip:tip>
                             </td>
                             <td align="right" style="margin: 5px">
                                 <g:if test="${speciality.referenceCount == 0}">
                                     <tooltip:tip code="tooltip.del">
-                                        <a href="#" onclick="deleteDialog(${speciality?.id})" class="delBtn">
-                                            <input type="image"
-                                                   src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                                        <a onclick="deleteDialog(${speciality?.id})" class="delBtn">
+                                            <img alt="delete" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
                                         </a>
                                     </tooltip:tip>
                                 </g:if>

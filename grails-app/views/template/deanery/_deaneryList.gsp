@@ -32,7 +32,7 @@
                             <td align="left" style="margin-left: 5px; margin-right: 5px">
                                 <tooltip:tip code="tooltip.deanery.edit">
                                     <g:link class="edBtn" controller="deanery" action="edit" params="${[id: deanery?.id]}">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
+                                        <img src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
                                     </g:link>
                                 </tooltip:tip>
                             </td>
