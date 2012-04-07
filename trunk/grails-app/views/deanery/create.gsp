@@ -1,3 +1,4 @@
+%{--TODO если введены поля неправильно, то должны отображаться соответсвующие сообщения а не Поле [name] класса [class decanat.grails.Deanery] не может быть пустым--}%
 <%@ page import="decanat.grails.Deanery" %>
 <html>
 <head>
