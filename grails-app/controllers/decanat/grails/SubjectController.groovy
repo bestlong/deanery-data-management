@@ -3,13 +3,22 @@ package decanat.grails
 import stu.cn.ua.CommonUtils
 
 import grails.converters.JSON
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class SubjectController {
 
     def subjectService
     def sessionParamsService
 
-    def propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'id']
+    def getPropertiesToRender(){
+        def propertiesToRender
+        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")){
+            propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'id']
+        } else {
+            propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'deanery', 'id']
+        }
+        propertiesToRender
+    }
 
     def index = {
         sessionParamsService.saveParams(params)
@@ -56,7 +65,6 @@ class SubjectController {
         catch (Exception e) {
             flash.error = message(code: "msg.subject.add.error")
             log.error(e.getMessage(), e)
-
         }
         redirect(action: index, params: params)
     }
@@ -66,7 +74,7 @@ class SubjectController {
         dataToRender.sEcho = params.sEcho
         dataToRender.aaData=[]
 
-        def list = subjectService.findSubjects(params, propertiesToRender)
+        def list = subjectService.findSubjects(params, getPropertiesToRender())
         dataToRender.iTotalRecords = list.totalCount
         dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
         list.each { subject ->
@@ -76,6 +84,9 @@ class SubjectController {
             record << subject.chair?.name
             record << subject.name
             record << subject.shortName
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")){
+                record << subject.deanery?.name
+            }
             record << subject.referenceCount
             dataToRender.aaData << record
         }
@@ -103,7 +114,7 @@ class SubjectController {
 
     def search = {
         sessionParamsService.saveParams(params)
-        def res = subjectService.findSubjects(params, propertiesToRender);
+        def res = subjectService.findSubjects(params, getPropertiesToRender());
         render(template: "/template/subject/subjectList", model: [res: res]);
     }
 

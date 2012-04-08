@@ -3,6 +3,7 @@ package stu.cn.ua.dbf.reader;
 import com.linuxense.javadbf.DBFException;
 import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFReader;
+import decanat.grails.domain.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import stu.cn.ua.dbf.exception.DBException;
@@ -22,6 +23,7 @@ public abstract class DBFAbstractReader<DOMEN> {
     protected abstract void add(DOMEN d);
     protected abstract DOMEN createDomain();
     private static final Log log = LogFactory.getLog(DBFAbstractReader.class);
+    public User currentUser;
 
     private DOMEN domen;
 

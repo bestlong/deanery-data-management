@@ -13,6 +13,12 @@
 
         function initTable() {
             var currId = '';
+        <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+            var refColumn = 6;
+        </sec:ifAnyGranted>
+        <sec:ifAnyGranted roles="ROLE_DEAN">
+            var refColumn = 5;
+        </sec:ifAnyGranted>
             $('#subjects').dataTable({
                 "bJQueryUI":true,
                 "bFilter":false,
@@ -46,8 +52,8 @@
                             currId = o.aData[0];
                             var res = '';
                             res = res + '<input type="hidden" name="id" value=' + o.aData[0] + '>' +
-                                    '<input type="hidden" name="referenceCount" value=' + o.aData[5] + '>';
-                            if (o.aData[5] == 0) {
+                                    '<input type="hidden" name="referenceCount" value=' + o.aData[refColumn] + '>';
+                            if (o.aData[refColumn] == 0) {
                                 res = res + '<input type="checkbox" name ="multipleDelete' + o.aData[0] + '" id="multipleDelete' + o.aData[0] + '" onclick="changeBackground(' + o.aData[0] + ')">';
                             }
                             return res;
@@ -55,6 +61,9 @@
                     {},
                     {},
                     {},
+                    <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                    {},
+                    </sec:ifAnyGranted>
                     {},
                     { bSortable:false, sWidth:"5%",
                         "fnRender":function (o, val) {
@@ -68,7 +77,7 @@
                                     '</a>' +
                                     '</span>' +
                                     '</td>';
-                            if (o.aData[5] == 0) {
+                            if (o.aData[refColumn] == 0) {
                                 res = res +
                                         '<td align="right" style="margin-left: 5px; margin-right: 5px">' +
                                         '<span onmouseover="tooltip.show(\'Удалить выбранный предмет\');" onmouseout="tooltip.hide();">' +
@@ -85,7 +94,7 @@
                                         '</span>' +
                                         '</td>';
                             }
-                            res = res + '</tr>'+
+                            res = res + '</tr>' +
                                     '</table>';
                             return res;
                         }}
