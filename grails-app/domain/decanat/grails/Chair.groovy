@@ -12,6 +12,7 @@ class Chair {
     String head
     String codeChair
     Integer referenceCount = 0
+    Deanery deanery
 
     private static final fieldMap = [name: 'NAMEKAF', shortName: 'SHORTKAF', head: 'FAMZAV', codeChair: 'CODKAF']
 

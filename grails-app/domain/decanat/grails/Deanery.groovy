@@ -8,5 +8,4 @@ class Deanery {
         name(blank: false, unique: true)
         shortName(unique: true, nullable: true)
     }
-
 }

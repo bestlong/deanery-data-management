@@ -17,30 +17,32 @@
 
         function initTable() {
             $("#users").dataTable({
-                "bJQueryUI": true,
-                "sPaginationType": "full_numbers",
-                "iDisplayLength": 15,
-                "bLengthChange": false,
-                "oLanguage": {
-                    "sInfo": "Всего: _TOTAL_. Показано с _START_ по _END_",
-                    "sInfoEmpty": "Нет данных для отображения",
-                    "sSearch": "Поиск",
+                "bJQueryUI":true,
+                "sPaginationType":"full_numbers",
+                "iDisplayLength":15,
+                "bLengthChange":false,
+                "oLanguage":{
+                    "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+                    "sInfoEmpty":"Нет данных для отображения",
+                    "sSearch":"Поиск",
                     "sLengthMenu":"Отображать по _MENU_",
-                    "sInfoFiltered": "(найдено из _MAX_)",
-                    "sZeroRecords": "По Вашему запросу ничего не найдено.",
-                    "oPaginate":
-                    {
-                        "sFirst": "К началу",
-                        "sPrevious": "Назад",
-                        "sLast": "В конец",
-                        "sNext": "Далее"
+                    "sInfoFiltered":"(найдено из _MAX_)",
+                    "sZeroRecords":"По Вашему запросу ничего не найдено.",
+                    "oPaginate":{
+                        "sFirst":"К началу",
+                        "sPrevious":"Назад",
+                        "sLast":"В конец",
+                        "sNext":"Далее"
                     }
                 },
-                bAutoWidth: false,
-                aoColumns   : [
-                    { sWidth: "55%" },
-                    { sWidth: "30%" },
-                    { sWidth: "15%", bSortable: false }
+                bAutoWidth:false,
+                aoColumns:[
+                    {},
+                    {},
+                    <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                    {},
+                    </sec:ifAnyGranted>
+                    {bSortable:false }
                 ]
             });
         }
@@ -64,18 +66,18 @@
 <body>
 <div align="left">
     <tooltip:tip code="tooltip.add.user">
-    <a href="<g:createLink action="add" controller="user"/>">
-        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
-    </a>
-        </tooltip:tip>
+        <a href="<g:createLink action="add" controller="user"/>">
+            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
+        </a>
+    </tooltip:tip>
 </div>
 <g:render template="/template/user/userList" model="${[res: res]}"/>
 <content tag="search">
-    <g:render template="/template/user/searchTemplate"/>
+    <g:render template="/template/user/searchTemplate" model="${[roles: roles]}"/>
 </content>
 <content tag="deleteConfirmation">
     <g:render template="/template/deleteConfirmation"
-            model="['askMessage':'Вы точно хотите удалить этого пользователя?']"/>
+              model="['askMessage': 'Вы точно хотите удалить этого пользователя?']"/>
 </content>
 
 </body>

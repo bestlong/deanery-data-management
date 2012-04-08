@@ -15,6 +15,9 @@
         <tr>
             <th>Логин</th>
             <th>Роль</th>
+            <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                <th>Деканат</th>
+            </sec:ifAnyGranted>
             <th>Ред.</th>
         </tr>
         </thead>
@@ -29,7 +32,10 @@
                 <td>
                     ${user?.authorities?.description}
                 </td>
-                <td>
+                <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                    <td>${user?.deanery?.name}</td>
+                </sec:ifAnyGranted>
+                <td width="20px">
                     <table>
                         <tr>
                             <td align="left" style="margin: 5px">
