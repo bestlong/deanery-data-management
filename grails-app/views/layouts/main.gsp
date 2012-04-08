@@ -37,12 +37,12 @@
 <g:render template="/template/header"/>
 <div id="content">
     <div id="menuSide" xmlns="">
-        <sec:ifAllGranted roles="ROLE_ADMIN">
+        <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
             <div id="colOne">
                 <g:render template="/template/menuSide"/>
                 <g:pageProperty name="page.search"/>
             </div>
-        </sec:ifAllGranted>
+        </sec:ifAnyGranted>
     </div>
     <sec:ifAllGranted roles="ROLE_USER">
         <g:set var="style" value="width: 100%"/>

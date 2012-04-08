@@ -38,8 +38,7 @@ class ProfileController {
         flash.message = message(code: "tooltip.plan.expand.work.plans")
         try {
             User user = User.get(springSecurityService.principal.id)
-            def encodedPass = springSecurityService.encodePassword(params.newPasswd)  //TODO fix fucking bug
-            user.password = encodedPass;
+            user.password = params.newPasswd
             if (user?.save()) {
                 flash.message = message(code: "msg.password.edit")
             } else {

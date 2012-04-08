@@ -6,7 +6,7 @@ $(function () {
 });
 
 function deleteDialog(iid) {
-    $("#editPass").attr("href", '${request.contextPath}/user/edit/' + iid);
+    $("#editPass").attr("href", 'plan/user/edit/' + iid);
     $("#dialog").dialog();
 }
 
@@ -80,7 +80,7 @@ $(function () {
             oldPasswd:{
                 required:true,
                 remote:{
-                    url:'${request.contextPath}/profile/validate',
+                    url:'/plan/profile/validate',
                     type:'post',
                     data:{
                         oldPasswd:function () {

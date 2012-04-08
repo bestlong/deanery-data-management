@@ -21,7 +21,7 @@
 </head>
 
 <body>
-<sec:ifAllGranted roles="ROLE_ADMIN">
+<sec:ifAnyGranted roles="ROLE_DEAN">
     <div align="left">
         <tooltip:tip code="tooltip.plan.add">
             <a href="<g:createLink action="index" controller="planCreation"/>">
@@ -29,7 +29,7 @@
             </a>
         </tooltip:tip>
     </div>
-</sec:ifAllGranted>
+</sec:ifAnyGranted>
 
 
 <sec:ifAllGranted roles="ROLE_USER">

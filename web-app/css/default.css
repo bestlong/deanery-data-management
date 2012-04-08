@@ -6,7 +6,7 @@ body {
 }
 
 h1 {
-   font-size: 24px;
+    font-size: 24px;
 }
 
 .h7 {
@@ -16,8 +16,6 @@ h1 {
 h2, h3, h4, h5 {
     color: #2582A4;
 }
-
-
 
 h6 {
     font-family: Tahoma, Arial, Helvetica, sans-serif;
@@ -54,8 +52,8 @@ a:hover {
     margin-bottom: 0;
     padding-bottom: 10px;
     background: url(../images/img08.gif) no-repeat left bottom;
-    list-style:circle inside;
-   color: #808080;
+    list-style: circle inside;
+    color: #808080;
 
 }
 
@@ -192,12 +190,12 @@ body .hello {
 
 #colOne li.passed {
 
-     background: url("../images/previous.gif") no-repeat scroll right center transparent;
+    background: url("../images/previous.gif") no-repeat scroll right center transparent;
 }
 
 #colOne li.active {
 
-    background : url("../images/current.gif") no-repeat scroll right center transparent;
+    background: url("../images/current.gif") no-repeat scroll right center transparent;
 
 }
 
@@ -223,11 +221,11 @@ body .hello {
 }
 
 .editTable tr td input {
-     width:440px;
- }
+    width: 440px;
+}
 
 .editTable tr td select {
-    width:450px;
+    width: 450px;
 }
 
 .post .meta {
@@ -241,14 +239,14 @@ body .hello {
 
 .post .meta span {
     color: black;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
-.post  {
+.post {
     margin-top: 20px;
     margin-bottom: 20px;
     padding-bottom: 5px;
-    border-bottom: dashed #9C9C9C 1px ;
+    border-bottom: dashed #9C9C9C 1px;
 
 }
 
@@ -304,8 +302,6 @@ td .error_field {
     margin: 0;
 }
 
-
-
 .subtitle {
     border-bottom: 1px solid #CCCCCC;
     color: #5890D1;
@@ -324,7 +320,6 @@ td .error_field {
     font-weight: bold;
     height: 35px;
 }
-
 
 .editTable tr {
     height: 50px;
@@ -354,8 +349,6 @@ td .error_field {
     padding: 3px;
     width: 200px;
 }
-
-
 
 #controlType #title {
     font-weight: bold;
@@ -387,15 +380,12 @@ td .error_field {
     font-style: normal;
     color: #000000;
     align: left;
-    width:50%;
+    width: 50%;
 }
 
 #controlType .planSubjectRowHeight {
-height: 3%;
+    height: 3%;
 }
-
-
-
 
 #controlType input {
     margin: 0;
@@ -428,8 +418,6 @@ height: 3%;
     height: 18px;
 }
 
-
-
 #addSubjTable tr {
     height: 10px;
 }
@@ -438,92 +426,92 @@ height: 3%;
     width: 85px;
 }
 
+#editPassTable .validation_error {
+    color: red;
+    font-style: italic;
+}
+
 /*#tabs {*/
-    /*float: left;*/
-    /*width: 100%;*/
-    /*background: #E3ECF3;*/
-    /*font-size: 93%;*/
-    /*line-height: normal;*/
+/*float: left;*/
+/*width: 100%;*/
+/*background: #E3ECF3;*/
+/*font-size: 93%;*/
+/*line-height: normal;*/
 /*}*/
 
 /*#tabs ul {*/
-    /*margin: 0;*/
-    /*padding: 10px 10px 0 0px;*/
-    /*list-style: none;*/
+/*margin: 0;*/
+/*padding: 10px 10px 0 0px;*/
+/*list-style: none;*/
 /*}*/
 
 /*#tabs li {*/
-    /*display: inline;*/
-    /*margin: 0;*/
-    /*padding: 0;*/
+/*display: inline;*/
+/*margin: 0;*/
+/*padding: 0;*/
 
 /*}*/
 
 /*#tabs a {*/
-    /*float: left;*/
-    /*background: url("../images/tableft.gif") no-repeat left top;*/
-    /*margin: 0;*/
-    /*padding: 0 0 0 4px;*/
-    /*text-decoration: none;*/
+/*float: left;*/
+/*background: url("../images/tableft.gif") no-repeat left top;*/
+/*margin: 0;*/
+/*padding: 0 0 0 4px;*/
+/*text-decoration: none;*/
 
 /*}*/
 
 /*#tabs a span {*/
-    /*float: left;*/
-    /*display: block;*/
-    /*background: url("../images/tabright.gif") no-repeat right top;*/
-    /*padding: 5px 15px 4px 6px;*/
-    /*color: #FFF;*/
-    /*font-size: 13px;*/
-    /*width: 60px;*/
+/*float: left;*/
+/*display: block;*/
+/*background: url("../images/tabright.gif") no-repeat right top;*/
+/*padding: 5px 15px 4px 6px;*/
+/*color: #FFF;*/
+/*font-size: 13px;*/
+/*width: 60px;*/
 /*}*/
 
 /* Commented Backslash Hack hides rule from IE5-Mac \*/
 /*#tabs a span {*/
-    /*float: left;*/
+/*float: left;*/
 /*}*/
 
 /* End IE5-Mac hack */
 /*#tabs a:hover span {*/
-    /*color: #FFF;*/
+/*color: #FFF;*/
 /*}*/
 
 /*#tabs a:hover {*/
-    /*background-position: 0% -42px;*/
+/*background-position: 0% -42px;*/
 /*}*/
 
 /*#tabs a:hover span {*/
-    /*background-position: 100% -42px;*/
-/*}*/
-
-/*#editPassTable .validation_error{*/
-    /*color: red;*/
-    /*font-style: italic;*/
+/*background-position: 100% -42px;*/
 /*}*/
 
 /*body .paginateButtons{*/
-        /*text-align: center;*/
-        /*font-size: 15px;*/
-     /*font-family: Tahoma, Arial, Helvetica, sans-serif;*/
+/*text-align: center;*/
+/*font-size: 15px;*/
+/*font-family: Tahoma, Arial, Helvetica, sans-serif;*/
 /*}*/
 
 /*body .paginateButtons .prevLink{*/
 
-        /*margin-right: 50px;*/
+/*margin-right: 50px;*/
 /*}*/
 
 /*body .paginateButtons .nextLink{*/
 
-        /*margin-left: 50px;*/
+/*margin-left: 50px;*/
 /*}*/
 
 /*body .paginateButtons .step {*/
 
-        /*margin: 0px 5px 0 0;*/
+/*margin: 0px 5px 0 0;*/
 /*}*/
 
 /*body .paginateButtons span {*/
 
-        /*margin: 0px 5px 0 0;*/
+/*margin: 0px 5px 0 0;*/
 /*}*/
 

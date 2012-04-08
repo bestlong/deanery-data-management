@@ -9,7 +9,7 @@
 <head>
     <g:javascript>
         function editPassDialog(iid) {
-            $("#editPass").attr("href", '/decanat-grails/user/edit/' + iid);
+            $("#editPass").attr("href", '/plan/user/edit/' + iid);
             $("#dialog").dialog();
         }
     </g:javascript>

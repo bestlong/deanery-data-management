@@ -207,5 +207,19 @@ grails.plugins.springsecurity.interceptUrlMap = [
         '/index/**':                    ['IS_AUTHENTICATED_FULLY'],
         '/profile/**':                  ['IS_AUTHENTICATED_FULLY'],
         '/printer/**':                  ['IS_AUTHENTICATED_FULLY'],
-        '/**':                          ['ROLE_ADMIN']
+        '/DBFImport/**':                  ['ROLE_DEAN'],
+        '/user/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/speciality/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/subject/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/chair/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/university/**':                  ['ROLE_DEAN'],
+        '/deanery/**':                  ['ROLE_PROREKTOR'],
+        '/planCreation/**':                  ['ROLE_DEAN'],
+        '/planInit/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/addSubjects/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/practice/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/stateExam/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/CSVExport/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/semestr/**':                  ['ROLE_DEAN', 'ROLE_PROREKTOR'],
+        '/**':                          ['IS_AUTHENTICATED_FULLY']
 ]
