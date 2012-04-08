@@ -53,10 +53,10 @@
                     <tr>
                         <td colspan="6">
                             <h4 class="title">
-                                <sec:ifAllGranted roles="ROLE_ADMIN">
+                                <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
                                     <g:link id="${plan.id}" action="index"
                                             controller="planInit">${plan.speciality.specialityCode} ${plan.speciality.name}</g:link>
-                                </sec:ifAllGranted>
+                                </sec:ifAnyGranted>
                                 <sec:ifAllGranted roles="ROLE_USER">
                                     ${plan.speciality.specialityCode} ${plan.speciality.name}
                                 </sec:ifAllGranted>
@@ -71,14 +71,14 @@
                             <span style="font-size: small; text-decoration: underline;">${plan.form}</span>
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
-                            <sec:ifAllGranted roles="ROLE_ADMIN">
+                            <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
                                 <tooltip:tip code="tooltip.plan.remove">
                                     <a href="#" class="delPlan" onclick="deleteDialog(${plan?.id})">
                                         <input type="image"
                                                src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
                                     </a>
                                 </tooltip:tip>
-                            </sec:ifAllGranted>
+                            </sec:ifAnyGranted>
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
                             <g:if test="${univer && plan.stateExam}">

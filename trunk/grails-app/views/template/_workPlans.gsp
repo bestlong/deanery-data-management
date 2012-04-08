@@ -16,23 +16,23 @@
     <g:each in="${plans}" var="plan">
         <tr>
             <td width="400px" style="font-size: 12px">
-                <sec:ifAllGranted roles="ROLE_ADMIN">
+                <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
                     <g:link id="${plan.id}" action="index"
                             controller="planInit">${plan.name}</g:link>
-                </sec:ifAllGranted>
+                </sec:ifAnyGranted>
                 <sec:ifAllGranted roles="ROLE_USER">
                     ${plan.name}
                 </sec:ifAllGranted>
             </td>
             <td >
-                <sec:ifAllGranted roles="ROLE_ADMIN">
+                <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
                     <tooltip:tip code="tooltip.plan.remove">
                         <a href="#" class="delPlan" onclick="deleteDialog(${plan?.id})">
                             <input type="image"
                                    src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
                         </a>
                     </tooltip:tip>
-                </sec:ifAllGranted>
+                </sec:ifAnyGranted>
             </td>
             <td >
                  <a href="#" onclick="chengworkplan(${plan?.id})" class="chengpl" >

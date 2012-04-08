@@ -1,4 +1,3 @@
-
 <style type="text/css">
 .selectedMenu {
     background: 0 100% no-repeat #e6e6fa;
@@ -19,7 +18,7 @@
     <ul class="menuBottom">
         <tooltip:tip code="tooltip.menu.gotoSpeciality">
             <li class="${selectedMenu == 1 ? 'selectedMenu' : ''}">
-                <g:link controller="speciality" action="index" >
+                <g:link controller="speciality" action="index">
                     Специальности
                 </g:link>
             </li>
@@ -30,20 +29,24 @@
             </li>
         </tooltip:tip>
         <tooltip:tip code="tooltip.menu.gotoChair">
-            <li  class="${selectedMenu == 3 ? 'selectedMenu' : ''}">
+            <li class="${selectedMenu == 3 ? 'selectedMenu' : ''}">
                 <g:link controller="chair" action="index">Кафедры</g:link>
             </li>
         </tooltip:tip>
-        <tooltip:tip code="tooltip.menu.gotoUniversity">
-            <li  class="${selectedMenu == 4 ? 'selectedMenu' : ''}">
-                <g:link controller="university" action="index">Информация о деканате</g:link>
-            </li>
-        </tooltip:tip>
-        <tooltip:tip code="tooltip.menu.gotoDeanery">
-            <li  class="${selectedMenu == 5 ? 'selectedMenu' : ''}">
-                <g:link controller="deanery" action="index">Деканаты</g:link>
-            </li>
-        </tooltip:tip>
+        <sec:ifAnyGranted roles="ROLE_DEAN">
+            <tooltip:tip code="tooltip.menu.gotoUniversity">
+                <li class="${selectedMenu == 4 ? 'selectedMenu' : ''}">
+                    <g:link controller="university" action="index">Информация о деканате</g:link>
+                </li>
+            </tooltip:tip>
+        </sec:ifAnyGranted>
+        <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+            <tooltip:tip code="tooltip.menu.gotoDeanery">
+                <li class="${selectedMenu == 5 ? 'selectedMenu' : ''}">
+                    <g:link controller="deanery" action="index">Деканаты</g:link>
+                </li>
+            </tooltip:tip>
+        </sec:ifAnyGranted>
     </ul>
 </div>
 
