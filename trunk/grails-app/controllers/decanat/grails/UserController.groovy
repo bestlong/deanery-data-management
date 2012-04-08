@@ -10,35 +10,35 @@ class UserController {
     def springSecurityService;
 
     def index = {
-        [res: User.list(), active: 2]
+        [res: userService.findUsersForCurrentUser(), roles:userService.findRolesForSearch(), active: 2]
     }
 
     def add = {
     }
 
     def save = {
-            try {
-                def user = new User(params);
-                if (user.validate()) {
-                    def role = Role.findById(params.user.role)
-                    if (!role) {
-                        flash.error = message(code: "msg.user.add.role.not.found")
-                    }
-                    else {
-                        user.enabled = true
-                        user.save();
-                        UserRole.create(user, role, true)
-                        flash.message = message(code: "msg.user.add", args: [user.username])
-                    }
+        try {
+            def user = new User(params);
+            if (user.validate()) {
+                def role = Role.findById(params.user.role)
+                if (!role) {
+                    flash.error = message(code: "msg.user.add.role.not.found")
                 }
                 else {
-                    flash.error = message(code: "msg.user.add.error")
+                    user.enabled = true
+                    user.save();
+                    UserRole.create(user, role, true)
+                    flash.message = message(code: "msg.user.add", args: [user.username])
                 }
             }
-            catch (Exception e) {
-                log.error(e.getMessage(), e)
+            else {
                 flash.error = message(code: "msg.user.add.error")
             }
+        }
+        catch (Exception e) {
+            log.error(e.getMessage(), e)
+            flash.error = message(code: "msg.user.add.error")
+        }
         redirect(action: index, params: params)
 
     }
@@ -96,19 +96,19 @@ class UserController {
     in page "Edit" for UserController create new dialog window for entered new password, and in init.js for user created rule for validation
     for editPasswd form named*/
         if (params.userId) {
-        try {
-            User user = User.findById(params.userId);
-            user.password = params.newPasswd
-            if (user?.save()) {
-                flash.message = message(code: "msg.password.edit")
-            } else {
+            try {
+                User user = User.findById(params.userId);
+                user.password = params.newPasswd
+                if (user?.save()) {
+                    flash.message = message(code: "msg.password.edit")
+                } else {
+                    flash.error = message(code: "msg.edit.error")
+                }
+            }
+            catch (Exception e) {
+                log.error(e.getMessage(), e)
                 flash.error = message(code: "msg.edit.error")
             }
-        }
-        catch (Exception e) {
-            log.error(e.getMessage(), e)
-            flash.error = message(code: "msg.edit.error")
-        }
         }
         redirect(action: "index", params: params)
     }

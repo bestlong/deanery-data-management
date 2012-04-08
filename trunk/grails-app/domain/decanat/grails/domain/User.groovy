@@ -1,5 +1,7 @@
 package decanat.grails.domain
 
+import decanat.grails.Deanery
+
 class User {
 
 	transient springSecurityService
@@ -10,10 +12,14 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+    Deanery deanery
+
+    static hasMany = [userRoles: UserRole]
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+        deanery nullable: true
 	}
 
 	static mapping = {

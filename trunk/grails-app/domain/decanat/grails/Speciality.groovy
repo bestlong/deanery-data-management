@@ -12,6 +12,7 @@ class Speciality {
     String name;
     String shortName;
     Integer referenceCount = 0
+    Deanery deanery
 
     private static final fieldMap = [code: 'CODSP', specialityCode: 'CODSPEC', name: 'NAME', shortName: 'CODNAME']
 
