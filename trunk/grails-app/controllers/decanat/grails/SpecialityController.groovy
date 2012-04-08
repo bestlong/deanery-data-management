@@ -5,6 +5,7 @@ import stu.cn.ua.CommonUtils
 class SpecialityController {
 
     def specialityService
+    def springSecurityService
 
     def index = {
         [res: Speciality.list(), selectedMenu: 1]
@@ -17,6 +18,8 @@ class SpecialityController {
         try {
             def speciality = new Speciality(params);
             speciality.name = CommonUtils.prepareString(speciality.name)
+            def chairInstance = new Chair(params)
+            chairInstance.deanery = user.deanery
             if (speciality.save()) {
                 flash.message = message(code: "msg.speciality.edit", args: [speciality.name])
             }

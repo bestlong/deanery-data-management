@@ -24,7 +24,7 @@ class SubjectDTOReader extends DBFAbstractReader<SubjectDTO> {
     List<SubjectDTO> validate() {
         def errors = []
         resultList.each {
-            def result = Subject.validate(it)
+            def result = Subject.validate(it, currentUser)
             if (!result.success) {
                 errors.add(result.messages)
             }
@@ -35,7 +35,7 @@ class SubjectDTOReader extends DBFAbstractReader<SubjectDTO> {
     @Override
     int save() {
         resultList.each {
-            Subject.saveSubject(it)
+            Subject.saveSubject(it, currentUser)
         }
         resultList.size()
     }

@@ -4,6 +4,7 @@ import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.ChairDTO
 import stu.cn.ua.dbf.dto.ErrorInfo
 import stu.cn.ua.CommonUtils
+import decanat.grails.domain.User
 
 class Chair {
 
@@ -24,31 +25,34 @@ class Chair {
         referenceCount(nullable: false)
     }
 
-    public static Chair saveChair(ChairDTO chairDTO) {
+    public static Chair saveChair(ChairDTO chairDTO, User user) {
         Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
         if (!chair || "".equals(chairDTO.codkaf)) {
             chair = new Chair(name: CommonUtils.prepareString(chairDTO.namekaf),
                     shortName: CommonUtils.prepareString(chairDTO.shortkaf),
                     head: CommonUtils.prepareString(chairDTO.famzav),
+                    deanery: user.deanery,
                     codeChair: CommonUtils.prepareString(chairDTO.codkaf))
         }
         else {
             chair.name = CommonUtils.prepareString(chairDTO.namekaf)
             chair.shortName = CommonUtils.prepareString(chairDTO.shortkaf)
             chair.head = CommonUtils.prepareString(chairDTO.famzav)
+            chair.deanery = user.deanery
         }
         chair.save()
     }
 
-    public static ValidationResult validate(ChairDTO chairDTO) {
+    public static ValidationResult validate(ChairDTO chairDTO, User user) {
         Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
         if (!chair || "".equals(chairDTO.codkaf)) {
-            chair = new Chair(name: chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf)
+            chair = new Chair(name: chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf, deanery: user.deanery)
         }
         else {
             chair.name = chairDTO.namekaf
             chair.shortName = chairDTO.shortkaf
             chair.head = chairDTO.famzav
+            chair.deanery = user.deanery
         }
         if (!chair.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
@@ -62,11 +66,8 @@ class Chair {
     }
 
     public def toCSV(){
-
         String srt = new String();
-
         def  nodes=["id" ,"codeChair", "head", "name", "referenceCount", "shortName"];
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);
@@ -74,5 +75,4 @@ class Chair {
         srt=srt+"\n"
         return srt;
     }
-
 }

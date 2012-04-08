@@ -1,16 +1,20 @@
 package decanat.grails
 
 import stu.cn.ua.CommonUtils
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import decanat.grails.domain.User
 
 class SubjectService {
 
     static transactional = true
 
     def sessionParamsService
+    def springSecurityService
 
-    def findSubjects(params, propertiesToRender){
-        int maxCount = params.iDisplayLength as Integer  ?: 25
-        int offsetPos = params.iDisplayStart as Integer  ?: 0
+    def findSubjects(params, propertiesToRender) {
+        User user = User.get(springSecurityService.principal.id)
+        int maxCount = params.iDisplayLength as Integer ?: 25
+        int offsetPos = params.iDisplayStart as Integer ?: 0
         def sort = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
         def orderField = propertiesToRender[params.iSortCol_0 as Integer ?: 0]
         def criteria = Subject.createCriteria()
@@ -20,13 +24,13 @@ class SubjectService {
         long chairId = 0
         try {
             chairId = params?.chair as long
-        } catch (Exception e){}
+        } catch (Exception e) {}
 
-        def list = criteria.list(max: maxCount, offset:offsetPos) {
-            if (!orderField.equals("") && !sort.equals("")){
+        def list = criteria.list(max: maxCount, offset: offsetPos) {
+            if (!orderField.equals("") && !sort.equals("")) {
                 order(orderField, sort)
             }
-            if (params){
+            if (params) {
                 if (chairId != 0) {
                     chair {
                         if (chairId == -1) {
@@ -37,18 +41,28 @@ class SubjectService {
                         }
                     }
                 }
-                if (name && !name.equals("")){
+                if (name && !name.equals("")) {
                     ilike("shortName", "%" + name + "%");
                 }
-                if (shortName && !shortName.equals("")){
+                if (shortName && !shortName.equals("")) {
                     ilike("name", "%" + shortName + "%");
+                }
+            }
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+                eq("deanery", user.deanery)
+            }
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                if (0 != params.deanery as Integer){
+                    Deanery deanery = Deanery.get(params.deanery as Integer)
+                    eq("deanery", deanery)
                 }
             }
         }
         list
     }
 
-    def findSubjectsCount (params, propertiesToRender){
+    def findSubjectsCount(params, propertiesToRender) {
+        User user = User.get(springSecurityService.principal.id)
         def sort = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
         def orderField = propertiesToRender[params.iSortCol_0 as int]
         def criteria = Subject.createCriteria()
@@ -58,13 +72,13 @@ class SubjectService {
         long chairId = 0
         try {
             chairId = params?.chair as long
-        } catch (Exception e){}
+        } catch (Exception e) {}
 
-        def count = criteria.list{
-            if (!orderField.equals("") && !sort.equals("")){
+        def count = criteria.list {
+            if (!orderField.equals("") && !sort.equals("")) {
                 order(orderField, sort)
             }
-            if (params){
+            if (params) {
                 println params?.chair && params?.chair != 0
                 println params?.chair
                 if (chairId != 0) {
@@ -77,14 +91,23 @@ class SubjectService {
                         }
                     }
                 }
-                if (name && !name.equals("")){
+                if (name && !name.equals("")) {
                     ilike("shortName", "%" + name + "%");
                 }
-                if (shortName && !shortName.equals("")){
+                if (shortName && !shortName.equals("")) {
                     ilike("name", "%" + shortName + "%");
                 }
                 projections {
                     countDistinct("id")
+                }
+            }
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+                eq("deanery", user.deanery)
+            }
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                if (0 != params.deanery){
+                    Deanery deanery = Deanery.get(params.deanery as int)
+                    eq("deanery", deanery)
                 }
             }
         }

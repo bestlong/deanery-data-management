@@ -4,6 +4,7 @@ import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.ErrorInfo
 import stu.cn.ua.dbf.dto.SpecialityPlanDTO
 import stu.cn.ua.CommonUtils
+import decanat.grails.domain.User
 
 class Speciality {
 
@@ -67,16 +68,18 @@ class Speciality {
     }
 
     public String toCSV(){
-
         String srt = new String();
-
         def  nodes=["id" , "code", "name" , "referenceCount", "shortName", "specialityCode" ];
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);
         }
         srt=srt+"\n"
         return srt;
+    }
+
+    def beforeInsert(){
+        User user = User.get(springSecurityService.principal.id)
+        this.deanery = user.deanery
     }
 }

@@ -1,11 +1,11 @@
 package decanat.grails
 
 import java.util.concurrent.ExecutionException
+import decanat.grails.domain.User
 
 class ChairController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+    def springSecurityService
     def chairService
 
     def index = {
@@ -24,7 +24,9 @@ class ChairController {
 
     def save = {
         try {
+            User user = User.get(springSecurityService.principal.id)
             def chairInstance = new Chair(params)
+            chairInstance.deanery = user.deanery
             if (chairInstance.save(flush: true)) {
                 flash.message = message(code: "msg.chair.add", args: [chairInstance.name, chairInstance.shortName ?: "<не указано>"])
                 redirect(action: "list", params: params)

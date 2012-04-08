@@ -4,8 +4,11 @@ import stu.cn.ua.dbf.reader.ChairDTOReader
 import stu.cn.ua.dbf.enums.AllowedFiles
 import stu.cn.ua.dbf.reader.SubjectDTOReader
 import stu.cn.ua.dbf.reader.SpecialityPlanDTOReader
+import decanat.grails.domain.User
 
 class DBFImportController {
+
+    def springSecurityService
 
     def index() {
         def errors = chainModel?.validationErrors
@@ -34,7 +37,7 @@ class DBFImportController {
                 redirect(action: 'index')
                 return
         }
-
+        reader.currentUser = User.get(springSecurityService.principal.id)
         def is = request.getFile("dbf").inputStream
         reader.read(is)
         def errors = reader.validate()

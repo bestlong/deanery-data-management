@@ -4,6 +4,7 @@ import stu.cn.ua.dbf.dto.ValidationResult
 import stu.cn.ua.dbf.dto.ErrorInfo
 import stu.cn.ua.dbf.dto.SubjectDTO
 import stu.cn.ua.CommonUtils
+import decanat.grails.domain.User
 
 class Subject {
 
@@ -12,6 +13,7 @@ class Subject {
     String shortName
     String code
     Integer referenceCount = 0
+    Deanery deanery
 
     private static final fieldMap = [name: 'NAMEDIS', shortName: 'SHORTDIS', code: 'CODDIS']
 
@@ -23,26 +25,29 @@ class Subject {
         referenceCount(nullable: false)
     }
 
-    public static Subject saveSubject(SubjectDTO subjectDTO) {
-        def subject = Subject.findByCode(subjectDTO.coddis)
+    public static Subject saveSubject(SubjectDTO subjectDTO, User user) {
+        def subject = Subject.findByCodeAndDeanery(subjectDTO.coddis, user.deanery)
         if (!subject || "".equals(subjectDTO.coddis)) {
             subject = new Subject(name: CommonUtils.prepareString(subjectDTO.namedis),
                     shortName: CommonUtils.prepareString(subjectDTO.shortdis),
+                    deanery: user.deanery,
                     code: CommonUtils.prepareString(subjectDTO.coddis))
         } else {
             subject.name = CommonUtils.prepareString(subjectDTO.namedis)
             subject.shortName = CommonUtils.prepareString(subjectDTO.shortdis)
+            subject.deanery = user.deanery
         }
         subject.save()
     }
 
-    public static ValidationResult validate(SubjectDTO subjectDTO) {
-        def subject = Subject.findByCode(subjectDTO.coddis)
+    public static ValidationResult validate(SubjectDTO subjectDTO, User user) {
+        def subject = Subject.findByCodeAndDeanery(subjectDTO.coddis, user.deanery)
         if (!subject || "".equals(subjectDTO.coddis)) {
-            subject = new Subject(name: subjectDTO.namedis, shortName: subjectDTO.shortdis, code: subjectDTO.coddis)
+            subject = new Subject(name: subjectDTO.namedis, shortName: subjectDTO.shortdis, code: subjectDTO.coddis, deanery: user.deanery)
         } else {
             subject.name = subjectDTO.namedis
             subject.shortName = subjectDTO.shortdis
+            subject.deanery = user.deanery
         }
         if (!subject.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()

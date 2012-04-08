@@ -25,7 +25,7 @@ class ChairDTOReader extends DBFAbstractReader<ChairDTO> {
     List<String> validate() {
         def errors = []
         resultList.each {
-            def result = Chair.validate(it)
+            def result = Chair.validate(it, currentUser)
             if (!result.success) {
                 errors.add(result.messages)
             }
@@ -36,7 +36,7 @@ class ChairDTOReader extends DBFAbstractReader<ChairDTO> {
     @Override
     int save() {
         resultList.each {
-            Chair.saveChair(it)
+            Chair.saveChair(it, currentUser)
         }
         resultList.size()
     }
