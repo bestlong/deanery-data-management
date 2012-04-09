@@ -13,7 +13,7 @@ class ChairController {
     }
 
     def list = {
-        [chairList: Chair.list(params), selectedMenu: 3, searchConfig: getSearchChairConfig()]
+        [chairList: chairService.findChairsForCurrentUser(), selectedMenu: 3, searchConfig: getSearchChairConfig()]
     }
 
     def create = {

@@ -3,6 +3,7 @@ package decanat.grails
 import decanat.grails.domain.User
 import decanat.grails.domain.Role
 import decanat.grails.domain.UserRole
+import stu.cn.ua.enums.Roles
 
 class UserController {
 
@@ -19,12 +20,21 @@ class UserController {
     def save = {
         try {
             def user = new User(params);
+            def facultyId = params.facultyId as Integer
+            def faculty = null
             if (user.validate()) {
                 def role = Role.findById(params.roleId)
                 if (!role) {
                     flash.error = message(code: "msg.user.add.role.not.found")
                 }
                 else {
+                    if (null != facultyId && 0 != facultyId){
+                        faculty = Deanery.get(facultyId)
+                    }
+                    if (role?.description == Roles.PROREKTOR.text){
+                        faculty = null
+                    }
+                    user.deanery = faculty
                     user.enabled = true
                     user.save();
                     UserRole.create(user, role, true)

@@ -37,6 +37,9 @@
                     {bSortable:false },
                     {},
                     {},
+                    <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                    {},
+                    </sec:ifAnyGranted>
                     {},
                     {},
                     {bSortable:false},

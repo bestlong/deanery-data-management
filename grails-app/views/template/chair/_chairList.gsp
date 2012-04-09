@@ -13,11 +13,14 @@
     <table id="tableCont" class="display">
         <thead>
         <tr>
-            <th><a onclick="selectUnselectAll()">Выделить все</a></th>
+            <th><a onclick="selectUnselectAll()">Все</a></th>
             <th>Код</th>
             <th>Название</th>
             <th>Аббревиатура</th>
             <th>Заведующий</th>
+            <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                <th>Факультет</th>
+            </sec:ifAnyGranted>
             <th>Предметы</th>
             <th>Планы</th>
             <th>Ред.</th>
@@ -47,6 +50,9 @@
                 <td>
                     ${chair?.head}
                 </td>
+                <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                    <td>${chair?.deanery?.shortName}</td>
+                </sec:ifAnyGranted>
                 <td>
                      <a href="<g:createLink action="specialitiesSubjects" controller="subject" params="${[id: chair?.id]}"/>">
                          Показать

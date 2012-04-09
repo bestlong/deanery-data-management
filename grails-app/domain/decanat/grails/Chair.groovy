@@ -18,15 +18,15 @@ class Chair {
     private static final fieldMap = [name: 'NAMEKAF', shortName: 'SHORTKAF', head: 'FAMZAV', codeChair: 'CODKAF']
 
     static constraints = {
-        name(blank: false, unique: true)
-        shortName(unique: true, nullable: true)
+        name(blank: false)
+        shortName(nullable: true)
         head(nullable: true)
         codeChair(nullable: true)
         referenceCount(nullable: false)
     }
 
     public static Chair saveChair(ChairDTO chairDTO, User user) {
-        Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
+        Chair chair = Chair.findByCodeChairAndDeanery(chairDTO.codkaf, user.deanery)
         if (!chair || "".equals(chairDTO.codkaf)) {
             chair = new Chair(name: CommonUtils.prepareString(chairDTO.namekaf),
                     shortName: CommonUtils.prepareString(chairDTO.shortkaf),
@@ -44,7 +44,7 @@ class Chair {
     }
 
     public static ValidationResult validate(ChairDTO chairDTO, User user) {
-        Chair chair = Chair.findByCodeChair(chairDTO.codkaf)
+        Chair chair = Chair.findByCodeChairAndDeanery(chairDTO.codkaf, user.deanery)
         if (!chair || "".equals(chairDTO.codkaf)) {
             chair = new Chair(name: chairDTO.namekaf, shortName: chairDTO.shortkaf, head: chairDTO.famzav, codeChair: chairDTO.codkaf, deanery: user.deanery)
         }
