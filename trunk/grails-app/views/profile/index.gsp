@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page import="stu.cn.ua.enums.Roles" contentType="text/html;charset=UTF-8" %>
 
 <html>
 <head>
@@ -21,8 +21,15 @@
                     <g:textField name="username" value="${user?.username}"/>
                 </td>
             </tr>
+            <tr>
+                <td class="caption">Деканат</td>
+                <td>
+                    <g:textField name="deanery" value="${user?.deanery?.name}" disabled="true"/>
+                </td>
+            </tr>
         </table>
         <br/>
+
         <div align="center" class="action">
             <g:link controller="index" action="index">Отмена</g:link>
             <g:submitButton name="save" value="Сохранить"/>

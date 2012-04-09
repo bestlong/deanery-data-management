@@ -20,7 +20,7 @@ class UserController {
         try {
             def user = new User(params);
             if (user.validate()) {
-                def role = Role.findById(params.user.role)
+                def role = Role.findById(params.roleId)
                 if (!role) {
                     flash.error = message(code: "msg.user.add.role.not.found")
                 }
