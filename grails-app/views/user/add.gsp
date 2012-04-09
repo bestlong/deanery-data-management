@@ -6,12 +6,29 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page import="decanat.grails.domain.Role" contentType="text/html;charset=UTF-8" %>
+<%@ page import="decanat.grails.Deanery; stu.cn.ua.enums.Roles; decanat.grails.domain.Role" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="main"/>
     <g:javascript src="/init/user/init.js"/>
-     <title>
+    <g:javascript>
+        $(function () {
+            $('#roleId').change(function () {
+                showHideFaculty();
+            });
+            showHideFaculty();
+        });
+
+        function showHideFaculty(){
+                var str = $("#roleId option:selected").text();
+                if (str != '${Roles.PROREKTOR.text}') {
+                    $("#trFaculty").show();
+                } else {
+                    $("#trFaculty").hide();
+                }
+        }
+    </g:javascript>
+    <title>
         Добавить нового пользователя
     </title>
 </head>
@@ -25,8 +42,14 @@
         <tr>
             <td class="caption">Роль*</td>
             <td align="left">
-                <g:select from="${Role.list()}" optionValue="description" optionKey="id" name="user.role"
+                <g:select from="${Role.list()}" optionValue="description" optionKey="id" name="roleId"
                           value="${authority}"/>
+            </td>
+        </tr>
+        <tr id="trFaculty">
+            <td class="caption">Факультет*</td>
+            <td>
+                <g:select from="${Deanery.list()}" optionValue="name" optionKey="id" name="facultyId"/>
             </td>
         </tr>
         <tr>
