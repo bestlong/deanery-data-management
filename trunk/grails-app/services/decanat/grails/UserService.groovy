@@ -9,9 +9,6 @@ class UserService {
 
     static transactional = true
 
-    String pass
-    String c_pass
-
     def springSecurityService
 
     def findRolesForSearch() {
