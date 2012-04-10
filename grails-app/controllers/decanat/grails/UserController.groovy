@@ -11,10 +11,11 @@ class UserController {
     def springSecurityService;
 
     def index = {
-        [res: userService.findUsersForCurrentUser(), roles:userService.findRolesForSearch(), active: 2]
+        [res: userService.findUsersForCurrentUser(), roles: userService.findRolesForSearch(), active: 2]
     }
 
     def add = {
+        [roles: userService.findRolesForSearch()]
     }
 
     def save = {
@@ -28,15 +29,16 @@ class UserController {
                     flash.error = message(code: "msg.user.add.role.not.found")
                 }
                 else {
-                    if (null != facultyId && 0 != facultyId){
+                    if (null != facultyId && 0 != facultyId) {
                         faculty = Deanery.get(facultyId)
                     }
-                    if (role?.description == Roles.PROREKTOR.text){
+                    if (role?.description == Roles.PROREKTOR.text) {
                         faculty = null
                     }
                     user.deanery = faculty
                     user.enabled = true
                     user.save();
+//                    UserRole.removeAll(user)
                     UserRole.create(user, role, true)
                     flash.message = message(code: "msg.user.add", args: [user.username])
                 }
@@ -55,14 +57,32 @@ class UserController {
 
     def update = {
         if (params.id) {
+            def facultyId = params.facultyId as Integer
+            def faculty = null
             User user = User.findById(params.id)
             user.properties = params
-            //user.password = springSecurityService.encodePassword(user.password)
-            if (user?.save()) {
-                flash.message = message(code: "msg.user.edit", args: [user.username])
-            } else {
-                flash.error = message(code: "msg.edit.error")
+            def role = Role.findById(params.roleId)
+            if (!role) {
+                flash.error = message(code: "msg.user.add.role.not.found")
             }
+            else {
+                if (null != facultyId && 0 != facultyId) {
+                    faculty = Deanery.get(facultyId)
+                }
+                if (role?.description == Roles.PROREKTOR.text) {
+                    faculty = null
+                }
+                user.deanery = faculty
+                UserRole.removeAll(user)
+                UserRole.create(user, role, true)
+                if (user?.save()) {
+                    flash.message = message(code: "msg.user.edit", args: [user.username])
+                } else {
+                    flash.error = message(code: "msg.edit.error")
+                }
+            }
+            //user.password = springSecurityService.encodePassword(user.password)
+
         } else {
             flash.error = message(code: "msg.edit.error")
         }
@@ -93,7 +113,7 @@ class UserController {
 
     def edit = {
         User user = User.findById(params.id);
-        [user: user]
+        [user: user, roles: userService.findRolesForSearch(), role: user.getAuthorities().toArray()[0]]
     }
 
     def validate = {

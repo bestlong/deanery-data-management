@@ -65,8 +65,7 @@
                                 </g:if>
                                 <g:else>
                                     <tooltip:tip code="tooltip.unable.remove">
-                                        <input type="image"
-                                               src="<g:createLinkTo dir="/images/ctrl" file="delete_disabled.gif"/>"/>
+                                        <img src="<g:createLinkTo dir="/images/ctrl" file="delete_disabled.gif"/>"/>
                                     </tooltip:tip>
                                 </g:else>
                             </td>

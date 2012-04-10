@@ -1,6 +1,7 @@
 package decanat.grails
 
 import stu.cn.ua.CommonUtils
+import decanat.grails.domain.User
 
 class SpecialityController {
 
@@ -16,6 +17,7 @@ class SpecialityController {
 
     def save = {
         try {
+            User user = User.get(springSecurityService.principal.id)
             def speciality = new Speciality(params);
             speciality.name = CommonUtils.prepareString(speciality.name)
             def chairInstance = new Chair(params)

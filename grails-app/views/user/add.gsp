@@ -42,7 +42,7 @@
         <tr>
             <td class="caption">Роль*</td>
             <td align="left">
-                <g:select from="${Role.list()}" optionValue="description" optionKey="id" name="roleId"
+                <g:select from="${roles}" optionValue="description" optionKey="id" name="roleId"
                           value="${authority}"/>
             </td>
         </tr>

@@ -69,7 +69,7 @@
                             <td align="left" style="margin-left: 5px; margin-right: 5px">
                                 <tooltip:tip code="tooltip.chair.edit">
                                     <g:link class="edBtn" controller="chair" action="edit" params="${[id: chair?.id]}">
-                                        <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
+                                        <img src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>"/>
                                     </g:link>
                                 </tooltip:tip>
                             </td>

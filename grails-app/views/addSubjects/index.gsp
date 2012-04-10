@@ -314,7 +314,7 @@ td.detailsStyle {
 <div align="left">
     <tooltip:tip code="tooltip.subject.add">
         <a href="<g:createLink action="add" controller="addSubjects" id="${plan.id}"/>">
-            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
+            <img src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
         </a>
     </tooltip:tip>
 </div>

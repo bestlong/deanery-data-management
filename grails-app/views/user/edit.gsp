@@ -1,4 +1,4 @@
-<%@ page import="decanat.grails.domain.Role; decanat.grails.domain.User" %>
+<%@ page import="stu.cn.ua.enums.Roles; decanat.grails.Deanery; decanat.grails.domain.Role; decanat.grails.domain.User" %>
 <%--
   author: evgeniy
   Date: 27.06.11
@@ -11,6 +11,21 @@
         function editPassDialog(iid) {
             $("#editPass").attr("href", '/plan/user/edit/' + iid);
             $("#dialog").dialog();
+        }
+        $(function () {
+            $('#roleId').change(function () {
+                showHideFaculty();
+            });
+            showHideFaculty();
+        });
+
+        function showHideFaculty(){
+                var str = $("#roleId option:selected").text();
+                if (str != '${Roles.PROREKTOR.text}') {
+                    $("#trFaculty").show();
+                } else {
+                    $("#trFaculty").hide();
+                }
         }
     </g:javascript>
     <meta name="layout" content="main"/>
@@ -43,9 +58,17 @@
                 <td class="caption">Роль*</td>
                 <td align="left">
                     <g:hiddenField name="id" value="${user.id}"/>
-                    <g:select from="${Role.list()}" optionValue="description" optionKey="id" name="user.role"/>
+                    <g:select from="${roles}" optionValue="description" optionKey="id" name="roleId" value="${role.id}"/>
                 </td>
             </tr>
+            <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                <tr id="trFaculty">
+                    <td class="caption">Факультет*</td>
+                    <td>
+                        <g:select from="${Deanery.list()}" optionValue="name" optionKey="id" name="facultyId" value="${user?.deanery?.id}"/>
+                    </td>
+                </tr>
+            </sec:ifAnyGranted>
             <tr>
                 <td class="caption">Логин*</td>
                 <td>

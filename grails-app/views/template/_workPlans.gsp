@@ -28,8 +28,7 @@
                 <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
                     <tooltip:tip code="tooltip.plan.remove">
                         <a href="#" class="delPlan" onclick="deleteDialog(${plan?.id})">
-                            <input type="image"
-                                   src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                            <img src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
                         </a>
                     </tooltip:tip>
                 </sec:ifAnyGranted>
@@ -45,15 +44,13 @@
                         <a style="align: right"
                            href="<g:createLink action="print" controller="index"
                                                id="${plan?.id}"/>">
-                            <input type="image"
-                                   src="<g:createLinkTo dir="/images" file="excel.gif"/>">
+                            <img src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                         </a>
                     </tooltip:tip>
                 </g:if>
                 <g:else>
                     <tooltip:tip code="tooltip.plan.notPrint">
-                        <input type="image"
-                               src="<g:createLinkTo dir="/images" file="excel.gif"/>">
+                        <img src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                     </tooltip:tip>
                 </g:else>
             </td>

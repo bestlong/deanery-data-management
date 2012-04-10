@@ -4,11 +4,13 @@ import stu.cn.ua.CommonUtils
 
 import grails.converters.JSON
 import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import decanat.grails.domain.User
 
 class SubjectController {
 
     def subjectService
     def sessionParamsService
+    def springSecurityService
 
     def getPropertiesToRender(){
         def propertiesToRender
@@ -21,8 +23,9 @@ class SubjectController {
     }
 
     def index = {
+        cleanParams(params)
         sessionParamsService.saveParams(params)
-        [res: Subject.list(sort: 'name', order: "asc"), selectedMenu: 2]
+        [selectedMenu: 2]
     }
 
     def add = {}
@@ -48,16 +51,21 @@ class SubjectController {
     }
 
     def specialitiesSubjects = {
-        def chair = Chair.findById(params.id as int)
-        def res = Subject.findAllByChair(chair)
-        render(view: "index", model: [res: res])
+//        def chair = Chair.findById(params.id as int)
+//        def res = Subject.findAllByChair(chair)
+        params.chair = params.id
+        params.id = null
+        sessionParamsService.saveParams(params)
+        render(view: "index")
     }
 
     def save = {
         try {
+            User user = User.get(springSecurityService.principal.id)
             def subject = new Subject(params);
             subject.chair = Chair.findById(params.subject.chair);
             subject.name = CommonUtils.prepareString(subject.name)
+            subject.deanery = user.deanery
             if (subject.save(flush: true)) {
                 flash.message = message(code: "msg.subject.add", args: [subject.name])
             }
@@ -141,6 +149,13 @@ class SubjectController {
             log.error(e.getMessage(), e)
         }
         redirect(action: 'index', controller: 'subject', params: params)
+    }
+
+    private void cleanParams(params){
+        params.name = null
+        params.subject = null
+        params.shortName = null
+        params.chair = null
     }
 }
 

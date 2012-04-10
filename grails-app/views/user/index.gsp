@@ -67,7 +67,7 @@
 <div align="left">
     <tooltip:tip code="tooltip.add.user">
         <a href="<g:createLink action="add" controller="user"/>">
-            <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
+            <img src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
         </a>
     </tooltip:tip>
 </div>

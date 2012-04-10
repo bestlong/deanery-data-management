@@ -7,7 +7,7 @@ class SessionParamsService {
     private def params
 
     def saveParams(params) {
-        this.params = params
+        this.params = params.clone()
     }
 
     def loadParams(){
