@@ -23,20 +23,18 @@
         $("#dialog").dialog();
     }
 
-    function switchIcon(id){
-        var res = $("#details"+id).attr("src").match("expand");
+    function switchIcon(id) {
+        var res = $("#details" + id).attr("src").match("expand");
         var src;
-        if (null != res){
-            src = $("#details"+id).attr("src").replace("expand", "collapse");
+        if (null != res) {
+            src = $("#details" + id).attr("src").replace("expand", "collapse");
         } else {
-            src = $("#details"+id).attr("src").replace("collapse", "expand");
-            $("#wPlans"+id).empty();
+            src = $("#details" + id).attr("src").replace("collapse", "expand");
+            $("#wPlans" + id).empty();
         }
-        $("#details"+id).attr("src", src);
+        $("#details" + id).attr("src", src);
     }
 </script>
-
-
 
 
 <div>
@@ -74,8 +72,7 @@
                             <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
                                 <tooltip:tip code="tooltip.plan.remove">
                                     <a href="#" class="delPlan" onclick="deleteDialog(${plan?.id})">
-                                        <input type="image"
-                                               src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
+                                        <img src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
                                     </a>
                                 </tooltip:tip>
                             </sec:ifAnyGranted>
@@ -86,29 +83,29 @@
                                     <a style="align: right"
                                        href="<g:createLink action="print" controller="index"
                                                            id="${plan?.id}"/>">
-                                        <input type="image"
-                                               src="<g:createLinkTo dir="/images" file="excel.gif"/>">
+                                        <img src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                                     </a>
                                 </tooltip:tip>
                             </g:if>
                             <g:else>
                                 <tooltip:tip code="tooltip.plan.notPrint">
-                                    <input type="image"
-                                           src="<g:createLinkTo dir="/images" file="excel.gif"/>">
+                                    <img src="<g:createLinkTo dir="/images" file="excel.gif"/>">
                                 </tooltip:tip>
                             </g:else>
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
                             <tooltip:tip code="tooltip.plan.expand.work.plans">
-                                <g:remoteLink action="showWorkPlans" id="${plan.id}" update="wPlans${plan.id}" onSuccess="switchIcon(${plan.id})">
-                                    <input id="details${plan.id}" type="image" src="<g:createLinkTo dir="/images" file="expand.png"/>">
+                                <g:remoteLink action="showWorkPlans" id="${plan.id}" update="wPlans${plan.id}"
+                                              onSuccess="switchIcon(${plan.id})">
+                                    <img id="details${plan.id}"
+                                           src="<g:createLinkTo dir="/images" file="expand.png"/>">
                                 </g:remoteLink>
                             </tooltip:tip>
                         </td>
                         <td rowspan="5" valign="bottom" width="10px" align="right">
                             <tooltip:tip code="tooltip.plan.incsv">
 
-                                <a href="#" onclick="chengplan(${plan?.id})" class="chengpl" >
+                                <a href="#" onclick="chengplan(${plan?.id})" class="chengpl">
                                     <img src="<g:createLinkTo dir="/images" file="cvs.png"/>" alt="CSV" class="chengpl">
                                 </a>
                             </tooltip:tip>
@@ -139,6 +136,7 @@
                         </td>
                     </tr>
                 </table>
+
                 <div id="wPlans${plan.id}">
 
                 </div>

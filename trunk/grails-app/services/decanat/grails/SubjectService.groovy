@@ -47,15 +47,15 @@ class SubjectService {
                 if (shortName && !shortName.equals("")) {
                     ilike("name", "%" + shortName + "%");
                 }
+                if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                    if (null != params.deanery && 0 != params.deanery as Integer){
+                        Deanery deanery = Deanery.get(params.deanery as Integer)
+                        eq("deanery", deanery)
+                    }
+                }
             }
             if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
                 eq("deanery", user.deanery)
-            }
-            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
-                if (0 != params.deanery as Integer){
-                    Deanery deanery = Deanery.get(params.deanery as Integer)
-                    eq("deanery", deanery)
-                }
             }
         }
         list

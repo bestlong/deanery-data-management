@@ -25,7 +25,7 @@
     <div align="left">
         <tooltip:tip code="tooltip.plan.add">
             <a href="<g:createLink action="index" controller="planCreation"/>">
-                <input type="image" src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
+                <img src="<g:createLinkTo dir="/images/ctrl" file="new.png"/>">
             </a>
         </tooltip:tip>
     </div>
