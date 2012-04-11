@@ -34,7 +34,7 @@
                 </sec:ifAnyGranted>
             </td>
             <td >
-                 <a href="#" onclick="chengworkplan(${plan?.id})" class="chengpl" >
+                 <a href="CSVExport/exportWorkPlanToCSV/${plan?.id}" class="chengpl" >
                     <img src="<g:createLinkTo dir="/images" file="cvs.png"/>" alt="CSV" class="chengpl">
                 </a>
              </td>

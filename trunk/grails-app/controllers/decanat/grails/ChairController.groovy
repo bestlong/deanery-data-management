@@ -1,14 +1,51 @@
 package decanat.grails
 
-import java.util.concurrent.ExecutionException
+
 import decanat.grails.domain.User
+import grails.converters.JSON
+import decanat.grails.ChairService
 
 class ChairController {
-
+    def sessionParamsService
     def springSecurityService
     def chairService
 
+    def getPropertiesToRender(){
+        def propertiesToRender
+
+        propertiesToRender  =["id" ,"codeChair", "name",  "shortName" , "head", "deanery.name", "id"]
+
+        propertiesToRender
+    }
+
+    def table = {
+        def dataToRender = [:]
+        dataToRender.sEcho = params.sEcho
+        dataToRender.aaData=[]
+
+        def list = chairService.findChairs(params, getPropertiesToRender())
+        dataToRender.iTotalRecords = list.totalCount
+        dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
+        list.each { subject ->
+            def record = []
+            record << subject.id
+            record << subject.codeChair
+            record << subject.name
+            record << subject.shortName
+            record << subject.head
+            record << subject.deanery.name
+            record << ' <a href="../../plan/subject/specialitiesSubjects/'+subject.id.toString()+'" >Показать</a>'
+            record <<  ' <a href="../../plan/index/chairPlans/'+subject.id.toString()+'">Показать</a> '
+
+            record << subject.referenceCount
+
+            dataToRender.aaData << record
+        }
+        render dataToRender as JSON
+    }
+
     def index = {
+        sessionParamsService.saveParams(params)
         redirect(action: "list", params: params)
     }
 
@@ -115,8 +152,9 @@ class ChairController {
     }
 
     def search = {
-        def res = chairService.findChairs(params.code, params.name, params.shortName)
-        render template: "/template/chair/chairList", model: [chairCollection: res]
+        sessionParamsService.saveParams(params)
+        def res = chairService.findChairs(params, getPropertiesToRender())
+        render template: "/template/chair/chairList", model: [res: res]
     }
 
     def getSearchChairConfig(){

@@ -1,11 +1,10 @@
 <%--
-  Created by IntelliJ IDEA.
-  decanat.grails.User: Admin
+  author: evgeniy
   Date: 27.06.11
   Time: 23:44
-  To change this template use File | Settings | File Templates.
 --%>
 
+<%@ page import="decanat.grails.domain.User" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <title>Специальности</title>
@@ -13,36 +12,95 @@
     <script type="text/javascript">
 
         function initTable() {
+            var currId = '';
+
+            var refColumn = 5;
+
             $('#specialityList').dataTable({
-                        "bJQueryUI":true,
-                        "sPaginationType":"full_numbers",
-                        "iDisplayLength":15,
-                        "bLengthChange":false,
-                        "oLanguage":{
-                            "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
-                            "sInfoEmpty":"Нет данных для отображения",
-                            "sSearch":"Поиск",
-                            "sLengthMenu":"Отображать по _MENU_",
-                            "sInfoFiltered":"(найдено из _MAX_)",
-                            "sZeroRecords":"По Вашему запросу ничего не найдено.",
-                            "oPaginate":{
-                                "sFirst":"К началу",
-                                "sPrevious":"Назад",
-                                "sLast":"В конец",
-                                "sNext":"Далее"
-                            }
-                        },
-                        bAutoWidth:false,
-                        aoColumns:[
-                            { bSortable:false, sWidth: "5%"},
-                            {},
-                            {},
-                            {},
-                            {},
-                            { bSortable:false, sWidth: "5%"}
-                        ]
+                "bJQueryUI":true,
+                "bFilter":false,
+                sPaginationType:"full_numbers",
+                iDisplayLength:25,
+                "oLanguage":{
+                    "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+                    "sInfoEmpty":"Нет данных для отображения",
+                    "sSearch":"Поиск",
+                    "sLengthMenu":"Отображать по _MENU_",
+                    "sInfoFiltered":"(найдено из _MAX_)",
+                    "sZeroRecords":"По Вашему запросу ничего не найдено.",
+                    "oPaginate":{
+                        "sFirst":"К началу",
+                        "sPrevious":"Назад",
+                        "sLast":"В конец",
+                        "sNext":"Далее"
                     }
-            );
+                },
+                bProcessing:true,
+                bServerSide:true,
+                sAjaxSource:"${request.contextPath}/speciality/table",
+                bAutoWidth:false,
+                aLengthMenu:[
+                    [10, 25, 50],
+                    [10, 25, 50]
+                ],
+                aoColumns:[
+                    { bSortable:false, sWidth:"5%",
+                        "fnRender":function (o, val) {
+                            currId = o.aData[0];
+                            var res = '';
+                            res = res + '<input type="hidden" name="id" value=' + o.aData[0] + '>' +
+                                    '<input type="hidden" name="referenceCount" value=' + o.aData[refColumn] + '>';
+                            if (o.aData[refColumn] == 0) {
+                                res = res + '<input type="checkbox" name ="multipleDelete' + o.aData[0] + '" id="multipleDelete' + o.aData[0] + '" onclick="changeBackground(' + o.aData[0] + ')">';
+                            }
+                            return res;
+                        }},
+                    {},
+                    {},
+                    {},
+                    {},
+                    { bSortable:false, sWidth:"5%",
+                        "fnRender":function (o, val) {
+                            var res = '';
+                            res = res + '<table>' +
+                                    '<tr>' +
+                                    '<td align="left" style="margin-left: 5px; margin-right: 5px">' +
+                                    '<span onmouseover="tooltip.show(\'Редактировать выбранный предмет\');" onmouseout="tooltip.hide();">' +
+                                    '<a href="/plan/speciality/edit/' + currId + '" class="editBtn">' +
+                                    '<img src="/plan/images/ctrl/edit.jpg">' +
+                                    '</a>' +
+                                    '</span>' +
+                                    '</td>';
+                            if (o.aData[refColumn] == 0) {
+                                res = res +
+                                        '<td align="right" style="margin-left: 5px; margin-right: 5px">' +
+                                        '<span onmouseover="tooltip.show(\'Удалить выбранный предмет\');" onmouseout="tooltip.hide();">' +
+                                        '<a class="delBtn" onclick="deleteDialog(' + currId + ')">' +
+                                        '<img alt="delete" src="/plan/images/ctrl/del.jpg">' +
+                                        '</a>' +
+                                        '</span>' +
+                                        '</td>';
+                            } else {
+                                res = res +
+                                        '<td align="right" style="margin-left: 5px; margin-right: 5px">' +
+                                        '<span onmouseover="tooltip.show(\'Удалить выбраную специальность\');" onmouseout="tooltip.hide();">' +
+                                        '<img alt="delete_disabled" src="/plan/images/ctrl/delete_disabled.gif">' +
+                                        '</span>' +
+                                        '</td>';
+                            }
+                            res = res + '</tr>' +
+                                    '</table>';
+                            return res;
+                        }}
+                ],
+                fnRowCallback:function (nRow, aData, iDisplayIndex) {
+                    $(nRow).attr("id", 'tr' + $(nRow).find("input:hidden[name=id]").val());
+                    if ($(nRow).find("input:hidden[name=referenceCount]").val() == 0) {
+                        $(nRow).attr("name", 'itemTr');
+                    }
+                    return nRow;
+                }
+            });
         }
 
         $(document).ready(function () {
@@ -64,12 +122,10 @@
             $('#recordsCount').html($("input[type=checkbox]:checked").length)
         }
     </script>
-
 </head>
 
 <body>
-
-<div style="width: 100%">
+<div>
     <g:form action="multipleDelete" controller="speciality">
         <div align="left" class="action">
             <g:link controller="speciality" action="add">
@@ -78,7 +134,6 @@
             <a id="multipleDelete" onclick="multipleDeleteDialog()">Удалить выделенные</a>
             <g:submitButton name="multipleDeleteSubmit" value="" style="display: none"/>
         </div>
-
         <g:render template="/template/speciality/specialityList" model="${[res: res]}"/>
 
         <content tag="search">
@@ -87,7 +142,7 @@
 
         <content tag="deleteConfirmation">
             <g:render template="/template/deleteConfirmation"
-                      model="['askMessage': 'Вы точно хотите удалить эту специальность?']"/>
+                      model="['askMessage': 'Вы точно хотите удалить этот предмет?']"/>
         </content>
     </g:form>
 </div>
