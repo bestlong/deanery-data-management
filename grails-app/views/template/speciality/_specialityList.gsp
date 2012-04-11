@@ -22,58 +22,7 @@
         </thead>
 
         <tbody>
-        <g:each in="${res}" var="speciality">
-            <tr id="${speciality.referenceCount == 0 ? 'tr'+speciality.id : ''}" name="${speciality.referenceCount == 0 ? 'itemTr' : ''}">
-                <td align="center">
-                    <g:if test="${speciality.referenceCount == 0}">
-                        <tooltip:tip code="tooltip.del">
-                            <g:hiddenField name="id" value="${speciality.id}"/>
-                            <g:checkBox name="multipleDelete${speciality.id}" onclick="changeBackground(${speciality.id})"/>
-                        </tooltip:tip>
-                    </g:if>
-                </td>
-                <td>
-                    ${speciality.code}
-                </td>
-                <td>
-                    ${speciality.specialityCode}
-                </td>
-                <td>
-                    ${speciality.name}
-                </td>
-                <td>
-                    ${speciality.shortName}
-                </td>
-                <td>
-                    <table>
-                        <tr>
-                            <td align="left" style="margin: 5px">
-                                <tooltip:tip code="tooltip.edit">
-                                    <a href="<g:createLink action="edit" controller="speciality"
-                                                           id="${speciality?.id}"/>">
-                                        <img src="<g:createLinkTo dir="/images/ctrl" file="edit.jpg"/>" alt="edit"/>
-                                    </a>
-                                </tooltip:tip>
-                            </td>
-                            <td align="right" style="margin: 5px">
-                                <g:if test="${speciality.referenceCount == 0}">
-                                    <tooltip:tip code="tooltip.del">
-                                        <a onclick="deleteDialog(${speciality?.id})" class="delBtn">
-                                            <img alt="delete" src="<g:createLinkTo dir="/images/ctrl" file="del.jpg"/>"/>
-                                        </a>
-                                    </tooltip:tip>
-                                </g:if>
-                                <g:else>
-                                    <tooltip:tip code="tooltip.unable.remove">
-                                        <img src="<g:createLinkTo dir="/images/ctrl" file="delete_disabled.gif"/>"/>
-                                    </tooltip:tip>
-                                </g:else>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </g:each>
+
         </tbody>
     </table>
 

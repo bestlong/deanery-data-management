@@ -19,23 +19,70 @@
 </head>
 
 <body>
-<fieldset>
+
+<g:form controller="CSVExport" action="export">
+
     <fieldset>
-        <g:form controller="CSVExport" action="exportDirectoriToCSV" method="get" name="ExportToCSV">
-            <input type="submit" value="Экспортировать справочники в CSV">
-            <p></p>
-            &nbsp
-           Экспортировать справочники в CSV . В справочники входят кафедры, специальности и предметы.
-            <p></p>
-        </g:form>
+
+        <table  >
+            <tr>
+                <td>
+                    <g:radio name="myGroup" value="directori"/>
+                        </td>
+                <td>
+                    <a style=" font-size: 14px;  color: #000000; ">
+                        Экспортировать справочники в CSV .</a>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <a style=" font-size: 14px;  color: #000000;">
+                        В справочники входят кафедры, специальности и предметы.   </a>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <g:radio name="myGroup" value="all" checked="true"/>
+                </td>
+                <td>
+                    <a style="font-size: 14px; color: #000000;">    Экспортировать всё в CSV    </a>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                </td>
+                <td>
+                    <a style=" font-size: 14px;  color: #000000;">
+                        В экспорт всего входит экспорт справочников, информаций о всех планах и деканатах.   </a>
+                </td>
+            </tr>
+
+        </table>
+
+
+        <table  >
+            <tr>
+                <td>
+
+                </td>
+                <td>
+
+                    <input type="submit" value="         Экспортировать       ">
+
+                </td>
+            </tr>
+        </table>
     </fieldset>
-    <p></p>
-    <g:form controller="CSVExport" action="exportAllToCSV" method="get" name="ExportToCSV">
-        <input type="submit" value="        Экспортировать всё в CSV           ">
-    </g:form>
 
 
+</g:form>
 
-</fieldset>
 </body>
 </html>

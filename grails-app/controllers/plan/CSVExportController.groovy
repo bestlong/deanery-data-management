@@ -22,7 +22,7 @@ class CSVExportController {
         try {
             response.contentType = "application/vnd.ms-excel"
             response.setHeader("Content-disposition", "attachment;filename=plan.csv")
-            outFile = new OutputStreamWriter(response.outputStream);
+            outFile = new OutputStreamWriter(response.outputStream,'CP1251');
             CSVExportService imprt=new CSVExportService(outFile);
             imprt.exportToCSVPlan(params.id);
             List<?> list1=imprt.exportToCSVPlanSubject(params.id);
@@ -42,7 +42,7 @@ class CSVExportController {
         try {
             response.contentType = "application/vnd.ms-excel"
             response.setHeader("Content-disposition", "attachment;filename=workplan.csv")
-            outFile = new OutputStreamWriter(response.outputStream);
+            outFile = new OutputStreamWriter(response.outputStream,'CP1251');
             CSVExportService imprt=new CSVExportService(outFile);
             imprt.exportToCSVWorkPlan(params.id);
             List<?> list1=imprt.exportToCSVPlanSubject(params.id);
@@ -58,16 +58,21 @@ class CSVExportController {
     }
 
 
-
-
-
+    def export(){
+        if (params.myGroup=='directori'){
+            exportDirectoriToCSV();
+        }
+        if (params.myGroup=='all'){
+            exportAllToCSV();
+        }
+    }
 
     def exportAllToCSV() {
         OutputStreamWriter outFile;
         try {
             response.contentType = "application/vnd.ms-excel"
             response.setHeader("Content-disposition", "attachment;filename=allbase.csv")
-            outFile = new OutputStreamWriter(response.outputStream);
+            outFile = new OutputStreamWriter(response.outputStream,'CP1251');
             CSVExportService imprt=new CSVExportService(outFile);
             imprt.exportToCSVAllChair();
             imprt.exportToCSVAllPlan();
@@ -93,7 +98,7 @@ class CSVExportController {
         try {
             response.contentType = "application/vnd.ms-excel"
             response.setHeader("Content-disposition", "attachment;filename=direcroti.csv")
-            outFile = new OutputStreamWriter(response.outputStream);
+            outFile = new OutputStreamWriter(response.outputStream,'CP1251');
             CSVExportService imprt=new CSVExportService(outFile);
             imprt.exportToCSVAllChair();
             imprt.exportToCSVAllSpeciality();

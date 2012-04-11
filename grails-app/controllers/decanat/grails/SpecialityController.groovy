@@ -2,13 +2,26 @@ package decanat.grails
 
 import stu.cn.ua.CommonUtils
 import decanat.grails.domain.User
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.converters.JSON
 
 class SpecialityController {
 
     def specialityService
     def springSecurityService
+    def sessionParamsService
+
+
+    def getPropertiesToRender(){
+        def propertiesToRender
+
+            propertiesToRender =  ['id' , 'code', 'specialityCode' , 'name' , 'shortName' ]
+
+        propertiesToRender
+    }
 
     def index = {
+        sessionParamsService.saveParams(params)
         [res: Speciality.list(), selectedMenu: 1]
     }
 
@@ -59,8 +72,32 @@ class SpecialityController {
     }
 
     def search = {
-        def res = specialityService.findSpecialities(params.code, params.specialityCode, params.name, params.shortName);
+
+        sessionParamsService.saveParams(params)
+        def res = specialityService.findSpeciality(params, getPropertiesToRender());
         render(template: "/template/speciality/specialityList", model: [res: res]);
+    }
+
+    def table = {
+        def dataToRender = [:]
+        dataToRender.sEcho = params.sEcho
+        dataToRender.aaData=[]
+
+        def list = specialityService.findSpeciality(params, getPropertiesToRender())
+        dataToRender.iTotalRecords = list.totalCount
+        dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
+        list.each { subject ->
+            def record = []
+            record << subject.id
+            record << subject.code
+            record << subject.specialityCode
+            record << subject.name
+            record << subject.shortName
+
+            record << subject.referenceCount
+            dataToRender.aaData << record
+        }
+        render dataToRender as JSON
     }
 
     def edit = {
