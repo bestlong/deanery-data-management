@@ -13,7 +13,7 @@ class ChairController {
     def getPropertiesToRender(){
         def propertiesToRender
 
-        propertiesToRender  =["id" ,"codeChair", "name",  "shortName" , "head", "deanery.name", "id"]
+        propertiesToRender  =["id" ,"codeChair", "name",  "shortName" , "head", "deanery", "id"]
 
         propertiesToRender
     }
@@ -33,7 +33,7 @@ class ChairController {
             record << subject.name
             record << subject.shortName
             record << subject.head
-            record << subject.deanery.name
+            record << subject.deanery?.name
             record << ' <a href="../../plan/subject/specialitiesSubjects/'+subject.id.toString()+'" >Показать</a>'
             record <<  ' <a href="../../plan/index/chairPlans/'+subject.id.toString()+'">Показать</a> '
 
