@@ -98,14 +98,19 @@ class ChairController {
     def remove = {
         try {
             if (params.id) {
+                User user = User.get(springSecurityService.principal.id)
                 int id = params.id as int
                 Chair chair = Chair.findById(id)
-                if (chair) {
-                    chair.delete(flush: true)
-                    flash.message = message(code: "msg.chair.remove", args: [chair.name])
-                }
-                else {
-                    flash.error = message(code: "msg.remove.error")
+                if (chair.deaneryId==user.deaneryId){
+                    if (chair && chair.deaneryId==user.deaneryId) {
+                        chair.delete(flush: true)
+                        flash.message = message(code: "msg.chair.remove", args: [chair.name])
+                    }
+                    else {
+                        flash.error = message(code: "msg.remove.error")
+                    }
+                }else{
+                    flash.error = message(code: "msg.DeaneryId.error")
                 }
             }
         }
@@ -120,15 +125,15 @@ class ChairController {
         try {
             if (params.id) {
                 Chair chair = Chair.findById(params.id)
-                chair.properties = params
-                if (chair?.save(flush: true)) {
-                    flash.message = message(code: "msg.chair.edit", args: [chair.name, chair.shortName ?: "<не указано>"])
-                } else {
+                    chair.properties = params
+                    if (chair?.save(flush: true)) {
+                        flash.message = message(code: "msg.chair.edit", args: [chair.name, chair.shortName ?: "<не указано>"])
+                    } else {
+                        flash.error = message(code: "msg.edit.error")
+                    }
+                }else{
                     flash.error = message(code: "msg.edit.error")
                 }
-            } else {
-                flash.error = message(code: "msg.edit.error")
-            }
         }
         catch (Exception e) {
             flash.error = message(code: "msg.edit.error")
@@ -140,6 +145,11 @@ class ChairController {
     def edit = {
         if (params.id) {
             Chair chair = Chair.findById(params.id)
+            User user = User.get(springSecurityService.principal.id)
+            if (user.deaneryId!=chair.deaneryId){
+                flash.error = message(code: "msg.DeaneryId.error")
+                redirect(action: 'list', params: params)
+            }
             if (!chair) {
                 flash.error = message(code: "msg.chair.edit.gotoError")
                 redirect(action: 'list', params: params)
