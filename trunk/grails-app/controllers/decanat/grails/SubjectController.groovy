@@ -34,14 +34,14 @@ class SubjectController {
         try {
             if (params.id) {
                 Subject subject = Subject.findById(params.id)
-                if (subjectService.updateSubject(subject, params)) {
-                    flash.message = message(code: "msg.subject.edit", args: [subject.name])
-                } else {
+                    if (subjectService.updateSubject(subject, params)) {
+                        flash.message = message(code: "msg.subject.edit", args: [subject.name])
+                    } else {
+                        flash.error = message(code: "msg.edit.error")
+                    }
+                }else{
                     flash.error = message(code: "msg.edit.error")
                 }
-            } else {
-                flash.error = message(code: "msg.edit.error")
-            }
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
@@ -128,19 +128,30 @@ class SubjectController {
 
     def edit = {
         Subject subject = Subject.findById(params.id);
-        [subject: subject]
+        User user = User.get(springSecurityService.principal.id)
+        if (user.deaneryId==subject.deaneryId){
+            [subject: subject]
+        }else{
+            flash.error = message(code: "msg.DeaneryId.error")
+            redirect(action: 'index')
+        }
     }
 
     def delete = {
         try {
             if (params.id) {
                 Subject subj = Subject.findById(params.id);
-                if (subj) {
-                    subj.delete(flush: true);
-                    flash.message = message(code: "msg.subject.remove", args: [subj.name])
-                }
-                else {
-                    flash.error = message(code: "msg.remove.error")
+                User user = User.get(springSecurityService.principal.id)
+                if (user.deaneryId!=subj.deaneryId){
+                    flash.error = message(code: "msg.DeaneryId.error")
+                }else{
+                    if (subj) {
+                        subj.delete(flush: true);
+                        flash.message = message(code: "msg.subject.remove", args: [subj.name])
+                    }
+                    else {
+                        flash.error = message(code: "msg.remove.error")
+                    }
                 }
             }
         }

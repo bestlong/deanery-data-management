@@ -51,18 +51,19 @@ class SpecialityController {
 
     def update = {
         try {
+            def ids = params.id
             if (params.id) {
                 Speciality speciality = Speciality.findById(params.id)
-                speciality.properties = params
-                speciality.name = CommonUtils.prepareString(speciality.name)
-                if (speciality?.save()) {
-                    flash.message = message(code: "msg.speciality.edit", args: [speciality.name])
-                } else {
+                    speciality.properties = params
+                    speciality.name = CommonUtils.prepareString(speciality.name)
+                    if (speciality?.save()) {
+                        flash.message = message(code: "msg.speciality.edit", args: [speciality.name])
+                    } else {
+                        flash.error = message(code: "msg.edit.error")
+                    }
+                }else{
                     flash.error = message(code: "msg.edit.error")
                 }
-            } else {
-                flash.error = message(code: "msg.edit.error")
-            }
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
@@ -102,7 +103,13 @@ class SpecialityController {
 
     def edit = {
         Speciality speciality = Speciality.findById(params.id);
-        [speciality: speciality]
+        User user = User.get(springSecurityService.principal.id)
+        if (user.deaneryId==speciality.deaneryId){
+            [speciality: speciality]
+        }else{
+            flash.error = message(code: "msg.DeaneryId.error")
+            redirect(action: index)
+        }
     }
 
     def delete = {
@@ -110,12 +117,16 @@ class SpecialityController {
             if (params.id) {
                 int id = params.id as int
                 Speciality spec = Speciality.findById(params.id);
-                if (spec) {
-                    flash.message = message(code: "msg.speciality.remove", args: [spec.name])
-                    spec.delete();
-                }
-                else {
-                    flash.error = message(code: "msg.remove.error")
+                User user = User.get(springSecurityService.principal.id)
+                if (user.deaneryId != spec.deaneryId){
+                    flash.error = message(code: "msg.DeaneryId.error")
+                }else{
+                    if (spec) {
+                        flash.message = message(code: "msg.speciality.remove", args: [spec.name])
+                        spec.delete();
+                    }else {
+                        flash.error = message(code: "msg.remove.error")
+                    }
                 }
             }
         }

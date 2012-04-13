@@ -92,12 +92,17 @@ class UserController {
 
     def delete = {
         if (params.id) {
+            User tekUser = User.get(springSecurityService.principal.id)
             User user = User.findById(params.id);
-            if (user) {
-                Collection<UserRole> userRoles = UserRole.findAllByUser(user)
-                userRoles*.delete()
-                user.delete()
-                flash.message = message(code: "msg.user.remove", args: [user.username])
+            if (user.deaneryId!=tekUser.deaneryId){
+                flash.error = message(code: "msg.DeaneryId.error")
+            }else{
+                if (user) {
+                    Collection<UserRole> userRoles = UserRole.findAllByUser(user)
+                    userRoles*.delete()
+                    user.delete()
+                    flash.message = message(code: "msg.user.remove", args: [user.username])
+                }
             }
         }
         else {
@@ -113,7 +118,13 @@ class UserController {
 
     def edit = {
         User user = User.findById(params.id);
-        [user: user, roles: userService.findRolesForSearch(), role: user.getAuthorities().toArray()[0]]
+        User tekUser = User.get(springSecurityService.principal.id)
+        if (user.deaneryId==tekUser.deaneryId){
+            [user: user, roles: userService.findRolesForSearch(), role: user.getAuthorities().toArray()[0]]
+        }else{
+            flash.error = message(code: "msg.DeaneryId.error")
+            redirect(action: index, params: params)
+        }
     }
 
     def validate = {
