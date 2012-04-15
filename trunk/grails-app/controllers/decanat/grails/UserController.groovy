@@ -4,6 +4,7 @@ import decanat.grails.domain.User
 import decanat.grails.domain.Role
 import decanat.grails.domain.UserRole
 import stu.cn.ua.enums.Roles
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class UserController {
 
@@ -29,16 +30,23 @@ class UserController {
                     flash.error = message(code: "msg.user.add.role.not.found")
                 }
                 else {
-                    if (null != facultyId && 0 != facultyId) {
-                        faculty = Deanery.get(facultyId)
-                    }
-                    if (role?.description == Roles.PROREKTOR.text) {
-                        faculty = null
+                    if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                        if (role?.description == Roles.PROREKTOR.text) {
+                            faculty = null
+                        } else {
+                            if (null != facultyId && 0 != facultyId) {
+                                faculty = Deanery.get(facultyId)
+                            }
+                        }
+                    } else {
+                        if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+                            User curUser = User.get(springSecurityService.principal.id)
+                            faculty = curUser.deanery
+                        }
                     }
                     user.deanery = faculty
                     user.enabled = true
                     user.save();
-//                    UserRole.removeAll(user)
                     UserRole.create(user, role, true)
                     flash.message = message(code: "msg.user.add", args: [user.username])
                 }
@@ -66,11 +74,19 @@ class UserController {
                 flash.error = message(code: "msg.user.add.role.not.found")
             }
             else {
-                if (null != facultyId && 0 != facultyId) {
-                    faculty = Deanery.get(facultyId)
-                }
-                if (role?.description == Roles.PROREKTOR.text) {
-                    faculty = null
+                if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                    if (role?.description == Roles.PROREKTOR.text) {
+                        faculty = null
+                    } else {
+                        if (null != facultyId && 0 != facultyId) {
+                            faculty = Deanery.get(facultyId)
+                        }
+                    }
+                } else {
+                    if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+                        User curUser = User.get(springSecurityService.principal.id)
+                        faculty = curUser.deanery
+                    }
                 }
                 user.deanery = faculty
                 UserRole.removeAll(user)
@@ -81,8 +97,6 @@ class UserController {
                     flash.error = message(code: "msg.edit.error")
                 }
             }
-            //user.password = springSecurityService.encodePassword(user.password)
-
         } else {
             flash.error = message(code: "msg.edit.error")
         }
@@ -94,14 +108,25 @@ class UserController {
         if (params.id) {
             User tekUser = User.get(springSecurityService.principal.id)
             User user = User.findById(params.id);
-            if (user.deaneryId!=tekUser.deaneryId){
-                flash.error = message(code: "msg.DeaneryId.error")
-            }else{
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
                 if (user) {
                     Collection<UserRole> userRoles = UserRole.findAllByUser(user)
                     userRoles*.delete()
                     user.delete()
                     flash.message = message(code: "msg.user.remove", args: [user.username])
+                }
+            } else {
+                if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+                    if (user.deaneryId != tekUser.deaneryId) {
+                        flash.error = message(code: "msg.DeaneryId.error")
+                    } else {
+                        if (user) {
+                            Collection<UserRole> userRoles = UserRole.findAllByUser(user)
+                            userRoles*.delete()
+                            user.delete()
+                            flash.message = message(code: "msg.user.remove", args: [user.username])
+                        }
+                    }
                 }
             }
         }
@@ -119,11 +144,17 @@ class UserController {
     def edit = {
         User user = User.findById(params.id);
         User tekUser = User.get(springSecurityService.principal.id)
-        if (user.deaneryId==tekUser.deaneryId){
+        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
             [user: user, roles: userService.findRolesForSearch(), role: user.getAuthorities().toArray()[0]]
-        }else{
-            flash.error = message(code: "msg.DeaneryId.error")
-            redirect(action: index, params: params)
+        } else {
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+                if (user.deaneryId == tekUser.deaneryId) {
+                    [user: user, roles: userService.findRolesForSearch(), role: user.getAuthorities().toArray()[0]]
+                } else {
+                    flash.error = message(code: "msg.DeaneryId.error")
+                    redirect(action: index, params: params)
+                }
+            }
         }
     }
 

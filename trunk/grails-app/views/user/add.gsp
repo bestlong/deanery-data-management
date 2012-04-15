@@ -46,12 +46,14 @@
                           value="${authority}"/>
             </td>
         </tr>
-        <tr id="trFaculty">
-            <td class="caption">Факультет*</td>
-            <td>
-                <g:select from="${Deanery.list()}" optionValue="name" optionKey="id" name="facultyId"/>
-            </td>
-        </tr>
+        <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+            <tr id="trFaculty">
+                <td class="caption">Факультет*</td>
+                <td>
+                    <g:select from="${Deanery.list()}" optionValue="name" optionKey="id" name="facultyId"/>
+                </td>
+            </tr>
+        </sec:ifAnyGranted>
         <tr>
             <td class="caption">Логин*</td>
             <td>

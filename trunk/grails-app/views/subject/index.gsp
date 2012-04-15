@@ -59,7 +59,7 @@
                             return res;
                         }},
                     {},
-                    {},
+                    {bSortable:false},
                     {},
                     <sec:ifAnyGranted roles="ROLE_PROREKTOR">
                     {},
@@ -134,9 +134,12 @@
 <div>
     <g:form action="multipleDelete" controller="subject">
         <div align="left" class="action">
-            <g:link controller="subject" action="add">
-                Новый
-            </g:link>
+            <sec:ifAnyGranted roles="ROLE_DEAN">
+                <g:link controller="subject" action="add">
+                    Новый
+                </g:link>
+            </sec:ifAnyGranted>
+
             <a id="multipleDelete" onclick="multipleDeleteDialog()">Удалить выделенные</a>
             <g:submitButton name="multipleDeleteSubmit" value="" style="display: none"/>
         </div>

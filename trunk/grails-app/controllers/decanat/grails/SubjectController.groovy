@@ -23,7 +23,12 @@ class SubjectController {
     }
 
     def index = {
-        cleanParams(params)
+        if (!sessionParamsService.loadParams()?.notClean){
+            cleanParams(params)
+        } else {
+            params.notClean = null
+            params.chair = sessionParamsService.loadParams().chair
+        }
         sessionParamsService.saveParams(params)
         [selectedMenu: 2]
     }
@@ -53,10 +58,11 @@ class SubjectController {
     def specialitiesSubjects = {
 //        def chair = Chair.findById(params.id as int)
 //        def res = Subject.findAllByChair(chair)
+        cleanParams(params)
         params.chair = params.id
-        params.id = null
+        params.notClean = true
         sessionParamsService.saveParams(params)
-        render(view: "index")
+        redirect(action: "index")
     }
 
     def save = {
@@ -163,9 +169,9 @@ class SubjectController {
     }
 
     private void cleanParams(params){
-        params.name = null
+        params.name = ""
         params.subject = null
-        params.shortName = null
+        params.shortName = ""
         params.chair = null
     }
 }
