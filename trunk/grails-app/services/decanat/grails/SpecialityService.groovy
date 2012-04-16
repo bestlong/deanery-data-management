@@ -8,16 +8,14 @@ import decanat.grails.domain.User
 
 class SpecialityService {
 
+    def sessionParamsService
+    def springSecurityService
+
     static transactional = true
-
-    def serviceMethod() {
-
-    }
+    static scope = "session"
 
     List<Speciality> findSpecialities(String code, String specialityCode, String name, String shortName) {
-
         def c = Speciality.createCriteria()
-
         def specialities = c.listDistinct {
             ilike("code", "%" + code + "%")
             ilike("name", "%" + name + "%")
@@ -25,16 +23,11 @@ class SpecialityService {
             if (!shortName.equals(""))
                 ilike("shortName", "%" + shortName + "%");
         }
-
         return specialities;
     }
 
-
-    def sessionParamsService
-    def springSecurityService
-
     def findSpeciality(params, propertiesToRender) {
-
+        User user = User.get(springSecurityService.principal.id)
         int maxCount = params.iDisplayLength as Integer ?: 25
         int offsetPos = params.iDisplayStart as Integer ?: 0
         def sort = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
@@ -46,7 +39,16 @@ class SpecialityService {
         def code = params?.code
         def specialityCode= params?.specialityCode
 
-
+        Deanery dean = null
+        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+            Integer deaneryId = params.deanery as Integer ?:0
+            if (0 != deaneryId) {
+                dean = Deanery.get(params.deanery as Integer)
+            }
+        }
+        if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+            dean = user.deanery
+        }
 
         def list = criteria.list(max: maxCount, offset: offsetPos) {
             if (!orderField.equals("") && !sort.equals("")) {
@@ -65,6 +67,9 @@ class SpecialityService {
                 if (specialityCode && !specialityCode.equals("")) {
                     ilike("specialityCode", "%" + specialityCode + "%");
                 }
+            }
+            if (null != dean) {
+                eq("deanery", dean)
             }
         }
         list

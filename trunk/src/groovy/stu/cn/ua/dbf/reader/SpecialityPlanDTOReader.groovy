@@ -25,7 +25,7 @@ class SpecialityPlanDTOReader extends DBFAbstractReader<SpecialityPlanDTO> {
     List<SpecialityPlanDTO> validate() {
         def errors = []
         resultList.each {
-            def result = Speciality.validate(it)
+            def result = Speciality.validate(it, currentUser)
             if (!result.success) {
                 errors.add(result.messages)
             }
@@ -42,7 +42,7 @@ class SpecialityPlanDTOReader extends DBFAbstractReader<SpecialityPlanDTO> {
     @Override
     int save() {
         resultList.each {
-            def spec = Speciality.saveSpeciality(it)
+            def spec = Speciality.saveSpeciality(it, currentUser)
             Plan.savePlan(it, spec)
         }
         resultList.size()

@@ -40,7 +40,7 @@
 </div>
 
 <div class="paginateButtons">
-    <g:paginate total="${totalPlans}" max="${sizePerPage ?: 4}" maxsteps="3" action="index" controller="index" prev="Предыдущая" next="Следующая"/>   <br/>
+    <g:paginate total="${totalPlans}" max="${sizePerPage ?: 10}" maxsteps="3" action="index" controller="index" prev="Предыдущая" next="Следующая"/>   <br/>
 </div>
 
 </body>
