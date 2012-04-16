@@ -9,6 +9,7 @@ class ChairService {
     def springSecurityService
 
     static transactional = true
+    static scope = "session"
 
     List<Chair> findChairs(String code, String name, String shortName) {
         User user = User.get(springSecurityService.principal.id)
@@ -35,12 +36,7 @@ class ChairService {
         res
     }
 
-
-
-
-
     def findChairs(params, propertiesToRender) {
-
         int maxCount = params.iDisplayLength as Integer ?: 25
         int offsetPos = params.iDisplayStart as Integer ?: 0
         def sort = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
@@ -50,9 +46,7 @@ class ChairService {
         def shortName = params?.shortName
         def name = params?.name
         def codeChair = params?.code
-
-
-       def list = criteria.list(max: maxCount, offset: offsetPos) {
+        def list = criteria.list(max: maxCount, offset: offsetPos) {
             if (!orderField.equals("") && !sort.equals("")) {
                 order(orderField, sort)
             }
@@ -70,5 +64,4 @@ class ChairService {
         }
         list
     }
-
 }
