@@ -6,6 +6,7 @@ class AddSubjectsController {
 
     def planSubjectService
     def subjectService
+    def sessionParamsService
 
     def index = {
         def plan = Plan.get(params.id as int)
@@ -35,6 +36,29 @@ class AddSubjectsController {
             newSubjects.add newSubject
         }
         [res: newSubjects, plan: plan]
+    }
+
+    def getPropertiesToRender() {
+        ['name', 'chair?.name', 'shortName', 'id']
+    }
+
+    def table = {
+        def dataToRender = [:]
+        dataToRender.sEcho = params.sEcho
+        dataToRender.aaData = []
+
+        def list = subjectService.findSubjects(params, getPropertiesToRender())
+        dataToRender.iTotalRecords = list.totalCount
+        dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
+        list.each { subject ->
+            def record = []
+            record << subject.name
+            record << subject.chair?.name
+            record << subject.shortName
+            record << subject.id
+            dataToRender.aaData << record
+        }
+        render dataToRender as JSON
     }
 
     def filter = {
@@ -81,7 +105,7 @@ class AddSubjectsController {
 
     def add = {
         def plan = Plan.get(params.id as int)
-        [res: Subject.list(), plan: plan]
+        [res: [], plan: plan]
     }
 
     def edit = {
@@ -115,8 +139,8 @@ class AddSubjectsController {
     }
 
     def search = {
-        def res = subjectService.findSubjects(params.chair.asType(Integer.class), params.name, params.shortName);
-        render(template: "/template/subject/selectSubject", model: [res: res]);
+        sessionParamsService.saveParams(params)
+        render(template: "/template/subject/selectSubject", model: []);
     }
 
     def save = {
