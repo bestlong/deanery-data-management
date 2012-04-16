@@ -6,6 +6,8 @@ import decanat.grails.domain.User
 
 class SubjectService {
 
+    static scope = "session"
+
     static transactional = true
 
     def sessionParamsService
@@ -44,7 +46,7 @@ class SubjectService {
             if (params) {
                 if (chairId != 0) {
                     chair {
-                        eq("id", chairId as long)
+                        eq("id", chairId)
                     }
                 }
                 ilike("shortName", "%" + shortName + "%");
