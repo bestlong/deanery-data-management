@@ -4,24 +4,23 @@ package decanat.grails
 import decanat.grails.domain.User
 import grails.converters.JSON
 import decanat.grails.ChairService
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 
 class ChairController {
     def sessionParamsService
     def springSecurityService
     def chairService
 
-    def getPropertiesToRender(){
+    def getPropertiesToRender() {
         def propertiesToRender
-
-        propertiesToRender  =["id" ,"codeChair", "name",  "shortName" , "head", "deanery", "id"]
-
+        propertiesToRender = ["id", "codeChair", "name", "shortName", "head", "deanery", "id"]
         propertiesToRender
     }
 
     def table = {
         def dataToRender = [:]
         dataToRender.sEcho = params.sEcho
-        dataToRender.aaData=[]
+        dataToRender.aaData = []
 
         def list = chairService.findChairs(params, getPropertiesToRender())
         dataToRender.iTotalRecords = list.totalCount
@@ -33,12 +32,11 @@ class ChairController {
             record << subject.name
             record << subject.shortName
             record << subject.head
-            record << subject.deanery?.name
-            record << ' <a href="../../plan/subject/specialitiesSubjects/'+subject.id.toString()+'" >Показать</a>'
-            record <<  ' <a href="../../plan/index/chairPlans/'+subject.id.toString()+'">Показать</a> '
-
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                record << subject.deanery?.shortName
+            }
+            record << ' <a href="../../plan/index/chairPlans/' + subject.id.toString() + '">Показать</a> '
             record << subject.referenceCount
-
             dataToRender.aaData << record
         }
         render dataToRender as JSON
@@ -84,13 +82,13 @@ class ChairController {
                 def deleteItem = params."multipleDelete${it}"
                 if (deleteItem) {
                     def item = Chair.get(it)
-                    item.delete(flush:true)
+                    item.delete(flush: true)
                     deletedCount++
                 }
             }
-            flash.message= message(code: "message.multiple.delete.success", args: [deletedCount])
+            flash.message = message(code: "message.multiple.delete.success", args: [deletedCount])
         } catch (Exception e) {
-            flash.error= message(code: "error.multiple.delete.records")
+            flash.error = message(code: "error.multiple.delete.records")
         }
         redirect(action: 'list')
     }
@@ -101,17 +99,15 @@ class ChairController {
                 User user = User.get(springSecurityService.principal.id)
                 int id = params.id as int
                 Chair chair = Chair.findById(id)
-                if (chair.deaneryId==user.deaneryId){
-                    if (chair && chair.deaneryId==user.deaneryId) {
-                        chair.delete(flush: true)
-                        flash.message = message(code: "msg.chair.remove", args: [chair.name])
-                    }
-                    else {
-                        flash.error = message(code: "msg.remove.error")
-                    }
-                }else{
-                    flash.error = message(code: "msg.DeaneryId.error")
+                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && chair.deaneryId != user.deaneryId) {
+                    flash.error = message(code: "msg.remove.error")
                 }
+                else {
+                    chair.delete(flush: true)
+                    flash.message = message(code: "msg.chair.remove", args: [chair.name])
+                }
+            } else {
+                flash.error = message(code: "msg.remove.error")
             }
         }
         catch (Exception e) {
@@ -125,15 +121,15 @@ class ChairController {
         try {
             if (params.id) {
                 Chair chair = Chair.findById(params.id)
-                    chair.properties = params
-                    if (chair?.save(flush: true)) {
-                        flash.message = message(code: "msg.chair.edit", args: [chair.name, chair.shortName ?: "<не указано>"])
-                    } else {
-                        flash.error = message(code: "msg.edit.error")
-                    }
-                }else{
+                chair.properties = params
+                if (chair?.save(flush: true)) {
+                    flash.message = message(code: "msg.chair.edit", args: [chair.name, chair.shortName ?: "<не указано>"])
+                } else {
                     flash.error = message(code: "msg.edit.error")
                 }
+            } else {
+                flash.error = message(code: "msg.edit.error")
+            }
         }
         catch (Exception e) {
             flash.error = message(code: "msg.edit.error")
@@ -146,17 +142,21 @@ class ChairController {
         if (params.id) {
             Chair chair = Chair.findById(params.id)
             User user = User.get(springSecurityService.principal.id)
-            if (user.deaneryId!=chair.deaneryId){
-                flash.error = message(code: "msg.DeaneryId.error")
-                redirect(action: 'list', params: params)
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                [curChair: chair]
+            } else {
+                if (user.deaneryId != chair.deaneryId) {
+                    flash.error = message(code: "msg.DeaneryId.error")
+                    redirect(action: 'list', params: params)
+                }
+                if (!chair) {
+                    flash.error = message(code: "msg.chair.edit.error")
+                    redirect(action: 'list', params: params)
+                }
+                [curChair: chair]
             }
-            if (!chair) {
-                flash.error = message(code: "msg.chair.edit.gotoError")
-                redirect(action: 'list', params: params)
-            }
-            [curChair: chair]
         } else {
-            flash.error = message(code: "msg.chair.edit.gotoError")
+            flash.error = message(code: "msg.chair.edit.error")
             redirect(action: 'list', params: params)
         }
     }
@@ -167,7 +167,8 @@ class ChairController {
         render template: "/template/chair/chairList", model: [res: res]
     }
 
-    def getSearchChairConfig(){
+    def getSearchChairConfig() {
         return [action: 'search', controller: 'chair']
     }
+
 }

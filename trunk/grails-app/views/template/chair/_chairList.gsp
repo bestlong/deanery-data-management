@@ -18,8 +18,9 @@
             <th>Название</th>
             <th>Аббревиатура</th>
             <th>Заведующий</th>
-            <th>Факультет</th>
-            <th>Предметы</th>
+            <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                <th>Факультет</th>
+            </sec:ifAnyGranted>
             <th>Планы</th>
             <th>Ред.</th>
         </tr>
