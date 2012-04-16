@@ -73,7 +73,7 @@ class PlanService {
         list
     }
 
-    private def getDeanery(params){
+    private def getDeanery(){
         User user = User.get(springSecurityService.principal.id)
         Deanery dean = null
         if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {

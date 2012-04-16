@@ -1,7 +1,7 @@
 <g:javascript>
     $(function () {
         $("#tabs").tabs();
-        $("input[type=text]").numeric({ decimal:false, negative:false }, null);
+        $("#formSave :input[type=text]").numeric({ decimal:false, negative:false }, null);
         $('#searchSubject').hide();
         initTable();
         $("#messages").delay(6000).fadeOut(5 * 400);
@@ -12,33 +12,49 @@
     });
 
     function initTable() {
+        var currId = '';
         $('#subjects').dataTable({
-            "bJQueryUI":true,
-            "sPaginationType":"full_numbers",
-            "iDisplayLength":20,
-            "bLengthChange":false,
-            "oLanguage":{
-                "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
-                "sInfoEmpty":"Нет данных для отображения",
-                "sSearch":"Поиск",
-                "sLengthMenu":"Отображать по _MENU_",
-                "sInfoFiltered":"(найдено из _MAX_)",
-                "sZeroRecords":"По Вашему запросу ничего не найдено.",
-                "oPaginate":{
-                    "sFirst":"К началу",
-                    "sPrevious":"Назад",
-                    "sLast":"В конец",
-                    "sNext":"Далее"
-                }
-            },
+        "bJQueryUI":true,
+        "bFilter":false,
+        sPaginationType:"full_numbers",
+        iDisplayLength:25,
+        "oLanguage":{
+            "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+            "sInfoEmpty":"Нет данных для отображения",
+            "sSearch":"Поиск",
+            "sLengthMenu":"Отображать по _MENU_",
+            "sInfoFiltered":"(найдено из _MAX_)",
+            "sZeroRecords":"По Вашему запросу ничего не найдено.",
+            "oPaginate":{
+                "sFirst":"К началу",
+                "sPrevious":"Назад",
+                "sLast":"В конец",
+                "sNext":"Далее"
+            }
+        },
+        bProcessing:true,
+        bServerSide:true,
+        sAjaxSource:"${request.contextPath}/addSubjects/table",
             bAutoWidth:false,
+            aLengthMenu:[
+                [10, 25, 50],
+                [10, 25, 50]
+            ],
             aoColumns:[
-                { sWidth:"30%" },
-                { sWidth:"30%" },
-                { sWidth:"25%" }
+                {
+                    "fnRender":function (o, val) {
+                        currId = o.aData[0];
+                        var res = '';
+                        res = res + '<a onclick="chooseSubj('+ o.aData[3]+', &#39;'+ o.aData[0]+'&#39;)" class="delBtn">'+ o.aData[0]+'</a>';
+                        return res;
+                    }},
+                {bSortable:false},
+                {},
+                {"fnRender":function (o, val) {
+                        return '';
+                }}
             ]
         });
-
         var myForm = $('#formSave');
         myForm.validate({
             onkeyup:false,
