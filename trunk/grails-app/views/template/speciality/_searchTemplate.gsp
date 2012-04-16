@@ -1,7 +1,7 @@
 <div class="search" id ="searchSpeciality">
     <h3>Поиск</h3>
     <g:formRemote name="fromSearch" update="updateSpecialityDiv"
-                  url="[controller:'speciality', action:'search']"
+                  url="[controller: searchConfig?.controller ?: 'speciality', action: searchConfig?.action ?: 'search']"
                   onSuccess="${searchConfig?.successFunction ?: 'initTable();'}">
         <div style="float: left; padding: 0 0 0 20px">
             <b class="searchTitles">Код</b><br/>

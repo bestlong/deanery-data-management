@@ -8,8 +8,8 @@
 <div class="search" id="searchChair">
     <h3>Поиск</h3>
     <g:formRemote name="fromSearch" update="updateChairDiv"
-                  url="[controller: 'chair', action:'search']"
-                  onComplete="initTable();">
+                  url="[controller: searchConfig?.controller ?: 'chair', action: searchConfig?.action ?: 'search']"
+                  onComplete='${searchConfig?.successFunction ?: 'initTable()'}'>
         <div style="float: left; padding: 0 0 0 20px">
             <b class="searchTitles">Код</b><br/>
             <g:textField name="code"/><br/>
