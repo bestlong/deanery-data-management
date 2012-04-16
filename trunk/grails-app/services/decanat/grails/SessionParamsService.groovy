@@ -4,13 +4,17 @@ class SessionParamsService {
 
     static scope = "session"
 
-    private def params
+    private def copyParams
 
     def saveParams(params) {
-        this.params = params.clone()
+        copyParams = [:]
+        params.each {
+            copyParams."${it.key}" = it.value
+        }
+        copyParams
     }
 
     def loadParams(){
-        params
+        copyParams
     }
 }

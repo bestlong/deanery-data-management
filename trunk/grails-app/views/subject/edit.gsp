@@ -82,7 +82,7 @@
                 <td class="caption">Кафедра*</td>
                 <td>
                     <g:hiddenField name="id" value="${subject.id}"/>
-                    <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair"/>
+                    <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair" value="${subject?.chair?.id}"/>
                 </td>
             </tr>
             <tr>

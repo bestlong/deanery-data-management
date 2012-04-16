@@ -12,9 +12,9 @@ class SubjectController {
     def sessionParamsService
     def springSecurityService
 
-    def getPropertiesToRender(){
+    def getPropertiesToRender() {
         def propertiesToRender
-        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")){
+        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
             propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'id']
         } else {
             propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'deanery', 'id']
@@ -23,12 +23,7 @@ class SubjectController {
     }
 
     def index = {
-        if (!sessionParamsService.loadParams()?.notClean){
-            cleanParams(params)
-        } else {
-            params.notClean = null
-            params.chair = sessionParamsService.loadParams().chair
-        }
+        cleanParams(params)
         sessionParamsService.saveParams(params)
         [selectedMenu: 2]
     }
@@ -39,30 +34,20 @@ class SubjectController {
         try {
             if (params.id) {
                 Subject subject = Subject.findById(params.id)
-                    if (subjectService.updateSubject(subject, params)) {
-                        flash.message = message(code: "msg.subject.edit", args: [subject.name])
-                    } else {
-                        flash.error = message(code: "msg.edit.error")
-                    }
-                }else{
+                if (subjectService.updateSubject(subject, params)) {
+                    flash.message = message(code: "msg.subject.edit", args: [subject.name])
+                } else {
                     flash.error = message(code: "msg.edit.error")
                 }
+            } else {
+                flash.error = message(code: "msg.edit.error")
+            }
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
             flash.error = message(code: "msg.edit.error")
         }
         redirect(action: index, params: params)
-    }
-
-    def specialitiesSubjects = {
-//        def chair = Chair.findById(params.id as int)
-//        def res = Subject.findAllByChair(chair)
-        cleanParams(params)
-        params.chair = params.id
-        params.notClean = true
-        sessionParamsService.saveParams(params)
-        redirect(action: "index")
     }
 
     def save = {
@@ -86,7 +71,7 @@ class SubjectController {
     def table = {
         def dataToRender = [:]
         dataToRender.sEcho = params.sEcho
-        dataToRender.aaData=[]
+        dataToRender.aaData = []
 
         def list = subjectService.findSubjects(params, getPropertiesToRender())
         dataToRender.iTotalRecords = list.totalCount
@@ -98,8 +83,8 @@ class SubjectController {
             record << subject.chair?.name
             record << subject.name
             record << subject.shortName
-            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")){
-                record << subject.deanery?.name
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                record << subject.deanery?.shortName
             }
             record << subject.referenceCount
             dataToRender.aaData << record
@@ -115,31 +100,34 @@ class SubjectController {
                 def deleteItem = params."multipleDelete${it}"
                 if (deleteItem) {
                     def item = Subject.get(it)
-                    item.delete(flush:true)
+                    item.delete(flush: true)
                     deletedCount++
                 }
             }
-            flash.message= message(code: "message.multiple.delete.success", args: [deletedCount])
+            flash.message = message(code: "message.multiple.delete.success", args: [deletedCount])
         } catch (Exception e) {
-            flash.error= message(code: "error.multiple.delete.records")
+            flash.error = message(code: "error.multiple.delete.records")
         }
         redirect(action: 'index')
     }
 
     def search = {
         sessionParamsService.saveParams(params)
-        def res = subjectService.findSubjects(params, getPropertiesToRender());
-        render(template: "/template/subject/subjectList", model: [res: res]);
+        render(template: "/template/subject/subjectList", model: [res: []]);
     }
 
     def edit = {
         Subject subject = Subject.findById(params.id);
         User user = User.get(springSecurityService.principal.id)
-        if (user.deaneryId==subject.deaneryId){
+        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
             [subject: subject]
-        }else{
-            flash.error = message(code: "msg.DeaneryId.error")
-            redirect(action: 'index')
+        } else {
+            if (user.deaneryId == subject.deaneryId) {
+                [subject: subject]
+            } else {
+                flash.error = message(code: "msg.DeaneryId.error")
+                redirect(action: 'index')
+            }
         }
     }
 
@@ -148,9 +136,9 @@ class SubjectController {
             if (params.id) {
                 Subject subj = Subject.findById(params.id);
                 User user = User.get(springSecurityService.principal.id)
-                if (user.deaneryId!=subj.deaneryId){
+                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && user.deaneryId != subj.deaneryId) {
                     flash.error = message(code: "msg.DeaneryId.error")
-                }else{
+                } else {
                     if (subj) {
                         subj.delete(flush: true);
                         flash.message = message(code: "msg.subject.remove", args: [subj.name])
@@ -168,11 +156,8 @@ class SubjectController {
         redirect(action: 'index', controller: 'subject', params: params)
     }
 
-    private void cleanParams(params){
-        params.name = ""
-        params.subject = null
-        params.shortName = ""
-        params.chair = null
+    private void cleanParams(params) {
+        params.clear()
     }
 }
 
