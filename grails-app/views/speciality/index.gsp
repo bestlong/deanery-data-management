@@ -14,7 +14,12 @@
         function initTable() {
             var currId = '';
 
+        <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+            var refColumn = 6;
+        </sec:ifAnyGranted>
+        <sec:ifAnyGranted roles="ROLE_DEAN">
             var refColumn = 5;
+        </sec:ifAnyGranted>
 
             $('#specialityList').dataTable({
                 "bJQueryUI":true,
@@ -59,6 +64,9 @@
                     {},
                     {},
                     {},
+                    <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                    {},
+                    </sec:ifAnyGranted>
                     { bSortable:false, sWidth:"5%",
                         "fnRender":function (o, val) {
                             var res = '';
@@ -128,9 +136,11 @@
 <div>
     <g:form action="multipleDelete" controller="speciality">
         <div align="left" class="action">
-            <g:link controller="speciality" action="add">
-                Новый
-            </g:link>
+            <sec:ifAnyGranted roles="ROLE_DEAN">
+                <g:link controller="speciality" action="add">
+                    Новая
+                </g:link>
+            </sec:ifAnyGranted>
             <a id="multipleDelete" onclick="multipleDeleteDialog()">Удалить выделенные</a>
             <g:submitButton name="multipleDeleteSubmit" value="" style="display: none"/>
         </div>

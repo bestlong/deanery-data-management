@@ -25,15 +25,16 @@ class Speciality {
         referenceCount(nullable: false)
     }
 
-    public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO) {
-        Speciality speciality = Speciality.findByCode(specialityPlanDTO.codsp)
+    public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO, User user) {
+        Speciality speciality = Speciality.findByCodeAndDeanery(specialityPlanDTO.codsp, user.deanery)
         if (!speciality || "".equals(specialityPlanDTO.codsp)) {
-            speciality = new Speciality(name: specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp)
+            speciality = new Speciality(name: specialityPlanDTO.name, shortName: specialityPlanDTO.codname, specialityCode: specialityPlanDTO.codspec, code: specialityPlanDTO.codsp, deanery: user.deanery)
         }
         else {
             speciality.name = specialityPlanDTO.name
             speciality.shortName = specialityPlanDTO.codname
             speciality.specialityCode = specialityPlanDTO.codspec
+            speciality.deanery = user.deanery
         }
         if (!speciality.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
@@ -46,18 +47,20 @@ class Speciality {
         }
     }
 
-    public static Speciality saveSpeciality(SpecialityPlanDTO specialityPlanDTO) {
-        def speciality = Speciality.findByCode(specialityPlanDTO.codsp)
+    public static Speciality saveSpeciality(SpecialityPlanDTO specialityPlanDTO, User user) {
+        def speciality = Speciality.findByCodeAndDeanery(specialityPlanDTO.codsp, user.deanery)
         if (!speciality || "".equals(specialityPlanDTO.codsp)) {
             speciality = new Speciality(name: CommonUtils.prepareString(specialityPlanDTO.name),
                     shortName: CommonUtils.prepareString(specialityPlanDTO.codname),
                     specialityCode: CommonUtils.prepareString(specialityPlanDTO.codspec),
+                    deanery: user.deanery,
                     code: CommonUtils.prepareString(specialityPlanDTO.codsp))
         }
         else {
             speciality.name = CommonUtils.prepareString(specialityPlanDTO.name)
             speciality.shortName = CommonUtils.prepareString(specialityPlanDTO.codname)
             speciality.specialityCode = CommonUtils.prepareString(specialityPlanDTO.codspec)
+            speciality.deanery = user.deanery
         }
         speciality.save()
     }
@@ -76,10 +79,5 @@ class Speciality {
         }
         srt=srt+"\n"
         return srt;
-    }
-
-    def beforeInsert(){
-        User user = User.get(springSecurityService.principal.id)
-        this.deanery = user.deanery
     }
 }

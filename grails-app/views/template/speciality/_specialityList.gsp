@@ -17,6 +17,9 @@
             <th>Код специальности</th>
             <th>Имя</th>
             <th>Короткое имя</th>
+            <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+                <th>Факультет</th>
+            </sec:ifAnyGranted>
             <th>Ред.</th>
         </tr>
         </thead>

@@ -163,8 +163,7 @@ class ChairController {
 
     def search = {
         sessionParamsService.saveParams(params)
-        def res = chairService.findChairs(params, getPropertiesToRender())
-        render template: "/template/chair/chairList", model: [res: res]
+        render template: "/template/chair/chairList", model: [res: []]
     }
 
     def getSearchChairConfig() {

@@ -135,9 +135,6 @@
             </div>
         </g:each>
     </div>
-
-
-
     <content tag="deleteConfirmation">
         <g:render template="/template/deleteConfirmation" model="['askMessage': 'Вы точно хотите удалить этот план?']"/>
     </content>

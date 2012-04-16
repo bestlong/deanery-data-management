@@ -12,15 +12,12 @@ class SpecialityController {
     def sessionParamsService
 
 
-    def getPropertiesToRender(){
-        def propertiesToRender
-
-            propertiesToRender =  ['id' , 'code', 'specialityCode' , 'name' , 'shortName' ]
-
-        propertiesToRender
+    def getPropertiesToRender() {
+        ['id', 'code', 'specialityCode', 'name', 'shortName']
     }
 
     def index = {
+        params.clear()
         sessionParamsService.saveParams(params)
         [res: Speciality.list(), selectedMenu: 1]
     }
@@ -33,8 +30,7 @@ class SpecialityController {
             User user = User.get(springSecurityService.principal.id)
             def speciality = new Speciality(params);
             speciality.name = CommonUtils.prepareString(speciality.name)
-            def chairInstance = new Chair(params)
-            chairInstance.deanery = user.deanery
+            speciality.deanery = user.deanery
             if (speciality.save()) {
                 flash.message = message(code: "msg.speciality.edit", args: [speciality.name])
             }
@@ -54,16 +50,16 @@ class SpecialityController {
             def ids = params.id
             if (params.id) {
                 Speciality speciality = Speciality.findById(params.id)
-                    speciality.properties = params
-                    speciality.name = CommonUtils.prepareString(speciality.name)
-                    if (speciality?.save()) {
-                        flash.message = message(code: "msg.speciality.edit", args: [speciality.name])
-                    } else {
-                        flash.error = message(code: "msg.edit.error")
-                    }
-                }else{
+                speciality.properties = params
+                speciality.name = CommonUtils.prepareString(speciality.name)
+                if (speciality?.save()) {
+                    flash.message = message(code: "msg.speciality.edit", args: [speciality.name])
+                } else {
                     flash.error = message(code: "msg.edit.error")
                 }
+            } else {
+                flash.error = message(code: "msg.edit.error")
+            }
         }
         catch (Exception e) {
             log.error(e.getMessage(), e)
@@ -73,29 +69,29 @@ class SpecialityController {
     }
 
     def search = {
-
         sessionParamsService.saveParams(params)
-        def res = specialityService.findSpeciality(params, getPropertiesToRender());
-        render(template: "/template/speciality/specialityList", model: [res: res]);
+        render(template: "/template/speciality/specialityList", model: [res: []]);
     }
 
     def table = {
         def dataToRender = [:]
         dataToRender.sEcho = params.sEcho
-        dataToRender.aaData=[]
+        dataToRender.aaData = []
 
         def list = specialityService.findSpeciality(params, getPropertiesToRender())
         dataToRender.iTotalRecords = list.totalCount
         dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
-        list.each { subject ->
+        list.each { speciality ->
             def record = []
-            record << subject.id
-            record << subject.code
-            record << subject.specialityCode
-            record << subject.name
-            record << subject.shortName
-
-            record << subject.referenceCount
+            record << speciality.id
+            record << speciality.code
+            record << speciality.specialityCode
+            record << speciality.name
+            record << speciality.shortName
+            if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+                record << speciality.deanery?.shortName
+            }
+            record << speciality.referenceCount
             dataToRender.aaData << record
         }
         render dataToRender as JSON
@@ -104,11 +100,15 @@ class SpecialityController {
     def edit = {
         Speciality speciality = Speciality.findById(params.id);
         User user = User.get(springSecurityService.principal.id)
-        if (user.deaneryId==speciality.deaneryId){
+        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
             [speciality: speciality]
-        }else{
-            flash.error = message(code: "msg.DeaneryId.error")
-            redirect(action: index)
+        } else {
+            if (user.deaneryId == speciality.deaneryId) {
+                [speciality: speciality]
+            } else {
+                flash.error = message(code: "msg.DeaneryId.error")
+                redirect(action: index)
+            }
         }
     }
 
@@ -118,13 +118,14 @@ class SpecialityController {
                 int id = params.id as int
                 Speciality spec = Speciality.findById(params.id);
                 User user = User.get(springSecurityService.principal.id)
-                if (user.deaneryId != spec.deaneryId){
+
+                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && user.deaneryId != spec.deaneryId) {
                     flash.error = message(code: "msg.DeaneryId.error")
-                }else{
+                } else {
                     if (spec) {
                         flash.message = message(code: "msg.speciality.remove", args: [spec.name])
                         spec.delete();
-                    }else {
+                    } else {
                         flash.error = message(code: "msg.remove.error")
                     }
                 }

@@ -23,7 +23,7 @@ class IndexController {
         def totalPlans = planService.findByDiscriminatorCount(PlanClass.STUDY)
         if (chainModel?.res == null)
             if (params.offset == null) {
-                planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, 4, 0)
+                planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, 10, 0)
             }
             else {
                 planList = planService.findByDiscriminatorForPaginating(PlanClass.STUDY, params.max as int, params.offset as int)
