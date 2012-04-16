@@ -1,64 +1,91 @@
 function initTableSpeciality() {
+
     $('#specialityList').dataTable({
-                "bJQueryUI": true,
-                "sPaginationType": "full_numbers",
-                "iDisplayLength": 15,
-                "bLengthChange": false,
-                "oLanguage": {
-                    "sInfo": "Всего: _TOTAL_. Показано с _START_ по _END_",
-                    "sInfoEmpty": "Нет данных для отображения",
-                    "sSearch": "Поиск",
-                    "sLengthMenu":"Отображать по _MENU_",
-                    "sInfoFiltered": "(найдено из _MAX_)",
-                    "sZeroRecords": "По Вашему запросу ничего не найдено.",
-                    "oPaginate":
-                    {
-                        "sFirst": "К началу",
-                        "sPrevious": "Назад",
-                        "sLast": "В конец",
-                        "sNext": "Далее"
-                    }
-                },
-                bAutoWidth: false,
-                aoColumns   : [
-                    {},
-                    {},
-                    {},
-                    {}
-                ]
+        "bJQueryUI":true,
+        "bFilter":false,
+        sPaginationType:"full_numbers",
+        iDisplayLength:25,
+        "oLanguage":{
+            "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+            "sInfoEmpty":"Нет данных для отображения",
+            "sSearch":"Поиск",
+            "sLengthMenu":"Отображать по _MENU_",
+            "sInfoFiltered":"(найдено из _MAX_)",
+            "sZeroRecords":"По Вашему запросу ничего не найдено.",
+            "oPaginate":{
+                "sFirst":"К началу",
+                "sPrevious":"Назад",
+                "sLast":"В конец",
+                "sNext":"Далее"
             }
-    );
+        },
+        bProcessing:true,
+        bServerSide:true,
+        sAjaxSource:"/plan/planInit/specialityTable",
+        bAutoWidth:false,
+        aLengthMenu:[
+            [10, 25, 50],
+            [10, 25, 50]
+        ],
+        aoColumns:[
+            {},
+            {
+                "fnRender":function (o, val) {
+                    var res = '';
+                    res = res + '<a onclick="chooseSpeciality(' + o.aData[4] + ', &#39;' + o.aData[1] + '&#39;)" class="delBtn">' + o.aData[1] + '</a>';
+                    return res;
+                }},
+            {},
+            {},
+            {"fnRender":function (o, val) {
+                return '';
+            }}
+        ]
+    });
 }
 
 function initTableChair() {
     $('#chairList').dataTable({
-                "bJQueryUI": true,
-                "sPaginationType": "full_numbers",
-                "iDisplayLength": 15,
-                "bLengthChange": false,
-                "oLanguage": {
-                    "sInfo": "Всего: _TOTAL_. Показано с _START_ по _END_",
-                    "sInfoEmpty": "Нет данных для отображения",
-                    "sSearch": "Поиск",
-                    "sLengthMenu":"Отображать по _MENU_",
-                    "sInfoFiltered": "(найдено из _MAX_)",
-                    "sZeroRecords": "По Вашему запросу ничего не найдено.",
-                    "oPaginate":
-                    {
-                        "sFirst": "К началу",
-                        "sPrevious": "Назад",
-                        "sLast": "В конец",
-                        "sNext": "Далее"
-                    }
-                },
-                bAutoWidth: false,
-                aoColumns   : [
-                    {},
-                    {},
-                    {}
-                ]
+        "bJQueryUI":true,
+        "bFilter":false,
+        sPaginationType:"full_numbers",
+        iDisplayLength:25,
+        "oLanguage":{
+            "sInfo":"Всего: _TOTAL_. Показано с _START_ по _END_",
+            "sInfoEmpty":"Нет данных для отображения",
+            "sSearch":"Поиск",
+            "sLengthMenu":"Отображать по _MENU_",
+            "sInfoFiltered":"(найдено из _MAX_)",
+            "sZeroRecords":"По Вашему запросу ничего не найдено.",
+            "oPaginate":{
+                "sFirst":"К началу",
+                "sPrevious":"Назад",
+                "sLast":"В конец",
+                "sNext":"Далее"
             }
-    );
+        },
+        bProcessing:true,
+        bServerSide:true,
+        sAjaxSource:"/plan/planInit/chairTable",
+        bAutoWidth:false,
+        aLengthMenu:[
+            [10, 25, 50],
+            [10, 25, 50]
+        ],
+        aoColumns:[
+            {},
+            {
+                "fnRender":function (o, val) {
+                    var res = '';
+                    res = res + '<a onclick="chooseChair(' + o.aData[3] + ', &#39;' + o.aData[1] + '&#39;)" class="delBtn">' + o.aData[1] + '</a>';
+                    return res;
+                }},
+            {},
+            {"fnRender":function (o, val) {
+                return '';
+            }}
+        ]
+    });
 }
 
 $(document).ready(function () {
@@ -72,7 +99,7 @@ $(document).ready(function () {
     $("#dialog").hide();
     $('#searchSpeciality').hide();
     $('#searchChair').hide();
-    $(".integer").numeric({ decimal: false, negative: false }, null);
+    $(".integer").numeric({ decimal:false, negative:false }, null);
 });
 
 function showChairSelect() {
@@ -96,7 +123,7 @@ function showSpecialitySelect(show) {
     $("#searchPartChair").hide();
 }
 
-function destroyQtips(){
+function destroyQtips() {
     $('#selectChair').qtip('destroy');
     $('#selectSpec').qtip('destroy');
 
@@ -129,116 +156,116 @@ function chooseSpeciality(id, name) {
     showMain(false);
 }
 
-$(function() {
+$(function () {
     var myForm = $('#selectSpecialityForm');
     myForm.validate({
-                onkeyup: false,
-                errorClass: 'error_field',
-                validClass: 'valid',
-                onsubmit: true,
-                success: function(label) {
-                    $('[id=' + label.attr('for') + ']').qtip('destroy');
-                },
-                errorPlacement: function(error, element) {
-                    if ($(error).text()) {
-                        if (element.attr('id') == 'specId')
-                            element = $('#selectSpec');
-                        if (element.attr('id') == 'chairId')
-                            element = $('#selectChair');
-                        $(element).filter(':not(.valid)').qtip({
-                                    overwrite: true,
-                                    content: error,
-                                    position: { my: 'left center', at: 'right center' },
-                                    show: {
-                                        event: false,
-                                        ready: true
-                                    },
-                                    hide: false,
-                                    style: {
-                                        widget: false,
-                                        classes: 'ui-tooltip-blue ui-tooltip-jtools ui-tooltip-rounded',
-                                        tip: true
-                                    }
-                                });
+        onkeyup:false,
+        errorClass:'error_field',
+        validClass:'valid',
+        onsubmit:true,
+        success:function (label) {
+            $('[id=' + label.attr('for') + ']').qtip('destroy');
+        },
+        errorPlacement:function (error, element) {
+            if ($(error).text()) {
+                if (element.attr('id') == 'specId')
+                    element = $('#selectSpec');
+                if (element.attr('id') == 'chairId')
+                    element = $('#selectChair');
+                $(element).filter(':not(.valid)').qtip({
+                    overwrite:true,
+                    content:error,
+                    position:{ my:'left center', at:'right center' },
+                    show:{
+                        event:false,
+                        ready:true
+                    },
+                    hide:false,
+                    style:{
+                        widget:false,
+                        classes:'ui-tooltip-blue ui-tooltip-jtools ui-tooltip-rounded',
+                        tip:true
                     }
+                });
+            }
 
 
-                },
-                rules: {
-                    level: {
-                        required: true
-                    },
-                    form: {
-                        range: [1, 3]
-                    },
-                    semestrCount: {
-                        range: [1, 11]
-                    },
-                    specId: {
-                        required: true
-                    },
-                    direction: {
-                        required: true
-                    },
-                    termin: {
-                        required: true
-                    },
-                    qualification: {
-                        required: true
-                    },
-                    chairId : {
-                        required: true
-                    },
-                    startYear : {
-                        required: true,
-                        minlength: 4,
-                        maxlength: 4,
-                        range: [1990, 2100]
-                    },
-                    endYear : {
-                        required: true,
-                        minlength: 4,
-                        maxlength: 4,
-                        range: [1990, 2100]
-                    }
-                },
-                messages: {
-                    level: {
-                        required: 'Выберите уровень'
-                    },
-                    form: {
-                        range: 'Выберите форму обучения'
-                    },
-                    semestrCount: {
-                        range: 'Выберите количество семестров'
-                    },
-                    specId: {
-                        required: 'Выберите специальность'
-                    },
-                    chairId: {
-                        required: 'Выберите кафедру'
-                    },
-                    direction: {
-                        required: 'Введите направление'
-                    },
-                    termin: {
-                        required: 'Введите срок обучения'
-                    },
-                    qualification: {
-                        required: " Введите квалификацию"
-                    },
-                    startYear: {
-                        required: "Введите год",
-                        minlength: "Должно быть 4 цифры",
-                        maxlength: "Должно быть 4 цифры",
-                        range: "Значение должно быть в пределать от 1990 до 2100"
-                    },
-                    endYear: {
-                        required: "Введите год",
-                        minlength: "Должно быть 4 цифры",
-                        maxlength: "Должно быть 4 цифры",
-                        range: "Значение должно быть в пределать от 1990 до 2100"
-                    }
-                }
-            });
+        },
+        rules:{
+            level:{
+                required:true
+            },
+            form:{
+                range:[1, 3]
+            },
+            semestrCount:{
+                range:[1, 11]
+            },
+            specId:{
+                required:true
+            },
+            direction:{
+                required:true
+            },
+            termin:{
+                required:true
+            },
+            qualification:{
+                required:true
+            },
+            chairId:{
+                required:true
+            },
+            startYear:{
+                required:true,
+                minlength:4,
+                maxlength:4,
+                range:[1990, 2100]
+            },
+            endYear:{
+                required:true,
+                minlength:4,
+                maxlength:4,
+                range:[1990, 2100]
+            }
+        },
+        messages:{
+            level:{
+                required:'Выберите уровень'
+            },
+            form:{
+                range:'Выберите форму обучения'
+            },
+            semestrCount:{
+                range:'Выберите количество семестров'
+            },
+            specId:{
+                required:'Выберите специальность'
+            },
+            chairId:{
+                required:'Выберите кафедру'
+            },
+            direction:{
+                required:'Введите направление'
+            },
+            termin:{
+                required:'Введите срок обучения'
+            },
+            qualification:{
+                required:" Введите квалификацию"
+            },
+            startYear:{
+                required:"Введите год",
+                minlength:"Должно быть 4 цифры",
+                maxlength:"Должно быть 4 цифры",
+                range:"Значение должно быть в пределать от 1990 до 2100"
+            },
+            endYear:{
+                required:"Введите год",
+                minlength:"Должно быть 4 цифры",
+                maxlength:"Должно быть 4 цифры",
+                range:"Значение должно быть в пределать от 1990 до 2100"
+            }
+        }
+    });
 });

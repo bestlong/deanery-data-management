@@ -35,7 +35,7 @@
         <h4 class="subtitle">для выбора специальности нажмите на её имя:</h4>
         <g:render template="/template/speciality/selectSpeciality" model="${[res: res]}"/>
         <div align="center" class="action">
-            <a href="" onclick="showMain()">Отмена</a>
+            <a onclick="showMain()">Отмена</a>
         </div>
     </div>
 
@@ -43,14 +43,14 @@
         <h4 class="subtitle">для выбора кафедры нажмите на её имя:</h4>
         <g:render template="/template/chair/selectChair" model="${[res: chairs]}"/>
         <div align="center" class="action">
-            <a href="" onclick="showMain()">Отмена</a>
+            <a onclick="showMain()">Отмена</a>
         </div>
     </div>
 
     <div id="selectPart">
         <h4 class="subtitle">Инициализация плана:</h4>
         <g:form action="next" controller="planInit" name="selectSpecialityForm">
-            <table cellpadding="5" class="editTable" style="border-width: 1">
+            <table cellpadding="5" class="editTable" style="border-width: 1px">
                 <tr>
                     <td class="caption">Года*</td>
                     <td>

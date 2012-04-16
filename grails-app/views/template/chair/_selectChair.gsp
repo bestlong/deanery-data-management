@@ -9,21 +9,6 @@
         </thead>
 
         <tbody>
-        <g:each in="${res}" var="chair">
-            <tr>
-                <td>
-                    ${chair.codeChair}
-                </td>
-                <td>
-                    <a href="#" onclick="chooseChair('${chair?.id}', '${chair?.name}')" class="delBtn">
-                        ${chair.name}
-                    </a>
-                </td>
-                <td>
-                    ${chair.shortName}
-                </td>
-            </tr>
-        </g:each>
         </tbody>
     </table>
 

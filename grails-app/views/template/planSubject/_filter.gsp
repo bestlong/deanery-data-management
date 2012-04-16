@@ -19,7 +19,7 @@
             <tr align="center">
                 <g:each in="${1..plan.semestrCount}" var="index">
                     <td>
-                        <g:checkBox name="filterSemestr${index}"/>
+                        <g:checkBox name="filterSemestr${index}" value="${true}"/>
                     </td>
                 </g:each>
             </tr>

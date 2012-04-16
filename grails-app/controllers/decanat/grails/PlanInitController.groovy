@@ -1,10 +1,14 @@
 package decanat.grails
 
+import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
+import grails.converters.JSON
+
 class PlanInitController {
     def planInitService
     def specialityService
     def semestrService
     def chairService
+    def sessionParamsService
 
 
     def index = {
@@ -15,9 +19,56 @@ class PlanInitController {
         else {
             plan = new Plan()
         }
-        def specList = Speciality.list()
-        def chairList = Chair.list()
-        [res: specList, plan: plan, chairs: chairList, searchConfig: getSearchChairConfig(), searchSpecialityConfig: getSearchSpecialityConfig()]
+        params.clear()
+        sessionParamsService.saveParams(params)
+        [res: [], plan: plan, chairs: [], searchConfig: getSearchChairConfig(), searchSpecialityConfig: getSearchSpecialityConfig()]
+    }
+
+    def getPropertiesToRenderSpeciality() {
+        ['code', 'name', 'shortName', 'specialityCode', 'id']
+    }
+
+    def specialityTable = {
+        def dataToRender = [:]
+        dataToRender.sEcho = params.sEcho
+        dataToRender.aaData = []
+
+        def list = specialityService.findSpeciality(params, getPropertiesToRenderSpeciality())
+        dataToRender.iTotalRecords = list.totalCount
+        dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
+        list.each { speciality ->
+            def record = []
+            record << speciality.code
+            record << speciality.name
+            record << speciality.shortName
+            record << speciality.specialityCode
+            record << speciality.id
+            dataToRender.aaData << record
+        }
+        render dataToRender as JSON
+    }
+
+    def getPropertiesToRender() {
+        ["codeChair", "name", "shortName", "id"]
+    }
+
+    def chairTable = {
+        def dataToRender = [:]
+        dataToRender.sEcho = params.sEcho
+        dataToRender.aaData = []
+
+        def list = chairService.findChairs(params, getPropertiesToRender())
+        dataToRender.iTotalRecords = list.totalCount
+        dataToRender.iTotalDisplayRecords = dataToRender.iTotalRecords
+        list.each { subject ->
+            def record = []
+            record << subject.codeChair
+            record << subject.name
+            record << subject.shortName
+            record << subject.id
+            dataToRender.aaData << record
+        }
+        render dataToRender as JSON
     }
 
     def next = {
@@ -39,13 +90,13 @@ class PlanInitController {
     }
 
     def search = {
-        def res = specialityService.findSpecialities(params.code, params.specialityCode, params.name, params.shortName);
-        render(template: "/template/speciality/selectSpeciality", model: [res: res]);
+        sessionParamsService.saveParams(params)
+        render(template: "/template/speciality/selectSpeciality", model: [res: []]);
     }
 
     def searchChair = {
-        def res = chairService.findChairs(params.code, params.name, params.shortName);
-        render(template: "/template/chair/selectChair", model: [res: res]);
+        sessionParamsService.saveParams(params)
+        render(template: "/template/chair/selectChair", model: [res: []]);
     }
 
 
