@@ -62,13 +62,10 @@ class IndexController {
 
     def print = {
         try {
-            log.error "111111111111111111111111111111111111"
             response.contentType = "application/vnd.ms-excel"
-            log.error "2222222222222222222222222222222222222"
             response.setHeader("Content-disposition", "attachment;filename=work-plan.xls")
-            log.error "33333333333333333333333333333333333333333"
             excelService.exportToExcel(Plan.get(params.id), new Date(), response.outputStream)
-            log.error "4444444444444444444444444444444444444444444"
+            response.outputStream.flush()
         } catch(Exception e) {
             log.error("error while exporting into excel: ", e)
         }
