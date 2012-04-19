@@ -10,29 +10,29 @@ class ProfileController {
         User user = User.get(springSecurityService.principal.id)
         [user: user, active: 3]
     }
-
-    def update = {
-        try {
-            if (params.id) {
-                User user = User.findById(params.id)
-                user.properties = params;
-                User userCurrent = User.get(springSecurityService.principal.id)
-                userCurrent.properties = params;
-                if (user?.save()) {
-                    flash.message = message(code: "msg.profile.edit")
-                } else {
-                    flash.error = message(code: "msg.edit.error")
-                }
-            } else {
-                flash.error = message(code: "msg.edit.error")
-            }
-        }
-        catch (Exception e) {
-            flash.error = message(code: "msg.edit.error")
-            log.error(e.getMessage(), e)
-        }
-        redirect(action: "index", params: params)
-    }
+//
+//    def update = {
+//        try {
+//            if (params.id) {
+//                User user = User.findById(params.id)
+//                user.properties = params;
+//                User userCurrent = User.get(springSecurityService.principal.id)
+//                userCurrent.properties = params;
+//                if (user?.save()) {
+//                    flash.message = message(code: "msg.profile.edit")
+//                } else {
+//                    flash.error = message(code: "msg.edit.error")
+//                }
+//            } else {
+//                flash.error = message(code: "msg.edit.error")
+//            }
+//        }
+//        catch (Exception e) {
+//            flash.error = message(code: "msg.edit.error")
+//            log.error(e.getMessage(), e)
+//        }
+//        redirect(action: "index", params: params)
+//    }
 
     def edit = {
         flash.message = message(code: "tooltip.plan.expand.work.plans")
