@@ -5,7 +5,12 @@ import stu.cn.ua.enums.PlanClass
 
 class PlanCreationController {
 
-    def index = {}
+    def planService
+
+    def index = {
+        [plans: planService.findByDiscriminatorForPaginating(PlanClass.STUDY, Integer.MAX_VALUE, 0),
+                workPlans: planService.findByDiscriminatorForPaginating(PlanClass.WORK, Integer.MAX_VALUE, 0)]
+    }
 
     def next = {
         try {

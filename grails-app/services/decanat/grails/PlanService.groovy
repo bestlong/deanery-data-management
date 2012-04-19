@@ -7,6 +7,7 @@ import decanat.grails.domain.User
 class PlanService {
 
     def springSecurityService
+    def authorityService
 
     static transactional = true
 
@@ -48,11 +49,11 @@ class PlanService {
             eq("class", PlanClass.WORK.name())
             eq("plan", plan)
             order("lastUpdated", "desc")
-            if (null != deanery) {
-                speciality{
-                    eq("deanery", deanery)
-                }
-            }
+//            if (null != deanery) {
+//                speciality{
+//                    eq("deanery", deanery)
+//                }
+//            }
         }
         list
     }
@@ -76,7 +77,7 @@ class PlanService {
     private def getDeanery(){
         User user = User.get(springSecurityService.principal.id)
         Deanery dean = null
-        if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+        if (!authorityService.isProrektor()) {
             dean = user.deanery
         }
         dean
