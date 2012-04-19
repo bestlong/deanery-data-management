@@ -12,7 +12,7 @@
     <table id="specialityList" class="display">
         <thead>
         <tr>
-            <th><a onclick="selectUnselectAll()">Выделить все</a></th>
+            <th><a onclick="selectUnselectAll()">Все</a></th>
             <th>Код</th>
             <th>Код специальности</th>
             <th>Имя</th>

@@ -4,7 +4,7 @@ class SessionParamsService {
 
     static scope = "session"
 
-    private def copyParams
+    private def copyParams = [:]
 
     def saveParams(params) {
         copyParams = [:]
