@@ -7,27 +7,28 @@ import decanat.grails.domain.User
 class ChairService {
     def sessionParamsService
     def springSecurityService
+    def authorityService
 
     static transactional = true
     static scope = "session"
 
-    List<Chair> findChairs(String code, String name, String shortName) {
-        User user = User.get(springSecurityService.principal.id)
-        def c = Chair.createCriteria()
-        def res = c.listDistinct {
-            ilike("codeChair", code)
-            ilike("name", name)
-            ilike("shortName", shortName)
-            if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
-                eq("deanery", user.deanery)
-            }
-        }
-        res
-    }
+//    List<Chair> findChairs(String code, String name, String shortName) {
+    //        User user = User.get(springSecurityService.principal.id)
+    //        def c = Chair.createCriteria()
+    //        def res = c.listDistinct {
+    //            ilike("codeChair", code)
+    //            ilike("name", name)
+    //            ilike("shortName", shortName)
+    //            if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
+    //                eq("deanery", user.deanery)
+    //            }
+    //        }
+    //        res
+    //    }
 
     def findChairsForCurrentUser() {
         def res
-        if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
+        if (authorityService.isProrektor()) {
             res = Chair.list()
         } else {
             User user = User.get(springSecurityService.principal.id)
@@ -37,29 +38,47 @@ class ChairService {
     }
 
     def findChairs(params, propertiesToRender) {
-        int maxCount = params.iDisplayLength as Integer ?: 25
-        int offsetPos = params.iDisplayStart as Integer ?: 0
-        def sort = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
-        def orderField = propertiesToRender[params.iSortCol_0 as Integer ?: 0]
+        Integer maxCount = 25
+        Integer offsetPos = 0
+        String sort = "desc"
+        String orderField = "id"
+        Integer sortCol = 0
+        if (null != params.iDisplayLength) {
+            maxCount = params.iDisplayLength as Integer
+        }
+        if (null != params.iDisplayStart) {
+            offsetPos = params.iDisplayStart as Integer
+        }
+        if (null != params.sSortDir_0) {
+            sort = params.sSortDir_0?.equalsIgnoreCase('asc') ? 'asc' : 'desc'
+        }
+        if (null != params.iSortCol_0) {
+            sortCol = params.iSortCol_0 as Integer
+        }
+        orderField = propertiesToRender[sortCol]
+
         def criteria = Chair.createCriteria()
         params = sessionParamsService.loadParams()
-        def shortName = params?.shortName
-        def name = params?.name
-        def codeChair = params?.code
+        def shortName = params?.shortName ?: ""
+        def name = params?.name ?: ""
+        def codeChair = params?.code ?: ""
+        Deanery dean = authorityService.getCurrentDeanery(params)
+
         def list = criteria.list(max: maxCount, offset: offsetPos) {
-            if (!orderField.equals("") && !sort.equals("")) {
-                order(orderField, sort)
-            }
+            order(orderField, sort)
             if (params) {
-                if (shortName && !shortName.equals("")) {
+                if (null != shortName && !shortName.equals("")) {
                     ilike("shortName", "%" + shortName + "%");
                 }
-                if (name && !name.equals("")) {
+                if (null != name && !name.equals("")) {
                     ilike("name", "%" + name + "%");
                 }
-                if (codeChair && !codeChair.equals("")) {
+                if (null != codeChair && !codeChair.equals("")) {
                     ilike("codeChair", "%" + codeChair + "%");
                 }
+            }
+            if (null != dean) {
+                eq("deanery", dean)
             }
         }
         list
