@@ -138,7 +138,7 @@
                         Рабочие планы
                     </td>
                     <td>
-                        <g:select from="${WorkPlan.list()}" optionValue="name" optionKey="id" name="baseWorkPlan"
+                        <g:select from="${workPlans}" optionValue="name" optionKey="id" name="baseWorkPlan"
                                   style="width:450px; padding: 3px; margin: 0"/>
                     </td>
                 </tr>
@@ -147,7 +147,7 @@
                         Учебные планы
                     </td>
                     <td align="left">
-                        <g:select from="${Plan.list()}" optionValue="speciality" optionKey="id" name="baseStudyPlan"
+                        <g:select from="${plans}" optionValue="speciality" optionKey="id" name="baseStudyPlan"
                                   style="width:450px; padding: 3px; margin: 0"/>
                     </td>
                 </tr>

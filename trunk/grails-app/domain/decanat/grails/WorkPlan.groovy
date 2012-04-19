@@ -67,13 +67,8 @@ class WorkPlan extends Plan{
         }
     }
     public String toCSV(){
-
         String srt = new String();
-
         def  nodes=["id" , "chairId", "direction" , "startYear" ,  "endYear" ,  "form" ,  "level" ,  "qualification" ,  "semestrCount", "specialityId",  "termin","name","planId"];
-
-
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);
