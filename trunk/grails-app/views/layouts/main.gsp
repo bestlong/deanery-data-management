@@ -55,7 +55,8 @@
         <div id="menuBuffer"></div>
         <g:pageProperty name="page.deleteConfirmation"/>
         <g:pageProperty name="page.editPassword"/>
-        <div>
+        <g:pageProperty name="page.findPlan"/>
+          <div>
             <g:render template="/template/notification/general"/>
             <g:layoutBody/>
         </div>

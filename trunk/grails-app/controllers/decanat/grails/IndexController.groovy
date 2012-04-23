@@ -1,5 +1,6 @@
 package decanat.grails
 
+
 import stu.cn.ua.enums.PlanClass
 
 class IndexController {
@@ -7,18 +8,25 @@ class IndexController {
     def planService
     def excelService
 
-    def chairPlans = {
-        def chair = Chair.get(params.id)
-        def plans = planService.findStudyPlansByChair(chair)
-        plans.each {
-            def useless = it.speciality.code
-        }
-        chain(action: 'index', model: [res: plans, msg: "Список учебных планов кафедры '${chair.name}", sizePerPage: plans.size()])
-    }
 
+
+    def findPlan = {
+        def plans = planService.findStudyPlansByParams(params)
+        for(Plan p: plans){
+            p.chair.getName();
+            p.speciality.getSpecialityCode()
+        }
+        Plan parametrs=params
+        parametrs.speciality=new Speciality();
+        parametrs.chair=new Chair();
+        parametrs.speciality.name=params.speciality
+        parametrs.chair.name=params.chair
+        chain(action: 'index', model: [res: plans, msg: "Найдено планов ${plans.size()}", sizePerPage: plans.size(),param: parametrs])
+    }
 
     def index = {
         def planList
+        def param = chainModel?.param
         def msg = chainModel?.msg ?: ""
         def totalPlans = planService.findByDiscriminatorCount(PlanClass.STUDY)
         if (chainModel?.res == null)
@@ -31,8 +39,29 @@ class IndexController {
         else{
             planList = chainModel.res
             totalPlans = planList.size()
+
+            if (!param){
+                Plan plan=new Plan();
+                plan.chair=new Chair();
+                plan.speciality=new Speciality();
+                plan.form="0";
+                plan.semestrCount=0;
+                param=plan;
+            }
+
         }
-        [res: planList, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
+        [res: planList,param: param, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
+    }
+
+
+    def chairPlans = {
+        def chair = Chair.get(params.id)
+        def plans = planService.findStudyPlansByChair(chair)
+        plans.each {
+            def useless = it.speciality.code
+        }
+
+        chain(action: 'index', model: [res: plans, msg: "Список учебных планов кафедры '${chair.name}", sizePerPage: plans.size()])
     }
 
     def delete = {

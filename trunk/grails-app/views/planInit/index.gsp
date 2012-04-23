@@ -19,6 +19,8 @@
                 $('#startYear').val(startYear);
             }
         }
+
+
     </g:javascript>
 </head>
 
