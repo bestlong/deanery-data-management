@@ -1,5 +1,4 @@
 
-
 <table style="margin-left: 100px;" cellspacing="3">
     <tr>
         <td align="center" style="text-decoration: underline; font-size: 14px" class="subtitle">
@@ -57,4 +56,3 @@
         </tr>
     </g:each>
 </table>
-

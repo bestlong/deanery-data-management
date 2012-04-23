@@ -9,6 +9,7 @@
             initTable();
             $("#messages").delay(6000).fadeOut(5 * 400);
             $("#errors").delay(6000).fadeOut(5 * 400);
+
         });
 
         function initTable() {
@@ -41,8 +42,11 @@
             });
             $(function () {
                 $("input:submit, a, button", ".action").button();
+
             });
         }
+
+
 
 
     </script>
@@ -61,7 +65,7 @@
             <g:link controller="deanery" action="create">
                 Новый
             </g:link>
-        </div>
+          </div>
     </div>
 
     <div id="container" align="center">
