@@ -62,7 +62,8 @@ class PlanService {
 
 
     def findStudyPlansByParams(def params){
-        def  deanery = getDeanery()
+        def deanery  = authorityService.getCurrentDeanery(params)
+
         def chair=params.chair;
         def form=params.form;
         def startYear=params.startYear;
@@ -83,7 +84,7 @@ class PlanService {
         }
         String query;
         if (null != deanery) {
-            query="from Plan as b where ((b.class='${PlanClass.STUDY.name()}') and (('${semestrCount}'='0') or (b.semestrCount='${semestrCount}')) and (('${form}'='0') or (b.form='${form}')) and (b.speciality.name like '%${spec}%' )   and (b.direction like '%${direction}%' ) and (b.chair.name like '%${chair}%' ) and (b.qualification like '%${qualification}%' )  and (b.termin like '%${termin}%' )  and (b.level like '%${level}%' ) and (('${startYear}'='-1') or (b.startYear='${startYear}'))  and (('${endYear}'='-1') or (b.endYear='${endYear}')) and ((b.speciality.deanery.name='${deanery.name}') and (b.speciality.deanery.shortName='${deanery.shortName}')))   order by b.lastUpdated desc ";
+            query="from Plan as b where ((b.class='${PlanClass.STUDY.name()}') and (('${semestrCount}'='0') or (b.semestrCount='${semestrCount}')) and (('${form}'='0') or (b.form='${form}')) and (b.speciality.name like '%${spec}%' )   and (b.direction like '%${direction}%' ) and (b.chair.name like '%${chair}%' ) and (b.qualification like '%${qualification}%' )  and (b.termin like '%${termin}%' )  and (b.level like '%${level}%' ) and (('${startYear}'='-1') or (b.startYear='${startYear}'))  and (('${endYear}'='-1') or (b.endYear='${endYear}')) and (b.speciality.deanery.id='${deanery.id}'))   order by b.lastUpdated desc ";
         } else{
             query="from Plan as b where ((b.class='${PlanClass.STUDY.name()}') and (('${semestrCount}'='0') or (b.semestrCount='${semestrCount}')) and (('${form}'='0') or (b.form='${form}')) and (b.speciality.name like '%${spec}%' )   and (b.direction like '%${direction}%' ) and (b.chair.name like '%${chair}%' ) and (b.qualification like '%${qualification}%' )  and (b.termin like '%${termin}%' )  and (b.level like '%${level}%' ) and (('${startYear}'='-1') or (b.startYear='${startYear}'))  and (('${endYear}'='-1') or (b.endYear='${endYear}')))  order by b.lastUpdated desc ";
         }

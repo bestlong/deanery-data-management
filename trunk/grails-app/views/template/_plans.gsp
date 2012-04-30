@@ -31,7 +31,7 @@
 
 
 
-<div>
+<div align="left">
 
     <div id="post_list" style="margin: 0px;">
         <div class="subtitle" align="center">${msg}</div>

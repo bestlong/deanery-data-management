@@ -7,7 +7,7 @@ class IndexController {
 
     def planService
     def excelService
-
+    def authorityService
 
 
     def findPlan = {
@@ -16,17 +16,19 @@ class IndexController {
             p.chair.getName();
             p.speciality.getSpecialityCode()
         }
+        Deanery deanery=  authorityService.getCurrentDeanery(params)
         Plan parametrs=params
         parametrs.speciality=new Speciality();
         parametrs.chair=new Chair();
         parametrs.speciality.name=params.speciality
         parametrs.chair.name=params.chair
-        chain(action: 'index', model: [res: plans, msg: "Найдено планов ${plans.size()}", sizePerPage: plans.size(),param: parametrs])
+        chain(action: 'index', model: [res: plans, msg: "Найдено планов ${plans.size()}", sizePerPage: plans.size(),param: parametrs,deanery: deanery])
     }
 
     def index = {
         def planList
         def param = chainModel?.param
+        def deanery = chainModel?.deanery
         def msg = chainModel?.msg ?: ""
         def totalPlans = planService.findByDiscriminatorCount(PlanClass.STUDY)
         if (chainModel?.res == null)
@@ -48,9 +50,16 @@ class IndexController {
                 plan.semestrCount=0;
                 param=plan;
             }
-
         }
-        [res: planList,param: param, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
+        if (null==deanery){
+            Deanery dec=new Deanery()
+            deanery=dec;
+            //"['0': '-Все деканаты-']"
+            deanery.id=0
+            deanery.name="-Все деканаты-";
+        }
+
+        [res: planList,param: param,deanery: deanery, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
     }
 
 

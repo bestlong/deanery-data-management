@@ -94,6 +94,8 @@ class PlanInitController {
         render(template: "/template/speciality/selectSpeciality", model: [res: []]);
     }
 
+
+
     def searchChair = {
         sessionParamsService.saveParams(params)
         render(template: "/template/chair/selectChair", model: [res: []]);
