@@ -23,6 +23,7 @@ class SubjectController {
     }
 
     def index = {
+
         cleanParams(params)
         sessionParamsService.saveParams(params)
         [selectedMenu: 2]
@@ -112,6 +113,7 @@ class SubjectController {
     }
 
     def search = {
+
         sessionParamsService.saveParams(params)
         render(template: "/template/subject/subjectList", model: [res: []]);
     }

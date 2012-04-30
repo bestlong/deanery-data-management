@@ -13,7 +13,7 @@ class SpecialityController {
 
 
     def getPropertiesToRender() {
-        ['id', 'code', 'specialityCode', 'name', 'shortName']
+        ['id', 'code', 'specialityCode', 'name', 'deanery', 'shortName']
     }
 
     def index = {

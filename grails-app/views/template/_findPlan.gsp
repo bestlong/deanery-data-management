@@ -1,4 +1,5 @@
 <%@ page import="stu.cn.ua.enums.PlanForm" %>
+<%@ page import="decanat.grails.Deanery; decanat.grails.Chair" %>
 
 <div id="findDialog" title="Поиск учебных планов">
 
@@ -37,6 +38,18 @@
                 <g:textField name="speciality" type="text"  value="${param?.speciality?.name}" style="width: 200px"/>
             </td>
         </tr>
+        <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+            <tr>
+                <td>
+                  Деканат
+                     </td>
+             <td>
+                    <g:select from="${Deanery.list()}" optionValue="name"   id="deanery"
+                              noSelection='["${deanery?.id}":"${deanery?.name}"]' name="deanery"
+                              optionKey="id" style="width: 150px"/><br/>
+                </td>
+            </tr>
+        </sec:ifAnyGranted>
         <tr>
             <td class="rowLabel">Кафедра</td>
             <td>
