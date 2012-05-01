@@ -16,6 +16,13 @@
         Меню
     </h3>
     <ul class="menuBottom">
+        <sec:ifAnyGranted roles="ROLE_PROREKTOR">
+            <tooltip:tip code="tooltip.menu.gotoDeanery">
+                <li class="${selectedMenu == 5 ? 'selectedMenu' : ''}">
+                    <g:link controller="deanery" action="index">Деканаты</g:link>
+                </li>
+            </tooltip:tip>
+        </sec:ifAnyGranted>
         <tooltip:tip code="tooltip.menu.gotoSpeciality">
             <li class="${selectedMenu == 1 ? 'selectedMenu' : ''}">
                 <g:link controller="speciality" action="index">
@@ -40,13 +47,7 @@
                 </li>
             </tooltip:tip>
         </sec:ifAnyGranted>
-        <sec:ifAnyGranted roles="ROLE_PROREKTOR">
-            <tooltip:tip code="tooltip.menu.gotoDeanery">
-                <li class="${selectedMenu == 5 ? 'selectedMenu' : ''}">
-                    <g:link controller="deanery" action="index">Деканаты</g:link>
-                </li>
-            </tooltip:tip>
-        </sec:ifAnyGranted>
+
     </ul>
 </div>
 

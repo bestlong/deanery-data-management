@@ -213,19 +213,18 @@ class Plan {
         sum
     }
     public def toCSV(){
-
         String srt = new String();
-
         def  nodes=["id" , "chairId", "direction" , "startYear" ,  "endYear" ,  "form" ,  "level" ,  "qualification" ,  "semestrCount", "specialityId",  "termin"];
-
-
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);
         }
         srt=srt+"\n"
         return srt;
+    }
+    
+    public boolean isStudyPlan(){
+        return !instanceOf(WorkPlan);
     }
 }
 
