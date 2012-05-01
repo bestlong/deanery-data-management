@@ -5,22 +5,20 @@
     <g:javascript src="/init/planInit/init.js"/>
     <title>Выбор специальности</title>
     <g:javascript>
-        function calculateEndYear(){
+        function calculateEndYear() {
             var startYear = $('#startYear').val();
-            if ($.isNumeric(startYear)){
+            if ($.isNumeric(startYear)) {
                 var endYear = parseInt(startYear, 10) + parseInt(1, 10);
                 $('#endYear').val(endYear);
             }
         }
-        function calculateStartYear(){
+        function calculateStartYear() {
             var endYear = $('#endYear').val();
-            if ($.isNumeric(endYear)){
+            if ($.isNumeric(endYear)) {
                 var startYear = parseInt(endYear, 10) - parseInt(1, 10);
                 $('#startYear').val(startYear);
             }
         }
-
-
     </g:javascript>
 </head>
 
@@ -53,14 +51,18 @@
         <h4 class="subtitle">Инициализация плана:</h4>
         <g:form action="next" controller="planInit" name="selectSpecialityForm">
             <table cellpadding="5" class="editTable" style="border-width: 1px">
-                <tr>
-                    <td class="caption">Года*</td>
-                    <td>
-                        <g:textField name="startYear" style="width: 40px" class="integer" onkeyup="calculateEndYear();" value="${plan?.startYear}"/>
-                        ${" -  "}
-                        <g:textField name="endYear" style="width: 40px" class="integer" onkeyup="calculateStartYear();" value="${plan?.endYear}"/>
-                    </td>
-                </tr>
+                <g:if test="${!plan.isStudyPlan()}">
+                    <tr>
+                        <td class="caption">Года*</td>
+                        <td>
+                            <g:textField name="startYear" style="width: 40px" class="integer"
+                                         onkeyup="calculateEndYear();" value="${plan?.startYear}"/>
+                            ${" -  "}
+                            <g:textField name="endYear" style="width: 40px" class="integer"
+                                         onkeyup="calculateStartYear();" value="${plan?.endYear}"/>
+                        </td>
+                    </tr>
+                </g:if>
                 <tr>
                     <td class="caption">Специальность*</td>
                     <td>
@@ -70,8 +72,10 @@
                             <g:hiddenField name="specId" value="${plan?.speciality?.id}"/>
                             <g:hiddenField name="id" value="${plan?.id}"/>
                         </div>
+
                         <div style="margin-top: 5px">
-                            <span style="font-size: 14px; color: #0000ff; text-decoration: underline" id="specialityName">${plan?.speciality?.name}</span>
+                            <span style="font-size: 14px; color: #0000ff; text-decoration: underline"
+                                  id="specialityName">${plan?.speciality?.name}</span>
                         </div>
                     </td>
                 </tr>
@@ -79,11 +83,14 @@
                     <td class="caption">Кафедра*</td>
                     <td>
                         <div>
-                            <a id="selectChair" href="#" onclick="showChairSelect(true)" class="action">Выбрать кафедру</a>
+                            <a id="selectChair" href="#" onclick="showChairSelect(true)"
+                               class="action">Выбрать кафедру</a>
                             <g:hiddenField name="chairId" value="${plan?.chair?.id}"/>
                         </div>
+
                         <div>
-                            <span style="font-size: 14px; color: #0000ff; text-decoration: underline" id="chairName">${plan?.chair?.name}</span>
+                            <span style="font-size: 14px; color: #0000ff; text-decoration: underline"
+                                  id="chairName">${plan?.chair?.name}</span>
                         </div>
                     </td>
                 </tr>
@@ -113,7 +120,7 @@
                 <tr>
                     <td class="caption">Количество семестров*</td>
                     <td>
-                        <g:select from="${[2,3,4,8]}" name="semestrCount" value="${plan?.semestrCount}"
+                        <g:select from="${[2, 3, 4, 8]}" name="semestrCount" value="${plan?.semestrCount}"
                                   style="width: 50px"/>
                     </td>
                 </tr>

@@ -79,11 +79,8 @@ class Subject {
     }
 
     public String toCSV(){
-
         String srt = new String();
-
         def  nodes=["id" , "chairId", "code" , "name", "referenceCount", "shortName" ];
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);

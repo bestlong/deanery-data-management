@@ -10,7 +10,7 @@ package stu.cn.ua
 class CommonUtils {
 
     public static String prepareString(String inp){
-        return inp.replaceAll("'", "’").replaceAll("\"", "’");
+        return inp.replaceAll("'", "’").replaceAll("\"", "’").trim();
     }
 
     public static def wordToCSV(def buf) {

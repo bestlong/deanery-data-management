@@ -1,7 +1,5 @@
 package decanat.grails
 
-import stu.cn.ua.CommonUtils
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
 import decanat.grails.domain.User
 
 class ChairService {
@@ -11,20 +9,6 @@ class ChairService {
 
     static transactional = true
     static scope = "session"
-
-//    List<Chair> findChairs(String code, String name, String shortName) {
-    //        User user = User.get(springSecurityService.principal.id)
-    //        def c = Chair.createCriteria()
-    //        def res = c.listDistinct {
-    //            ilike("codeChair", code)
-    //            ilike("name", name)
-    //            ilike("shortName", shortName)
-    //            if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
-    //                eq("deanery", user.deanery)
-    //            }
-    //        }
-    //        res
-    //    }
 
     def findChairsForCurrentUser() {
         def res
