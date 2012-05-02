@@ -37,6 +37,7 @@
                 aoColumns:[
                     {},
                     {},
+                    {bSortable:false },
                     {bSortable:false }
                 ]
             });
@@ -60,6 +61,18 @@
 </head>
 
 <body>
+<sec:ifAnyGranted roles="ROLE_PROREKTOR">
+    <g:if test="${deanery!=null}">
+        <div  align=center>
+            <h3>
+                Работает
+                <a href="/plan/deanery/list" style="color: #2582A4">
+                    фильтр</a> по деканату : ${deanery?.name}
+            </h3>
+        </div>
+    </g:if>
+</sec:ifAnyGranted>
+
     <div align="left">
         <div align="left" class="action">
             <g:link controller="deanery" action="create">

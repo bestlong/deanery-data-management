@@ -16,7 +16,10 @@ class IndexController {
             p.chair.getName();
             p.speciality.getSpecialityCode()
         }
-        Deanery deanery=  authorityService.getCurrentDeanery(params)
+        Deanery deanery
+         if (authorityService.isProrektor()){
+        deanery =authorityService.getCurrentUser().getDeanery();
+         }
         Plan parametrs=params
         parametrs.speciality=new Speciality();
         parametrs.chair=new Chair();
@@ -51,12 +54,18 @@ class IndexController {
                 param=plan;
             }
         }
+
         if (null==deanery){
-            Deanery dec=new Deanery()
-            deanery=dec;
-            //"['0': '-Все деканаты-']"
-            deanery.id=0
-            deanery.name="-Все деканаты-";
+            def did=authorityService.getCurrentUser().getDeaneryId()
+            if (did!=null)
+            deanery=Deanery.findById(did)
+            if (null==deanery){
+                Deanery dec=new Deanery()
+                deanery=dec;
+                //"['0': '-Все деканаты-']"
+                deanery.id=0
+                deanery.name="-Все деканаты-";
+            }
         }
 
         [res: planList,param: param,deanery: deanery, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]

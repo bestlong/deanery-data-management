@@ -63,7 +63,11 @@ class PlanService {
 
     def findStudyPlansByParams(def params){
         def deanery  = authorityService.getCurrentDeanery(params)
-
+        if (authorityService.isProrektor()){
+            def did=authorityService.getCurrentUser().getDeaneryId()
+            if (did!=null)
+                deanery=Deanery.findById(did)
+        }
         def chair=params.chair;
         def form=params.form;
         def startYear=params.startYear;
@@ -132,6 +136,10 @@ class PlanService {
         Deanery dean = null
         if (!authorityService.isProrektor()) {
             dean = user.deanery
+        }else{
+            def did=authorityService.getCurrentUser().getDeaneryId()
+            if (did!=null)
+                dean=Deanery.findById(did)
         }
         dean
     }

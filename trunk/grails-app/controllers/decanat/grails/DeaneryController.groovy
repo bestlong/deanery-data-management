@@ -5,15 +5,36 @@ import org.springframework.dao.DataIntegrityViolationException
 class DeaneryController {
 
     def deaneryService
+    def authorityService
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
     }
+    def removeFilterToDeanery(){
+        authorityService.getCurrentUser().setDeanery(null)
+        params.clear()
+        redirect(action: 'list', params: params)
+    }
+
+    def setFilterToDeanery(){
+        def dec=Deanery.findById(params.id)
+        authorityService.getCurrentUser().setDeanery(dec)
+        params.clear()
+        redirect(action: 'list', params: params)
+    }
 
     def list() {
-        [deaneryList: Deanery.list(params), selectedMenu: 5, searchConfig: getSearchDeaneryConfig()]
+        def idDeanery = 0
+        if (authorityService.isProrektor()){
+            idDeanery=authorityService.getCurrentUser().getDeaneryId()
+           }
+        def deanery
+        if (idDeanery!=null){
+            deanery= Deanery.findById(idDeanery);
+        }
+        [deaneryList: Deanery.list(params), deanery : deanery, idDeanery: idDeanery, selectedMenu: 5, searchConfig: getSearchDeaneryConfig()]
     }
 
     def create = {

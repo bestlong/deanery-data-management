@@ -8,6 +8,7 @@ import decanat.grails.domain.User
 
 class SubjectController {
 
+    def authorityService
     def subjectService
     def sessionParamsService
     def springSecurityService
@@ -23,10 +24,21 @@ class SubjectController {
     }
 
     def index = {
+        def    deanery
+        def did=authorityService.getCurrentUser().getDeaneryId()
+        if (did!=null)
+            deanery=Deanery.findById(did)
+        if (null==deanery){
+            Deanery dec=new Deanery()
+            deanery=dec;
+            //"['0': '-Все деканаты-']"
+            deanery.id=0
+            deanery.name="-Все деканаты-";
 
+        }
         cleanParams(params)
         sessionParamsService.saveParams(params)
-        [selectedMenu: 2]
+        [selectedMenu: 2,deanery: deanery]
     }
 
     def add = {}

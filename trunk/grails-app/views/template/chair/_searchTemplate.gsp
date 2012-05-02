@@ -13,9 +13,16 @@
         <div style="float: left; padding: 0 0 0 20px">
             <sec:ifAnyGranted roles="ROLE_PROREKTOR">
                 <b class="searchTitles">Деканат</b><br/>
-                <g:select from="${Deanery.list()}" optionValue="name"
-                          noSelection="['0': '-Все деканаты-']" name="deanery"
-                          optionKey="id" style="width: 150px"/><br/>
+                <g:if test="${deanery?.id!=0}">
+                    <g:select from=" " disabled="true"
+                              noSelection='["${deanery?.id}": "${deanery?.name}"]' name="deanery_disabled"
+                              style="width: 150px"/><br/>
+                </g:if>
+                <g:if test="${deanery?.id==0}">
+                    <g:select from="${Deanery.list()}" optionValue="name"
+                              noSelection="['0': '-Все деканаты-']" name="deanery"
+                              optionKey="id" style="width: 150px"/><br/>
+                </g:if>
             </sec:ifAnyGranted>
             <b class="searchTitles">Код</b><br/>
             <g:textField name="code"/><br/>

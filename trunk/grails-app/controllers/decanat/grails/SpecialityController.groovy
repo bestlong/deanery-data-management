@@ -10,16 +10,28 @@ class SpecialityController {
     def specialityService
     def springSecurityService
     def sessionParamsService
-
+    def authorityService
 
     def getPropertiesToRender() {
         ['id', 'code', 'specialityCode', 'name', 'deanery', 'shortName']
     }
 
     def index = {
+        def    deanery
+        def did=authorityService.getCurrentUser().getDeaneryId()
+        if (did!=null)
+            deanery=Deanery.findById(did)
+        if (null==deanery){
+            Deanery dec=new Deanery()
+            deanery=dec;
+            //"['0': '-Все деканаты-']"
+            deanery.id=0
+            deanery.name="-Все деканаты-";
+
+        }
         params.clear()
         sessionParamsService.saveParams(params)
-        [res: Speciality.list(), selectedMenu: 1]
+        [res: Speciality.list(), selectedMenu: 1, deanery: deanery]
     }
 
     def add = {

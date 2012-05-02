@@ -5,7 +5,7 @@ import stu.cn.ua.dbf.dto.ChairDTO
 import stu.cn.ua.dbf.dto.ErrorInfo
 import stu.cn.ua.CommonUtils
 import decanat.grails.domain.User
-
+import decanat.grails.Deanery
 class Chair {
 
     String name;
