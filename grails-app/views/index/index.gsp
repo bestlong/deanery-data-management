@@ -67,6 +67,20 @@
 
 </sec:ifAnyGranted>
 
+
+<sec:ifAnyGranted roles="ROLE_PROREKTOR">
+    <g:if test="${deanery?.id!=0}">
+        <div  align=center>
+            <h3>
+                Работает
+                <a href="/plan/deanery/list" style="color: #2582A4">
+                фильтр</a> по деканату : ${deanery?.name}
+            </h3>
+        </div>
+    </g:if>
+</sec:ifAnyGranted>
+
+
 <div  align="right" >
 <tooltip:tip code="tooltip.plan.find">
     <a href="#" onclick="findDialog()">
@@ -74,6 +88,7 @@
     </a>
 </tooltip:tip>
 </div>
+
 
 
 <sec:ifAllGranted roles="ROLE_USER">

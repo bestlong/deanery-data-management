@@ -10,6 +10,7 @@ class ChairController {
     def sessionParamsService
     def springSecurityService
     def chairService
+     def authorityService
 
     def getPropertiesToRender() {
         def propertiesToRender
@@ -48,7 +49,19 @@ class ChairController {
     }
 
     def list = {
-        [chairList: chairService.findChairsForCurrentUser(), selectedMenu: 3, searchConfig: getSearchChairConfig()]
+        def    deanery
+        def did=authorityService.getCurrentUser().getDeaneryId()
+        if (did!=null)
+            deanery=Deanery.findById(did)
+        if (null==deanery){
+            Deanery dec=new Deanery()
+            deanery=dec;
+            //"['0': '-Все деканаты-']"
+            deanery.id=0
+            deanery.name="-Все деканаты-";
+
+        }
+        [chairList: chairService.findChairsForCurrentUser(), deanery: deanery, selectedMenu: 3, searchConfig: getSearchChairConfig()]
     }
 
     def create = {
@@ -163,6 +176,7 @@ class ChairController {
 
     def search = {
         sessionParamsService.saveParams(params)
+
         render template: "/template/chair/chairList", model: [res: []]
     }
 

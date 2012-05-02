@@ -6,13 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 
+
 <div id="updateDeaneryDiv">
     <div class="subtitle" align="center">Список Деканатов</div>
     <table id="tableCont" class="display">
         <thead>
         <tr>
+
             <th>Название</th>
             <th>Аббревиатура</th>
+            <th>Фильтр</th>
             <th>Ред.</th>
         </tr>
         </thead>
@@ -25,6 +28,21 @@
                 </td>
                 <td>
                     ${deanery?.shortName}
+                </td>
+                <td width="5px">
+                    <g:if test="${deanery?.id!=idDeanery}">
+                    <a style="align: right"
+                       href="../Deanery/setFilterToDeanery?id=${deanery?.id}">
+                        Установить
+                    </a>
+                    </g:if>
+                    <g:if test="${deanery?.id==idDeanery}">
+                        <a style="align: right"
+                           href="../Deanery/removeFilterToDeanery?id=${deanery?.id}" >
+                            Снять
+                        </a>
+                    </g:if>
+
                 </td>
                 <td class="edit" width="10px">
                     <table>

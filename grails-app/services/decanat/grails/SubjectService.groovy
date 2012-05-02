@@ -43,7 +43,11 @@ class SubjectService {
         }
 
         Deanery dean = authorityService.getCurrentDeanery(params)
-
+        if (authorityService.isProrektor()){
+            def did=authorityService.getCurrentUser().getDeaneryId()
+            if (did!=null)
+                dean=Deanery.findById(did)
+        }
         def list = criteria.list(max: maxCount, offset: offsetPos) {
             order(orderField, sort)
             if (params) {

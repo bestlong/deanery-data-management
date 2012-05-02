@@ -44,10 +44,17 @@
                   Деканат
                      </td>
              <td>
-                    <g:select from="${Deanery.list()}" optionValue="name"   id="deanery"
-                              noSelection='["${deanery?.id}":"${deanery?.name}"]' name="deanery"
-                              optionKey="id" style="width: 150px"/><br/>
-                </td>
+                 <g:if test="${deanery?.id!=0}">
+                     <g:select from=" " noSelection='["${deanery?.id}":"${deanery?.name}"]' id="deanery_disabled" disabled="true" name="deanery_disabled"
+                               style="width: 150px;"/>
+                 </g:if>
+
+                 <g:if test="${deanery?.id==0}">
+                     <g:select from="${Deanery.list()}" optionValue="name"   id="deanery"
+                               noSelection='["${deanery?.id}":"${deanery?.name}"]' name="deanery"
+                               optionKey="id" style="width: 150px"/>
+                 </g:if>
+             </td>
             </tr>
         </sec:ifAnyGranted>
         <tr>
@@ -57,9 +64,9 @@
             </td>
         </tr>
         <tr>
-        <td class="rowLabel">Форма обучения</td>
-        <td>
-            <select name="form" id="form" style="width: 150px">
+            <td class="rowLabel">Форма обучения</td>
+            <td>
+                <select name="form" id="form" style="width: 150px">
                 <option id="form0" value="0">Выберите форму</option>
                 <option id="form${PlanForm.DAILY.name}" value="${PlanForm.DAILY.name}" >Дневная</option>
                 <option id="form${PlanForm.EXTRAMURAL.name}" value="${PlanForm.EXTRAMURAL.name}" >Заочная</option>
@@ -115,4 +122,5 @@
   </g:form>
 
 </div>
+
 
