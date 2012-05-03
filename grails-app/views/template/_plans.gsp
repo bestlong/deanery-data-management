@@ -1,5 +1,4 @@
 <script type="text/javascript ">
-
     $(function () {
         $("#messages").delay(6000).fadeOut(5 * 400);
         $("#errors").delay(6000).fadeOut(5 * 400);
@@ -12,27 +11,26 @@
         $("#dialog").dialog();
     }
 
-    function switchIcon(id){
-        var res = $("#details"+id).attr("src").match("expand");
-        var src;
-        if (null != res){
-            src = $("#details"+id).attr("src").replace("expand", "collapse");
-        } else {
-            src = $("#details"+id).attr("src").replace("collapse", "expand");
-            $("#wPlans"+id).empty();
-        }
-        $("#details"+id).attr("src", src);
+    function importDialog(iid) {
+        $("#importPlanId").val(iid);
+        $("#dialogImportDBF").dialog();
     }
 
-
+    function switchIcon(id) {
+        var res = $("#details" + id).attr("src").match("expand");
+        var src;
+        if (null != res) {
+            src = $("#details" + id).attr("src").replace("expand", "collapse");
+        } else {
+            src = $("#details" + id).attr("src").replace("collapse", "expand");
+            $("#wPlans" + id).empty();
+        }
+        $("#details" + id).attr("src", src);
+    }
 </script>
 
 
-
-
-
 <div align="left">
-
     <div id="post_list" style="margin: 0px;">
         <div class="subtitle" align="center">${msg}</div>
         <g:if test="${totalPlans == 0}">
@@ -41,9 +39,7 @@
             </div>
         </g:if>
         <g:each in="${res}" var="plan">
-
             <tr>
-
                 <td colspan="6">
                     <h4 class="title">
                         <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
@@ -65,7 +61,7 @@
                 </td>
                 <td width="10%">
                     <span style="font-size: small;">Cрок обучения:</span>
-                </td >
+                </td>
                 <td width="30%">
                     <span style="font-size: small; text-decoration: underline;">${plan.termin}</span>
                 </td>
@@ -100,33 +96,43 @@
                 </td>
                 <td rowspan="5" valign="bottom" width="10px" align="right">
                     <tooltip:tip code="tooltip.plan.expand.work.plans">
-                        <g:remoteLink action="showWorkPlans" id="${plan.id}" update="wPlans${plan.id}" onSuccess="switchIcon(${plan.id})">
-                            <input id="details${plan.id}" type="image" src="<g:createLinkTo dir="/images" file="expand.png"/>">
+                        <g:remoteLink action="showWorkPlans" id="${plan.id}" update="wPlans${plan.id}"
+                                      onSuccess="switchIcon(${plan.id})">
+                            <input id="details${plan.id}" type="image"
+                                   src="<g:createLinkTo dir="/images" file="expand.png"/>">
                         </g:remoteLink>
                     </tooltip:tip>
                 </td>
                 <td rowspan="5" valign="bottom" width="10px" align="right">
                     <tooltip:tip code="tooltip.plan.incsv">
-
-                        <a href="CSVExport/exportPlanToCSV/${plan?.id}" class="chengpl" >
+                        <a href="CSVExport/exportPlanToCSV/${plan?.id}" class="chengpl">
                             <img src="<g:createLinkTo dir="/images" file="cvs.png"/>" alt="CSV" class="chengpl">
                         </a>
                     </tooltip:tip>
                 </td>
-
+                <td rowspan="5" valign="bottom" width="10px" align="right">
+                    <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
+                        <tooltip:tip code="tooltip.plan.dbf.import">
+                            <a href="#" class="delPlan" onclick="importDialog(${plan?.id})">
+                                <input type="image"
+                                       src="<g:createLinkTo dir="/images" file="dbf.PNG"/>"/>
+                            </a>
+                        </tooltip:tip>
+                    </sec:ifAnyGranted>
+                </td>
             </tr>
             <tr>
                 <td>
                     <span style="font-size: small;">Кафедра:</span>
                 </td>
                 <td>
-                    <span style="font-size: small; text-decoration: underline" >${plan.chair.name}
+                    <span style="font-size: small; text-decoration: underline">${plan.chair.name}
                     </span>
                 </td>
                 <td>
                     <span style="font-size: small;">Специальность:</span>
                 </td>
-                <td >
+                <td>
                     <span style="font-size: small; text-decoration: underline">${plan.speciality.name}</span>
                 </td>
             </tr>
@@ -137,13 +143,12 @@
                 <td>
                     <span style="font-size: small; text-decoration: underline;">${plan.level}</span>
                 </td>
-                <td >
+                <td>
                     <span style="font-size: small;">Года:</span>
                 </td>
-                <td >
+                <td>
                     <span style="font-size: small; text-decoration: underline;">${plan.startYear}-${plan.endYear}</span>
                 </td>
-
             </tr>
             <tr>
                 <td>
@@ -153,25 +158,22 @@
                     <span style="font-size: small; text-decoration: underline;">${plan.lastUpdated.toLocaleString()}</span>
                 </td>
                 <td>
-                    <span style="font-size: small;"> Cеместров:</span>
+                    <span style="font-size: small;">Cеместров:</span>
                 </td>
-                <td >
+                <td>
                     <span style="font-size: small; text-decoration: underline;">${plan.semestrCount}</span>
                 </td>
             </tr>
-
-            <tr><td colspan="8" >
-                <div id="wPlans${plan.id}">
-
-                </div>
-            </td></tr>
-
-            <tr >
-                <td colspan="8" >
+            <tr>
+                <td colspan="8">
+                    <div id="wPlans${plan.id}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8">
                     <div class="post" style="margin-top: 0px; margin-bottom: 10px">
                     </div>
                 </td></tr>
-
         </g:each>
     </div>
 

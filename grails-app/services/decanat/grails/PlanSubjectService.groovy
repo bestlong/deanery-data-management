@@ -35,9 +35,7 @@ class PlanSubjectService {
             ]
             newControls.add(newControl)
         }
-
         return newControls
-
     }
 
     def fillControlType(params, planControlType, subject, semestr) {

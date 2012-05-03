@@ -3,6 +3,9 @@ package decanat.grails
 import stu.cn.ua.enums.ControlTypeEnum
 import stu.cn.ua.enums.WorkTypeEnum
 import stu.cn.ua.CommonUtils
+import stu.cn.ua.dbf.dto.PlanSubjectDTO
+import stu.cn.ua.dbf.dto.ErrorInfo
+import stu.cn.ua.dbf.dto.ValidationResult
 
 class PlanSubject {
 
@@ -19,6 +22,8 @@ class PlanSubject {
     int samCount
     Date lastUpdated
 
+    private static final fieldMap = [subject: 'CODDIS']
+
     static PlanSubject createNew(PlanSubject subj){
         PlanSubject newSubject = new PlanSubject()
         newSubject.subject = subj.subject
@@ -34,8 +39,52 @@ class PlanSubject {
         subj.planControlTypes.each {
             newSubject.addToPlanControlTypes(PlanControlType.createPlanControlType(it))
         }
-
         newSubject
+    }
+
+    public static PlanSubject savePlanSubject(PlanSubjectDTO planSubjectDTO, Plan plan) {
+        def subject = Subject.findByDeaneryAndCode(plan.speciality.deanery, planSubjectDTO.coddis)
+        def planSubject = PlanSubject.findByPlanAndSubject(plan, subject)
+
+        if (null == planSubject){
+            planSubject = new PlanSubject(subject: subject, plan: plan, creditCount: 0)
+            planSubject.save()
+        }
+        PlanHours planHours = new PlanHours(labCount: planSubjectDTO.lb ?: 0, lectureCount: planSubjectDTO.lk ?:0,
+                seminarCount: planSubjectDTO.sem ?: 0, practiceCount: planSubjectDTO.pr ?: 0, semestr: planSubjectDTO.sem, planSubject: planSubject)
+        planHours.save()
+
+        PlanControlType planControlType = getControlTypeFromDBF(planSubjectDTO)
+        planControlType.planSubject = planSubject
+        planControlType.save()
+        planSubject
+    }
+
+    public static ValidationResult validate(PlanSubjectDTO planSubjectDTO, Plan plan) {
+        def subject = Subject.findByDeaneryAndCode(plan.speciality.deanery, planSubjectDTO.coddis)
+        def planSubject = PlanSubject.findByPlanAndSubject(plan, subject)
+        if (null == planSubject){
+            planSubject = new PlanSubject(subject: subject, plan: plan, creditCount: 0)
+        }
+        planSubject.subject = subject
+        planSubject.plan = plan
+
+        if (!planSubject.validate()) {
+            List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
+            planSubject.errors.allErrors.each {
+                validationErrors.add(new ErrorInfo(planSubjectDTO.toString(), fieldMap.get(it.field), it.rejectedValue))
+            }
+            return new ValidationResult(false, validationErrors)
+        } else {
+            return new ValidationResult(true)
+        }
+    }
+
+    def static getControlTypeFromDBF(PlanSubjectDTO planSubjectDTO){
+        int mask = (planSubjectDTO.e ?: 0) + (planSubjectDTO.z ?:0) *2 + (planSubjectDTO.kpr ?: 0) *4 + (planSubjectDTO.krb ?: 0)*8
+                                    +(planSubjectDTO.rgr ?: 0)*16 + (planSubjectDTO.knr ?: 0)*32
+        def controlType= new PlanControlType(mask: mask, semestr: planSubjectDTO.sem)
+        controlType
     }
 
     def beforeInsert = {
@@ -68,12 +117,11 @@ class PlanSubject {
         return lectureCount + seminarCount + practiceCount + labCount + samCount
     }
 
+
+
     public String toCSV(){
-
         String srt = new String();
-
         def  nodes=["id" , "creditCount", "labCount" , "lectureCount" ,  "planId" ,  "practiceCount" ,  "samCount" ,  "seminarCount" ,  "subjectId"];
-
         for(String obj: nodes){
             def nod=this."${obj}";
             srt = srt + CommonUtils.wordToCSV(nod);
