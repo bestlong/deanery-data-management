@@ -11,7 +11,8 @@
     <jqval:resources/>
     <jqvalui:resources/>
     <jqui:resources/>
-    <link href="<g:createLinkTo dir='/css/jquery-ui/themes/green' file='jquery-ui-1.8.14.custom.css'/>" rel="stylesheet"/>
+    <link href="<g:createLinkTo dir='/css/jquery-ui/themes/green' file='jquery-ui-1.8.14.custom.css'/>"
+          rel="stylesheet"/>
 
     <script type="text/javascript" src="<g:createLinkTo dir="/js/jQuery" file="jquery.dataTables.js"/>"></script>
     <script type="text/javascript" src="<g:createLinkTo dir="/js/jQuery" file="jquery.numeric.js"/>"></script>
@@ -20,13 +21,13 @@
 
     <tooltip:resources stylesheet="customTooltip"/>
     <g:javascript>
-        $(function() {
+        $(function () {
             $('#ajax_spinner').ajaxStart(
-            function() {
-                $(this).show();
-            }).ajaxComplete(function() {
-                $(this).hide();
-            });
+                    function () {
+                        $(this).show();
+                    }).ajaxComplete(function () {
+                        $(this).hide();
+                    });
         });
     </g:javascript>
     <g:layoutHead/>
@@ -56,8 +57,15 @@
         <g:pageProperty name="page.deleteConfirmation"/>
         <g:pageProperty name="page.editPassword"/>
         <g:pageProperty name="page.findPlan"/>
-          <div>
+        <div>
             <g:render template="/template/notification/general"/>
+            <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_SECRETARY">
+                <div align=center>
+                    <h3>
+                        <g:deanFacultyFullName/>
+                    </h3>
+                </div>
+            </sec:ifAnyGranted>
             <g:layoutBody/>
         </div>
 
