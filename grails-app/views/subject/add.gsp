@@ -73,13 +73,13 @@
     <g:form controller="subject" action="save" width="300">
         <table class="editTable" align="center">
             <tr>
-                <td class="caption">Код*</td>
+                <td class="caption">Код</td>
                 <td>
                     <g:textField name="code" value="${subject?.code}"/>
                 </td>
             </tr>
             <tr>
-                <td class="caption">Кафедра*</td>
+                <td class="caption">Кафедра</td>
                 <td>
                     <g:select from="${Chair.list()}" optionValue="name" optionKey="id" name="subject.chair"/>
                 </td>
@@ -91,7 +91,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="caption">Короткое имя*</td>
+                <td class="caption">Короткое имя</td>
                 <td>
                     <g:textField name="shortName" value="${subject?.shortName}"/>
                 </td>

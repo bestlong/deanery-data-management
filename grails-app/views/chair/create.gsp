@@ -24,7 +24,7 @@
     <g:form controller="chair" action="save" width="300">
         <table class="editTable" align="center">
             <tr class="title">
-                <td class="caption">Код*</td>
+                <td class="caption">Код</td>
                 <td>
                     <g:textField name="codeChair" value="${chairInstance?.codeChair}" class="normal_input"/>
                 </td>
@@ -42,7 +42,7 @@
                 </td>
             </tr>
             <tr class="title">
-                <td class="caption">Заведующий*</td>
+                <td class="caption">Заведующий</td>
                 <td>
                     <g:textField name="head" value="${chairInstance?.head}" class="normal_input"/>
                 </td>

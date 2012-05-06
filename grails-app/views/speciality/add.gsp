@@ -44,7 +44,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="caption">Короткое имя*</td>
+                <td class="caption">Короткое имя</td>
                 <td>
                     <g:textField name="shortName" value="${speciality?.shortName}"/>
                 </td>
