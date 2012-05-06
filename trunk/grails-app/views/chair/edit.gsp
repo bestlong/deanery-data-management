@@ -33,13 +33,13 @@
         <g:hiddenField name="id" value="${curChair?.id}"/>
         <table class="editTable" align="center">
             <tr class="title">
-                <td class="caption">Код*</td>
+                <td class="caption">Код</td>
                 <td>
                     <g:textField name="codeChair" value="${curChair?.codeChair}" class="normal_input"/>
                 </td>
             </tr>
             <tr class="title">
-                <td class="caption">Имя*</td>
+                <td class="caption">Имя<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="name" value="${curChair?.name}"/>
                 </td>
@@ -51,7 +51,7 @@
                 </td>
             </tr>
             <tr class="title">
-                <td class="caption">Заведующий*</td>
+                <td class="caption">Заведующий</td>
                 <td>
                     <g:textField name="head" value="${curChair?.head}" class="normal_input"/>
                 </td>

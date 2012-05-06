@@ -30,7 +30,7 @@
                 </td>
             </tr>
             <tr class="title">
-                <td class="caption">Имя*</td>
+                <td class="caption">Имя<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="name" value="${chairInstance?.name}" class="normal_input"/>
                 </td>

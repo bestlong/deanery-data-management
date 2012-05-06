@@ -21,14 +21,14 @@
     <g:form controller="university" action="update" width="300">
         <table class="editTable" align="center">
             <tr>
-                <td class="caption">Проректор*</td>
+                <td class="caption">Проректор<span style="color: red">*</span></td>
                 <td>
                     <g:hiddenField name="id" value="${university.id}"/>
                     <g:textField name="prorektor" value="${university?.prorektor}"/>
                 </td>
             </tr>
             <tr>
-                <td class="caption">Декан*</td>
+                <td class="caption">Декан<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="dean" value="${university?.dean}"/>
                 </td>

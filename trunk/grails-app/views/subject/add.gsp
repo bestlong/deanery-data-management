@@ -85,7 +85,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="caption">Имя*</td>
+                <td class="caption">Имя<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="name" value="${subject?.name}"/>
                 </td>
