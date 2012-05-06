@@ -33,7 +33,7 @@
             <g:set var="idx" value="${1}"/>
             <g:while test="${idx <= plan.semestrCount}">
                 <tr>
-                    <td class="caption">${idx} семестр*</td>
+                    <td class="caption">${idx} семестр<span style="color: red">*</span></td>
                     <td>
                         <g:if test="${idx<=semestr.size()}">
                             <g:hiddenField name="id${idx}" value="${semestr.get(idx-1).id}"/>

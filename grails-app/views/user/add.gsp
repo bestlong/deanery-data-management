@@ -40,7 +40,7 @@
 <g:form controller="user" action="save" width="300" method="post" name="addUserForm">
     <table class="editTable" align="center">
         <tr>
-            <td class="caption">Роль*</td>
+            <td class="caption">Роль<span style="color: red">*</span></td>
             <td align="left">
                 <g:select from="${roles}" optionValue="description" optionKey="id" name="roleId"
                           value="${authority}"/>
@@ -55,19 +55,19 @@
             </tr>
         </sec:ifAnyGranted>
         <tr>
-            <td class="caption">Логин*</td>
+            <td class="caption">Логин<span style="color: red">*</span></td>
             <td>
                 <g:textField name="username"/>
             </td>
         </tr>
         <tr>
-            <td class="caption">Пароль*</td>
+            <td class="caption">Пароль<span style="color: red">*</span></td>
             <td>
                 <g:passwordField name="password"/>
             </td>
         </tr>
         <tr>
-            <td class="caption">Повторите пароль*</td>
+            <td class="caption">Повторите пароль<span style="color: red">*</span></td>
             <td>
                 <g:passwordField name="passwdRetype"/>
             </td>
