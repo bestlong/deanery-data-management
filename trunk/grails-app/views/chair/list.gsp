@@ -135,8 +135,8 @@
 
 <body>
 <sec:ifAnyGranted roles="ROLE_PROREKTOR">
-    <g:if test="${deanery?.id!=0}">
-        <div  align=center>
+    <g:if test="${deanery?.id != 0}">
+        <div align=center>
             <h3>
                 Работает
                 <a href="/plan/deanery/list" style="color: #2582A4">

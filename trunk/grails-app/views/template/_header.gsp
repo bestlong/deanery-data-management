@@ -29,11 +29,8 @@
         </ul>
 
         <div align="right" class="hello">
-        <sec:ifAnyGranted roles="ROLE_DEAN">
-            ${g.deanFacultyName()}
-        </sec:ifAnyGranted>
             ${g.userName()} &nbsp;
-            <a  style="color: white;" href="<g:createLink action="index" controller="logout"/>">выход</a>
+            <a style="color: white;" href="<g:createLink action="index" controller="logout"/>">выход</a>
         </div>
     </sec:ifLoggedIn>
 </div>

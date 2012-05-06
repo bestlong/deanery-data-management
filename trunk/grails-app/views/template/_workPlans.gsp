@@ -53,6 +53,16 @@
                     </tooltip:tip>
                 </g:else>
             </td>
+            <td>
+                <sec:ifAnyGranted roles="ROLE_DEAN, ROLE_PROREKTOR">
+                    <tooltip:tip code="tooltip.plan.dbf.import">
+                        <a href="#" class="delPlan" onclick="importDialog(${plan?.id})">
+                            <input type="image"
+                                   src="<g:createLinkTo dir="/images" file="dbf.PNG"/>"/>
+                        </a>
+                    </tooltip:tip>
+                </sec:ifAnyGranted>
+            </td>
         </tr>
     </g:each>
 </table>
