@@ -26,14 +26,14 @@
     <g:form controller="stateExam" action="save" width="300" >
         <table class="editTable" align="center">
                <tr>
-                <td class="caption">Номер семестра*</td>
+                <td class="caption">Номер семестра<span style="color: red">*</span></td>
                 <td>
                      <g:hiddenField name="id" value="${stateExam.id}"/>
                     <g:select name="semestr" from="${1..8}" value="${1}" style="width: 100px">  </g:select>
                 </td>
             </tr>
             <tr>
-                <td class="caption">Дата проведения*</td>
+                <td class="caption">Дата проведения<span style="color: red">*</span></td>
                 <td>
                     <g:hiddenField name="planId" value="${plan.id}"/>
 
@@ -41,7 +41,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="caption">Форма аттестации*</td>
+                <td class="caption">Форма аттестации<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="form" value="${stateExam.form}" />
                 </td>
