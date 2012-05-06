@@ -26,26 +26,26 @@
     <g:form controller="speciality" action="update" width="300">
         <table class="editTable" align="center">
             <tr>
-                <td class="caption">Код специальности*</td>
+                <td class="caption">Код специальности<span style="color: red">*</span></td>
                 <td>
                     <g:hiddenField name="id" value="${speciality.id}"/>
                     <g:textField name="specialityCode" value="${speciality?.specialityCode}" />
                 </td >
             </tr>
             <tr>
-                <td class="caption">Код*</td>
+                <td class="caption">Код</td>
                 <td>
                     <g:textField name="code" value="${speciality?.code}" />
                 </td>
             </tr>
             <tr>
-                <td class="caption">Имя*</td>
+                <td class="caption">Имя<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="name" value="${speciality?.name}" />
                 </td>
             </tr>
             <tr>
-                <td class="caption">Короткое имя*</td>
+                <td class="caption">Короткое имя</td>
                 <td>
                     <g:textField name="shortName" value="${speciality?.shortName}"/>
                 </td>

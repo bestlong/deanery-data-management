@@ -32,13 +32,13 @@
                 </td>
             </tr>
             <tr>
-                <td class="caption">Код специальности*</td>
+                <td class="caption">Код специальности<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="specialityCode" value="${speciality?.code}"/>
                 </td>
             </tr>
             <tr>
-                <td class="caption">Имя*</td>
+                <td class="caption">Имя<span style="color: red">*</span></td>
                 <td>
                     <g:textField name="name" value="${speciality?.name}"/>
                 </td>
