@@ -84,12 +84,12 @@ class DeaneryController {
             Deanery deanery = Deanery.findById(params.id)
             if (!deanery) {
                 //TODO ты используешь несуществующие месседжы, добавь нужные строки в messages.properties, ну и наверно месседжы не должны быть связаны с chair
-                flash.error = message(code: "msg.chair.edit.gotoError")
+                flash.error = message(code: "msg.edit.error")
                 redirect(action: 'list', params: params)
             }
             [curDeanery: deanery]
         } else {
-            flash.error = message(code: "msg.chair.edit.gotoError")
+            flash.error = message(code: "msg.edit.error")
             redirect(action: 'list', params: params)
         }
     }
