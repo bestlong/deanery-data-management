@@ -2,7 +2,7 @@ package decanat.grails
 
 
 import stu.cn.ua.enums.PlanClass
-import decanat.grails.domain.User
+
 import stu.cn.ua.dbf.reader.PlanSubjectDTOReader
 
 class IndexController {
@@ -70,7 +70,7 @@ class IndexController {
             }
         }
 
-        [res: planList, param: param, deanery: deanery, totalPlans: totalPlans, univer: University.list(), active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
+        [res: planList, param: param, deanery: deanery, totalPlans: totalPlans, active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
     }
 
 
@@ -106,7 +106,7 @@ class IndexController {
 
     def showWorkPlans = {
         def plans = planService.findWorkPlansByStudyPlan(Plan.get(params.id))
-        render(template: "/template/workPlans", model: ["plans": plans, univer: University.list()])
+        render(template: "/template/workPlans", model: ["plans": plans])
     }
 
     def print = {
