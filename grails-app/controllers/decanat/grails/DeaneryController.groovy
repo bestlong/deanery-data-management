@@ -95,7 +95,7 @@ class DeaneryController {
     }
 
     def search = {
-        def res = deaneryService.findDeaneries(params.name, params.shortName)
+        def res = deaneryService.findDeaneries(params.name, params.shortName, params.prorektor, params.dean)
         render template: "/template/deanery/deaneryList", model: [deaneryCollection: res]
     }
 

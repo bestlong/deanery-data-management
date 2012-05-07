@@ -13,7 +13,7 @@
         });
 
         function initTable() {
-            $("#tableCont").dataTable({
+                $("#tableCont").dataTable({
                 "bJQueryUI":true,
                 "sPaginationType":"full_numbers",
                 "iDisplayLength":15,
@@ -35,6 +35,8 @@
                 },
                 bAutoWidth:false,
                 aoColumns:[
+                    {},
+                    {},
                     {},
                     {},
                     {bSortable:false },

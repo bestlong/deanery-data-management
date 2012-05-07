@@ -14,7 +14,7 @@ class BootStrap {
         def userRole = Role.findByAuthority("ROLE_USER") ?: new Role(authority: "ROLE_USER", description: "Секретарь").save()
         Deanery deanery;
         if (0 == Deanery.getCount()){
-            deanery = new Deanery(name: "Факультет Электронных Информационных технологий", shortName: "ФЭИТ").save()
+            deanery = new Deanery(name: "Факультет Электронных Информационных технологий", shortName: "ФЭИТ",prorektor: "prorektor", dean: "admin").save()
         } else {
             deanery = Deanery.findAll().get(0)
         }

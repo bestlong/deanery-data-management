@@ -36,6 +36,18 @@
                     <g:textField name="shortName" value="${deaneryInstance?.shortName}" class="normal_input"/>
                 </td>
             </tr>
+            <tr class="title">
+                <td class="caption">Проректор</td>
+                <td>
+                    <g:textField name="prorektor" value="${deaneryInstance?.prorektor}" class="normal_input"/>
+                </td>
+            </tr>
+            <tr class="title">
+                <td class="caption">Декан</td>
+                <td>
+                    <g:textField name="dean" value="${deaneryInstance?.dean}" class="normal_input"/>
+                </td>
+            </tr>
         </table>
         <br/>
 

@@ -221,14 +221,4 @@ class CSVExportService {
             outFile.write(((Chair) object).toCSV());
         }
     }
-
-    def exportToCSVAllUniversity() {
-        String s = new String("--university--;\n");
-        s = s + "\"id\";\"dean\";\"prorektor\";\n";
-        outFile.write(s);
-        List<?> list5 = University.findAll();
-        for (Object object: list5) {
-            outFile.write(((University) object).toCSV());
-        }
-    }
 }

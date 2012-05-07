@@ -16,6 +16,10 @@
             <g:textField name="name"/><br/>
             <b class="searchTitles">Аббревиатура</b><br/>
             <g:textField name="shortName"/><br/><br/>
+            <b class="searchTitles">Проректор</b><br/>
+            <g:textField name="prorektor"/><br/><br/>
+            <b class="searchTitles">Декан</b><br/>
+            <g:textField name="dean"/><br/><br/>
             <div align="center" class="action">
                 <g:submitButton name="find" value="Найти" id="searchButton"/>
             </div>

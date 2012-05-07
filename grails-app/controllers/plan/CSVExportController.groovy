@@ -84,7 +84,6 @@ class CSVExportController {
             imprt.exportToCSVAllSemestr();
             imprt.exportToCSVAllSpeciality();
             imprt.exportToCSVAllSubject();
-            imprt.exportToCSVAllUniversity();
             imprt.exportToCSVAllWorkPlan();
             outFile.close();
         } catch (Exception e) {

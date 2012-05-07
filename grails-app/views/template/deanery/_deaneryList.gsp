@@ -12,9 +12,10 @@
     <table id="tableCont" class="display">
         <thead>
         <tr>
-
             <th>Название</th>
             <th>Аббревиатура</th>
+            <th>Проректор</th>
+            <th>Декан</th>
             <th>Фильтр</th>
             <th>Ред.</th>
         </tr>
@@ -28,6 +29,12 @@
                 </td>
                 <td>
                     ${deanery?.shortName}
+                </td>
+                <td>
+                    ${deanery?.prorektor}
+                </td>
+                <td>
+                    ${deanery?.dean}
                 </td>
                 <td width="5px">
                     <g:if test="${deanery?.id!=idDeanery}">
