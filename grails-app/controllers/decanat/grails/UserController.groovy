@@ -35,16 +35,16 @@ class UserController {
                             faculty = null
                         } else {
                             if (null != facultyId && 0 != facultyId) {
-                                faculty = Deanery.get(facultyId)
+                                faculty = Faculty.get(facultyId)
                             }
                         }
                     } else {
                         if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
                             User curUser = User.get(springSecurityService.principal.id)
-                            faculty = curUser.deanery
+                            faculty = curUser.faculty
                         }
                     }
-                    user.deanery = faculty
+                    user.faculty = faculty
                     user.enabled = true
                     user.save();
                     UserRole.create(user, role, true)
@@ -79,16 +79,16 @@ class UserController {
                         faculty = null
                     } else {
                         if (null != facultyId && 0 != facultyId) {
-                            faculty = Deanery.get(facultyId)
+                            faculty = Faculty.get(facultyId)
                         }
                     }
                 } else {
                     if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
                         User curUser = User.get(springSecurityService.principal.id)
-                        faculty = curUser.deanery
+                        faculty = curUser.faculty
                     }
                 }
-                user.deanery = faculty
+                user.faculty = faculty
                 UserRole.removeAll(user)
                 UserRole.create(user, role, true)
                 if (user?.save()) {
@@ -117,8 +117,8 @@ class UserController {
                 }
             } else {
                 if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
-                    if (user.deaneryId != tekUser.deaneryId) {
-                        flash.error = message(code: "msg.DeaneryId.error")
+                    if (user.facultyId != tekUser.facultyId) {
+                        flash.error = message(code: "msg.FacultyId.error")
                     } else {
                         if (user) {
                             Collection<UserRole> userRoles = UserRole.findAllByUser(user)
@@ -148,10 +148,10 @@ class UserController {
             [user: user, roles: userService.findRolesForSearch(), role: user.getAuthorities().toArray()[0]]
         } else {
             if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
-                if (user.deaneryId == tekUser.deaneryId) {
+                if (user.facultyId == tekUser.facultyId) {
                     [user: user, roles: userService.findRolesForSearch(), role: user.getAuthorities().toArray()[0]]
                 } else {
-                    flash.error = message(code: "msg.DeaneryId.error")
+                    flash.error = message(code: "msg.FacultyId.error")
                     redirect(action: index, params: params)
                 }
             }

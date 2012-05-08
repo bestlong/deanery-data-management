@@ -18,22 +18,22 @@ class IndexController {
             p.chair.getName();
             p.speciality.getSpecialityCode()
         }
-        Deanery deanery
+        Faculty faculty
         if (authorityService.isProrektor()) {
-            deanery = authorityService.getCurrentUser().getDeanery();
+            faculty = authorityService.getCurrentUser().getFaculty();
         }
         Plan parametrs = params
         parametrs.speciality = new Speciality();
         parametrs.chair = new Chair();
         parametrs.speciality.name = params.speciality
         parametrs.chair.name = params.chair
-        chain(action: 'index', model: [res: plans, msg: "Найдено планов ${plans.size()}", sizePerPage: plans.size(), param: parametrs, deanery: deanery])
+        chain(action: 'index', model: [res: plans, msg: "Найдено планов ${plans.size()}", sizePerPage: plans.size(), param: parametrs, faculty: faculty])
     }
 
     def index = {
         def planList
         def param = chainModel?.param
-        def deanery = chainModel?.deanery
+        def faculty = chainModel?.faculty
         def msg = chainModel?.msg ?: ""
         def totalPlans = planService.findByDiscriminatorCount(PlanClass.STUDY)
         if (chainModel?.res == null)
@@ -57,20 +57,20 @@ class IndexController {
             }
         }
 
-        if (null == deanery) {
-            def did = authorityService.getCurrentUser().getDeaneryId()
+        if (null == faculty) {
+            def did = authorityService.getCurrentUser().getFacultyId()
             if (did != null)
-                deanery = Deanery.findById(did)
-            if (null == deanery) {
-                Deanery dec = new Deanery()
-                deanery = dec;
+                faculty = Faculty.findById(did)
+            if (null == faculty) {
+                Faculty dec = new Faculty()
+                faculty = dec;
                 //"['0': '-Все деканаты-']"
-                deanery.id = 0
-                deanery.name = "-Все деканаты-";
+                faculty.id = 0
+                faculty.name = "-Все деканаты-";
             }
         }
 
-        [res: planList, param: param, deanery: deanery, totalPlans: totalPlans, active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
+        [res: planList, param: param, faculty: faculty, totalPlans: totalPlans, active: 1, msg: msg, sizePerPage: chainModel?.sizePerPage]
     }
 
 

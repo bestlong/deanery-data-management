@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%@ page import="decanat.grails.Deanery; stu.cn.ua.enums.Roles; decanat.grails.domain.Role" contentType="text/html;charset=UTF-8" %>
+<%@ page import="decanat.grails.Faculty; stu.cn.ua.enums.Roles; decanat.grails.domain.Role" contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
     <meta name="layout" content="main"/>
@@ -50,7 +50,7 @@
             <tr id="trFaculty">
                 <td class="caption">Факультет*</td>
                 <td>
-                    <g:select from="${Deanery.list()}" optionValue="name" optionKey="id" name="facultyId"/>
+                    <g:select from="${Faculty.list()}" optionValue="name" optionKey="id" name="facultyId"/>
                 </td>
             </tr>
         </sec:ifAnyGranted>

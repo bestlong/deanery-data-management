@@ -16,7 +16,7 @@ class ChairService {
             res = Chair.list()
         } else {
             User user = User.get(springSecurityService.principal.id)
-            res = Chair.findAllByDeanery(user.deanery)
+            res = Chair.findAllByFaculty(user.faculty)
         }
         res
     }
@@ -46,11 +46,11 @@ class ChairService {
         def shortName = params?.shortName ?: ""
         def name = params?.name ?: ""
         def codeChair = params?.code ?: ""
-        Deanery dean = authorityService.getCurrentDeanery(params)
+        Faculty dean = authorityService.getCurrentFaculty(params)
         if (authorityService.isProrektor()){
-            def did=authorityService.getCurrentUser().getDeaneryId()
+            def did=authorityService.getCurrentUser().getFacultyId()
             if (did!=null)
-                dean=Deanery.findById(did)
+                dean=Faculty.findById(did)
         }
         def list = criteria.list(max: maxCount, offset: offsetPos) {
             order(orderField, sort)
@@ -66,7 +66,7 @@ class ChairService {
                 }
             }
             if (null != dean) {
-                eq("deanery", dean)
+                eq("faculty", dean)
             }
         }
         list

@@ -13,7 +13,7 @@ class Subject {
     String shortName
     String code
     Integer referenceCount = 0
-    Deanery deanery
+    Faculty faculty
 
     private static final fieldMap = [name: 'NAMEDIS', shortName: 'SHORTDIS', code: 'CODDIS']
 
@@ -26,28 +26,28 @@ class Subject {
     }
 
     public static Subject saveSubject(SubjectDTO subjectDTO, User user) {
-        def subject = Subject.findByCodeAndDeanery(subjectDTO.coddis, user.deanery)
+        def subject = Subject.findByCodeAndFaculty(subjectDTO.coddis, user.faculty)
         if (!subject || "".equals(subjectDTO.coddis)) {
             subject = new Subject(name: CommonUtils.prepareString(subjectDTO.namedis),
                     shortName: CommonUtils.prepareString(subjectDTO.shortdis),
-                    deanery: user.deanery,
+                    faculty: user.faculty,
                     code: CommonUtils.prepareString(subjectDTO.coddis))
         } else {
             subject.name = CommonUtils.prepareString(subjectDTO.namedis)
             subject.shortName = CommonUtils.prepareString(subjectDTO.shortdis)
-            subject.deanery = user.deanery
+            subject.faculty = user.faculty
         }
         subject.save()
     }
 
     public static ValidationResult validate(SubjectDTO subjectDTO, User user) {
-        def subject = Subject.findByCodeAndDeanery(subjectDTO.coddis, user.deanery)
+        def subject = Subject.findByCodeAndFaculty(subjectDTO.coddis, user.faculty)
         if (!subject || "".equals(subjectDTO.coddis)) {
-            subject = new Subject(name: subjectDTO.namedis, shortName: subjectDTO.shortdis, code: subjectDTO.coddis, deanery: user.deanery)
+            subject = new Subject(name: subjectDTO.namedis, shortName: subjectDTO.shortdis, code: subjectDTO.coddis, faculty: user.faculty)
         } else {
             subject.name = subjectDTO.namedis
             subject.shortName = subjectDTO.shortdis
-            subject.deanery = user.deanery
+            subject.faculty = user.faculty
         }
         if (!subject.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()

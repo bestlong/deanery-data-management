@@ -1,6 +1,6 @@
 package decanat.grails.domain
 
-import decanat.grails.Deanery
+import decanat.grails.Faculty
 
 class User {
 
@@ -12,14 +12,14 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
-    Deanery deanery
+    Faculty faculty
 
     static hasMany = [userRoles: UserRole]
 
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
-        deanery nullable: true
+        faculty nullable: true
 	}
 
 	static mapping = {

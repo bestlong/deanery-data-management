@@ -1,8 +1,6 @@
 package decanat.grails
 
 import stu.cn.ua.CommonUtils
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
-import decanat.grails.domain.User
 
 class SubjectService {
 
@@ -42,11 +40,11 @@ class SubjectService {
             chairId = params.chair as Integer
         }
 
-        Deanery dean = authorityService.getCurrentDeanery(params)
+        Faculty dean = authorityService.getCurrentFaculty(params)
         if (authorityService.isProrektor()){
-            def did=authorityService.getCurrentUser().getDeaneryId()
+            def did=authorityService.getCurrentUser().getFacultyId()
             if (did!=null)
-                dean=Deanery.findById(did)
+                dean=Faculty.findById(did)
         }
         def list = criteria.list(max: maxCount, offset: offsetPos) {
             order(orderField, sort)
@@ -60,7 +58,7 @@ class SubjectService {
                 ilike("name", "%" + name + "%");
             }
             if (null != dean) {
-                eq("deanery", dean)
+                eq("faculty", dean)
             }
         }
         list

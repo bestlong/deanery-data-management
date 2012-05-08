@@ -13,7 +13,7 @@ class Speciality {
     String name;
     String shortName;
     Integer referenceCount = 0
-    Deanery deanery
+    Faculty faculty
 
     private static final fieldMap = [code: 'CODSP', specialityCode: 'CODSPEC', name: 'NAME', shortName: 'CODNAME']
 
@@ -26,19 +26,19 @@ class Speciality {
     }
 
     public static ValidationResult validate(SpecialityPlanDTO specialityPlanDTO, User user) {
-        Speciality speciality = Speciality.findByCodeAndDeanery(specialityPlanDTO.codsp, user.deanery)
+        Speciality speciality = Speciality.findByCodeAndFaculty(specialityPlanDTO.codsp, user.faculty)
         if (!speciality || "".equals(specialityPlanDTO.codsp)) {
             speciality = new Speciality(name: CommonUtils.prepareString(specialityPlanDTO.name),
                     shortName: CommonUtils.prepareString(specialityPlanDTO.codname),
                     specialityCode: CommonUtils.prepareString(specialityPlanDTO.codspec),
                     code: CommonUtils.prepareString(specialityPlanDTO.codsp),
-                    deanery: user.deanery)
+                    faculty: user.faculty)
         }
         else {
             speciality.name = CommonUtils.prepareString(specialityPlanDTO.name)
             speciality.shortName = CommonUtils.prepareString(specialityPlanDTO.codname)
             speciality.specialityCode = CommonUtils.prepareString(specialityPlanDTO.codspec)
-            speciality.deanery = user.deanery
+            speciality.faculty = user.faculty
         }
         if (!speciality.validate()) {
             List<ErrorInfo> validationErrors = new ArrayList<ErrorInfo>()
@@ -52,19 +52,19 @@ class Speciality {
     }
 
     public static Speciality saveSpeciality(SpecialityPlanDTO specialityPlanDTO, User user) {
-        def speciality = Speciality.findByCodeAndDeanery(specialityPlanDTO.codsp, user.deanery)
+        def speciality = Speciality.findByCodeAndFaculty(specialityPlanDTO.codsp, user.faculty)
         if (!speciality || "".equals(specialityPlanDTO.codsp)) {
             speciality = new Speciality(name: CommonUtils.prepareString(specialityPlanDTO.name),
                     shortName: CommonUtils.prepareString(specialityPlanDTO.codname),
                     specialityCode: CommonUtils.prepareString(specialityPlanDTO.codspec),
-                    deanery: user.deanery,
+                    faculty: user.faculty,
                     code: CommonUtils.prepareString(specialityPlanDTO.codsp))
         }
         else {
             speciality.name = CommonUtils.prepareString(specialityPlanDTO.name)
             speciality.shortName = CommonUtils.prepareString(specialityPlanDTO.codname)
             speciality.specialityCode = CommonUtils.prepareString(specialityPlanDTO.codspec)
-            speciality.deanery = user.deanery
+            speciality.faculty = user.faculty
         }
         speciality.save()
     }

@@ -1,4 +1,4 @@
-<%@ page import="stu.cn.ua.enums.Roles; decanat.grails.Deanery; decanat.grails.domain.Role; decanat.grails.domain.User" %>
+<%@ page import="stu.cn.ua.enums.Roles; decanat.grails.Faculty; decanat.grails.domain.Role; decanat.grails.domain.User" %>
 <%--
   author: evgeniy
   Date: 27.06.11
@@ -65,7 +65,7 @@
                 <tr id="trFaculty">
                     <td class="caption">Факультет*</td>
                     <td>
-                        <g:select from="${Deanery.list()}" optionValue="name" optionKey="id" name="facultyId" value="${user?.deanery?.id}"/>
+                        <g:select from="${Faculty.list()}" optionValue="name" optionKey="id" name="facultyId" value="${user?.faculty?.id}"/>
                     </td>
                 </tr>
             </sec:ifAnyGranted>

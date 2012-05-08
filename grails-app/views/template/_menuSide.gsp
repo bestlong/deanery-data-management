@@ -17,9 +17,9 @@
     </h3>
     <ul class="menuBottom">
         <sec:ifAnyGranted roles="ROLE_PROREKTOR">
-            <tooltip:tip code="tooltip.menu.gotoDeanery">
+            <tooltip:tip code="tooltip.menu.gotoFaculty">
                 <li class="${selectedMenu == 5 ? 'selectedMenu' : ''}">
-                    <g:link controller="deanery" action="index">Деканаты</g:link>
+                    <g:link controller="faculty" action="index">Факультеты</g:link>
                 </li>
             </tooltip:tip>
         </sec:ifAnyGranted>

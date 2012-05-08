@@ -18,27 +18,27 @@ class SubjectController {
         if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
             propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'id']
         } else {
-            propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'deanery', 'id']
+            propertiesToRender = ['id', 'code', 'chair?.name', 'name', 'shortName', 'faculty', 'id']
         }
         propertiesToRender
     }
 
     def index = {
-        def    deanery
-        def did=authorityService.getCurrentUser().getDeaneryId()
+        def    faculty
+        def did=authorityService.getCurrentUser().getFacultyId()
         if (did!=null)
-            deanery=Deanery.findById(did)
-        if (null==deanery){
-            Deanery dec=new Deanery()
-            deanery=dec;
+            faculty=Faculty.findById(did)
+        if (null==faculty){
+            Faculty dec=new Faculty()
+            faculty=dec;
             //"['0': '-Все деканаты-']"
-            deanery.id=0
-            deanery.name="-Все деканаты-";
+            faculty.id=0
+            faculty.name="-Все деканаты-";
 
         }
         cleanParams(params)
         sessionParamsService.saveParams(params)
-        [selectedMenu: 2,deanery: deanery]
+        [selectedMenu: 2,faculty: faculty]
     }
 
     def add = {}
@@ -69,7 +69,7 @@ class SubjectController {
             def subject = new Subject(params);
             subject.chair = Chair.findById(params.subject.chair);
             subject.name = CommonUtils.prepareString(subject.name)
-            subject.deanery = user.deanery
+            subject.faculty = user.faculty
             if (subject.save(flush: true)) {
                 flash.message = message(code: "msg.subject.add", args: [subject.name])
             }
@@ -97,7 +97,7 @@ class SubjectController {
             record << subject.name
             record << subject.shortName
             if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
-                record << subject.deanery?.shortName
+                record << subject.faculty?.shortName
             }
             record << subject.referenceCount
             dataToRender.aaData << record
@@ -136,10 +136,10 @@ class SubjectController {
         if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
             [subject: subject]
         } else {
-            if (user.deaneryId == subject.deaneryId) {
+            if (user.facultyId == subject.facultyId) {
                 [subject: subject]
             } else {
-                flash.error = message(code: "msg.DeaneryId.error")
+                flash.error = message(code: "msg.FacultyId.error")
                 redirect(action: 'index')
             }
         }
@@ -150,8 +150,8 @@ class SubjectController {
             if (params.id) {
                 Subject subj = Subject.findById(params.id);
                 User user = User.get(springSecurityService.principal.id)
-                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && user.deaneryId != subj.deaneryId) {
-                    flash.error = message(code: "msg.DeaneryId.error")
+                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && user.facultyId != subj.facultyId) {
+                    flash.error = message(code: "msg.FacultyId.error")
                 } else {
                     if (subj) {
                         subj.delete(flush: true);
