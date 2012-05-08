@@ -1,11 +1,5 @@
 package decanat.grails
 
-import stu.cn.ua.CommonUtils
-
-import grails.converters.JSON
-import org.codehaus.groovy.grails.plugins.springsecurity.SpringSecurityUtils
-import decanat.grails.domain.User
-
 class SpecialityService {
 
     def sessionParamsService
@@ -54,11 +48,11 @@ class SpecialityService {
         def code = params?.code ?: ""
         def specialityCode = params?.specialityCode
 
-        Deanery dean = authorityService.getCurrentDeanery(params)
+        Faculty dean = authorityService.getCurrentFaculty(params)
        if (authorityService.isProrektor()){
-            def did=authorityService.getCurrentUser().getDeaneryId()
+            def did=authorityService.getCurrentUser().getFacultyId()
             if (did!=null)
-                dean=Deanery.findById(did)
+                dean=Faculty.findById(did)
         }
         def list = criteria.list(max: maxCount, offset: offsetPos) {
             order(orderField, sort)
@@ -77,7 +71,7 @@ class SpecialityService {
                 }
             }
             if (null != dean) {
-                eq("deanery", dean)
+                eq("faculty", dean)
             }
         }
         list

@@ -25,7 +25,7 @@
             <tr>
                 <td class="caption">Деканат</td>
                 <td>
-                    <g:textField name="deanery" value="${user?.deanery?.name}" disabled="true"/>
+                    <g:textField name="faculty" value="${user?.faculty?.name}" disabled="true"/>
                 </td>
             </tr>
         </sec:ifNotGranted>

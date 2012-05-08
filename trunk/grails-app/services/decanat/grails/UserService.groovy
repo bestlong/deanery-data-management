@@ -37,7 +37,7 @@ class UserService {
                 }
             }
             if (SpringSecurityUtils.ifAnyGranted("ROLE_DEAN")) {
-                eq("deanery", user.deanery)
+                eq("faculty", user.faculty)
             }
         }
         return users;
@@ -49,7 +49,7 @@ class UserService {
             res = User.list()
         } else {
             User user = User.get(springSecurityService.principal.id)
-            res = User.findAllByDeanery(user.deanery)
+            res = User.findAllByFaculty(user.faculty)
         }
         res
     }

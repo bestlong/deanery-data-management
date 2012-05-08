@@ -13,30 +13,30 @@ class PlanService {
     static transactional = true
 
     def findByDiscriminatorForPaginating(PlanClass planClass, int max, int offset) {
-        def  deanery = getDeanery()
+        def  faculty = getFaculty()
         def c = Plan.createCriteria()
         c.list{
             maxResults (max)
             firstResult(offset)
             order("lastUpdated", "desc")
             eq("class", planClass.name())
-            if (null != deanery) {
+            if (null != faculty) {
                 speciality{
-                    eq("deanery", deanery)
+                    eq("faculty", faculty)
                 }
             }
         }
     }
 
     def findByDiscriminatorCount(PlanClass planClass) {
-        def  deanery = getDeanery()
+        def  faculty = getFaculty()
         def c = Plan.createCriteria()
         def list = c.list(){
             eq("class", planClass.name())
             order("lastUpdated", "desc")
-            if (null != deanery) {
+            if (null != faculty) {
                 speciality{
-                    eq("deanery", deanery)
+                    eq("faculty", faculty)
                 }
             }
         }
@@ -45,16 +45,16 @@ class PlanService {
 
 
     def findByDiscriminatorForPaginating(PlanClass planClass, int max, int offset, def sessionParamsService) {
-        def  deanery = getDeanery()
+        def  faculty = getFaculty()
         def c = Plan.createCriteria()
         c.list{
             maxResults (max)
             firstResult(offset)
             order("lastUpdated", "desc")
             eq("class", planClass.name())
-            if (null != deanery) {
+            if (null != faculty) {
                 speciality{
-                    eq("deanery", deanery)
+                    eq("faculty", faculty)
                 }
             }
         }
@@ -62,11 +62,11 @@ class PlanService {
 
 
     def findStudyPlansByParams(def params){
-        def deanery  = authorityService.getCurrentDeanery(params)
+        def faculty  = authorityService.getCurrentFaculty(params)
         if (authorityService.isProrektor()){
-            def did=authorityService.getCurrentUser().getDeaneryId()
+            def did=authorityService.getCurrentUser().getFacultyId()
             if (did!=null)
-                deanery=Deanery.findById(did)
+                faculty=Faculty.findById(did)
         }
         def chair=params.chair;
         def form=params.form;
@@ -87,8 +87,8 @@ class PlanService {
             startYear=-1;
         }
         String query;
-        if (null != deanery) {
-            query="from Plan as b where ((b.class='${PlanClass.STUDY.name()}') and (('${semestrCount}'='0') or (b.semestrCount='${semestrCount}')) and (('${form}'='0') or (b.form='${form}')) and (b.speciality.name like '%${spec}%' )   and (b.direction like '%${direction}%' ) and (b.chair.name like '%${chair}%' ) and (b.qualification like '%${qualification}%' )  and (b.termin like '%${termin}%' )  and (b.level like '%${level}%' ) and (('${startYear}'='-1') or (b.startYear='${startYear}'))  and (('${endYear}'='-1') or (b.endYear='${endYear}')) and (b.speciality.deanery.id='${deanery.id}'))   order by b.lastUpdated desc ";
+        if (null != faculty) {
+            query="from Plan as b where ((b.class='${PlanClass.STUDY.name()}') and (('${semestrCount}'='0') or (b.semestrCount='${semestrCount}')) and (('${form}'='0') or (b.form='${form}')) and (b.speciality.name like '%${spec}%' )   and (b.direction like '%${direction}%' ) and (b.chair.name like '%${chair}%' ) and (b.qualification like '%${qualification}%' )  and (b.termin like '%${termin}%' )  and (b.level like '%${level}%' ) and (('${startYear}'='-1') or (b.startYear='${startYear}'))  and (('${endYear}'='-1') or (b.endYear='${endYear}')) and (b.speciality.faculty.id='${faculty.id}'))   order by b.lastUpdated desc ";
         } else{
             query="from Plan as b where ((b.class='${PlanClass.STUDY.name()}') and (('${semestrCount}'='0') or (b.semestrCount='${semestrCount}')) and (('${form}'='0') or (b.form='${form}')) and (b.speciality.name like '%${spec}%' )   and (b.direction like '%${direction}%' ) and (b.chair.name like '%${chair}%' ) and (b.qualification like '%${qualification}%' )  and (b.termin like '%${termin}%' )  and (b.level like '%${level}%' ) and (('${startYear}'='-1') or (b.startYear='${startYear}'))  and (('${endYear}'='-1') or (b.endYear='${endYear}')))  order by b.lastUpdated desc ";
         }
@@ -97,15 +97,15 @@ class PlanService {
     }
 
     def findWorkPlansByStudyPlan(Plan plan){
-        def  deanery = getDeanery()
+        def  faculty = getFaculty()
         def c = Plan.createCriteria()
         def list = c.list(){
             eq("class", PlanClass.WORK.name())
             eq("plan", plan)
             order("lastUpdated", "desc")
-//            if (null != deanery) {
+//            if (null != faculty) {
 //                speciality{
-//                    eq("deanery", deanery)
+//                    eq("faculty", faculty)
 //                }
 //            }
         }
@@ -113,15 +113,15 @@ class PlanService {
     }
 
     def findStudyPlansByChair(Chair chair){
-        def  deanery = getDeanery()
+        def  faculty = getFaculty()
         def c = Plan.createCriteria()
         def list = c.list(){
             eq("class", PlanClass.STUDY.name())
             eq("chair", chair)
             order("lastUpdated", "desc")
-            if (null != deanery) {
+            if (null != faculty) {
                 speciality{
-                    eq("deanery", deanery)
+                    eq("faculty", faculty)
                 }
             }
         }
@@ -131,15 +131,15 @@ class PlanService {
 
 
 
-    private def getDeanery(){
+    private def getFaculty(){
         User user = User.get(springSecurityService.principal.id)
-        Deanery dean = null
+        Faculty dean = null
         if (!authorityService.isProrektor()) {
-            dean = user.deanery
+            dean = user.faculty
         }else{
-            def did=authorityService.getCurrentUser().getDeaneryId()
+            def did=authorityService.getCurrentUser().getFacultyId()
             if (did!=null)
-                dean=Deanery.findById(did)
+                dean=Faculty.findById(did)
         }
         dean
     }

@@ -21,26 +21,26 @@ class AuthorityService {
 
     /**
      * if role == ROLE_PROREKTOR return role from params or 0
-     * else if role == ROLE_DEAN return user.deanery
+     * else if role == ROLE_DEAN return user.faculty
      * @return
      */
-    def getCurrentDeanery(params) {
-        Integer deaneryId = null
-        def deanery = null
+    def getCurrentFaculty(params) {
+        Integer facultyId = null
+        def faculty = null
         if (isProrektor()) {
-            if (null != params.deanery) {
-                deaneryId = params.deanery as Integer
-                if (null != deaneryId && 0 != deaneryId) {
-                    deanery = Deanery.get(deaneryId)
+            if (null != params.faculty) {
+                facultyId = params.faculty as Integer
+                if (null != facultyId && 0 != facultyId) {
+                    faculty = Faculty.get(facultyId)
                 }
             }
         } else {
             if (isDean()) {
                 def user = getCurrentUser()
-                deanery = user.deanery
+                faculty = user.faculty
             }
         }
-        deanery
+        faculty
     }
 
     def getCurrentUser() {

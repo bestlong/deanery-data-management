@@ -33,7 +33,7 @@
                     ${user?.authorities?.description}
                 </td>
                 <sec:ifAnyGranted roles="ROLE_PROREKTOR">
-                    <td>${user?.deanery?.name}</td>
+                    <td>${user?.faculty?.name}</td>
                 </sec:ifAnyGranted>
                 <td width="20px">
                     <table>

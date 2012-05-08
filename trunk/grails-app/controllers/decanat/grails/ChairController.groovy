@@ -14,7 +14,7 @@ class ChairController {
 
     def getPropertiesToRender() {
         def propertiesToRender
-        propertiesToRender = ["id", "codeChair", "name", "shortName", "head", "deanery", "id"]
+        propertiesToRender = ["id", "codeChair", "name", "shortName", "head", "faculty", "id"]
         propertiesToRender
     }
 
@@ -34,7 +34,7 @@ class ChairController {
             record << subject.shortName
             record << subject.head
             if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
-                record << subject.deanery?.shortName
+                record << subject.faculty?.shortName
             }
             record << ' <a href="../../plan/index/chairPlans/' + subject.id.toString() + '">Показать</a> '
             record << subject.referenceCount
@@ -49,19 +49,19 @@ class ChairController {
     }
 
     def list = {
-        def    deanery
-        def did=authorityService.getCurrentUser().getDeaneryId()
+        def    faculty
+        def did=authorityService.getCurrentUser().getFacultyId()
         if (did!=null)
-            deanery=Deanery.findById(did)
-        if (null==deanery){
-            Deanery dec=new Deanery()
-            deanery=dec;
+            faculty=Faculty.findById(did)
+        if (null==faculty){
+            Faculty dec=new Faculty()
+            faculty=dec;
             //"['0': '-Все деканаты-']"
-            deanery.id=0
-            deanery.name="-Все деканаты-";
+            faculty.id=0
+            faculty.name="-Все деканаты-";
 
         }
-        [chairList: chairService.findChairsForCurrentUser(), deanery: deanery, selectedMenu: 3, searchConfig: getSearchChairConfig()]
+        [chairList: chairService.findChairsForCurrentUser(), faculty: faculty, selectedMenu: 3, searchConfig: getSearchChairConfig()]
     }
 
     def create = {
@@ -74,7 +74,7 @@ class ChairController {
         try {
             User user = User.get(springSecurityService.principal.id)
             def chairInstance = new Chair(params)
-            chairInstance.deanery = user.deanery
+            chairInstance.faculty = user.faculty
             if (chairInstance.save(flush: true)) {
                 flash.message = message(code: "msg.chair.add", args: [chairInstance.name, chairInstance.shortName ?: "<не указано>"])
                 redirect(action: "list", params: params)
@@ -112,7 +112,7 @@ class ChairController {
                 User user = User.get(springSecurityService.principal.id)
                 int id = params.id as int
                 Chair chair = Chair.findById(id)
-                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && chair.deaneryId != user.deaneryId) {
+                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && chair.facultyId != user.facultyId) {
                     flash.error = message(code: "msg.remove.error")
                 }
                 else {
@@ -158,8 +158,8 @@ class ChairController {
             if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
                 [curChair: chair]
             } else {
-                if (user.deaneryId != chair.deaneryId) {
-                    flash.error = message(code: "msg.DeaneryId.error")
+                if (user.facultyId != chair.facultyId) {
+                    flash.error = message(code: "msg.FacultyId.error")
                     redirect(action: 'list', params: params)
                 }
                 if (!chair) {

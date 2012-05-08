@@ -1,5 +1,5 @@
 <%@ page import="stu.cn.ua.enums.PlanForm" %>
-<%@ page import="decanat.grails.Deanery; decanat.grails.Chair" %>
+<%@ page import="decanat.grails.Faculty; decanat.grails.Chair" %>
 
 <div id="findDialog" title="Поиск учебных планов">
 
@@ -44,14 +44,14 @@
                   Деканат
                      </td>
              <td>
-                 <g:if test="${deanery?.id!=0}">
-                     <g:select from=" " noSelection='["${deanery?.id}":"${deanery?.name}"]' id="deanery_disabled" disabled="true" name="deanery_disabled"
+                 <g:if test="${faculty?.id!=0}">
+                     <g:select from=" " noSelection='["${faculty?.id}":"${faculty?.name}"]' id="faculty_disabled" disabled="true" name="faculty_disabled"
                                style="width: 150px;"/>
                  </g:if>
 
-                 <g:if test="${deanery?.id==0}">
-                     <g:select from="${Deanery.list()}" optionValue="name"   id="deanery"
-                               noSelection='["${deanery?.id}":"${deanery?.name}"]' name="deanery"
+                 <g:if test="${faculty?.id==0}">
+                     <g:select from="${Faculty.list()}" optionValue="name"   id="faculty"
+                               noSelection='["${faculty?.id}":"${faculty?.name}"]' name="faculty"
                                optionKey="id" style="width: 150px"/>
                  </g:if>
              </td>

@@ -69,12 +69,12 @@
 
 
 <sec:ifAnyGranted roles="ROLE_PROREKTOR">
-    <g:if test="${deanery?.id!=0}">
+    <g:if test="${faculty?.id!=0}">
         <div  align=center>
             <h3>
                 Работает
-                <a href="/plan/deanery/list" style="color: #2582A4">
-                фильтр</a> по деканату : ${deanery?.name}
+                <a href="/plan/faculty/list" style="color: #2582A4">
+                фильтр</a> по факультету : ${faculty?.name}
             </h3>
         </div>
     </g:if>

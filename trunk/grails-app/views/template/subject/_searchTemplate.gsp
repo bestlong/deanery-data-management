@@ -1,4 +1,4 @@
-<%@ page import="decanat.grails.Deanery; decanat.grails.Chair" %>
+<%@ page import="decanat.grails.Faculty; decanat.grails.Chair" %>
 <div class="search" id="searchSubject">
     <h3>Поиск</h3>
     <g:formRemote name="fromSearch" update="updatePlanSubjectDiv"
@@ -11,14 +11,14 @@
                       optionKey="id" style="width: 150px"/><br/>
             <sec:ifAnyGranted roles="ROLE_PROREKTOR">
                 <b class="searchTitles">Деканат</b><br/>
-                <g:if test="${deanery?.id!=0}">
+                <g:if test="${faculty?.id!=0}">
                     <g:select from=" " disabled="true"
-                              noSelection='["${deanery?.id}": "${deanery?.name}"]' name="deanery_disabled"
+                              noSelection='["${faculty?.id}": "${faculty?.name}"]' name="faculty_disabled"
                               style="width: 150px"/><br/>
                 </g:if>
-                <g:if test="${deanery?.id==0}">
-                    <g:select from="${Deanery.list()}" optionValue="name"
-                              noSelection="['0': '-Все деканаты-']" name="deanery"
+                <g:if test="${faculty?.id==0}">
+                    <g:select from="${Faculty.list()}" optionValue="name"
+                              noSelection="['0': '-Все деканаты-']" name="faculty"
                               optionKey="id" style="width: 150px"/><br/>
                 </g:if>
             </sec:ifAnyGranted>

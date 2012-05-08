@@ -11,8 +11,8 @@ class DecanatTagLib {
 
     def deanFacultyFullName = {
         User user = User.findByUsername(springSecurityService.getPrincipal().username)
-        if (user && user.deanery) {
-            out << user.deanery.name
+        if (user && user.faculty) {
+            out << user.faculty.name
         }
         else
             out << ('')
@@ -20,8 +20,8 @@ class DecanatTagLib {
 
     def deanFacultyShortName = {
         User user = User.findByUsername(springSecurityService.getPrincipal().username)
-        if (user && user.deanery) {
-            out << user.deanery.shortName
+        if (user && user.faculty) {
+            out << user.faculty.shortName
         }
         else
             out << ('')
@@ -29,8 +29,8 @@ class DecanatTagLib {
 
     def deanFacultyName = {
         User user = User.findByUsername(springSecurityService.getPrincipal().username)
-        if (user && user.deanery ) {
-            out << (user.deanery.shortName ? user.deanery.shortName : user.deanery.name)
+        if (user && user.faculty ) {
+            out << (user.faculty.shortName ? user.faculty.shortName : user.faculty.name)
         }
         else
             out << ('')

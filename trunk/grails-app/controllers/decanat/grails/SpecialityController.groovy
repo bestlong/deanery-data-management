@@ -13,25 +13,25 @@ class SpecialityController {
     def authorityService
 
     def getPropertiesToRender() {
-        ['id', 'code', 'specialityCode', 'name', 'deanery', 'shortName']
+        ['id', 'code', 'specialityCode', 'name', 'faculty', 'shortName']
     }
 
     def index = {
-        def    deanery
-        def did=authorityService.getCurrentUser().getDeaneryId()
+        def    faculty
+        def did=authorityService.getCurrentUser().getFacultyId()
         if (did!=null)
-            deanery=Deanery.findById(did)
-        if (null==deanery){
-            Deanery dec=new Deanery()
-            deanery=dec;
+            faculty=Faculty.findById(did)
+        if (null==faculty){
+            Faculty dec=new Faculty()
+            faculty=dec;
             //"['0': '-Все деканаты-']"
-            deanery.id=0
-            deanery.name="-Все деканаты-";
+            faculty.id=0
+            faculty.name="-Все деканаты-";
 
         }
         params.clear()
         sessionParamsService.saveParams(params)
-        [res: Speciality.list(), selectedMenu: 1, deanery: deanery]
+        [res: Speciality.list(), selectedMenu: 1, faculty: faculty]
     }
 
     def add = {
@@ -42,7 +42,7 @@ class SpecialityController {
             User user = User.get(springSecurityService.principal.id)
             def speciality = new Speciality(params);
             speciality.name = CommonUtils.prepareString(speciality.name)
-            speciality.deanery = user.deanery
+            speciality.faculty = user.faculty
             if (speciality.save()) {
                 flash.message = message(code: "msg.speciality.edit", args: [speciality.name])
             }
@@ -101,7 +101,7 @@ class SpecialityController {
             record << speciality.name
             record << speciality.shortName
             if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
-                record << speciality.deanery?.shortName
+                record << speciality.faculty?.shortName
             }
             record << speciality.referenceCount
             dataToRender.aaData << record
@@ -115,10 +115,10 @@ class SpecialityController {
         if (SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR")) {
             [speciality: speciality]
         } else {
-            if (user.deaneryId == speciality.deaneryId) {
+            if (user.facultyId == speciality.facultyId) {
                 [speciality: speciality]
             } else {
-                flash.error = message(code: "msg.DeaneryId.error")
+                flash.error = message(code: "msg.FacultyId.error")
                 redirect(action: index)
             }
         }
@@ -131,8 +131,8 @@ class SpecialityController {
                 Speciality spec = Speciality.findById(params.id);
                 User user = User.get(springSecurityService.principal.id)
 
-                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && user.deaneryId != spec.deaneryId) {
-                    flash.error = message(code: "msg.DeaneryId.error")
+                if (!SpringSecurityUtils.ifAnyGranted("ROLE_PROREKTOR") && user.facultyId != spec.facultyId) {
+                    flash.error = message(code: "msg.FacultyId.error")
                 } else {
                     if (spec) {
                         flash.message = message(code: "msg.speciality.remove", args: [spec.name])
