@@ -40,7 +40,13 @@
                 <g:link controller="chair" action="index">Кафедры</g:link>
             </li>
         </tooltip:tip>
-
+        <sec:ifAnyGranted roles="ROLE_DEAN">
+            <tooltip:tip code="tooltip.menu.gotoFaculty">
+                <li class="${selectedMenu == 4 ? 'selectedMenu' : ''}">
+                    <g:link controller="university" action="index">Информация о деканате</g:link>
+                </li>
+            </tooltip:tip>
+        </sec:ifAnyGranted>
     </ul>
 </div>
 

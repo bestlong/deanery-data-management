@@ -43,7 +43,7 @@ class PlanSubject {
     }
 
     public static PlanSubject savePlanSubject(PlanSubjectDTO planSubjectDTO, Plan plan) {
-        def subject = Subject.findByDeaneryAndCode(plan.speciality.deanery, planSubjectDTO.coddis)
+        def subject = Subject.findByFacultyAndCode(plan.speciality.faculty, planSubjectDTO.coddis)
         def planSubject = PlanSubject.findByPlanAndSubject(plan, subject)
 
         if (null == planSubject){
@@ -61,7 +61,7 @@ class PlanSubject {
     }
 
     public static ValidationResult validate(PlanSubjectDTO planSubjectDTO, Plan plan) {
-        def subject = Subject.findByDeaneryAndCode(plan.speciality.deanery, planSubjectDTO.coddis)
+        def subject = Subject.findByFacultyAndCode(plan.speciality.faculty, planSubjectDTO.coddis)
         def planSubject = PlanSubject.findByPlanAndSubject(plan, subject)
         if (null == planSubject){
             planSubject = new PlanSubject(subject: subject, plan: plan, creditCount: 0)
