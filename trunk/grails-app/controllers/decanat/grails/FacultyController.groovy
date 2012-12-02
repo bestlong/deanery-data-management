@@ -1,7 +1,5 @@
 package decanat.grails
 
-import org.springframework.dao.DataIntegrityViolationException
-
 class FacultyController {
 
     def facultyService

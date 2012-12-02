@@ -62,7 +62,7 @@ class HeadPrinter {
         cell.setCellValue("Перший проректор")
         cell = row.createCell(10)
         cell.setCellStyle(excelComponent.leftCellStyle)
-        cell.setCellValue("В. І. Скоробогатова")
+        cell.setCellValue(plan.chair.faculty.prorektor)
 
         currentRow++;
 

@@ -106,7 +106,7 @@ class IndexController {
 
     def showWorkPlans = {
         def plans = planService.findWorkPlansByStudyPlan(Plan.get(params.id))
-        render(template: "/template/workPlans", model: ["plans": plans])
+        render(template: "/template/workPlans", model: ["plans": plans, "faculty": planService.getFaculty()])
     }
 
     def print = {

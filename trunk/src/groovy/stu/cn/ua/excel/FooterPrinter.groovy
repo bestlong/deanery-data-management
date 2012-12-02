@@ -5,7 +5,6 @@ import decanat.grails.Plan
 
 import java.text.SimpleDateFormat
 import java.text.DateFormat
-import decanat.grails.University
 
 /**
  * author: evgeniy
@@ -14,7 +13,7 @@ import decanat.grails.University
 class FooterPrinter {
 
     public void print(Plan plan, int sRow, Sheet sheet, Date date, ExcelComponent excelComponent){
-        def university = University.findAll().get(0)
+        def faculty = plan.chair.faculty
 
         DateFormat dateFormat = new SimpleDateFormat("dd. MM. yyyy");
         def row = sheet.createRow(sRow)
@@ -30,7 +29,7 @@ class FooterPrinter {
 
         cCell = excelComponent.mergeCellsByCoordinates(sheet, sRow, 9000, 12000)
         cell = row.createCell(cCell)
-        cell.setCellValue(university.dean)
+        cell.setCellValue(faculty.dean)
         cell.setCellStyle(excelComponent.leftCellStyle)
 
         cCell = excelComponent.mergeCellsByCoordinates(sheet, sRow, 20000, 24000)

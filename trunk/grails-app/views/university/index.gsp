@@ -3,7 +3,7 @@
 <head>
     <title>Информация о деканате</title>
     <meta name="layout" content="main"/>
-    <jqvalui:renderValidationScript for="decanat.grails.University"/>
+    <jqvalui:renderValidationScript for="decanat.grails.Faculty"/>
 </head>
 
 <body>
@@ -23,14 +23,14 @@
             <tr>
                 <td class="caption">Проректор<span style="color: red">*</span></td>
                 <td>
-                    <g:hiddenField name="id" value="${university.id}"/>
-                    <g:textField name="prorektor" value="${university?.prorektor}"/>
+                    <g:hiddenField name="id" value="${faculty.id}"/>
+                    <g:textField name="prorektor" value="${faculty?.prorektor}"/>
                 </td>
             </tr>
             <tr>
                 <td class="caption">Декан<span style="color: red">*</span></td>
                 <td>
-                    <g:textField name="dean" value="${university?.dean}"/>
+                    <g:textField name="dean" value="${faculty?.dean}"/>
                 </td>
             </tr>
         </table>
