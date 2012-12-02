@@ -131,7 +131,7 @@ class PlanService {
 
 
 
-    private def getFaculty(){
+    def getFaculty(){
         User user = User.get(springSecurityService.principal.id)
         Faculty dean = null
         if (!authorityService.isProrektor()) {

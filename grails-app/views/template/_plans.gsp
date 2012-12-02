@@ -77,7 +77,7 @@
                     </sec:ifAnyGranted>
                 </td>
                 <td rowspan="5" valign="bottom" width="10px" align="right">
-                    <g:if test="${univer && plan.stateExam}">
+                    <g:if test="${faculty && plan.stateExam}">
                         <tooltip:tip code="tooltip.plan.print">
                             <a style="align: right"
                                href="<g:createLink action="print" controller="index"
